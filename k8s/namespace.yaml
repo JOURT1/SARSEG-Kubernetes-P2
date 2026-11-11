@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: sarseg-observabilidad
+  labels:
+    app.kubernetes.io/part-of: sarseg-p2
+    pod-security.kubernetes.io/enforce: baseline
