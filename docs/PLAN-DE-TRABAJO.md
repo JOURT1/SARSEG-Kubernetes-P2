@@ -11,10 +11,12 @@ Pod del material Intro Kubernetes usa Nginx, por lo que se emplea otra plataform
 | Avance | Rama | Entrega |
 |---|---|---|
 | 1 | main | Alcance inicial y criterios de aceptación |
-| 2 | codex/infraestructura-kubernetes | Clúster, namespace, Grafana y exposición |
-| 3 | codex/metricas-sarseg | Prometheus, kube-state-metrics y tablero |
-| 4 | codex/pruebas-deployment-replicaset | Scripts, ejecución y registros de pruebas |
-| 5 | codex/informe-evidencias | Informe, figuras, conclusiones y guía de entrega |
+| 2 | infraestructura-kubernetes | Clúster, namespace, Grafana y exposición |
+| 3 | metricas-sarseg | Prometheus, kube-state-metrics y tablero |
+| 4 | pruebas-deployment-replicaset | Scripts, ejecución y registros de pruebas |
+| 5 | informe-evidencias | Informe, figuras, conclusiones y guía de entrega |
+| 6 | informe-apa7 | Carátula APA 7 y recorrido completo de capturas |
+| 7 | mantenimiento-ramas | Nombres de ramas y referencias actuales |
 
 Cada rama tendrá commits por unidad de trabajo y una integración explícita en main.
 Se conservarán las ramas remotas para revisar los avances. No se alterarán fechas

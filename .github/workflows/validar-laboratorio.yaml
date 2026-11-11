@@ -1,7 +1,7 @@
 name: Validar laboratorio Kubernetes
 on:
   push:
-    branches: [main, 'codex/**']
+    branches: ['**']
     paths-ignore: ['docs/**', 'output/**', '**.md']
   pull_request:
     paths-ignore: ['docs/**', 'output/**', '**.md']
