@@ -52,3 +52,4 @@ confunden sus resultados con los del equipo Windows.
 Las fechas de los registros son UTC. America/Guayaquil corresponde a UTC menos
 cinco horas. Los hashes SHA256 se encuentran en SHA256SUMS.txt y permiten
 comprobar que los archivos descargados coinciden con los entregados.
+Los archivos de texto se normalizan a UTF8 con saltos LF antes de calcularlos.
