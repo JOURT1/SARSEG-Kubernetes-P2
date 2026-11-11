@@ -1,0 +1,44 @@
+name: Validar laboratorio Kubernetes
+on:
+  push:
+    branches: [main, 'codex/**']
+    paths-ignore: ['docs/**', 'output/**', '**.md']
+  pull_request:
+    paths-ignore: ['docs/**', 'output/**', '**.md']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  laboratorio-real:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Instalar herramientas fijadas
+        run: |
+          curl -fsSLo kind https://github.com/kubernetes-sigs/kind/releases/download/v0.27.0/kind-linux-amd64
+          curl -fsSLo kind.sha256sum https://github.com/kubernetes-sigs/kind/releases/download/v0.27.0/kind-linux-amd64.sha256sum
+          echo "$(cut -d ' ' -f1 kind.sha256sum)  kind" | sha256sum --check
+          chmod +x kind
+          sudo mv kind /usr/local/bin/kind
+          curl -fsSLo kubectl https://dl.k8s.io/release/v1.32.2/bin/linux/amd64/kubectl
+          curl -fsSLo kubectl.sha256 https://dl.k8s.io/release/v1.32.2/bin/linux/amd64/kubectl.sha256
+          echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
+          chmod +x kubectl
+          sudo mv kubectl /usr/local/bin/kubectl
+      - name: Crear cluster y desplegar plataforma
+        run: |
+          kind create cluster --config cluster/kind.yaml --wait 180s
+          kubectl --context kind-sarseg-p2 apply -k k8s
+          for app in grafana prometheus kube-state-metrics; do
+            kubectl --context kind-sarseg-p2 -n sarseg-observabilidad rollout status deployment/$app --timeout=300s
+          done
+          sleep 10
+      - name: Probar Deployment y ReplicaSet
+        run: python3 scripts/test_lab.py --output tmp/ci-evidence
+      - name: Conservar evidencia de CI
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidencia-kubernetes
+          path: tmp/ci-evidence
