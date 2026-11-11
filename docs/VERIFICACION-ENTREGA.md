@@ -5,8 +5,10 @@
 Se generó el PDF ampliado desde los resultados de la reproducción aprobada,
 conservando por separado las ejecuciones originales. Se renderizaron sus treinta
 y seis páginas con Poppler para la inspección visual. Contiene veintiséis figuras
-del recorrido, veintisiete imágenes incrustadas contando el logotipo, trece
+del recorrido, veintisiete imágenes incrustadas contando el logotipo, catorce
 enlaces activos y cuarenta y tres marcadores de navegación.
+
+La portada incluye el enlace completo y clicable del repositorio público.
 
 Se comprobó tamaño carta en todas las páginas, márgenes de 2,54 cm, Times New
 Roman 12, interlineado doble, sangría inicial, numeración superior derecha,
