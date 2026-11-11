@@ -1,0 +1,87 @@
+Name:                   grafana
+Namespace:              sarseg-observabilidad
+CreationTimestamp:      Tue, 10 Nov 2026 23:54:48 -0500
+Labels:                 <none>
+Annotations:            deployment.kubernetes.io/revision: 8
+                        kubernetes.io/change-cause: Base del laboratorio con dos replicas
+Selector:               app=grafana
+Replicas:               2 desired | 2 updated | 2 total | 2 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        5
+RollingUpdateStrategy:  0 max unavailable, 1 max surge
+Pod Template:
+  Labels:       app=grafana
+                app.kubernetes.io/part-of=sarseg-p2
+  Annotations:  sarseg.io/revision-laboratorio: v1
+  Containers:
+   grafana:
+    Image:      grafana/grafana:12.3.0
+    Port:       3000/TCP
+    Host Port:  0/TCP
+    Limits:
+      cpu:     500m
+      memory:  512Mi
+    Requests:
+      cpu:      100m
+      memory:   160Mi
+    Liveness:   http-get http://:http/api/health delay=0s timeout=1s period=10s #success=1 #failure=3
+    Readiness:  http-get http://:http/api/health delay=0s timeout=1s period=3s #success=1 #failure=3
+    Startup:    http-get http://:http/api/health delay=0s timeout=1s period=2s #success=1 #failure=60
+    Environment:
+      GF_AUTH_ANONYMOUS_ENABLED:                   true
+      GF_AUTH_ANONYMOUS_ORG_ROLE:                  Viewer
+      GF_AUTH_DISABLE_LOGIN_FORM:                  true
+      GF_SECURITY_DISABLE_INITIAL_ADMIN_CREATION:  true
+      GF_USERS_ALLOW_SIGN_UP:                      false
+      GF_ANALYTICS_REPORTING_ENABLED:              false
+      GF_ANALYTICS_CHECK_FOR_UPDATES:              false
+      GF_ANALYTICS_CHECK_FOR_PLUGIN_UPDATES:       false
+      GF_PLUGINS_PREINSTALL_DISABLED:              true
+      GF_METRICS_ENABLED:                          true
+      GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH:   /var/lib/grafana/dashboards/sarseg-operacion.json
+    Mounts:
+      /etc/grafana/provisioning/dashboards from providers (ro)
+      /etc/grafana/provisioning/datasources from datasources (ro)
+      /var/lib/grafana from data (rw)
+      /var/lib/grafana/dashboards from dashboards (ro)
+  Volumes:
+   data:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:     
+    SizeLimit:  <unset>
+   datasources:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      grafana-datasources-hb9k56hh4h
+    Optional:  false
+   providers:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      grafana-providers-45khmht664
+    Optional:  false
+   dashboards:
+    Type:                       ConfigMap (a volume populated by a ConfigMap)
+    Name:                       grafana-dashboards-89ddfk27g6
+    Optional:                   false
+  Topology Spread Constraints:  kubernetes.io/hostname:DoNotSchedule when max skew 1 is exceeded for selector app=grafana
+  Node-Selectors:               <none>
+  Tolerations:                  <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  grafana-5f755dcc4b (0/0 replicas created), grafana-5bbf58666c (0/0 replicas created), grafana-67977598df (0/0 replicas created), grafana-6b6488c747 (0/0 replicas created), grafana-557d55f7c (0/0 replicas created)
+NewReplicaSet:   grafana-5c4c8dcb6c (2/2 replicas created)
+Events:
+  Type    Reason             Age                    From                   Message
+  ----    ------             ----                   ----                   -------
+  Normal  ScalingReplicaSet  11m                    deployment-controller  Scaled up replica set grafana-5f755dcc4b from 0 to 2
+  Normal  ScalingReplicaSet  9m37s                  deployment-controller  Scaled up replica set grafana-5bbf58666c from 0 to 1
+  Normal  ScalingReplicaSet  9m                     deployment-controller  Scaled down replica set grafana-5bbf58666c from 1 to 0
+  Normal  ScalingReplicaSet  9m                     deployment-controller  Scaled up replica set grafana-67977598df from 0 to 1
+  Normal  ScalingReplicaSet  8m46s                  deployment-controller  Scaled down replica set grafana-5f755dcc4b from 2 to 1
+  Normal  ScalingReplicaSet  8m33s                  deployment-controller  Scaled down replica set grafana-5f755dcc4b from 1 to 0
+  Normal  ScalingReplicaSet  4m50s                  deployment-controller  Scaled up replica set grafana-67977598df from 2 to 3
+  Normal  ScalingReplicaSet  4m22s                  deployment-controller  Scaled down replica set grafana-67977598df from 3 to 2
+  Normal  ScalingReplicaSet  3m27s (x2 over 8m46s)  deployment-controller  Scaled up replica set grafana-67977598df from 1 to 2
+  Normal  ScalingReplicaSet  115s                   deployment-controller  Scaled down replica set grafana-67977598df from 1 to 0
+  Normal  ScalingReplicaSet  41s (x16 over 4m6s)    deployment-controller  (combined from similar events): Scaled down replica set grafana-5c4c8dcb6c from 1 to 0

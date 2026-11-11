@@ -1,0 +1,41 @@
+{
+  "status": "success",
+  "data": {
+    "resultType": "vector",
+    "result": [
+      {
+        "metric": {
+          "__name__": "up",
+          "instance": "grafana:3000",
+          "job": "grafana-service"
+        },
+        "value": [
+          1794373305.871,
+          "1"
+        ]
+      },
+      {
+        "metric": {
+          "__name__": "up",
+          "instance": "localhost:9090",
+          "job": "prometheus"
+        },
+        "value": [
+          1794373305.871,
+          "1"
+        ]
+      },
+      {
+        "metric": {
+          "__name__": "up",
+          "instance": "kube-state-metrics:8080",
+          "job": "kubernetes-sarseg"
+        },
+        "value": [
+          1794373305.871,
+          "1"
+        ]
+      }
+    ]
+  }
+}

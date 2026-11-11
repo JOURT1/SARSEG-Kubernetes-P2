@@ -1,0 +1,10 @@
+{
+  "url": "http://127.0.0.1:13000/api/health",
+  "http": 200,
+  "response": {
+    "database": "ok",
+    "version": "12.3.0",
+    "commit": "20051fb1fc604fc54aae76356da1c14612af41d0"
+  },
+  "time_utc": "2026-11-11T05:04:42.104+00:00"
+}

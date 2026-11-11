@@ -1,0 +1,7 @@
+deployment.apps/grafana 
+REVISION  CHANGE-CAUSE
+1         Base del laboratorio con dos replicas
+2         Base del laboratorio con dos replicas
+4         Prueba P2 de actualizacion de plantilla
+5         Base del laboratorio con dos replicas
+
