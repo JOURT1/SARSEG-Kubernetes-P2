@@ -25,11 +25,12 @@ function Invoke-Kubectl {
     & kubectl --context kind-sarseg-p2 @args
     if ($LASTEXITCODE -ne 0) { throw "kubectl fallo: $args" }
 }
-Invoke-Kubectl apply -f k8s/namespace.yaml
-Invoke-Kubectl apply -f k8s
-Invoke-Kubectl -n sarseg-observabilidad rollout status deployment/grafana --timeout=300s
+Invoke-Kubectl apply -k k8s
+foreach ($deployment in @('grafana', 'prometheus', 'kube-state-metrics')) {
+    Invoke-Kubectl -n sarseg-observabilidad rollout status "deployment/$deployment" --timeout=300s
+}
 Invoke-Kubectl get nodes
-Invoke-Kubectl -n sarseg-observabilidad get deployments,replicasets,pods,services -o wide
+Invoke-Kubectl -n sarseg-observabilidad get 'deployments,replicasets,pods,services' -o wide
 $health = Invoke-RestMethod 'http://127.0.0.1:13000/api/health'
 if ($health.database -ne 'ok') { throw 'Grafana no responde con database=ok.' }
 Write-Host 'Grafana disponible en http://127.0.0.1:13000'
