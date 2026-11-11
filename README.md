@@ -71,11 +71,12 @@ kind-sarseg-p2 y el puerto 13000. Los UIDs y mediciones se identifican por ejecu
 | Rama conservada | Avance |
 |---|---|
 | main | Integración de entregables |
-| codex/infraestructura-kubernetes | Clúster, despliegue y exposición, PR 1 |
-| codex/metricas-sarseg | Fuentes reales y tablero, PR 2 |
-| codex/pruebas-deployment-replicaset | Pruebas, correcciones y evidencia, PR 3 |
-| codex/informe-evidencias | Informe, referencias y guía de entrega, PR 4 |
-| codex/informe-apa7 | Reproducción desde cero, carátula APA 7 y secuencia completa de capturas |
+| infraestructura-kubernetes | Clúster, despliegue y exposición, PR 1 |
+| metricas-sarseg | Fuentes reales y tablero, PR 2 |
+| pruebas-deployment-replicaset | Pruebas, correcciones y evidencia, PR 3 |
+| informe-evidencias | Informe, referencias y guía de entrega, PR 4 |
+| informe-apa7 | Reproducción desde cero, carátula APA 7 y secuencia completa de capturas |
+| mantenimiento-ramas | Nombres de ramas, documentación y filtro de CI |
 
 Los [pull requests](https://github.com/JOURT1/SARSEG-Kubernetes-P2/pulls?q=is%3Apr)
 conservan los commits por avance y se integran mediante merge commits.
