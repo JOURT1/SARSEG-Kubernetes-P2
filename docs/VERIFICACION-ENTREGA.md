@@ -2,27 +2,37 @@
 
 ## Informe
 
-Se generó el PDF desde resultados de la ejecución final aprobada, sin completar
-mediciones manualmente. Se renderizaron sus nueve páginas con Poppler y se
-inspeccionaron visualmente. Se verificaron tres imágenes incrustadas y dieciséis
-enlaces activos, incluido el enlace del repositorio público.
+Se generó el PDF ampliado desde los resultados de la reproducción aprobada,
+conservando por separado las ejecuciones originales. Se renderizaron sus treinta
+y seis páginas con Poppler para la inspección visual. Contiene veintiséis figuras
+del recorrido, veintisiete imágenes incrustadas contando el logotipo, trece
+enlaces activos y cuarenta y tres marcadores de navegación.
 
-Los fragmentos de PowerShell se revisaron para conservar comillas y comandos
-legibles. El informe diferencia exportaciones reales de la interfaz, registros
-de terminal, resultados observados y usos futuros de SARSEG.
+Se comprobó tamaño carta en todas las páginas, márgenes de 2,54 cm, Times New
+Roman 12, interlineado doble, sangría inicial, numeración superior derecha,
+figuras con número y título, citas autor-fecha y referencias con sangría francesa.
+Las tablas usan reglas horizontales y un tamaño de texto adecuado a su contenido.
+El logotipo oficial es una adaptación institucional de la carátula solicitada.
+
+El informe diferencia capturas directas de GitHub y Grafana, capturas del visor
+de registros, exportaciones de la plataforma, resultados observados y usos
+futuros. Se revisó la legibilidad de las capturas y se corrigieron tres imágenes
+antes de incorporarlas al PDF definitivo.
 
 ## Integridad de evidencias
 
-Se comprobaron los cincuenta y cinco archivos indexados en SHA256SUMS.txt tanto
+Se comprobaron los ciento nueve archivos indexados en SHA256SUMS.txt tanto
 contra el contenido local como contra los blobs preparados para Git. Los textos
 usan UTF8 y LF para obtener los mismos hashes en Windows y Linux.
 
 ## Ejecución
 
-La ejecución final tiene once comprobaciones aprobadas y 113 de 113 solicitudes
-HTTP correctas. La primera ejecución, con una conexión interrumpida, sigue
-incluida. GitHub Actions ejecutó el mismo protocolo en un clúster independiente
-y terminó correctamente; su enlace y SHA están en evidencias/github-actions.json.
+La ejecución original final tiene once comprobaciones aprobadas y 113 de 113
+solicitudes HTTP correctas. La reproducción desde cero del recorrido amplió la
+evidencia con once comprobaciones y 109 de 109 muestras correctas. La primera
+ejecución original, con una conexión interrumpida, sigue incluida. Los contextos,
+los puertos y los UIDs identifican cada ejecución. GitHub Actions también ejecutó
+el protocolo en un clúster independiente y terminó correctamente.
 
 El script Start-Lab.ps1 se volvió a ejecutar sobre el clúster existente para
 validar que los manifiestos son aplicables de nuevo y que todos los Deployments
