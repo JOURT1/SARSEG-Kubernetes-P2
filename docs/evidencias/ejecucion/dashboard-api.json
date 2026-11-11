@@ -1,0 +1,396 @@
+{
+  "meta": {
+    "type": "db",
+    "canSave": false,
+    "canEdit": false,
+    "canAdmin": false,
+    "canStar": false,
+    "canDelete": false,
+    "slug": "sarseg-7c-operacion-de-kubernetes",
+    "url": "/d/sarseg-operacion/sarseg-7c-operacion-de-kubernetes",
+    "expires": "0001-01-01T00:00:00Z",
+    "created": "2026-11-11T04:57:43Z",
+    "updated": "2026-11-11T04:57:43Z",
+    "updatedBy": "Anonymous",
+    "createdBy": "Anonymous",
+    "version": 1,
+    "hasAcl": false,
+    "isFolder": false,
+    "apiVersion": "v0alpha1",
+    "folderId": 0,
+    "folderUid": "",
+    "folderTitle": "General",
+    "folderUrl": "",
+    "provisioned": true,
+    "provisionedExternalId": "sarseg-operacion.json",
+    "annotationsPermissions": {
+      "dashboard": {
+        "canAdd": false,
+        "canEdit": false,
+        "canDelete": false
+      },
+      "organization": {
+        "canAdd": false,
+        "canEdit": false,
+        "canDelete": false
+      }
+    }
+  },
+  "dashboard": {
+    "editable": false,
+    "id": 1,
+    "panels": [
+      {
+        "gridPos": {
+          "h": 2,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 1,
+        "options": {
+          "content": "**Laboratorio SARSEG P2** · Deployment → ReplicaSet → Pods · Métricas reales de `sarseg-observabilidad`. La API de asistencia no está desplegada en esta práctica.",
+          "mode": "markdown"
+        },
+        "title": "Alcance de las métricas",
+        "type": "text"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus-sarseg"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "fixedColor": "green",
+              "mode": "fixed"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 6,
+          "x": 0,
+          "y": 2
+        },
+        "id": 2,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "values": false
+          },
+          "textMode": "value"
+        },
+        "targets": [
+          {
+            "expr": "kube_deployment_spec_replicas{namespace=\"sarseg-observabilidad\",deployment=\"grafana\"}",
+            "instant": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Grafana · réplicas deseadas",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus-sarseg"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "fixedColor": "green",
+              "mode": "fixed"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 6,
+          "x": 6,
+          "y": 2
+        },
+        "id": 3,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "values": false
+          },
+          "textMode": "value"
+        },
+        "targets": [
+          {
+            "expr": "kube_deployment_status_replicas_available{namespace=\"sarseg-observabilidad\",deployment=\"grafana\"}",
+            "instant": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Grafana · réplicas disponibles",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus-sarseg"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "fixedColor": "blue",
+              "mode": "fixed"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 6,
+          "x": 12,
+          "y": 2
+        },
+        "id": 4,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "values": false
+          },
+          "textMode": "value"
+        },
+        "targets": [
+          {
+            "expr": "sum(kube_pod_status_phase{namespace=\"sarseg-observabilidad\",phase=\"Running\"})",
+            "instant": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Pods de infraestructura Running",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus-sarseg"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "fixedColor": "blue",
+              "mode": "fixed"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 6,
+          "x": 18,
+          "y": 2
+        },
+        "id": 5,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "values": false
+          },
+          "textMode": "value"
+        },
+        "targets": [
+          {
+            "expr": "sum(kube_pod_container_status_restarts_total{namespace=\"sarseg-observabilidad\"})",
+            "instant": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Reinicios de contenedores",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus-sarseg"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "axisLabel": "Réplicas",
+              "drawStyle": "line",
+              "fillOpacity": 8,
+              "lineWidth": 2,
+              "spanNulls": false
+            },
+            "min": 0,
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 16,
+          "x": 0,
+          "y": 7
+        },
+        "id": 6,
+        "options": {
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "multi"
+          }
+        },
+        "targets": [
+          {
+            "expr": "kube_deployment_spec_replicas{namespace=\"sarseg-observabilidad\",deployment=\"grafana\"}",
+            "legendFormat": "Deseadas",
+            "refId": "A"
+          },
+          {
+            "expr": "kube_deployment_status_replicas_available{namespace=\"sarseg-observabilidad\",deployment=\"grafana\"}",
+            "legendFormat": "Disponibles",
+            "refId": "B"
+          },
+          {
+            "expr": "kube_deployment_status_replicas_updated{namespace=\"sarseg-observabilidad\",deployment=\"grafana\"}",
+            "legendFormat": "Actualizadas",
+            "refId": "C"
+          }
+        ],
+        "title": "Deployment de Grafana durante las pruebas",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus-sarseg"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "max": 1,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "red",
+                  "value": null
+                },
+                {
+                  "color": "green",
+                  "value": 1
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 8,
+          "x": 16,
+          "y": 7
+        },
+        "id": 7,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "values": false
+          },
+          "textMode": "value_and_name"
+        },
+        "targets": [
+          {
+            "expr": "up",
+            "instant": true,
+            "legendFormat": "{{job}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Fuentes de Prometheus · 1 significa UP",
+        "type": "stat"
+      }
+    ],
+    "refresh": "5s",
+    "schemaVersion": 39,
+    "tags": [
+      "SARSEG",
+      "P2",
+      "Kubernetes"
+    ],
+    "time": {
+      "from": "now-15m",
+      "to": "now"
+    },
+    "timezone": "browser",
+    "title": "SARSEG | Operación de Kubernetes",
+    "uid": "sarseg-operacion",
+    "version": 1
+  }
+}

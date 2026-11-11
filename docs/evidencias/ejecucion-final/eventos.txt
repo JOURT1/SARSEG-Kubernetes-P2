@@ -1,0 +1,178 @@
+LAST SEEN   TYPE      REASON              OBJECT                                     MESSAGE
+11m         Normal    Scheduled           pod/grafana-5f755dcc4b-xrcqk               Successfully assigned sarseg-observabilidad/grafana-5f755dcc4b-xrcqk to sarseg-p2-worker2
+11m         Normal    Scheduled           pod/grafana-5f755dcc4b-79wxd               Successfully assigned sarseg-observabilidad/grafana-5f755dcc4b-79wxd to sarseg-p2-worker
+11m         Normal    ScalingReplicaSet   deployment/grafana                         Scaled up replica set grafana-5f755dcc4b from 0 to 2
+11m         Normal    Pulling             pod/grafana-5f755dcc4b-79wxd               Pulling image "grafana/grafana:12.3.0"
+11m         Normal    Pulling             pod/grafana-5f755dcc4b-xrcqk               Pulling image "grafana/grafana:12.3.0"
+11m         Normal    SuccessfulCreate    replicaset/grafana-5f755dcc4b              Created pod: grafana-5f755dcc4b-xrcqk
+11m         Normal    SuccessfulCreate    replicaset/grafana-5f755dcc4b              Created pod: grafana-5f755dcc4b-79wxd
+11m         Normal    Pulled              pod/grafana-5f755dcc4b-xrcqk               Successfully pulled image "grafana/grafana:12.3.0" in 18.209s (18.209s including waiting). Image size: 210145120 bytes.
+11m         Normal    Created             pod/grafana-5f755dcc4b-xrcqk               Created container: grafana
+11m         Normal    Created             pod/grafana-5f755dcc4b-79wxd               Created container: grafana
+11m         Normal    Started             pod/grafana-5f755dcc4b-xrcqk               Started container grafana
+11m         Normal    Pulled              pod/grafana-5f755dcc4b-79wxd               Successfully pulled image "grafana/grafana:12.3.0" in 18.19s (18.19s including waiting). Image size: 210145120 bytes.
+11m         Normal    Started             pod/grafana-5f755dcc4b-79wxd               Started container grafana
+11m         Warning   Unhealthy           pod/grafana-5f755dcc4b-xrcqk               Startup probe failed: Get "http://10.244.2.2:3000/api/health": dial tcp 10.244.2.2:3000: connect: connection refused
+11m         Warning   Unhealthy           pod/grafana-5f755dcc4b-79wxd               Startup probe failed: Get "http://10.244.1.2:3000/api/health": dial tcp 10.244.1.2:3000: connect: connection refused
+9m37s       Normal    Scheduled           pod/prometheus-6798b5c955-jkhwz            Successfully assigned sarseg-observabilidad/prometheus-6798b5c955-jkhwz to sarseg-p2-worker
+9m37s       Normal    ScalingReplicaSet   deployment/grafana                         Scaled up replica set grafana-5bbf58666c from 0 to 1
+9m37s       Normal    SuccessfulCreate    replicaset/grafana-5bbf58666c              Created pod: grafana-5bbf58666c-mf6mv
+9m37s       Normal    Scheduled           pod/kube-state-metrics-5ccfd57cc8-flnht    Successfully assigned sarseg-observabilidad/kube-state-metrics-5ccfd57cc8-flnht to sarseg-p2-worker2
+9m37s       Normal    ScalingReplicaSet   deployment/prometheus                      Scaled up replica set prometheus-6798b5c955 from 0 to 1
+9m37s       Normal    SuccessfulCreate    replicaset/kube-state-metrics-5ccfd57cc8   Created pod: kube-state-metrics-5ccfd57cc8-flnht
+9m37s       Normal    ScalingReplicaSet   deployment/kube-state-metrics              Scaled up replica set kube-state-metrics-5ccfd57cc8 from 0 to 1
+9m37s       Warning   FailedScheduling    pod/grafana-5bbf58666c-mf6mv               0/3 nodes are available: 1 node(s) had untolerated taint {node-role.kubernetes.io/control-plane: }, 2 node(s) didn't match pod topology spread constraints. preemption: 0/3 nodes are available: 1 Preemption is not helpful for scheduling, 2 No preemption victims found for incoming pod.
+9m37s       Normal    SuccessfulCreate    replicaset/prometheus-6798b5c955           Created pod: prometheus-6798b5c955-jkhwz
+9m36s       Normal    Pulling             pod/prometheus-6798b5c955-jkhwz            Pulling image "prom/prometheus:v3.5.0"
+9m36s       Normal    Pulling             pod/kube-state-metrics-5ccfd57cc8-flnht    Pulling image "registry.k8s.io/kube-state-metrics/kube-state-metrics:v2.16.0"
+9m30s       Normal    Created             pod/prometheus-6798b5c955-jkhwz            Created container: prometheus
+9m30s       Normal    Pulled              pod/prometheus-6798b5c955-jkhwz            Successfully pulled image "prom/prometheus:v3.5.0" in 6.635s (6.636s including waiting). Image size: 123797512 bytes.
+9m29s       Normal    Started             pod/prometheus-6798b5c955-jkhwz            Started container prometheus
+9m          Normal    ScalingReplicaSet   deployment/grafana                         Scaled up replica set grafana-67977598df from 0 to 1
+9m          Normal    Scheduled           pod/grafana-67977598df-klfmf               Successfully assigned sarseg-observabilidad/grafana-67977598df-klfmf to sarseg-p2-worker
+9m          Normal    ScalingReplicaSet   deployment/grafana                         Scaled down replica set grafana-5bbf58666c from 1 to 0
+9m          Normal    SuccessfulCreate    replicaset/grafana-67977598df              Created pod: grafana-67977598df-klfmf
+9m          Normal    SuccessfulDelete    replicaset/grafana-5bbf58666c              Deleted pod: grafana-5bbf58666c-mf6mv
+8m59s       Normal    Pulled              pod/grafana-67977598df-klfmf               Container image "grafana/grafana:12.3.0" already present on machine
+8m59s       Normal    Created             pod/grafana-67977598df-klfmf               Created container: grafana
+8m59s       Normal    Started             pod/grafana-67977598df-klfmf               Started container grafana
+8m53s       Warning   Unhealthy           pod/grafana-67977598df-klfmf               Startup probe failed: Get "http://10.244.1.4:3000/api/health": dial tcp 10.244.1.4:3000: connect: connection refused
+8m46s       Normal    SuccessfulDelete    replicaset/grafana-5f755dcc4b              Deleted pod: grafana-5f755dcc4b-79wxd
+8m46s       Normal    Created             pod/grafana-67977598df-4rtpk               Created container: grafana
+8m46s       Normal    Started             pod/grafana-67977598df-4rtpk               Started container grafana
+8m46s       Normal    Pulled              pod/grafana-67977598df-4rtpk               Container image "grafana/grafana:12.3.0" already present on machine
+8m46s       Normal    SuccessfulCreate    replicaset/grafana-67977598df              Created pod: grafana-67977598df-4rtpk
+8m46s       Normal    Scheduled           pod/grafana-67977598df-4rtpk               Successfully assigned sarseg-observabilidad/grafana-67977598df-4rtpk to sarseg-p2-worker2
+8m46s       Normal    Killing             pod/grafana-5f755dcc4b-79wxd               Stopping container grafana
+3m27s       Normal    ScalingReplicaSet   deployment/grafana                         Scaled up replica set grafana-67977598df from 1 to 2
+8m46s       Normal    ScalingReplicaSet   deployment/grafana                         Scaled down replica set grafana-5f755dcc4b from 2 to 1
+8m40s       Warning   Unhealthy           pod/grafana-67977598df-4rtpk               Startup probe failed: Get "http://10.244.2.4:3000/api/health": dial tcp 10.244.2.4:3000: connect: connection refused
+8m33s       Normal    ScalingReplicaSet   deployment/grafana                         Scaled down replica set grafana-5f755dcc4b from 1 to 0
+8m33s       Normal    SuccessfulDelete    replicaset/grafana-5f755dcc4b              Deleted pod: grafana-5f755dcc4b-xrcqk
+8m33s       Normal    Killing             pod/grafana-5f755dcc4b-xrcqk               Stopping container grafana
+8m28s       Normal    Started             pod/kube-state-metrics-5ccfd57cc8-flnht    Started container kube-state-metrics
+8m28s       Normal    Pulled              pod/kube-state-metrics-5ccfd57cc8-flnht    Successfully pulled image "registry.k8s.io/kube-state-metrics/kube-state-metrics:v2.16.0" in 1m7.955s (1m7.955s including waiting). Image size: 18382550 bytes.
+8m28s       Normal    Created             pod/kube-state-metrics-5ccfd57cc8-flnht    Created container: kube-state-metrics
+4m50s       Normal    Scheduled           pod/grafana-67977598df-bvvxz               Successfully assigned sarseg-observabilidad/grafana-67977598df-bvvxz to sarseg-p2-worker2
+4m50s       Normal    SuccessfulCreate    replicaset/grafana-67977598df              Created pod: grafana-67977598df-bvvxz
+4m50s       Normal    ScalingReplicaSet   deployment/grafana                         Scaled up replica set grafana-67977598df from 2 to 3
+4m50s       Normal    Created             pod/grafana-67977598df-bvvxz               Created container: grafana
+4m50s       Normal    Pulled              pod/grafana-67977598df-bvvxz               Container image "grafana/grafana:12.3.0" already present on machine
+4m48s       Normal    Started             pod/grafana-67977598df-bvvxz               Started container grafana
+4m44s       Warning   Unhealthy           pod/grafana-67977598df-bvvxz               Startup probe failed: Get "http://10.244.2.5:3000/api/health": dial tcp 10.244.2.5:3000: connect: connection refused
+4m22s       Normal    SuccessfulCreate    replicaset/grafana-67977598df              Created pod: grafana-67977598df-jxsjr
+4m22s       Normal    SuccessfulDelete    replicaset/grafana-67977598df              Deleted pod: grafana-67977598df-bvvxz
+4m22s       Normal    Killing             pod/grafana-67977598df-bvvxz               Stopping container grafana
+4m22s       Normal    Scheduled           pod/grafana-67977598df-jxsjr               Successfully assigned sarseg-observabilidad/grafana-67977598df-jxsjr to sarseg-p2-worker2
+4m22s       Normal    Killing             pod/grafana-67977598df-4rtpk               Stopping container grafana
+4m22s       Normal    ScalingReplicaSet   deployment/grafana                         Scaled down replica set grafana-67977598df from 3 to 2
+4m21s       Normal    Pulled              pod/grafana-67977598df-jxsjr               Container image "grafana/grafana:12.3.0" already present on machine
+4m21s       Normal    Created             pod/grafana-67977598df-jxsjr               Created container: grafana
+4m21s       Normal    Started             pod/grafana-67977598df-jxsjr               Started container grafana
+4m15s       Warning   Unhealthy           pod/grafana-67977598df-jxsjr               Startup probe failed: Get "http://10.244.2.6:3000/api/health": dial tcp 10.244.2.6:3000: connect: connection refused
+4m6s        Normal    SuccessfulCreate    replicaset/grafana-6b6488c747              Created pod: grafana-6b6488c747-x24vx
+4m6s        Normal    Scheduled           pod/grafana-6b6488c747-x24vx               Successfully assigned sarseg-observabilidad/grafana-6b6488c747-x24vx to sarseg-p2-worker2
+41s         Normal    ScalingReplicaSet   deployment/grafana                         (combined from similar events): Scaled down replica set grafana-5c4c8dcb6c from 1 to 0
+4m5s        Normal    Started             pod/grafana-6b6488c747-x24vx               Started container grafana
+4m5s        Normal    Created             pod/grafana-6b6488c747-x24vx               Created container: grafana
+4m5s        Normal    Pulled              pod/grafana-6b6488c747-x24vx               Container image "grafana/grafana:12.3.0" already present on machine
+4m1s        Warning   Unhealthy           pod/grafana-6b6488c747-x24vx               Startup probe failed: Get "http://10.244.2.7:3000/api/health": dial tcp 10.244.2.7:3000: connect: connection refused
+3m54s       Normal    Created             pod/grafana-6b6488c747-8tsrj               Created container: grafana
+3m54s       Normal    SuccessfulCreate    replicaset/grafana-6b6488c747              Created pod: grafana-6b6488c747-8tsrj
+3m54s       Normal    Started             pod/grafana-6b6488c747-8tsrj               Started container grafana
+3m54s       Normal    Pulled              pod/grafana-6b6488c747-8tsrj               Container image "grafana/grafana:12.3.0" already present on machine
+3m54s       Normal    Scheduled           pod/grafana-6b6488c747-8tsrj               Successfully assigned sarseg-observabilidad/grafana-6b6488c747-8tsrj to sarseg-p2-worker
+3m54s       Normal    SuccessfulDelete    replicaset/grafana-67977598df              Deleted pod: grafana-67977598df-jxsjr
+3m54s       Normal    Killing             pod/grafana-67977598df-jxsjr               Stopping container grafana
+3m48s       Warning   Unhealthy           pod/grafana-6b6488c747-8tsrj               Startup probe failed: Get "http://10.244.1.5:3000/api/health": dial tcp 10.244.1.5:3000: connect: connection refused
+3m41s       Normal    Killing             pod/grafana-67977598df-klfmf               Stopping container grafana
+3m41s       Normal    SuccessfulDelete    replicaset/grafana-67977598df              Deleted pod: grafana-67977598df-klfmf
+3m40s       Normal    SuccessfulCreate    replicaset/grafana-67977598df              Created pod: grafana-67977598df-lkzhq
+3m40s       Normal    Created             pod/grafana-67977598df-lkzhq               Created container: grafana
+3m40s       Normal    Pulled              pod/grafana-67977598df-lkzhq               Container image "grafana/grafana:12.3.0" already present on machine
+3m40s       Normal    Scheduled           pod/grafana-67977598df-lkzhq               Successfully assigned sarseg-observabilidad/grafana-67977598df-lkzhq to sarseg-p2-worker2
+3m39s       Normal    Started             pod/grafana-67977598df-lkzhq               Started container grafana
+3m34s       Warning   Unhealthy           pod/grafana-67977598df-lkzhq               Startup probe failed: Get "http://10.244.2.8:3000/api/health": dial tcp 10.244.2.8:3000: connect: connection refused
+3m27s       Normal    Killing             pod/grafana-6b6488c747-x24vx               Stopping container grafana
+3m27s       Normal    SuccessfulCreate    replicaset/grafana-67977598df              Created pod: grafana-67977598df-n8x59
+3m27s       Normal    SuccessfulDelete    replicaset/grafana-6b6488c747              Deleted pod: grafana-6b6488c747-x24vx
+3m27s       Normal    Scheduled           pod/grafana-67977598df-n8x59               Successfully assigned sarseg-observabilidad/grafana-67977598df-n8x59 to sarseg-p2-worker
+3m26s       Normal    Pulled              pod/grafana-67977598df-n8x59               Container image "grafana/grafana:12.3.0" already present on machine
+3m26s       Normal    Started             pod/grafana-67977598df-n8x59               Started container grafana
+3m26s       Normal    Created             pod/grafana-67977598df-n8x59               Created container: grafana
+3m20s       Warning   Unhealthy           pod/grafana-67977598df-n8x59               Startup probe failed: Get "http://10.244.1.6:3000/api/health": dial tcp 10.244.1.6:3000: connect: connection refused
+3m13s       Normal    Killing             pod/grafana-6b6488c747-8tsrj               Stopping container grafana
+3m13s       Normal    SuccessfulDelete    replicaset/grafana-6b6488c747              Deleted pod: grafana-6b6488c747-8tsrj
+2m22s       Normal    ScalingReplicaSet   deployment/prometheus                      Scaled up replica set prometheus-557d9dfd67 from 0 to 1
+2m22s       Normal    SuccessfulCreate    replicaset/prometheus-557d9dfd67           Created pod: prometheus-557d9dfd67-hsr44
+2m22s       Normal    Scheduled           pod/grafana-5c4c8dcb6c-mpqjd               Successfully assigned sarseg-observabilidad/grafana-5c4c8dcb6c-mpqjd to sarseg-p2-worker2
+2m22s       Normal    Scheduled           pod/prometheus-557d9dfd67-hsr44            Successfully assigned sarseg-observabilidad/prometheus-557d9dfd67-hsr44 to sarseg-p2-worker
+2m22s       Normal    SuccessfulCreate    replicaset/grafana-5c4c8dcb6c              Created pod: grafana-5c4c8dcb6c-mpqjd
+2m21s       Normal    Pulled              pod/prometheus-557d9dfd67-hsr44            Container image "prom/prometheus:v3.5.0" already present on machine
+2m21s       Normal    Created             pod/grafana-5c4c8dcb6c-mpqjd               Created container: grafana
+2m21s       Normal    SuccessfulDelete    replicaset/prometheus-6798b5c955           Deleted pod: prometheus-6798b5c955-jkhwz
+2m21s       Normal    Pulled              pod/grafana-5c4c8dcb6c-mpqjd               Container image "grafana/grafana:12.3.0" already present on machine
+2m21s       Normal    Started             pod/prometheus-557d9dfd67-hsr44            Started container prometheus
+2m21s       Normal    Created             pod/prometheus-557d9dfd67-hsr44            Created container: prometheus
+2m21s       Normal    Killing             pod/prometheus-6798b5c955-jkhwz            Stopping container prometheus
+2m21s       Normal    Started             pod/grafana-5c4c8dcb6c-mpqjd               Started container grafana
+2m21s       Normal    ScalingReplicaSet   deployment/prometheus                      Scaled down replica set prometheus-6798b5c955 from 1 to 0
+2m16s       Warning   Unhealthy           pod/grafana-5c4c8dcb6c-mpqjd               Startup probe failed: Get "http://10.244.2.9:3000/api/health": dial tcp 10.244.2.9:3000: connect: connection refused
+2m9s        Normal    SuccessfulCreate    replicaset/grafana-5c4c8dcb6c              Created pod: grafana-5c4c8dcb6c-6rchm
+2m9s        Normal    Killing             pod/grafana-67977598df-lkzhq               Stopping container grafana
+2m9s        Normal    Scheduled           pod/grafana-5c4c8dcb6c-6rchm               Successfully assigned sarseg-observabilidad/grafana-5c4c8dcb6c-6rchm to sarseg-p2-worker
+2m9s        Normal    SuccessfulDelete    replicaset/grafana-67977598df              Deleted pod: grafana-67977598df-lkzhq
+2m8s        Normal    Started             pod/grafana-5c4c8dcb6c-6rchm               Started container grafana
+2m8s        Normal    Pulled              pod/grafana-5c4c8dcb6c-6rchm               Container image "grafana/grafana:12.3.0" already present on machine
+2m8s        Normal    Created             pod/grafana-5c4c8dcb6c-6rchm               Created container: grafana
+2m2s        Warning   Unhealthy           pod/grafana-5c4c8dcb6c-6rchm               Startup probe failed: Get "http://10.244.1.8:3000/api/health": dial tcp 10.244.1.8:3000: connect: connection refused
+115s        Normal    ScalingReplicaSet   deployment/grafana                         Scaled down replica set grafana-67977598df from 1 to 0
+115s        Normal    SuccessfulDelete    replicaset/grafana-67977598df              Deleted pod: grafana-67977598df-n8x59
+115s        Normal    Killing             pod/grafana-67977598df-n8x59               Stopping container grafana
+114s        Normal    SuccessfulCreate    replicaset/grafana-5c4c8dcb6c              Created pod: grafana-5c4c8dcb6c-d28f7
+114s        Normal    Scheduled           pod/grafana-5c4c8dcb6c-d28f7               Successfully assigned sarseg-observabilidad/grafana-5c4c8dcb6c-d28f7 to sarseg-p2-worker
+113s        Normal    Pulled              pod/grafana-5c4c8dcb6c-d28f7               Container image "grafana/grafana:12.3.0" already present on machine
+113s        Normal    Started             pod/grafana-5c4c8dcb6c-d28f7               Started container grafana
+113s        Normal    Created             pod/grafana-5c4c8dcb6c-d28f7               Created container: grafana
+107s        Warning   Unhealthy           pod/grafana-5c4c8dcb6c-d28f7               Startup probe failed: Get "http://10.244.1.9:3000/api/health": dial tcp 10.244.1.9:3000: connect: connection refused
+84s         Normal    Killing             pod/grafana-5c4c8dcb6c-d28f7               Stopping container grafana
+84s         Normal    SuccessfulDelete    replicaset/grafana-5c4c8dcb6c              Deleted pod: grafana-5c4c8dcb6c-d28f7
+83s         Normal    SuccessfulCreate    replicaset/grafana-5c4c8dcb6c              Created pod: grafana-5c4c8dcb6c-sclrn
+83s         Normal    Killing             pod/grafana-5c4c8dcb6c-6rchm               Stopping container grafana
+83s         Normal    Scheduled           pod/grafana-5c4c8dcb6c-sclrn               Successfully assigned sarseg-observabilidad/grafana-5c4c8dcb6c-sclrn to sarseg-p2-worker
+83s         Normal    Pulled              pod/grafana-5c4c8dcb6c-sclrn               Container image "grafana/grafana:12.3.0" already present on machine
+83s         Normal    Created             pod/grafana-5c4c8dcb6c-sclrn               Created container: grafana
+82s         Normal    Started             pod/grafana-5c4c8dcb6c-sclrn               Started container grafana
+77s         Warning   Unhealthy           pod/grafana-5c4c8dcb6c-sclrn               Startup probe failed: Get "http://10.244.1.10:3000/api/health": dial tcp 10.244.1.10:3000: connect: connection refused
+67s         Normal    Started             pod/grafana-557d55f7c-bg4dl                Started container grafana
+67s         Normal    Pulled              pod/grafana-557d55f7c-bg4dl                Container image "grafana/grafana:12.3.0" already present on machine
+67s         Normal    Scheduled           pod/grafana-557d55f7c-bg4dl                Successfully assigned sarseg-observabilidad/grafana-557d55f7c-bg4dl to sarseg-p2-worker
+67s         Normal    SuccessfulCreate    replicaset/grafana-557d55f7c               Created pod: grafana-557d55f7c-bg4dl
+67s         Normal    Created             pod/grafana-557d55f7c-bg4dl                Created container: grafana
+61s         Warning   Unhealthy           pod/grafana-557d55f7c-bg4dl                Startup probe failed: Get "http://10.244.1.11:3000/api/health": dial tcp 10.244.1.11:3000: connect: connection refused
+54s         Normal    Killing             pod/grafana-5c4c8dcb6c-sclrn               Stopping container grafana
+54s         Normal    SuccessfulDelete    replicaset/grafana-5c4c8dcb6c              Deleted pod: grafana-5c4c8dcb6c-sclrn
+54s         Normal    SuccessfulCreate    replicaset/grafana-557d55f7c               Created pod: grafana-557d55f7c-vs62j
+54s         Normal    Scheduled           pod/grafana-557d55f7c-vs62j                Successfully assigned sarseg-observabilidad/grafana-557d55f7c-vs62j to sarseg-p2-worker2
+53s         Normal    Started             pod/grafana-557d55f7c-vs62j                Started container grafana
+53s         Normal    Pulled              pod/grafana-557d55f7c-vs62j                Container image "grafana/grafana:12.3.0" already present on machine
+53s         Normal    Created             pod/grafana-557d55f7c-vs62j                Created container: grafana
+48s         Warning   Unhealthy           pod/grafana-557d55f7c-vs62j                Startup probe failed: Get "http://10.244.2.10:3000/api/health": dial tcp 10.244.2.10:3000: connect: connection refused
+41s         Normal    SuccessfulDelete    replicaset/grafana-5c4c8dcb6c              Deleted pod: grafana-5c4c8dcb6c-mpqjd
+41s         Normal    Killing             pod/grafana-5c4c8dcb6c-mpqjd               Stopping container grafana
+40s         Normal    SuccessfulCreate    replicaset/grafana-5c4c8dcb6c              Created pod: grafana-5c4c8dcb6c-wz8f9
+40s         Normal    Scheduled           pod/grafana-5c4c8dcb6c-wz8f9               Successfully assigned sarseg-observabilidad/grafana-5c4c8dcb6c-wz8f9 to sarseg-p2-worker
+39s         Normal    Pulled              pod/grafana-5c4c8dcb6c-wz8f9               Container image "grafana/grafana:12.3.0" already present on machine
+39s         Normal    Started             pod/grafana-5c4c8dcb6c-wz8f9               Started container grafana
+39s         Normal    Created             pod/grafana-5c4c8dcb6c-wz8f9               Created container: grafana
+35s         Warning   Unhealthy           pod/grafana-5c4c8dcb6c-wz8f9               Startup probe failed: Get "http://10.244.1.12:3000/api/health": dial tcp 10.244.1.12:3000: connect: connection refused
+28s         Normal    Started             pod/grafana-5c4c8dcb6c-4pv85               Started container grafana
+28s         Normal    Pulled              pod/grafana-5c4c8dcb6c-4pv85               Container image "grafana/grafana:12.3.0" already present on machine
+28s         Normal    Killing             pod/grafana-557d55f7c-bg4dl                Stopping container grafana
+28s         Normal    SuccessfulDelete    replicaset/grafana-557d55f7c               Deleted pod: grafana-557d55f7c-bg4dl
+28s         Normal    SuccessfulCreate    replicaset/grafana-5c4c8dcb6c              Created pod: grafana-5c4c8dcb6c-4pv85
+28s         Normal    Scheduled           pod/grafana-5c4c8dcb6c-4pv85               Successfully assigned sarseg-observabilidad/grafana-5c4c8dcb6c-4pv85 to sarseg-p2-worker2
+28s         Normal    Created             pod/grafana-5c4c8dcb6c-4pv85               Created container: grafana
+22s         Warning   Unhealthy           pod/grafana-5c4c8dcb6c-4pv85               Startup probe failed: Get "http://10.244.2.11:3000/api/health": dial tcp 10.244.2.11:3000: connect: connection refused
+15s         Normal    Killing             pod/grafana-557d55f7c-vs62j                Stopping container grafana
+15s         Normal    SuccessfulDelete    replicaset/grafana-557d55f7c               Deleted pod: grafana-557d55f7c-vs62j
