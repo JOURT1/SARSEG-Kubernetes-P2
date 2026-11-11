@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: sarseg-observabilidad
+resources:
+  - namespace.yaml
+  - grafana.yaml
+  - monitoring.yaml
+configMapGenerator:
+  - name: prometheus-config
+    files:
+      - prometheus.yml=config/prometheus.yml
+  - name: grafana-datasources
+    files:
+      - datasources.yaml=config/datasources.yaml
+  - name: grafana-providers
+    files:
+      - dashboards.yaml=config/dashboards.yaml
+  - name: grafana-dashboards
+    files:
+      - sarseg-operacion.json=config/sarseg-operacion.json
