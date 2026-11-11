@@ -18,6 +18,12 @@ permite un Pod adicional y exige cero réplicas no disponibles. La readinessProb
 evita enviar tráfico a Pods que todavía no están listos. Un escalado cambia el
 número de réplicas y no crea por sí mismo una nueva revisión de la plantilla.
 
+El hook preStop espera diez segundos antes de terminar Grafana, con un periodo
+de gracia total de treinta segundos. Esto da tiempo para que la retirada del
+endpoint del Pod se propague antes de que el proceso deje de atender solicitudes.
+maxUnavailable=0 por sí solo no garantiza que todas las conexiones HTTP terminen
+correctamente durante una actualización.
+
 No se crea un ReplicaSet independiente con el mismo selector: competiría con el
 control del Deployment. El ReplicaSet administrado se observa y prueba directamente.
 

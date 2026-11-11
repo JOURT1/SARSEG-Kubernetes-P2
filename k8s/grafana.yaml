@@ -27,6 +27,7 @@ spec:
         sarseg.io/revision-laboratorio: "v1"
     spec:
       automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 30
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -52,6 +53,10 @@ spec:
         - name: grafana
           image: grafana/grafana:12.3.0
           imagePullPolicy: IfNotPresent
+          lifecycle:
+            preStop:
+              exec:
+                command: ["sh", "-c", "sleep 10"]
           ports:
             - name: http
               containerPort: 3000
