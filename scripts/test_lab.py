@@ -1,4 +1,4 @@
-"""Pruebas reales de Deployment y ReplicaSet, solo en el cluster sarseg-p2."""
+"""Pruebas reales de Deployment y ReplicaSet en los dos contextos locales de la practica."""
 from __future__ import annotations
 
 import argparse
