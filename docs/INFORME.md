@@ -21,6 +21,10 @@ Docente: Mónica Fernanda Sanchez Rosero
 
 
 
+Repositorio público en la portada: [https://github.com/JOURT1/SARSEG-Kubernetes-P2](https://github.com/JOURT1/SARSEG-Kubernetes-P2)
+
+
+
 ## Configuración de un clúster Kubernetes y despliegue de Grafana para SARSEG con Deployment y ReplicaSet
 
 

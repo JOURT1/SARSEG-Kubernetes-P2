@@ -155,7 +155,11 @@ def main():
         para(escape(META[key]),'center')
     STORY.append(Spacer(1,24))
     para('Configuración de clúster Docker Swarm o Kubernetes<br/>15% P2','center')
+    STORY.append(Spacer(1,24))
+    para('<b>Repositorio público</b>','center')
+    para(href(REPO,REPO),'center')
     MD.extend(['# '+TITLE,'\n'+META['autor']+'\n','\n'+META['universidad']+' · '+META['carrera']+'\n','\nAsignatura: '+META['asignatura']+'\n','\nDocente: '+META['docente']+'\n','\n'+META['fecha']+'\n'])
+    MD.append('\nRepositorio público en la portada: ['+REPO+']('+REPO+')\n')
 
     section(TITLE,True)
     prose('El presente informe documenta el despliegue de Grafana en un clúster local de Kubernetes para el contexto de SARSEG, sistema de registro de asistencia con API .NET, PostgreSQL e interfaz Ionic/Angular. La práctica aplica Deployment y ReplicaSet, comprueba la ejecución de los Pods y expone la plataforma mediante un Service NodePort. La secuencia incluye preparación, configuración, despliegue, acceso, escalado, recuperación, actualización y reversión.')
