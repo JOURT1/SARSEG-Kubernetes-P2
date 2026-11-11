@@ -1,5 +1,18 @@
 # Índice de evidencias reales
 
+## Ampliación del informe APA 7
+
+La [reproducción desde cero](recorrido-apa7/README.md) conserva las dieciocho
+fases del nuevo recorrido y sus 109/109 muestras correctas. Las capturas de
+GitHub, bitácora y navegador se encuentran en apa7. El informe ampliado incluye
+veintiséis figuras numeradas y sus explicaciones, además del logotipo oficial
+de la UDLA en la carátula.
+
+Las capturas del visor se identifican como registros conservados de comandos
+reales. Se distinguen de las capturas directas de GitHub y Grafana y de las
+exportaciones de Grafana Image Renderer. Los archivos y las fechas originales
+se mantienen para contrastar cada fase.
+
 ## Ejecución final aprobada
 
 La ejecución principal está en [ejecucion-final](ejecucion-final). Pasaron once

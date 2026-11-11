@@ -1,0 +1,184 @@
+[
+  {
+    "number": 1,
+    "title": "Repositorio público de la práctica",
+    "image": "docs/evidencias/apa7/01-repositorio-publico.jpg",
+    "source": "https://github.com/JOURT1/SARSEG-Kubernetes-P2",
+    "step": "Paso 1 Acceso al repositorio público"
+  },
+  {
+    "number": 2,
+    "title": "Ramas conservadas por avance",
+    "image": "docs/evidencias/apa7/02-ramas-avances.jpg",
+    "source": "https://github.com/JOURT1/SARSEG-Kubernetes-P2/branches",
+    "step": "Paso 2 Organización por ramas"
+  },
+  {
+    "number": 3,
+    "title": "Historial de cambios y merges",
+    "image": "docs/evidencias/apa7/03-historial-commits.jpg",
+    "source": "https://github.com/JOURT1/SARSEG-Kubernetes-P2/commits/main/",
+    "step": "Paso 3 Historial de commits"
+  },
+  {
+    "number": 4,
+    "title": "Verificación de requisitos",
+    "image": "docs/evidencias/apa7/paso-01.jpg",
+    "source": "docs/evidencias/recorrido-apa7/pasos.json#01",
+    "step": "Paso 4 Verificación de requisitos"
+  },
+  {
+    "number": 5,
+    "title": "Configuración del clúster",
+    "image": "docs/evidencias/apa7/paso-02.jpg",
+    "source": "docs/evidencias/recorrido-apa7/pasos.json#02",
+    "step": "Paso 5 Definición del clúster"
+  },
+  {
+    "number": 6,
+    "title": "Creación real del clúster desde cero",
+    "image": "docs/evidencias/apa7/paso-03.jpg",
+    "source": "docs/evidencias/recorrido-apa7/pasos.json#03",
+    "step": "Paso 6 Creación desde cero"
+  },
+  {
+    "number": 7,
+    "title": "Comprobación de los tres nodos",
+    "image": "docs/evidencias/apa7/paso-04.jpg",
+    "source": "docs/evidencias/recorrido-apa7/pasos.json#04",
+    "step": "Paso 7 Verificación de nodos Ready"
+  },
+  {
+    "number": 8,
+    "title": "Definición del Deployment",
+    "image": "docs/evidencias/apa7/paso-05.jpg",
+    "source": "docs/evidencias/recorrido-apa7/pasos.json#05",
+    "step": "Paso 8 Configuración del Deployment"
+  },
+  {
+    "number": 9,
+    "title": "Aplicación de los manifiestos",
+    "image": "docs/evidencias/apa7/paso-06.jpg",
+    "source": "docs/evidencias/recorrido-apa7/pasos.json#06",
+    "step": "Paso 9 Aplicación de los recursos"
+  },
+  {
+    "number": 10,
+    "title": "Espera de disponibilidad",
+    "image": "docs/evidencias/apa7/paso-07.jpg",
+    "source": "docs/evidencias/recorrido-apa7/pasos.json#07",
+    "step": "Paso 10 Espera de disponibilidad"
+  },
+  {
+    "number": 11,
+    "title": "Deployment y ReplicaSet disponibles",
+    "image": "docs/evidencias/apa7/paso-08.jpg",
+    "source": "docs/evidencias/recorrido-apa7/pasos.json#08",
+    "step": "Paso 11 Comprobación de Deployment y ReplicaSet"
+  },
+  {
+    "number": 12,
+    "title": "Pods distribuidos en los workers",
+    "image": "docs/evidencias/apa7/paso-09.jpg",
+    "source": "docs/evidencias/recorrido-apa7/pasos.json#09",
+    "step": "Paso 12 Comprobación de los Pods"
+  },
+  {
+    "number": 13,
+    "title": "Definición de la exposición",
+    "image": "docs/evidencias/apa7/paso-10.jpg",
+    "source": "docs/evidencias/recorrido-apa7/pasos.json#10",
+    "step": "Paso 13 Configuración de Service"
+  },
+  {
+    "number": 14,
+    "title": "Plataforma expuesta por HTTP",
+    "image": "docs/evidencias/apa7/paso-11.jpg",
+    "source": "docs/evidencias/recorrido-apa7/pasos.json#11",
+    "step": "Paso 14 Validación del acceso HTTP"
+  },
+  {
+    "number": 15,
+    "title": "Respuesta real de salud de Grafana",
+    "image": "docs/evidencias/apa7/25-salud-http-navegador.jpg",
+    "source": "http://127.0.0.1:13010/api/health",
+    "step": "Paso 15 Consulta directa del endpoint"
+  },
+  {
+    "number": 16,
+    "title": "Tablero inicial de Grafana",
+    "image": "docs/evidencias/recorrido-apa7/pruebas/capturas/01-grafana-inicial.png",
+    "source": "docs/evidencias/recorrido-apa7/pruebas/capturas/01-grafana-inicial.png",
+    "step": "Paso 16 Apertura de la plataforma"
+  },
+  {
+    "number": 17,
+    "title": "Ejecución del protocolo completo",
+    "image": "docs/evidencias/apa7/paso-12.jpg",
+    "source": "docs/evidencias/recorrido-apa7/pasos.json#12",
+    "step": "Paso 17 Ejecución del protocolo"
+  },
+  {
+    "number": 18,
+    "title": "Escalado de dos a tres réplicas",
+    "image": "docs/evidencias/apa7/paso-13.jpg",
+    "source": "docs/evidencias/recorrido-apa7/pasos.json#13",
+    "step": "Paso 18 Escalado a tres réplicas"
+  },
+  {
+    "number": 19,
+    "title": "Grafana con tres réplicas",
+    "image": "docs/evidencias/recorrido-apa7/pruebas/capturas/02-grafana-tres-replicas.png",
+    "source": "docs/evidencias/recorrido-apa7/pruebas/02-escalado-tres.json",
+    "step": "Paso 19 Observación del escalado"
+  },
+  {
+    "number": 20,
+    "title": "Retorno a dos réplicas",
+    "image": "docs/evidencias/apa7/paso-14.jpg",
+    "source": "docs/evidencias/recorrido-apa7/pasos.json#14",
+    "step": "Paso 20 Restauración de dos réplicas"
+  },
+  {
+    "number": 21,
+    "title": "Reposición automática del Pod eliminado",
+    "image": "docs/evidencias/apa7/paso-15.jpg",
+    "source": "docs/evidencias/recorrido-apa7/pasos.json#15",
+    "step": "Paso 21 Reposición de un Pod"
+  },
+  {
+    "number": 22,
+    "title": "Actualización de la plantilla",
+    "image": "docs/evidencias/apa7/paso-16.jpg",
+    "source": "docs/evidencias/recorrido-apa7/pasos.json#16",
+    "step": "Paso 22 Actualización gradual"
+  },
+  {
+    "number": 23,
+    "title": "Rollback de la revisión",
+    "image": "docs/evidencias/apa7/paso-17.jpg",
+    "source": "docs/evidencias/recorrido-apa7/pasos.json#17",
+    "step": "Paso 23 Rollback"
+  },
+  {
+    "number": 24,
+    "title": "Grafana después de la reversión",
+    "image": "docs/evidencias/apa7/26-grafana-final-navegador.jpg",
+    "source": "http://127.0.0.1:13010/d/sarseg-operacion/sarseg",
+    "step": "Paso 24 Verificación final en Grafana"
+  },
+  {
+    "number": 25,
+    "title": "Resultados y exposición final",
+    "image": "docs/evidencias/apa7/paso-18.jpg",
+    "source": "docs/evidencias/recorrido-apa7/pasos.json#18",
+    "step": "Paso 25 Revisión del resultado registrado"
+  },
+  {
+    "number": 26,
+    "title": "Ejecución exitosa de GitHub Actions",
+    "image": "docs/evidencias/apa7/24-github-actions.jpg",
+    "source": "https://github.com/JOURT1/SARSEG-Kubernetes-P2/actions/runs/42964113968",
+    "step": "Paso 26 Verificación independiente en CI"
+  }
+]

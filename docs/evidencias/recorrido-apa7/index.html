@@ -1,0 +1,189 @@
+<!doctype html><html lang="es"><meta charset="utf-8"><title>SARSEG | Bitácora del laboratorio</title><style>
+*{box-sizing:border-box}body{margin:0;background:#fff;color:#172330;font-family:Arial,sans-serif;font-size:18px;line-height:1.45}header{padding:15px 26px;background:#172b3c;color:white;font-size:18px;font-weight:bold}header span{float:right;font-weight:normal;font-size:14px}nav{padding:8px 26px;border-bottom:1px solid #ccd3d9;display:flex;gap:13px}nav a{color:#185485;text-decoration:none;font-size:14px}article{display:none;padding:22px 28px;max-width:1000px}article.active{display:block}.eyebrow{font-size:14px;font-weight:bold;color:#4a6477}h1{font-size:29px;line-height:1.2;margin:10px 0}h2{font-size:17px;margin:20px 0 7px}p{margin:9px 0}.scope{font-size:14px;color:#516171}pre{font-family:Consolas,monospace;font-size:20px;line-height:1.38;border:1px solid #c6d0d8;background:#f5f7f9;padding:15px;margin:0;white-space:pre-wrap;overflow-wrap:anywhere}footer{padding:14px 28px;font-size:13px;color:#55616a;border-top:1px solid #ccd3d9}
+</style><header>SARSEG · Registro reproducible de Kubernetes<span>Bitácora de salidas originales</span></header><nav><a href="?paso=01">01</a><a href="?paso=02">02</a><a href="?paso=03">03</a><a href="?paso=04">04</a><a href="?paso=05">05</a><a href="?paso=06">06</a><a href="?paso=07">07</a><a href="?paso=08">08</a><a href="?paso=09">09</a><a href="?paso=10">10</a><a href="?paso=11">11</a><a href="?paso=12">12</a><a href="?paso=13">13</a><a href="?paso=14">14</a><a href="?paso=15">15</a><a href="?paso=16">16</a><a href="?paso=17">17</a><a href="?paso=18">18</a></nav><article data-step="01"><div class="eyebrow">PASO 01 · EVIDENCIA DE EJECUCIÓN</div><h1>Verificación de requisitos</h1><p class="scope">2026-11-11T05:35:14+00:00 UTC · kind-sarseg-p2-evidencia</p><p>Se comprobó el motor Docker y las versiones de las herramientas disponibles.</p><section><h2>$ docker version --format &quot;Docker Server: {{.Server.Version}}&quot;</h2><pre>Docker Server: 28.1.1
+</pre></section><section><h2>$ C:\Users\USER\Desktop\TITA\SARSEG-Kubernetes-P2\.tools\kind.exe version</h2><pre>kind v0.27.0 go1.23.6 windows/amd64
+</pre></section><section><h2>$ kubectl version --client -o yaml</h2><pre>clientVersion:
+  buildDate: &quot;2025-02-12T21:26:09Z&quot;
+  compiler: gc
+  gitCommit: 67a30c0adcf52bd3f56ff0893ce19966be12991f
+  gitTreeState: clean
+  gitVersion: v1.32.2
+  goVersion: go1.23.6
+  major: &quot;1&quot;
+  minor: &quot;32&quot;
+  platform: windows/amd64
+kustomizeVersion: v5.5.0
+
+</pre></section></article><article data-step="02"><div class="eyebrow">PASO 02 · EVIDENCIA DE EJECUCIÓN</div><h1>Configuración del clúster</h1><p class="scope">2026-11-11T05:35:14+00:00 UTC · kind-sarseg-p2-evidencia</p><p>Se usa la misma topología de tres nodos. El nombre y el puerto 13010 identifican la reproducción, separada del laboratorio original en 13000.</p><section><h2>Archivo cluster/kind-evidencias.yaml</h2><pre>kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: sarseg-p2-evidencia
+nodes:
+  - role: control-plane
+    image: kindest/node:v1.32.2
+    extraPortMappings:
+      - containerPort: 30300
+        hostPort: 13010
+        listenAddress: &quot;127.0.0.1&quot;
+        protocol: TCP
+  - role: worker
+    image: kindest/node:v1.32.2
+  - role: worker
+    image: kindest/node:v1.32.2
+</pre></section></article><article data-step="03"><div class="eyebrow">PASO 03 · EVIDENCIA DE EJECUCIÓN</div><h1>Creación real del clúster desde cero</h1><p class="scope">2026-11-11T05:35:51+00:00 UTC · kind-sarseg-p2-evidencia</p><p>kind creó el control plane y los dos workers sobre Docker Desktop.</p><section><h2>$ C:\Users\USER\Desktop\TITA\SARSEG-Kubernetes-P2\.tools\kind.exe create cluster --config cluster/kind-evidencias.yaml --wait 180s</h2><pre>Creating cluster &quot;sarseg-p2-evidencia&quot; ...
+ • Ensuring node image (kindest/node:v1.32.2) 🖼  ...
+ ✓ Ensuring node image (kindest/node:v1.32.2) 🖼
+ • Preparing nodes 📦 📦 📦   ...
+ ✓ Preparing nodes 📦 📦 📦 
+ • Writing configuration 📜  ...
+ ✓ Writing configuration 📜
+ • Starting control-plane 🕹️  ...
+ ✓ Starting control-plane 🕹️
+ • Installing CNI 🔌  ...
+ ✓ Installing CNI 🔌
+ • Installing StorageClass 💾  ...
+ ✓ Installing StorageClass 💾
+ • Joining worker nodes 🚜  ...
+ ✓ Joining worker nodes 🚜
+ • Waiting ≤ 3m0s for control-plane = Ready ⏳  ...
+ ✓ Waiting ≤ 3m0s for control-plane = Ready ⏳
+ • Ready after 10s 💚
+Set kubectl context to &quot;kind-sarseg-p2-evidencia&quot;
+You can now use your cluster with:
+
+kubectl cluster-info --context kind-sarseg-p2-evidencia
+
+Have a nice day! 👋
+</pre></section></article><article data-step="04"><div class="eyebrow">PASO 04 · EVIDENCIA DE EJECUCIÓN</div><h1>Comprobación de los tres nodos</h1><p class="scope">2026-11-11T05:35:52+00:00 UTC · kind-sarseg-p2-evidencia</p><p>Los nodos deben aparecer Ready antes de desplegar Grafana.</p><section><h2>$ kubectl --context kind-sarseg-p2-evidencia get nodes</h2><pre>NAME                                STATUS     ROLES           AGE   VERSION
+sarseg-p2-evidencia-control-plane   Ready      control-plane   24s   v1.32.2
+sarseg-p2-evidencia-worker          NotReady   &lt;none&gt;          12s   v1.32.2
+sarseg-p2-evidencia-worker2         NotReady   &lt;none&gt;          12s   v1.32.2
+</pre></section></article><article data-step="05"><div class="eyebrow">PASO 05 · EVIDENCIA DE EJECUCIÓN</div><h1>Definición del Deployment</h1><p class="scope">2026-11-11T05:35:52+00:00 UTC · kind-sarseg-p2-evidencia</p><p>El manifiesto declara dos réplicas, el selector y la estrategia RollingUpdate. El código completo está versionado en el repositorio.</p><section><h2>k8s/grafana.yaml, líneas 1 a 27</h2><pre>apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana
+  namespace: sarseg-observabilidad
+  annotations:
+    kubernetes.io/change-cause: &quot;Base del laboratorio con dos replicas&quot;
+spec:
+  replicas: 2
+  revisionHistoryLimit: 5
+  minReadySeconds: 5
+  progressDeadlineSeconds: 300
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: grafana
+  template:
+    metadata:
+      labels:
+        app: grafana
+        app.kubernetes.io/part-of: sarseg-p2
+      annotations:
+        sarseg.io/revision-laboratorio: &quot;v1&quot;</pre></section></article><article data-step="06"><div class="eyebrow">PASO 06 · EVIDENCIA DE EJECUCIÓN</div><h1>Aplicación de los manifiestos</h1><p class="scope">2026-11-11T05:35:52+00:00 UTC · kind-sarseg-p2-evidencia</p><p>Kustomize generó los ConfigMaps y Kubernetes creó los servicios y Deployments del namespace.</p><section><h2>$ kubectl --context kind-sarseg-p2-evidencia apply -k k8s</h2><pre>namespace/sarseg-observabilidad created
+serviceaccount/kube-state-metrics created
+role.rbac.authorization.k8s.io/kube-state-metrics created
+rolebinding.rbac.authorization.k8s.io/kube-state-metrics created
+configmap/grafana-dashboards-89ddfk27g6 created
+configmap/grafana-datasources-hb9k56hh4h created
+configmap/grafana-providers-45khmht664 created
+configmap/prometheus-config-t2852m8864 created
+service/grafana created
+service/kube-state-metrics created
+service/prometheus created
+deployment.apps/grafana created
+deployment.apps/kube-state-metrics created
+deployment.apps/prometheus created
+</pre></section></article><article data-step="07"><div class="eyebrow">PASO 07 · EVIDENCIA DE EJECUCIÓN</div><h1>Espera de disponibilidad</h1><p class="scope">2026-11-11T05:36:36+00:00 UTC · kind-sarseg-p2-evidencia</p><p>Se esperó a que los tres Deployments completaran su arranque; esto no equivale solamente a crear sus objetos.</p><section><h2>$ kubectl --context kind-sarseg-p2-evidencia -n sarseg-observabilidad rollout status deployment/grafana --timeout=300s</h2><pre>Waiting for deployment &quot;grafana&quot; rollout to finish: 0 of 2 updated replicas are available...
+Waiting for deployment &quot;grafana&quot; rollout to finish: 0 of 2 updated replicas are available...
+Waiting for deployment &quot;grafana&quot; rollout to finish: 0 of 2 updated replicas are available...
+Waiting for deployment &quot;grafana&quot; rollout to finish: 1 of 2 updated replicas are available...
+deployment &quot;grafana&quot; successfully rolled out
+</pre></section><section><h2>$ kubectl --context kind-sarseg-p2-evidencia -n sarseg-observabilidad rollout status deployment/prometheus --timeout=300s</h2><pre>deployment &quot;prometheus&quot; successfully rolled out
+</pre></section><section><h2>$ kubectl --context kind-sarseg-p2-evidencia -n sarseg-observabilidad rollout status deployment/kube-state-metrics --timeout=300s</h2><pre>deployment &quot;kube-state-metrics&quot; successfully rolled out
+</pre></section></article><article data-step="08"><div class="eyebrow">PASO 08 · EVIDENCIA DE EJECUCIÓN</div><h1>Deployment y ReplicaSet disponibles</h1><p class="scope">2026-11-11T05:36:37+00:00 UTC · kind-sarseg-p2-evidencia</p><p>El ReplicaSet fue creado por el Deployment, no mediante un manifiesto independiente.</p><section><h2>$ kubectl --context kind-sarseg-p2-evidencia -n sarseg-observabilidad get deployment grafana</h2><pre>NAME      READY   UP-TO-DATE   AVAILABLE   AGE
+grafana   2/2     2            2           44s
+</pre></section><section><h2>$ kubectl --context kind-sarseg-p2-evidencia -n sarseg-observabilidad get rs -l app=grafana -o custom-columns=NAME:.metadata.name,DESIRED:.spec.replicas,CURRENT:.status.replicas,READY:.status.readyReplicas</h2><pre>NAME                 DESIRED   CURRENT   READY
+grafana-5c4c8dcb6c   2         2         2
+</pre></section></article><article data-step="09"><div class="eyebrow">PASO 09 · EVIDENCIA DE EJECUCIÓN</div><h1>Pods distribuidos en los workers</h1><p class="scope">2026-11-11T05:36:37+00:00 UTC · kind-sarseg-p2-evidencia</p><p>Dos Pods Ready ejecutan la imagen de Grafana en nodos trabajadores distintos.</p><section><h2>$ kubectl --context kind-sarseg-p2-evidencia -n sarseg-observabilidad get pods -l app=grafana -o wide</h2><pre>NAME                       READY   STATUS    RESTARTS   AGE   IP           NODE                          NOMINATED NODE   READINESS GATES
+grafana-5c4c8dcb6c-b6qvs   1/1     Running   0          45s   10.244.2.2   sarseg-p2-evidencia-worker2   &lt;none&gt;           &lt;none&gt;
+grafana-5c4c8dcb6c-khkqv   1/1     Running   0          45s   10.244.1.2   sarseg-p2-evidencia-worker    &lt;none&gt;           &lt;none&gt;
+</pre></section></article><article data-step="10"><div class="eyebrow">PASO 10 · EVIDENCIA DE EJECUCIÓN</div><h1>Definición de la exposición</h1><p class="scope">2026-11-11T05:36:37+00:00 UTC · kind-sarseg-p2-evidencia</p><p>Service selecciona app=grafana. NodePort 30300 se mapea al puerto 13010 de Windows en esta reproducción.</p><section><h2>Sección Service de k8s/grafana.yaml</h2><pre>---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana
+  namespace: sarseg-observabilidad
+spec:
+  type: NodePort
+  selector:
+    app: grafana
+  ports:
+    - name: http
+      port: 3000
+      targetPort: http
+      nodePort: 30300</pre></section></article><article data-step="11"><div class="eyebrow">PASO 11 · EVIDENCIA DE EJECUCIÓN</div><h1>Plataforma expuesta por HTTP</h1><p class="scope">2026-11-11T05:36:37+00:00 UTC · kind-sarseg-p2-evidencia</p><p>La solicitud se realizó desde Windows al puerto publicado; la base interna de Grafana respondió ok.</p><section><h2>$ kubectl --context kind-sarseg-p2-evidencia -n sarseg-observabilidad get service grafana</h2><pre>NAME      TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
+grafana   NodePort   10.96.191.16   &lt;none&gt;        3000:30300/TCP   45s
+</pre></section><section><h2>GET http://127.0.0.1:13010/api/health</h2><pre>{
+  &quot;http&quot;: 200,
+  &quot;response&quot;: {
+    &quot;database&quot;: &quot;ok&quot;,
+    &quot;version&quot;: &quot;12.3.0&quot;,
+    &quot;commit&quot;: &quot;20051fb1fc604fc54aae76356da1c14612af41d0&quot;
+  }
+}</pre></section></article><article data-step="12"><div class="eyebrow">PASO 12 · EVIDENCIA DE EJECUCIÓN</div><h1>Ejecución del protocolo completo</h1><p class="scope">2026-11-11T05:38:37+00:00 UTC · kind-sarseg-p2-evidencia</p><p>El script prueba escalado, recuperación, rollout, rollback, RBAC y salud HTTP en este contexto separado.</p><section><h2>$ C:\Users\USER\AppData\Local\Programs\Python\Python313\python.exe scripts/test_lab.py --output docs/evidencias/recorrido-apa7/pruebas --context kind-sarseg-p2-evidencia --base-url http://127.0.0.1:13010 --render</h2><pre>PASS cluster
+PASS ownership
+PASS exposure
+PASS metrics
+PASS rbac
+PASS scale_up
+PASS scale_down
+PASS self_healing
+PASS rolling_update
+PASS rollback
+PASS http_sampling
+{&quot;total&quot;: 109, &quot;successful&quot;: 109, &quot;failed&quot;: 0, &quot;interval_seconds&quot;: 1, &quot;scope&quot;: &quot;Escalado, eliminacion de Pod, rollout y rollback&quot;}
+</pre></section></article><article data-step="13"><div class="eyebrow">PASO 13 · EVIDENCIA DE EJECUCIÓN</div><h1>Escalado de dos a tres réplicas</h1><p class="scope">2026-11-11T05:37:15.032+00:00 UTC · kind-sarseg-p2-evidencia</p><p>Cambió el número de Pods, pero no la plantilla ni el UID del ReplicaSet. El estado mostrado procede del JSON de esa fase.</p><section><h2>$ kubectl --context kind-sarseg-p2-evidencia -n sarseg-observabilidad scale deployment/grafana --replicas=3</h2><pre>deployment.apps/grafana scaled
+</pre></section><section><h2>Estado 02-escalado-tres.json</h2><pre>Deployment | grafana | 3 | 3
+ReplicaSet | grafana-5c4c8dcb6c | 3 | 3
+Pod | grafana-5c4c8dcb6c-b6qvs | Running | True
+Pod | grafana-5c4c8dcb6c-khkqv | Running | True
+Pod | grafana-5c4c8dcb6c-z7f9m | Running | True</pre></section></article><article data-step="14"><div class="eyebrow">PASO 14 · EVIDENCIA DE EJECUCIÓN</div><h1>Retorno a dos réplicas</h1><p class="scope">2026-11-11T05:37:15.352+00:00 UTC · kind-sarseg-p2-evidencia</p><p>El Deployment volvió al tamaño inicial antes de probar la eliminación de un Pod.</p><section><h2>$ kubectl --context kind-sarseg-p2-evidencia -n sarseg-observabilidad scale deployment/grafana --replicas=2</h2><pre>deployment.apps/grafana scaled
+</pre></section><section><h2>Comprobación</h2><pre>3 -&gt; 2 replicas disponibles</pre></section></article><article data-step="15"><div class="eyebrow">PASO 15 · EVIDENCIA DE EJECUCIÓN</div><h1>Reposición automática del Pod eliminado</h1><p class="scope">2026-11-11T05:37:33.578+00:00 UTC · kind-sarseg-p2-evidencia</p><p>ReplicaSet creó otro objeto Pod. Los nombres y UIDs distintos identifican la recuperación real.</p><section><h2>$ kubectl --context kind-sarseg-p2-evidencia -n sarseg-observabilidad delete pod grafana-5c4c8dcb6c-b6qvs --wait=false</h2><pre>pod &quot;grafana-5c4c8dcb6c-b6qvs&quot; deleted
+</pre></section><section><h2>UIDs y recuperación registrados</h2><pre>{
+  &quot;deleted_pod&quot;: &quot;grafana-5c4c8dcb6c-b6qvs&quot;,
+  &quot;deleted_uid&quot;: &quot;86c57e4b-0a85-4be9-9211-68a6b3950cd2&quot;,
+  &quot;new_pods&quot;: [
+    {
+      &quot;name&quot;: &quot;grafana-5c4c8dcb6c-2m86d&quot;,
+      &quot;uid&quot;: &quot;58a617df-67f9-4a4c-b393-9f0565693113&quot;
+    }
+  ],
+  &quot;elapsed_seconds&quot;: 17.88
+}</pre></section></article><article data-step="16"><div class="eyebrow">PASO 16 · EVIDENCIA DE EJECUCIÓN</div><h1>Actualización de la plantilla</h1><p class="scope">2026-11-11T05:37:57.153+00:00 UTC · kind-sarseg-p2-evidencia</p><p>Se cambió una anotación de spec.template y Kubernetes creó otro ReplicaSet. Se mantuvo la imagen de Grafana.</p><section><h2>$ kubectl --context kind-sarseg-p2-evidencia -n sarseg-observabilidad patch deployment grafana --type=merge -p &quot;{\&quot;metadata\&quot;: {\&quot;annotations\&quot;: {\&quot;kubernetes.io/change-cause\&quot;: \&quot;Prueba P2 de actualizacion de plantilla\&quot;}}, \&quot;spec\&quot;: {\&quot;template\&quot;: {\&quot;metadata\&quot;: {\&quot;annotations\&quot;: {\&quot;sarseg.io/revision-laboratorio\&quot;: \&quot;v2-prueba-p2\&quot;}}}}}&quot;</h2><pre>deployment.apps/grafana patched
+</pre></section><section><h2>Estado 05-rollout-completo.json</h2><pre>Deployment | grafana | 2 | 2
+ReplicaSet | grafana-557d55f7c | 2 | 2
+ReplicaSet | grafana-5c4c8dcb6c | 0 | 0
+Pod | grafana-557d55f7c-8855v | Running | True
+Pod | grafana-557d55f7c-mgstk | Running | True</pre></section></article><article data-step="17"><div class="eyebrow">PASO 17 · EVIDENCIA DE EJECUCIÓN</div><h1>Rollback de la revisión</h1><p class="scope">2026-11-11T05:38:22.807+00:00 UTC · kind-sarseg-p2-evidencia</p><p>El controlador restauró la plantilla v1 y reactivó el ReplicaSet anterior.</p><section><h2>$ kubectl --context kind-sarseg-p2-evidencia -n sarseg-observabilidad rollout undo deployment/grafana --to-revision=1</h2><pre>deployment.apps/grafana rolled back
+</pre></section><section><h2>Estado 06-rollback.json</h2><pre>Deployment | grafana | 2 | 2
+ReplicaSet | grafana-557d55f7c | 0 | 0
+ReplicaSet | grafana-5c4c8dcb6c | 2 | 2
+Pod | grafana-5c4c8dcb6c-klhlz | Running | True
+Pod | grafana-5c4c8dcb6c-ww7ch | Running | True</pre></section></article><article data-step="18"><div class="eyebrow">PASO 18 · EVIDENCIA DE EJECUCIÓN</div><h1>Resultados y exposición final</h1><p class="scope">2026-11-11T05:38:37+00:00 UTC · kind-sarseg-p2-evidencia</p><p>Se conservan todas las muestras; el resultado no se deduce únicamente de la imagen del dashboard.</p><section><h2>Resumen del protocolo</h2><pre>{
+  &quot;success&quot;: true,
+  &quot;checks_passed&quot;: 11,
+  &quot;http_sampling&quot;: {
+    &quot;total&quot;: 109,
+    &quot;successful&quot;: 109,
+    &quot;failed&quot;: 0,
+    &quot;interval_seconds&quot;: 1,
+    &quot;scope&quot;: &quot;Escalado, eliminacion de Pod, rollout y rollback&quot;
+  },
+  &quot;finished_utc&quot;: &quot;2026-11-11T05:38:37.126+00:00&quot;
+}</pre></section></article><footer>Captura de un visor de registros. Las salidas y estados proceden de comandos reales; no es una terminal simulada ni un estado en vivo.</footer><script>
+let id=new URLSearchParams(location.search).get('paso')||'01';let el=document.querySelector('[data-step="'+id+'"]');if(el)el.classList.add('active');
+</script></html>

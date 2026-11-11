@@ -1,0 +1,109 @@
+{
+  "started_utc": "2026-11-11T05:36:37.428+00:00",
+  "context": "kind-sarseg-p2-evidencia",
+  "base_url": "http://127.0.0.1:13010",
+  "namespace": "sarseg-observabilidad",
+  "checks": {
+    "cluster": {
+      "passed": true,
+      "detail": "3 nodos Ready con Kubernetes v1.32.2",
+      "time_utc": "2026-11-11T05:36:37.623+00:00"
+    },
+    "ownership": {
+      "passed": true,
+      "detail": "ownerReferences unen Deployment, ReplicaSet y dos Pods en workers distintos",
+      "time_utc": "2026-11-11T05:36:37.984+00:00"
+    },
+    "exposure": {
+      "passed": true,
+      "detail": "HTTP 200 en http://127.0.0.1:13010 y Service NodePort 30300",
+      "time_utc": "2026-11-11T05:36:38.100+00:00"
+    },
+    "metrics": {
+      "passed": true,
+      "detail": "Dashboard provisionado y tres fuentes de Prometheus con up=1",
+      "time_utc": "2026-11-11T05:36:38.163+00:00"
+    },
+    "rbac": {
+      "passed": true,
+      "detail": "kube-state-metrics puede listar Pods y no puede listar Secrets",
+      "time_utc": "2026-11-11T05:36:38.345+00:00"
+    },
+    "scale_up": {
+      "passed": true,
+      "detail": "2 -> 3 Pods Ready; se mantiene el mismo ReplicaSet",
+      "time_utc": "2026-11-11T05:37:15.032+00:00"
+    },
+    "scale_down": {
+      "passed": true,
+      "detail": "3 -> 2 replicas disponibles",
+      "time_utc": "2026-11-11T05:37:15.352+00:00"
+    },
+    "self_healing": {
+      "passed": true,
+      "detail": "ReplicaSet repone el Pod eliminado con un UID nuevo",
+      "time_utc": "2026-11-11T05:37:33.578+00:00"
+    },
+    "rolling_update": {
+      "passed": true,
+      "detail": "Cambio de spec.template crea un ReplicaSet diferente con maxUnavailable=0",
+      "time_utc": "2026-11-11T05:37:57.153+00:00"
+    },
+    "rollback": {
+      "passed": true,
+      "detail": "Se recupera la plantilla v1 y se reactiva su ReplicaSet",
+      "time_utc": "2026-11-11T05:38:22.807+00:00"
+    },
+    "http_sampling": {
+      "passed": true,
+      "detail": "109/109 muestras HTTP 200; muestreo, no prueba de disponibilidad absoluta",
+      "time_utc": "2026-11-11T05:38:37.126+00:00"
+    }
+  },
+  "ownership": {
+    "deployment": "grafana",
+    "deployment_uid": "98ab473e-f362-4e97-8edb-2ff26ef685ec",
+    "replicaset": "grafana-5c4c8dcb6c",
+    "replicaset_uid": "40f67a79-e420-4a37-af00-a5670bec29f4",
+    "pods": [
+      {
+        "name": "grafana-5c4c8dcb6c-b6qvs",
+        "uid": "86c57e4b-0a85-4be9-9211-68a6b3950cd2",
+        "node": "sarseg-p2-evidencia-worker2"
+      },
+      {
+        "name": "grafana-5c4c8dcb6c-khkqv",
+        "uid": "0056a2b1-ed14-4a85-9f4f-3a81d75aa649",
+        "node": "sarseg-p2-evidencia-worker"
+      }
+    ]
+  },
+  "recovery": {
+    "deleted_pod": "grafana-5c4c8dcb6c-b6qvs",
+    "deleted_uid": "86c57e4b-0a85-4be9-9211-68a6b3950cd2",
+    "new_pods": [
+      {
+        "name": "grafana-5c4c8dcb6c-2m86d",
+        "uid": "58a617df-67f9-4a4c-b393-9f0565693113"
+      }
+    ],
+    "elapsed_seconds": 17.88
+  },
+  "rollout": {
+    "before_rs": "grafana-5c4c8dcb6c",
+    "after_rs": "grafana-557d55f7c",
+    "initial_revision": "1",
+    "updated_revision": "2",
+    "change": "Solo anotacion de spec.template; misma imagen grafana/grafana:12.3.0",
+    "rollback_rs": "grafana-5c4c8dcb6c"
+  },
+  "success": true,
+  "http_sampling": {
+    "total": 109,
+    "successful": 109,
+    "failed": 0,
+    "interval_seconds": 1,
+    "scope": "Escalado, eliminacion de Pod, rollout y rollback"
+  },
+  "finished_utc": "2026-11-11T05:38:37.126+00:00"
+}

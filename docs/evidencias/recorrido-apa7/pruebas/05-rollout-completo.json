@@ -1,0 +1,3334 @@
+{
+  "apiVersion": "v1",
+  "items": [
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "annotations": {
+          "deployment.kubernetes.io/revision": "2",
+          "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"metadata\":{\"annotations\":{\"kubernetes.io/change-cause\":\"Base del laboratorio con dos replicas\"},\"name\":\"grafana\",\"namespace\":\"sarseg-observabilidad\"},\"spec\":{\"minReadySeconds\":5,\"progressDeadlineSeconds\":300,\"replicas\":2,\"revisionHistoryLimit\":5,\"selector\":{\"matchLabels\":{\"app\":\"grafana\"}},\"strategy\":{\"rollingUpdate\":{\"maxSurge\":1,\"maxUnavailable\":0},\"type\":\"RollingUpdate\"},\"template\":{\"metadata\":{\"annotations\":{\"sarseg.io/revision-laboratorio\":\"v1\"},\"labels\":{\"app\":\"grafana\",\"app.kubernetes.io/part-of\":\"sarseg-p2\"}},\"spec\":{\"affinity\":{\"nodeAffinity\":{\"requiredDuringSchedulingIgnoredDuringExecution\":{\"nodeSelectorTerms\":[{\"matchExpressions\":[{\"key\":\"node-role.kubernetes.io/control-plane\",\"operator\":\"DoesNotExist\"}]}]}}},\"automountServiceAccountToken\":false,\"containers\":[{\"env\":[{\"name\":\"GF_AUTH_ANONYMOUS_ENABLED\",\"value\":\"true\"},{\"name\":\"GF_AUTH_ANONYMOUS_ORG_ROLE\",\"value\":\"Viewer\"},{\"name\":\"GF_AUTH_DISABLE_LOGIN_FORM\",\"value\":\"true\"},{\"name\":\"GF_SECURITY_DISABLE_INITIAL_ADMIN_CREATION\",\"value\":\"true\"},{\"name\":\"GF_USERS_ALLOW_SIGN_UP\",\"value\":\"false\"},{\"name\":\"GF_ANALYTICS_REPORTING_ENABLED\",\"value\":\"false\"},{\"name\":\"GF_ANALYTICS_CHECK_FOR_UPDATES\",\"value\":\"false\"},{\"name\":\"GF_ANALYTICS_CHECK_FOR_PLUGIN_UPDATES\",\"value\":\"false\"},{\"name\":\"GF_PLUGINS_PREINSTALL_DISABLED\",\"value\":\"true\"},{\"name\":\"GF_METRICS_ENABLED\",\"value\":\"true\"},{\"name\":\"GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH\",\"value\":\"/var/lib/grafana/dashboards/sarseg-operacion.json\"}],\"image\":\"grafana/grafana:12.3.0\",\"imagePullPolicy\":\"IfNotPresent\",\"lifecycle\":{\"preStop\":{\"exec\":{\"command\":[\"sh\",\"-c\",\"sleep 10\"]}}},\"livenessProbe\":{\"failureThreshold\":3,\"httpGet\":{\"path\":\"/api/health\",\"port\":\"http\"},\"periodSeconds\":10},\"name\":\"grafana\",\"ports\":[{\"containerPort\":3000,\"name\":\"http\"}],\"readinessProbe\":{\"httpGet\":{\"path\":\"/api/health\",\"port\":\"http\"},\"periodSeconds\":3},\"resources\":{\"limits\":{\"cpu\":\"500m\",\"memory\":\"512Mi\"},\"requests\":{\"cpu\":\"100m\",\"memory\":\"160Mi\"}},\"securityContext\":{\"allowPrivilegeEscalation\":false,\"capabilities\":{\"drop\":[\"ALL\"]}},\"startupProbe\":{\"failureThreshold\":60,\"httpGet\":{\"path\":\"/api/health\",\"port\":\"http\"},\"periodSeconds\":2},\"volumeMounts\":[{\"mountPath\":\"/var/lib/grafana\",\"name\":\"data\"},{\"mountPath\":\"/etc/grafana/provisioning/datasources\",\"name\":\"datasources\",\"readOnly\":true},{\"mountPath\":\"/etc/grafana/provisioning/dashboards\",\"name\":\"providers\",\"readOnly\":true},{\"mountPath\":\"/var/lib/grafana/dashboards\",\"name\":\"dashboards\",\"readOnly\":true}]}],\"securityContext\":{\"fsGroup\":472,\"runAsGroup\":472,\"runAsNonRoot\":true,\"runAsUser\":472,\"seccompProfile\":{\"type\":\"RuntimeDefault\"}},\"terminationGracePeriodSeconds\":30,\"topologySpreadConstraints\":[{\"labelSelector\":{\"matchLabels\":{\"app\":\"grafana\"}},\"maxSkew\":1,\"topologyKey\":\"kubernetes.io/hostname\",\"whenUnsatisfiable\":\"DoNotSchedule\"}],\"volumes\":[{\"emptyDir\":{},\"name\":\"data\"},{\"configMap\":{\"name\":\"grafana-datasources-hb9k56hh4h\"},\"name\":\"datasources\"},{\"configMap\":{\"name\":\"grafana-providers-45khmht664\"},\"name\":\"providers\"},{\"configMap\":{\"name\":\"grafana-dashboards-89ddfk27g6\"},\"name\":\"dashboards\"}]}}}}\n",
+          "kubernetes.io/change-cause": "Prueba P2 de actualizacion de plantilla"
+        },
+        "creationTimestamp": "2026-11-11T05:35:52Z",
+        "generation": 4,
+        "name": "grafana",
+        "namespace": "sarseg-observabilidad",
+        "resourceVersion": "1024",
+        "uid": "98ab473e-f362-4e97-8edb-2ff26ef685ec"
+      },
+      "spec": {
+        "minReadySeconds": 5,
+        "progressDeadlineSeconds": 300,
+        "replicas": 2,
+        "revisionHistoryLimit": 5,
+        "selector": {
+          "matchLabels": {
+            "app": "grafana"
+          }
+        },
+        "strategy": {
+          "rollingUpdate": {
+            "maxSurge": 1,
+            "maxUnavailable": 0
+          },
+          "type": "RollingUpdate"
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "sarseg.io/revision-laboratorio": "v2-prueba-p2"
+            },
+            "creationTimestamp": null,
+            "labels": {
+              "app": "grafana",
+              "app.kubernetes.io/part-of": "sarseg-p2"
+            }
+          },
+          "spec": {
+            "affinity": {
+              "nodeAffinity": {
+                "requiredDuringSchedulingIgnoredDuringExecution": {
+                  "nodeSelectorTerms": [
+                    {
+                      "matchExpressions": [
+                        {
+                          "key": "node-role.kubernetes.io/control-plane",
+                          "operator": "DoesNotExist"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            "automountServiceAccountToken": false,
+            "containers": [
+              {
+                "env": [
+                  {
+                    "name": "GF_AUTH_ANONYMOUS_ENABLED",
+                    "value": "true"
+                  },
+                  {
+                    "name": "GF_AUTH_ANONYMOUS_ORG_ROLE",
+                    "value": "Viewer"
+                  },
+                  {
+                    "name": "GF_AUTH_DISABLE_LOGIN_FORM",
+                    "value": "true"
+                  },
+                  {
+                    "name": "GF_SECURITY_DISABLE_INITIAL_ADMIN_CREATION",
+                    "value": "true"
+                  },
+                  {
+                    "name": "GF_USERS_ALLOW_SIGN_UP",
+                    "value": "false"
+                  },
+                  {
+                    "name": "GF_ANALYTICS_REPORTING_ENABLED",
+                    "value": "false"
+                  },
+                  {
+                    "name": "GF_ANALYTICS_CHECK_FOR_UPDATES",
+                    "value": "false"
+                  },
+                  {
+                    "name": "GF_ANALYTICS_CHECK_FOR_PLUGIN_UPDATES",
+                    "value": "false"
+                  },
+                  {
+                    "name": "GF_PLUGINS_PREINSTALL_DISABLED",
+                    "value": "true"
+                  },
+                  {
+                    "name": "GF_METRICS_ENABLED",
+                    "value": "true"
+                  },
+                  {
+                    "name": "GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH",
+                    "value": "/var/lib/grafana/dashboards/sarseg-operacion.json"
+                  }
+                ],
+                "image": "grafana/grafana:12.3.0",
+                "imagePullPolicy": "IfNotPresent",
+                "lifecycle": {
+                  "preStop": {
+                    "exec": {
+                      "command": [
+                        "sh",
+                        "-c",
+                        "sleep 10"
+                      ]
+                    }
+                  }
+                },
+                "livenessProbe": {
+                  "failureThreshold": 3,
+                  "httpGet": {
+                    "path": "/api/health",
+                    "port": "http",
+                    "scheme": "HTTP"
+                  },
+                  "periodSeconds": 10,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "name": "grafana",
+                "ports": [
+                  {
+                    "containerPort": 3000,
+                    "name": "http",
+                    "protocol": "TCP"
+                  }
+                ],
+                "readinessProbe": {
+                  "failureThreshold": 3,
+                  "httpGet": {
+                    "path": "/api/health",
+                    "port": "http",
+                    "scheme": "HTTP"
+                  },
+                  "periodSeconds": 3,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "resources": {
+                  "limits": {
+                    "cpu": "500m",
+                    "memory": "512Mi"
+                  },
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "160Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  }
+                },
+                "startupProbe": {
+                  "failureThreshold": 60,
+                  "httpGet": {
+                    "path": "/api/health",
+                    "port": "http",
+                    "scheme": "HTTP"
+                  },
+                  "periodSeconds": 2,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                  {
+                    "mountPath": "/var/lib/grafana",
+                    "name": "data"
+                  },
+                  {
+                    "mountPath": "/etc/grafana/provisioning/datasources",
+                    "name": "datasources",
+                    "readOnly": true
+                  },
+                  {
+                    "mountPath": "/etc/grafana/provisioning/dashboards",
+                    "name": "providers",
+                    "readOnly": true
+                  },
+                  {
+                    "mountPath": "/var/lib/grafana/dashboards",
+                    "name": "dashboards",
+                    "readOnly": true
+                  }
+                ]
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "restartPolicy": "Always",
+            "schedulerName": "default-scheduler",
+            "securityContext": {
+              "fsGroup": 472,
+              "runAsGroup": 472,
+              "runAsNonRoot": true,
+              "runAsUser": 472,
+              "seccompProfile": {
+                "type": "RuntimeDefault"
+              }
+            },
+            "terminationGracePeriodSeconds": 30,
+            "topologySpreadConstraints": [
+              {
+                "labelSelector": {
+                  "matchLabels": {
+                    "app": "grafana"
+                  }
+                },
+                "maxSkew": 1,
+                "topologyKey": "kubernetes.io/hostname",
+                "whenUnsatisfiable": "DoNotSchedule"
+              }
+            ],
+            "volumes": [
+              {
+                "emptyDir": {},
+                "name": "data"
+              },
+              {
+                "configMap": {
+                  "defaultMode": 420,
+                  "name": "grafana-datasources-hb9k56hh4h"
+                },
+                "name": "datasources"
+              },
+              {
+                "configMap": {
+                  "defaultMode": 420,
+                  "name": "grafana-providers-45khmht664"
+                },
+                "name": "providers"
+              },
+              {
+                "configMap": {
+                  "defaultMode": 420,
+                  "name": "grafana-dashboards-89ddfk27g6"
+                },
+                "name": "dashboards"
+              }
+            ]
+          }
+        }
+      },
+      "status": {
+        "availableReplicas": 2,
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-11-11T05:37:32Z",
+            "lastUpdateTime": "2026-11-11T05:37:32Z",
+            "message": "Deployment has minimum availability.",
+            "reason": "MinimumReplicasAvailable",
+            "status": "True",
+            "type": "Available"
+          },
+          {
+            "lastTransitionTime": "2026-11-11T05:35:52Z",
+            "lastUpdateTime": "2026-11-11T05:37:56Z",
+            "message": "ReplicaSet \"grafana-557d55f7c\" has successfully progressed.",
+            "reason": "NewReplicaSetAvailable",
+            "status": "True",
+            "type": "Progressing"
+          }
+        ],
+        "observedGeneration": 4,
+        "readyReplicas": 2,
+        "replicas": 2,
+        "updatedReplicas": 2
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "annotations": {
+          "deployment.kubernetes.io/revision": "1",
+          "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"metadata\":{\"annotations\":{},\"name\":\"kube-state-metrics\",\"namespace\":\"sarseg-observabilidad\"},\"spec\":{\"replicas\":1,\"selector\":{\"matchLabels\":{\"app\":\"kube-state-metrics\"}},\"template\":{\"metadata\":{\"labels\":{\"app\":\"kube-state-metrics\"}},\"spec\":{\"containers\":[{\"args\":[\"--namespaces=sarseg-observabilidad\",\"--resources=deployments,replicasets,pods\"],\"image\":\"registry.k8s.io/kube-state-metrics/kube-state-metrics:v2.16.0\",\"livenessProbe\":{\"httpGet\":{\"path\":\"/livez\",\"port\":\"metrics\"}},\"name\":\"kube-state-metrics\",\"ports\":[{\"containerPort\":8080,\"name\":\"metrics\"},{\"containerPort\":8081,\"name\":\"telemetry\"}],\"readinessProbe\":{\"httpGet\":{\"path\":\"/readyz\",\"port\":\"telemetry\"}},\"resources\":{\"limits\":{\"cpu\":\"200m\",\"memory\":\"128Mi\"},\"requests\":{\"cpu\":\"30m\",\"memory\":\"48Mi\"}},\"securityContext\":{\"allowPrivilegeEscalation\":false,\"capabilities\":{\"drop\":[\"ALL\"]}}}],\"securityContext\":{\"runAsNonRoot\":true,\"runAsUser\":65534,\"seccompProfile\":{\"type\":\"RuntimeDefault\"}},\"serviceAccountName\":\"kube-state-metrics\"}}}}\n"
+        },
+        "creationTimestamp": "2026-11-11T05:35:52Z",
+        "generation": 1,
+        "name": "kube-state-metrics",
+        "namespace": "sarseg-observabilidad",
+        "resourceVersion": "715",
+        "uid": "50b00cba-009f-4db2-88c1-673fbe301fa7"
+      },
+      "spec": {
+        "progressDeadlineSeconds": 600,
+        "replicas": 1,
+        "revisionHistoryLimit": 10,
+        "selector": {
+          "matchLabels": {
+            "app": "kube-state-metrics"
+          }
+        },
+        "strategy": {
+          "rollingUpdate": {
+            "maxSurge": "25%",
+            "maxUnavailable": "25%"
+          },
+          "type": "RollingUpdate"
+        },
+        "template": {
+          "metadata": {
+            "creationTimestamp": null,
+            "labels": {
+              "app": "kube-state-metrics"
+            }
+          },
+          "spec": {
+            "containers": [
+              {
+                "args": [
+                  "--namespaces=sarseg-observabilidad",
+                  "--resources=deployments,replicasets,pods"
+                ],
+                "image": "registry.k8s.io/kube-state-metrics/kube-state-metrics:v2.16.0",
+                "imagePullPolicy": "IfNotPresent",
+                "livenessProbe": {
+                  "failureThreshold": 3,
+                  "httpGet": {
+                    "path": "/livez",
+                    "port": "metrics",
+                    "scheme": "HTTP"
+                  },
+                  "periodSeconds": 10,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "name": "kube-state-metrics",
+                "ports": [
+                  {
+                    "containerPort": 8080,
+                    "name": "metrics",
+                    "protocol": "TCP"
+                  },
+                  {
+                    "containerPort": 8081,
+                    "name": "telemetry",
+                    "protocol": "TCP"
+                  }
+                ],
+                "readinessProbe": {
+                  "failureThreshold": 3,
+                  "httpGet": {
+                    "path": "/readyz",
+                    "port": "telemetry",
+                    "scheme": "HTTP"
+                  },
+                  "periodSeconds": 10,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "resources": {
+                  "limits": {
+                    "cpu": "200m",
+                    "memory": "128Mi"
+                  },
+                  "requests": {
+                    "cpu": "30m",
+                    "memory": "48Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  }
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File"
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "restartPolicy": "Always",
+            "schedulerName": "default-scheduler",
+            "securityContext": {
+              "runAsNonRoot": true,
+              "runAsUser": 65534,
+              "seccompProfile": {
+                "type": "RuntimeDefault"
+              }
+            },
+            "serviceAccount": "kube-state-metrics",
+            "serviceAccountName": "kube-state-metrics",
+            "terminationGracePeriodSeconds": 30
+          }
+        }
+      },
+      "status": {
+        "availableReplicas": 1,
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-11-11T05:36:26Z",
+            "lastUpdateTime": "2026-11-11T05:36:26Z",
+            "message": "Deployment has minimum availability.",
+            "reason": "MinimumReplicasAvailable",
+            "status": "True",
+            "type": "Available"
+          },
+          {
+            "lastTransitionTime": "2026-11-11T05:35:52Z",
+            "lastUpdateTime": "2026-11-11T05:36:26Z",
+            "message": "ReplicaSet \"kube-state-metrics-5ccfd57cc8\" has successfully progressed.",
+            "reason": "NewReplicaSetAvailable",
+            "status": "True",
+            "type": "Progressing"
+          }
+        ],
+        "observedGeneration": 1,
+        "readyReplicas": 1,
+        "replicas": 1,
+        "updatedReplicas": 1
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "annotations": {
+          "deployment.kubernetes.io/revision": "1",
+          "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"metadata\":{\"annotations\":{},\"name\":\"prometheus\",\"namespace\":\"sarseg-observabilidad\"},\"spec\":{\"replicas\":1,\"selector\":{\"matchLabels\":{\"app\":\"prometheus\"}},\"template\":{\"metadata\":{\"labels\":{\"app\":\"prometheus\"}},\"spec\":{\"automountServiceAccountToken\":false,\"containers\":[{\"args\":[\"--config.file=/etc/prometheus/prometheus.yml\",\"--storage.tsdb.path=/prometheus\",\"--storage.tsdb.retention.time=6h\",\"--storage.tsdb.retention.size=512MB\"],\"image\":\"prom/prometheus:v3.5.0\",\"livenessProbe\":{\"httpGet\":{\"path\":\"/-/healthy\",\"port\":\"http\"}},\"name\":\"prometheus\",\"ports\":[{\"containerPort\":9090,\"name\":\"http\"}],\"readinessProbe\":{\"httpGet\":{\"path\":\"/-/ready\",\"port\":\"http\"}},\"resources\":{\"limits\":{\"cpu\":\"500m\",\"memory\":\"512Mi\"},\"requests\":{\"cpu\":\"100m\",\"memory\":\"128Mi\"}},\"securityContext\":{\"allowPrivilegeEscalation\":false,\"capabilities\":{\"drop\":[\"ALL\"]}},\"volumeMounts\":[{\"mountPath\":\"/etc/prometheus\",\"name\":\"config\",\"readOnly\":true},{\"mountPath\":\"/prometheus\",\"name\":\"data\"}]}],\"securityContext\":{\"fsGroup\":65534,\"runAsGroup\":65534,\"runAsNonRoot\":true,\"runAsUser\":65534,\"seccompProfile\":{\"type\":\"RuntimeDefault\"}},\"volumes\":[{\"configMap\":{\"name\":\"prometheus-config-t2852m8864\"},\"name\":\"config\"},{\"emptyDir\":{\"sizeLimit\":\"1Gi\"},\"name\":\"data\"}]}}}}\n"
+        },
+        "creationTimestamp": "2026-11-11T05:35:52Z",
+        "generation": 1,
+        "name": "prometheus",
+        "namespace": "sarseg-observabilidad",
+        "resourceVersion": "646",
+        "uid": "aa321d81-5889-41f4-91e4-1367bcb58c62"
+      },
+      "spec": {
+        "progressDeadlineSeconds": 600,
+        "replicas": 1,
+        "revisionHistoryLimit": 10,
+        "selector": {
+          "matchLabels": {
+            "app": "prometheus"
+          }
+        },
+        "strategy": {
+          "rollingUpdate": {
+            "maxSurge": "25%",
+            "maxUnavailable": "25%"
+          },
+          "type": "RollingUpdate"
+        },
+        "template": {
+          "metadata": {
+            "creationTimestamp": null,
+            "labels": {
+              "app": "prometheus"
+            }
+          },
+          "spec": {
+            "automountServiceAccountToken": false,
+            "containers": [
+              {
+                "args": [
+                  "--config.file=/etc/prometheus/prometheus.yml",
+                  "--storage.tsdb.path=/prometheus",
+                  "--storage.tsdb.retention.time=6h",
+                  "--storage.tsdb.retention.size=512MB"
+                ],
+                "image": "prom/prometheus:v3.5.0",
+                "imagePullPolicy": "IfNotPresent",
+                "livenessProbe": {
+                  "failureThreshold": 3,
+                  "httpGet": {
+                    "path": "/-/healthy",
+                    "port": "http",
+                    "scheme": "HTTP"
+                  },
+                  "periodSeconds": 10,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "name": "prometheus",
+                "ports": [
+                  {
+                    "containerPort": 9090,
+                    "name": "http",
+                    "protocol": "TCP"
+                  }
+                ],
+                "readinessProbe": {
+                  "failureThreshold": 3,
+                  "httpGet": {
+                    "path": "/-/ready",
+                    "port": "http",
+                    "scheme": "HTTP"
+                  },
+                  "periodSeconds": 10,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "resources": {
+                  "limits": {
+                    "cpu": "500m",
+                    "memory": "512Mi"
+                  },
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "128Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  }
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                  {
+                    "mountPath": "/etc/prometheus",
+                    "name": "config",
+                    "readOnly": true
+                  },
+                  {
+                    "mountPath": "/prometheus",
+                    "name": "data"
+                  }
+                ]
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "restartPolicy": "Always",
+            "schedulerName": "default-scheduler",
+            "securityContext": {
+              "fsGroup": 65534,
+              "runAsGroup": 65534,
+              "runAsNonRoot": true,
+              "runAsUser": 65534,
+              "seccompProfile": {
+                "type": "RuntimeDefault"
+              }
+            },
+            "terminationGracePeriodSeconds": 30,
+            "volumes": [
+              {
+                "configMap": {
+                  "defaultMode": 420,
+                  "name": "prometheus-config-t2852m8864"
+                },
+                "name": "config"
+              },
+              {
+                "emptyDir": {
+                  "sizeLimit": "1Gi"
+                },
+                "name": "data"
+              }
+            ]
+          }
+        }
+      },
+      "status": {
+        "availableReplicas": 1,
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-11-11T05:36:05Z",
+            "lastUpdateTime": "2026-11-11T05:36:05Z",
+            "message": "Deployment has minimum availability.",
+            "reason": "MinimumReplicasAvailable",
+            "status": "True",
+            "type": "Available"
+          },
+          {
+            "lastTransitionTime": "2026-11-11T05:35:52Z",
+            "lastUpdateTime": "2026-11-11T05:36:05Z",
+            "message": "ReplicaSet \"prometheus-6798b5c955\" has successfully progressed.",
+            "reason": "NewReplicaSetAvailable",
+            "status": "True",
+            "type": "Progressing"
+          }
+        ],
+        "observedGeneration": 1,
+        "readyReplicas": 1,
+        "replicas": 1,
+        "updatedReplicas": 1
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "ReplicaSet",
+      "metadata": {
+        "annotations": {
+          "deployment.kubernetes.io/desired-replicas": "2",
+          "deployment.kubernetes.io/max-replicas": "3",
+          "deployment.kubernetes.io/revision": "2",
+          "kubernetes.io/change-cause": "Prueba P2 de actualizacion de plantilla"
+        },
+        "creationTimestamp": "2026-11-11T05:37:33Z",
+        "generation": 2,
+        "labels": {
+          "app": "grafana",
+          "app.kubernetes.io/part-of": "sarseg-p2",
+          "pod-template-hash": "557d55f7c"
+        },
+        "name": "grafana-557d55f7c",
+        "namespace": "sarseg-observabilidad",
+        "ownerReferences": [
+          {
+            "apiVersion": "apps/v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "Deployment",
+            "name": "grafana",
+            "uid": "98ab473e-f362-4e97-8edb-2ff26ef685ec"
+          }
+        ],
+        "resourceVersion": "1013",
+        "uid": "9d43070e-88c3-4cce-8254-912981e1171c"
+      },
+      "spec": {
+        "minReadySeconds": 5,
+        "replicas": 2,
+        "selector": {
+          "matchLabels": {
+            "app": "grafana",
+            "pod-template-hash": "557d55f7c"
+          }
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "sarseg.io/revision-laboratorio": "v2-prueba-p2"
+            },
+            "creationTimestamp": null,
+            "labels": {
+              "app": "grafana",
+              "app.kubernetes.io/part-of": "sarseg-p2",
+              "pod-template-hash": "557d55f7c"
+            }
+          },
+          "spec": {
+            "affinity": {
+              "nodeAffinity": {
+                "requiredDuringSchedulingIgnoredDuringExecution": {
+                  "nodeSelectorTerms": [
+                    {
+                      "matchExpressions": [
+                        {
+                          "key": "node-role.kubernetes.io/control-plane",
+                          "operator": "DoesNotExist"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            "automountServiceAccountToken": false,
+            "containers": [
+              {
+                "env": [
+                  {
+                    "name": "GF_AUTH_ANONYMOUS_ENABLED",
+                    "value": "true"
+                  },
+                  {
+                    "name": "GF_AUTH_ANONYMOUS_ORG_ROLE",
+                    "value": "Viewer"
+                  },
+                  {
+                    "name": "GF_AUTH_DISABLE_LOGIN_FORM",
+                    "value": "true"
+                  },
+                  {
+                    "name": "GF_SECURITY_DISABLE_INITIAL_ADMIN_CREATION",
+                    "value": "true"
+                  },
+                  {
+                    "name": "GF_USERS_ALLOW_SIGN_UP",
+                    "value": "false"
+                  },
+                  {
+                    "name": "GF_ANALYTICS_REPORTING_ENABLED",
+                    "value": "false"
+                  },
+                  {
+                    "name": "GF_ANALYTICS_CHECK_FOR_UPDATES",
+                    "value": "false"
+                  },
+                  {
+                    "name": "GF_ANALYTICS_CHECK_FOR_PLUGIN_UPDATES",
+                    "value": "false"
+                  },
+                  {
+                    "name": "GF_PLUGINS_PREINSTALL_DISABLED",
+                    "value": "true"
+                  },
+                  {
+                    "name": "GF_METRICS_ENABLED",
+                    "value": "true"
+                  },
+                  {
+                    "name": "GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH",
+                    "value": "/var/lib/grafana/dashboards/sarseg-operacion.json"
+                  }
+                ],
+                "image": "grafana/grafana:12.3.0",
+                "imagePullPolicy": "IfNotPresent",
+                "lifecycle": {
+                  "preStop": {
+                    "exec": {
+                      "command": [
+                        "sh",
+                        "-c",
+                        "sleep 10"
+                      ]
+                    }
+                  }
+                },
+                "livenessProbe": {
+                  "failureThreshold": 3,
+                  "httpGet": {
+                    "path": "/api/health",
+                    "port": "http",
+                    "scheme": "HTTP"
+                  },
+                  "periodSeconds": 10,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "name": "grafana",
+                "ports": [
+                  {
+                    "containerPort": 3000,
+                    "name": "http",
+                    "protocol": "TCP"
+                  }
+                ],
+                "readinessProbe": {
+                  "failureThreshold": 3,
+                  "httpGet": {
+                    "path": "/api/health",
+                    "port": "http",
+                    "scheme": "HTTP"
+                  },
+                  "periodSeconds": 3,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "resources": {
+                  "limits": {
+                    "cpu": "500m",
+                    "memory": "512Mi"
+                  },
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "160Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  }
+                },
+                "startupProbe": {
+                  "failureThreshold": 60,
+                  "httpGet": {
+                    "path": "/api/health",
+                    "port": "http",
+                    "scheme": "HTTP"
+                  },
+                  "periodSeconds": 2,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                  {
+                    "mountPath": "/var/lib/grafana",
+                    "name": "data"
+                  },
+                  {
+                    "mountPath": "/etc/grafana/provisioning/datasources",
+                    "name": "datasources",
+                    "readOnly": true
+                  },
+                  {
+                    "mountPath": "/etc/grafana/provisioning/dashboards",
+                    "name": "providers",
+                    "readOnly": true
+                  },
+                  {
+                    "mountPath": "/var/lib/grafana/dashboards",
+                    "name": "dashboards",
+                    "readOnly": true
+                  }
+                ]
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "restartPolicy": "Always",
+            "schedulerName": "default-scheduler",
+            "securityContext": {
+              "fsGroup": 472,
+              "runAsGroup": 472,
+              "runAsNonRoot": true,
+              "runAsUser": 472,
+              "seccompProfile": {
+                "type": "RuntimeDefault"
+              }
+            },
+            "terminationGracePeriodSeconds": 30,
+            "topologySpreadConstraints": [
+              {
+                "labelSelector": {
+                  "matchLabels": {
+                    "app": "grafana"
+                  }
+                },
+                "maxSkew": 1,
+                "topologyKey": "kubernetes.io/hostname",
+                "whenUnsatisfiable": "DoNotSchedule"
+              }
+            ],
+            "volumes": [
+              {
+                "emptyDir": {},
+                "name": "data"
+              },
+              {
+                "configMap": {
+                  "defaultMode": 420,
+                  "name": "grafana-datasources-hb9k56hh4h"
+                },
+                "name": "datasources"
+              },
+              {
+                "configMap": {
+                  "defaultMode": 420,
+                  "name": "grafana-providers-45khmht664"
+                },
+                "name": "providers"
+              },
+              {
+                "configMap": {
+                  "defaultMode": 420,
+                  "name": "grafana-dashboards-89ddfk27g6"
+                },
+                "name": "dashboards"
+              }
+            ]
+          }
+        }
+      },
+      "status": {
+        "availableReplicas": 2,
+        "fullyLabeledReplicas": 2,
+        "observedGeneration": 2,
+        "readyReplicas": 2,
+        "replicas": 2
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "ReplicaSet",
+      "metadata": {
+        "annotations": {
+          "deployment.kubernetes.io/desired-replicas": "2",
+          "deployment.kubernetes.io/max-replicas": "3",
+          "deployment.kubernetes.io/revision": "1",
+          "kubernetes.io/change-cause": "Base del laboratorio con dos replicas"
+        },
+        "creationTimestamp": "2026-11-11T05:35:52Z",
+        "generation": 5,
+        "labels": {
+          "app": "grafana",
+          "app.kubernetes.io/part-of": "sarseg-p2",
+          "pod-template-hash": "5c4c8dcb6c"
+        },
+        "name": "grafana-5c4c8dcb6c",
+        "namespace": "sarseg-observabilidad",
+        "ownerReferences": [
+          {
+            "apiVersion": "apps/v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "Deployment",
+            "name": "grafana",
+            "uid": "98ab473e-f362-4e97-8edb-2ff26ef685ec"
+          }
+        ],
+        "resourceVersion": "1023",
+        "uid": "40f67a79-e420-4a37-af00-a5670bec29f4"
+      },
+      "spec": {
+        "minReadySeconds": 5,
+        "replicas": 0,
+        "selector": {
+          "matchLabels": {
+            "app": "grafana",
+            "pod-template-hash": "5c4c8dcb6c"
+          }
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "sarseg.io/revision-laboratorio": "v1"
+            },
+            "creationTimestamp": null,
+            "labels": {
+              "app": "grafana",
+              "app.kubernetes.io/part-of": "sarseg-p2",
+              "pod-template-hash": "5c4c8dcb6c"
+            }
+          },
+          "spec": {
+            "affinity": {
+              "nodeAffinity": {
+                "requiredDuringSchedulingIgnoredDuringExecution": {
+                  "nodeSelectorTerms": [
+                    {
+                      "matchExpressions": [
+                        {
+                          "key": "node-role.kubernetes.io/control-plane",
+                          "operator": "DoesNotExist"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            "automountServiceAccountToken": false,
+            "containers": [
+              {
+                "env": [
+                  {
+                    "name": "GF_AUTH_ANONYMOUS_ENABLED",
+                    "value": "true"
+                  },
+                  {
+                    "name": "GF_AUTH_ANONYMOUS_ORG_ROLE",
+                    "value": "Viewer"
+                  },
+                  {
+                    "name": "GF_AUTH_DISABLE_LOGIN_FORM",
+                    "value": "true"
+                  },
+                  {
+                    "name": "GF_SECURITY_DISABLE_INITIAL_ADMIN_CREATION",
+                    "value": "true"
+                  },
+                  {
+                    "name": "GF_USERS_ALLOW_SIGN_UP",
+                    "value": "false"
+                  },
+                  {
+                    "name": "GF_ANALYTICS_REPORTING_ENABLED",
+                    "value": "false"
+                  },
+                  {
+                    "name": "GF_ANALYTICS_CHECK_FOR_UPDATES",
+                    "value": "false"
+                  },
+                  {
+                    "name": "GF_ANALYTICS_CHECK_FOR_PLUGIN_UPDATES",
+                    "value": "false"
+                  },
+                  {
+                    "name": "GF_PLUGINS_PREINSTALL_DISABLED",
+                    "value": "true"
+                  },
+                  {
+                    "name": "GF_METRICS_ENABLED",
+                    "value": "true"
+                  },
+                  {
+                    "name": "GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH",
+                    "value": "/var/lib/grafana/dashboards/sarseg-operacion.json"
+                  }
+                ],
+                "image": "grafana/grafana:12.3.0",
+                "imagePullPolicy": "IfNotPresent",
+                "lifecycle": {
+                  "preStop": {
+                    "exec": {
+                      "command": [
+                        "sh",
+                        "-c",
+                        "sleep 10"
+                      ]
+                    }
+                  }
+                },
+                "livenessProbe": {
+                  "failureThreshold": 3,
+                  "httpGet": {
+                    "path": "/api/health",
+                    "port": "http",
+                    "scheme": "HTTP"
+                  },
+                  "periodSeconds": 10,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "name": "grafana",
+                "ports": [
+                  {
+                    "containerPort": 3000,
+                    "name": "http",
+                    "protocol": "TCP"
+                  }
+                ],
+                "readinessProbe": {
+                  "failureThreshold": 3,
+                  "httpGet": {
+                    "path": "/api/health",
+                    "port": "http",
+                    "scheme": "HTTP"
+                  },
+                  "periodSeconds": 3,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "resources": {
+                  "limits": {
+                    "cpu": "500m",
+                    "memory": "512Mi"
+                  },
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "160Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  }
+                },
+                "startupProbe": {
+                  "failureThreshold": 60,
+                  "httpGet": {
+                    "path": "/api/health",
+                    "port": "http",
+                    "scheme": "HTTP"
+                  },
+                  "periodSeconds": 2,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                  {
+                    "mountPath": "/var/lib/grafana",
+                    "name": "data"
+                  },
+                  {
+                    "mountPath": "/etc/grafana/provisioning/datasources",
+                    "name": "datasources",
+                    "readOnly": true
+                  },
+                  {
+                    "mountPath": "/etc/grafana/provisioning/dashboards",
+                    "name": "providers",
+                    "readOnly": true
+                  },
+                  {
+                    "mountPath": "/var/lib/grafana/dashboards",
+                    "name": "dashboards",
+                    "readOnly": true
+                  }
+                ]
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "restartPolicy": "Always",
+            "schedulerName": "default-scheduler",
+            "securityContext": {
+              "fsGroup": 472,
+              "runAsGroup": 472,
+              "runAsNonRoot": true,
+              "runAsUser": 472,
+              "seccompProfile": {
+                "type": "RuntimeDefault"
+              }
+            },
+            "terminationGracePeriodSeconds": 30,
+            "topologySpreadConstraints": [
+              {
+                "labelSelector": {
+                  "matchLabels": {
+                    "app": "grafana"
+                  }
+                },
+                "maxSkew": 1,
+                "topologyKey": "kubernetes.io/hostname",
+                "whenUnsatisfiable": "DoNotSchedule"
+              }
+            ],
+            "volumes": [
+              {
+                "emptyDir": {},
+                "name": "data"
+              },
+              {
+                "configMap": {
+                  "defaultMode": 420,
+                  "name": "grafana-datasources-hb9k56hh4h"
+                },
+                "name": "datasources"
+              },
+              {
+                "configMap": {
+                  "defaultMode": 420,
+                  "name": "grafana-providers-45khmht664"
+                },
+                "name": "providers"
+              },
+              {
+                "configMap": {
+                  "defaultMode": 420,
+                  "name": "grafana-dashboards-89ddfk27g6"
+                },
+                "name": "dashboards"
+              }
+            ]
+          }
+        }
+      },
+      "status": {
+        "observedGeneration": 5,
+        "replicas": 0
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "ReplicaSet",
+      "metadata": {
+        "annotations": {
+          "deployment.kubernetes.io/desired-replicas": "1",
+          "deployment.kubernetes.io/max-replicas": "2",
+          "deployment.kubernetes.io/revision": "1"
+        },
+        "creationTimestamp": "2026-11-11T05:35:52Z",
+        "generation": 1,
+        "labels": {
+          "app": "kube-state-metrics",
+          "pod-template-hash": "5ccfd57cc8"
+        },
+        "name": "kube-state-metrics-5ccfd57cc8",
+        "namespace": "sarseg-observabilidad",
+        "ownerReferences": [
+          {
+            "apiVersion": "apps/v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "Deployment",
+            "name": "kube-state-metrics",
+            "uid": "50b00cba-009f-4db2-88c1-673fbe301fa7"
+          }
+        ],
+        "resourceVersion": "714",
+        "uid": "a2c9cabd-eb99-454a-9694-2c001323115a"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "app": "kube-state-metrics",
+            "pod-template-hash": "5ccfd57cc8"
+          }
+        },
+        "template": {
+          "metadata": {
+            "creationTimestamp": null,
+            "labels": {
+              "app": "kube-state-metrics",
+              "pod-template-hash": "5ccfd57cc8"
+            }
+          },
+          "spec": {
+            "containers": [
+              {
+                "args": [
+                  "--namespaces=sarseg-observabilidad",
+                  "--resources=deployments,replicasets,pods"
+                ],
+                "image": "registry.k8s.io/kube-state-metrics/kube-state-metrics:v2.16.0",
+                "imagePullPolicy": "IfNotPresent",
+                "livenessProbe": {
+                  "failureThreshold": 3,
+                  "httpGet": {
+                    "path": "/livez",
+                    "port": "metrics",
+                    "scheme": "HTTP"
+                  },
+                  "periodSeconds": 10,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "name": "kube-state-metrics",
+                "ports": [
+                  {
+                    "containerPort": 8080,
+                    "name": "metrics",
+                    "protocol": "TCP"
+                  },
+                  {
+                    "containerPort": 8081,
+                    "name": "telemetry",
+                    "protocol": "TCP"
+                  }
+                ],
+                "readinessProbe": {
+                  "failureThreshold": 3,
+                  "httpGet": {
+                    "path": "/readyz",
+                    "port": "telemetry",
+                    "scheme": "HTTP"
+                  },
+                  "periodSeconds": 10,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "resources": {
+                  "limits": {
+                    "cpu": "200m",
+                    "memory": "128Mi"
+                  },
+                  "requests": {
+                    "cpu": "30m",
+                    "memory": "48Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  }
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File"
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "restartPolicy": "Always",
+            "schedulerName": "default-scheduler",
+            "securityContext": {
+              "runAsNonRoot": true,
+              "runAsUser": 65534,
+              "seccompProfile": {
+                "type": "RuntimeDefault"
+              }
+            },
+            "serviceAccount": "kube-state-metrics",
+            "serviceAccountName": "kube-state-metrics",
+            "terminationGracePeriodSeconds": 30
+          }
+        }
+      },
+      "status": {
+        "availableReplicas": 1,
+        "fullyLabeledReplicas": 1,
+        "observedGeneration": 1,
+        "readyReplicas": 1,
+        "replicas": 1
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "ReplicaSet",
+      "metadata": {
+        "annotations": {
+          "deployment.kubernetes.io/desired-replicas": "1",
+          "deployment.kubernetes.io/max-replicas": "2",
+          "deployment.kubernetes.io/revision": "1"
+        },
+        "creationTimestamp": "2026-11-11T05:35:52Z",
+        "generation": 1,
+        "labels": {
+          "app": "prometheus",
+          "pod-template-hash": "6798b5c955"
+        },
+        "name": "prometheus-6798b5c955",
+        "namespace": "sarseg-observabilidad",
+        "ownerReferences": [
+          {
+            "apiVersion": "apps/v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "Deployment",
+            "name": "prometheus",
+            "uid": "aa321d81-5889-41f4-91e4-1367bcb58c62"
+          }
+        ],
+        "resourceVersion": "645",
+        "uid": "99a6e6ea-b631-41a3-af0f-a76b7c086b40"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "app": "prometheus",
+            "pod-template-hash": "6798b5c955"
+          }
+        },
+        "template": {
+          "metadata": {
+            "creationTimestamp": null,
+            "labels": {
+              "app": "prometheus",
+              "pod-template-hash": "6798b5c955"
+            }
+          },
+          "spec": {
+            "automountServiceAccountToken": false,
+            "containers": [
+              {
+                "args": [
+                  "--config.file=/etc/prometheus/prometheus.yml",
+                  "--storage.tsdb.path=/prometheus",
+                  "--storage.tsdb.retention.time=6h",
+                  "--storage.tsdb.retention.size=512MB"
+                ],
+                "image": "prom/prometheus:v3.5.0",
+                "imagePullPolicy": "IfNotPresent",
+                "livenessProbe": {
+                  "failureThreshold": 3,
+                  "httpGet": {
+                    "path": "/-/healthy",
+                    "port": "http",
+                    "scheme": "HTTP"
+                  },
+                  "periodSeconds": 10,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "name": "prometheus",
+                "ports": [
+                  {
+                    "containerPort": 9090,
+                    "name": "http",
+                    "protocol": "TCP"
+                  }
+                ],
+                "readinessProbe": {
+                  "failureThreshold": 3,
+                  "httpGet": {
+                    "path": "/-/ready",
+                    "port": "http",
+                    "scheme": "HTTP"
+                  },
+                  "periodSeconds": 10,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "resources": {
+                  "limits": {
+                    "cpu": "500m",
+                    "memory": "512Mi"
+                  },
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "128Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  }
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                  {
+                    "mountPath": "/etc/prometheus",
+                    "name": "config",
+                    "readOnly": true
+                  },
+                  {
+                    "mountPath": "/prometheus",
+                    "name": "data"
+                  }
+                ]
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "restartPolicy": "Always",
+            "schedulerName": "default-scheduler",
+            "securityContext": {
+              "fsGroup": 65534,
+              "runAsGroup": 65534,
+              "runAsNonRoot": true,
+              "runAsUser": 65534,
+              "seccompProfile": {
+                "type": "RuntimeDefault"
+              }
+            },
+            "terminationGracePeriodSeconds": 30,
+            "volumes": [
+              {
+                "configMap": {
+                  "defaultMode": 420,
+                  "name": "prometheus-config-t2852m8864"
+                },
+                "name": "config"
+              },
+              {
+                "emptyDir": {
+                  "sizeLimit": "1Gi"
+                },
+                "name": "data"
+              }
+            ]
+          }
+        }
+      },
+      "status": {
+        "availableReplicas": 1,
+        "fullyLabeledReplicas": 1,
+        "observedGeneration": 1,
+        "readyReplicas": 1,
+        "replicas": 1
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "metadata": {
+        "annotations": {
+          "sarseg.io/revision-laboratorio": "v2-prueba-p2"
+        },
+        "creationTimestamp": "2026-11-11T05:37:33Z",
+        "generateName": "grafana-557d55f7c-",
+        "labels": {
+          "app": "grafana",
+          "app.kubernetes.io/part-of": "sarseg-p2",
+          "pod-template-hash": "557d55f7c"
+        },
+        "name": "grafana-557d55f7c-8855v",
+        "namespace": "sarseg-observabilidad",
+        "ownerReferences": [
+          {
+            "apiVersion": "apps/v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "ReplicaSet",
+            "name": "grafana-557d55f7c",
+            "uid": "9d43070e-88c3-4cce-8254-912981e1171c"
+          }
+        ],
+        "resourceVersion": "941",
+        "uid": "3ebf737a-8859-495e-a370-120cbc56a0e7"
+      },
+      "spec": {
+        "affinity": {
+          "nodeAffinity": {
+            "requiredDuringSchedulingIgnoredDuringExecution": {
+              "nodeSelectorTerms": [
+                {
+                  "matchExpressions": [
+                    {
+                      "key": "node-role.kubernetes.io/control-plane",
+                      "operator": "DoesNotExist"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "automountServiceAccountToken": false,
+        "containers": [
+          {
+            "env": [
+              {
+                "name": "GF_AUTH_ANONYMOUS_ENABLED",
+                "value": "true"
+              },
+              {
+                "name": "GF_AUTH_ANONYMOUS_ORG_ROLE",
+                "value": "Viewer"
+              },
+              {
+                "name": "GF_AUTH_DISABLE_LOGIN_FORM",
+                "value": "true"
+              },
+              {
+                "name": "GF_SECURITY_DISABLE_INITIAL_ADMIN_CREATION",
+                "value": "true"
+              },
+              {
+                "name": "GF_USERS_ALLOW_SIGN_UP",
+                "value": "false"
+              },
+              {
+                "name": "GF_ANALYTICS_REPORTING_ENABLED",
+                "value": "false"
+              },
+              {
+                "name": "GF_ANALYTICS_CHECK_FOR_UPDATES",
+                "value": "false"
+              },
+              {
+                "name": "GF_ANALYTICS_CHECK_FOR_PLUGIN_UPDATES",
+                "value": "false"
+              },
+              {
+                "name": "GF_PLUGINS_PREINSTALL_DISABLED",
+                "value": "true"
+              },
+              {
+                "name": "GF_METRICS_ENABLED",
+                "value": "true"
+              },
+              {
+                "name": "GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH",
+                "value": "/var/lib/grafana/dashboards/sarseg-operacion.json"
+              }
+            ],
+            "image": "grafana/grafana:12.3.0",
+            "imagePullPolicy": "IfNotPresent",
+            "lifecycle": {
+              "preStop": {
+                "exec": {
+                  "command": [
+                    "sh",
+                    "-c",
+                    "sleep 10"
+                  ]
+                }
+              }
+            },
+            "livenessProbe": {
+              "failureThreshold": 3,
+              "httpGet": {
+                "path": "/api/health",
+                "port": "http",
+                "scheme": "HTTP"
+              },
+              "periodSeconds": 10,
+              "successThreshold": 1,
+              "timeoutSeconds": 1
+            },
+            "name": "grafana",
+            "ports": [
+              {
+                "containerPort": 3000,
+                "name": "http",
+                "protocol": "TCP"
+              }
+            ],
+            "readinessProbe": {
+              "failureThreshold": 3,
+              "httpGet": {
+                "path": "/api/health",
+                "port": "http",
+                "scheme": "HTTP"
+              },
+              "periodSeconds": 3,
+              "successThreshold": 1,
+              "timeoutSeconds": 1
+            },
+            "resources": {
+              "limits": {
+                "cpu": "500m",
+                "memory": "512Mi"
+              },
+              "requests": {
+                "cpu": "100m",
+                "memory": "160Mi"
+              }
+            },
+            "securityContext": {
+              "allowPrivilegeEscalation": false,
+              "capabilities": {
+                "drop": [
+                  "ALL"
+                ]
+              }
+            },
+            "startupProbe": {
+              "failureThreshold": 60,
+              "httpGet": {
+                "path": "/api/health",
+                "port": "http",
+                "scheme": "HTTP"
+              },
+              "periodSeconds": 2,
+              "successThreshold": 1,
+              "timeoutSeconds": 1
+            },
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "volumeMounts": [
+              {
+                "mountPath": "/var/lib/grafana",
+                "name": "data"
+              },
+              {
+                "mountPath": "/etc/grafana/provisioning/datasources",
+                "name": "datasources",
+                "readOnly": true
+              },
+              {
+                "mountPath": "/etc/grafana/provisioning/dashboards",
+                "name": "providers",
+                "readOnly": true
+              },
+              {
+                "mountPath": "/var/lib/grafana/dashboards",
+                "name": "dashboards",
+                "readOnly": true
+              }
+            ]
+          }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "enableServiceLinks": true,
+        "nodeName": "sarseg-p2-evidencia-worker",
+        "preemptionPolicy": "PreemptLowerPriority",
+        "priority": 0,
+        "restartPolicy": "Always",
+        "schedulerName": "default-scheduler",
+        "securityContext": {
+          "fsGroup": 472,
+          "runAsGroup": 472,
+          "runAsNonRoot": true,
+          "runAsUser": 472,
+          "seccompProfile": {
+            "type": "RuntimeDefault"
+          }
+        },
+        "serviceAccount": "default",
+        "serviceAccountName": "default",
+        "terminationGracePeriodSeconds": 30,
+        "tolerations": [
+          {
+            "effect": "NoExecute",
+            "key": "node.kubernetes.io/not-ready",
+            "operator": "Exists",
+            "tolerationSeconds": 300
+          },
+          {
+            "effect": "NoExecute",
+            "key": "node.kubernetes.io/unreachable",
+            "operator": "Exists",
+            "tolerationSeconds": 300
+          }
+        ],
+        "topologySpreadConstraints": [
+          {
+            "labelSelector": {
+              "matchLabels": {
+                "app": "grafana"
+              }
+            },
+            "maxSkew": 1,
+            "topologyKey": "kubernetes.io/hostname",
+            "whenUnsatisfiable": "DoNotSchedule"
+          }
+        ],
+        "volumes": [
+          {
+            "emptyDir": {},
+            "name": "data"
+          },
+          {
+            "configMap": {
+              "defaultMode": 420,
+              "name": "grafana-datasources-hb9k56hh4h"
+            },
+            "name": "datasources"
+          },
+          {
+            "configMap": {
+              "defaultMode": 420,
+              "name": "grafana-providers-45khmht664"
+            },
+            "name": "providers"
+          },
+          {
+            "configMap": {
+              "defaultMode": 420,
+              "name": "grafana-dashboards-89ddfk27g6"
+            },
+            "name": "dashboards"
+          }
+        ]
+      },
+      "status": {
+        "conditions": [
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-11T05:37:34Z",
+            "status": "True",
+            "type": "PodReadyToStartContainers"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-11T05:37:33Z",
+            "status": "True",
+            "type": "Initialized"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-11T05:37:40Z",
+            "status": "True",
+            "type": "Ready"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-11T05:37:40Z",
+            "status": "True",
+            "type": "ContainersReady"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-11T05:37:33Z",
+            "status": "True",
+            "type": "PodScheduled"
+          }
+        ],
+        "containerStatuses": [
+          {
+            "containerID": "containerd://82d83dbb7f7d9c486834b6510ee3275ac4f02184c7d2551b712773345824a0c1",
+            "image": "docker.io/grafana/grafana:12.3.0",
+            "imageID": "docker.io/grafana/grafana@sha256:70d9599b186ce287be0d2c5ba9a78acb2e86c1a68c9c41449454d0fc3eeb84e8",
+            "lastState": {},
+            "name": "grafana",
+            "ready": true,
+            "restartCount": 0,
+            "started": true,
+            "state": {
+              "running": {
+                "startedAt": "2026-11-11T05:37:34Z"
+              }
+            },
+            "volumeMounts": [
+              {
+                "mountPath": "/var/lib/grafana",
+                "name": "data"
+              },
+              {
+                "mountPath": "/etc/grafana/provisioning/datasources",
+                "name": "datasources",
+                "readOnly": true,
+                "recursiveReadOnly": "Disabled"
+              },
+              {
+                "mountPath": "/etc/grafana/provisioning/dashboards",
+                "name": "providers",
+                "readOnly": true,
+                "recursiveReadOnly": "Disabled"
+              },
+              {
+                "mountPath": "/var/lib/grafana/dashboards",
+                "name": "dashboards",
+                "readOnly": true,
+                "recursiveReadOnly": "Disabled"
+              }
+            ]
+          }
+        ],
+        "hostIP": "172.20.0.7",
+        "hostIPs": [
+          {
+            "ip": "172.20.0.7"
+          }
+        ],
+        "phase": "Running",
+        "podIP": "10.244.1.4",
+        "podIPs": [
+          {
+            "ip": "10.244.1.4"
+          }
+        ],
+        "qosClass": "Burstable",
+        "startTime": "2026-11-11T05:37:33Z"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "metadata": {
+        "annotations": {
+          "sarseg.io/revision-laboratorio": "v2-prueba-p2"
+        },
+        "creationTimestamp": "2026-11-11T05:37:45Z",
+        "generateName": "grafana-557d55f7c-",
+        "labels": {
+          "app": "grafana",
+          "app.kubernetes.io/part-of": "sarseg-p2",
+          "pod-template-hash": "557d55f7c"
+        },
+        "name": "grafana-557d55f7c-mgstk",
+        "namespace": "sarseg-observabilidad",
+        "ownerReferences": [
+          {
+            "apiVersion": "apps/v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "ReplicaSet",
+            "name": "grafana-557d55f7c",
+            "uid": "9d43070e-88c3-4cce-8254-912981e1171c"
+          }
+        ],
+        "resourceVersion": "994",
+        "uid": "2548a084-91c0-4de3-9bef-95be3884af03"
+      },
+      "spec": {
+        "affinity": {
+          "nodeAffinity": {
+            "requiredDuringSchedulingIgnoredDuringExecution": {
+              "nodeSelectorTerms": [
+                {
+                  "matchExpressions": [
+                    {
+                      "key": "node-role.kubernetes.io/control-plane",
+                      "operator": "DoesNotExist"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "automountServiceAccountToken": false,
+        "containers": [
+          {
+            "env": [
+              {
+                "name": "GF_AUTH_ANONYMOUS_ENABLED",
+                "value": "true"
+              },
+              {
+                "name": "GF_AUTH_ANONYMOUS_ORG_ROLE",
+                "value": "Viewer"
+              },
+              {
+                "name": "GF_AUTH_DISABLE_LOGIN_FORM",
+                "value": "true"
+              },
+              {
+                "name": "GF_SECURITY_DISABLE_INITIAL_ADMIN_CREATION",
+                "value": "true"
+              },
+              {
+                "name": "GF_USERS_ALLOW_SIGN_UP",
+                "value": "false"
+              },
+              {
+                "name": "GF_ANALYTICS_REPORTING_ENABLED",
+                "value": "false"
+              },
+              {
+                "name": "GF_ANALYTICS_CHECK_FOR_UPDATES",
+                "value": "false"
+              },
+              {
+                "name": "GF_ANALYTICS_CHECK_FOR_PLUGIN_UPDATES",
+                "value": "false"
+              },
+              {
+                "name": "GF_PLUGINS_PREINSTALL_DISABLED",
+                "value": "true"
+              },
+              {
+                "name": "GF_METRICS_ENABLED",
+                "value": "true"
+              },
+              {
+                "name": "GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH",
+                "value": "/var/lib/grafana/dashboards/sarseg-operacion.json"
+              }
+            ],
+            "image": "grafana/grafana:12.3.0",
+            "imagePullPolicy": "IfNotPresent",
+            "lifecycle": {
+              "preStop": {
+                "exec": {
+                  "command": [
+                    "sh",
+                    "-c",
+                    "sleep 10"
+                  ]
+                }
+              }
+            },
+            "livenessProbe": {
+              "failureThreshold": 3,
+              "httpGet": {
+                "path": "/api/health",
+                "port": "http",
+                "scheme": "HTTP"
+              },
+              "periodSeconds": 10,
+              "successThreshold": 1,
+              "timeoutSeconds": 1
+            },
+            "name": "grafana",
+            "ports": [
+              {
+                "containerPort": 3000,
+                "name": "http",
+                "protocol": "TCP"
+              }
+            ],
+            "readinessProbe": {
+              "failureThreshold": 3,
+              "httpGet": {
+                "path": "/api/health",
+                "port": "http",
+                "scheme": "HTTP"
+              },
+              "periodSeconds": 3,
+              "successThreshold": 1,
+              "timeoutSeconds": 1
+            },
+            "resources": {
+              "limits": {
+                "cpu": "500m",
+                "memory": "512Mi"
+              },
+              "requests": {
+                "cpu": "100m",
+                "memory": "160Mi"
+              }
+            },
+            "securityContext": {
+              "allowPrivilegeEscalation": false,
+              "capabilities": {
+                "drop": [
+                  "ALL"
+                ]
+              }
+            },
+            "startupProbe": {
+              "failureThreshold": 60,
+              "httpGet": {
+                "path": "/api/health",
+                "port": "http",
+                "scheme": "HTTP"
+              },
+              "periodSeconds": 2,
+              "successThreshold": 1,
+              "timeoutSeconds": 1
+            },
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "volumeMounts": [
+              {
+                "mountPath": "/var/lib/grafana",
+                "name": "data"
+              },
+              {
+                "mountPath": "/etc/grafana/provisioning/datasources",
+                "name": "datasources",
+                "readOnly": true
+              },
+              {
+                "mountPath": "/etc/grafana/provisioning/dashboards",
+                "name": "providers",
+                "readOnly": true
+              },
+              {
+                "mountPath": "/var/lib/grafana/dashboards",
+                "name": "dashboards",
+                "readOnly": true
+              }
+            ]
+          }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "enableServiceLinks": true,
+        "nodeName": "sarseg-p2-evidencia-worker2",
+        "preemptionPolicy": "PreemptLowerPriority",
+        "priority": 0,
+        "restartPolicy": "Always",
+        "schedulerName": "default-scheduler",
+        "securityContext": {
+          "fsGroup": 472,
+          "runAsGroup": 472,
+          "runAsNonRoot": true,
+          "runAsUser": 472,
+          "seccompProfile": {
+            "type": "RuntimeDefault"
+          }
+        },
+        "serviceAccount": "default",
+        "serviceAccountName": "default",
+        "terminationGracePeriodSeconds": 30,
+        "tolerations": [
+          {
+            "effect": "NoExecute",
+            "key": "node.kubernetes.io/not-ready",
+            "operator": "Exists",
+            "tolerationSeconds": 300
+          },
+          {
+            "effect": "NoExecute",
+            "key": "node.kubernetes.io/unreachable",
+            "operator": "Exists",
+            "tolerationSeconds": 300
+          }
+        ],
+        "topologySpreadConstraints": [
+          {
+            "labelSelector": {
+              "matchLabels": {
+                "app": "grafana"
+              }
+            },
+            "maxSkew": 1,
+            "topologyKey": "kubernetes.io/hostname",
+            "whenUnsatisfiable": "DoNotSchedule"
+          }
+        ],
+        "volumes": [
+          {
+            "emptyDir": {},
+            "name": "data"
+          },
+          {
+            "configMap": {
+              "defaultMode": 420,
+              "name": "grafana-datasources-hb9k56hh4h"
+            },
+            "name": "datasources"
+          },
+          {
+            "configMap": {
+              "defaultMode": 420,
+              "name": "grafana-providers-45khmht664"
+            },
+            "name": "providers"
+          },
+          {
+            "configMap": {
+              "defaultMode": 420,
+              "name": "grafana-dashboards-89ddfk27g6"
+            },
+            "name": "dashboards"
+          }
+        ]
+      },
+      "status": {
+        "conditions": [
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-11T05:37:46Z",
+            "status": "True",
+            "type": "PodReadyToStartContainers"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-11T05:37:45Z",
+            "status": "True",
+            "type": "Initialized"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-11T05:37:51Z",
+            "status": "True",
+            "type": "Ready"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-11T05:37:51Z",
+            "status": "True",
+            "type": "ContainersReady"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-11T05:37:45Z",
+            "status": "True",
+            "type": "PodScheduled"
+          }
+        ],
+        "containerStatuses": [
+          {
+            "containerID": "containerd://d1de7b8c64085a24994481b306e7f3af6410524ec1cdcf42bb3237b27017c8e5",
+            "image": "docker.io/grafana/grafana:12.3.0",
+            "imageID": "docker.io/grafana/grafana@sha256:70d9599b186ce287be0d2c5ba9a78acb2e86c1a68c9c41449454d0fc3eeb84e8",
+            "lastState": {},
+            "name": "grafana",
+            "ready": true,
+            "restartCount": 0,
+            "started": true,
+            "state": {
+              "running": {
+                "startedAt": "2026-11-11T05:37:45Z"
+              }
+            },
+            "volumeMounts": [
+              {
+                "mountPath": "/var/lib/grafana",
+                "name": "data"
+              },
+              {
+                "mountPath": "/etc/grafana/provisioning/datasources",
+                "name": "datasources",
+                "readOnly": true,
+                "recursiveReadOnly": "Disabled"
+              },
+              {
+                "mountPath": "/etc/grafana/provisioning/dashboards",
+                "name": "providers",
+                "readOnly": true,
+                "recursiveReadOnly": "Disabled"
+              },
+              {
+                "mountPath": "/var/lib/grafana/dashboards",
+                "name": "dashboards",
+                "readOnly": true,
+                "recursiveReadOnly": "Disabled"
+              }
+            ]
+          }
+        ],
+        "hostIP": "172.20.0.6",
+        "hostIPs": [
+          {
+            "ip": "172.20.0.6"
+          }
+        ],
+        "phase": "Running",
+        "podIP": "10.244.2.6",
+        "podIPs": [
+          {
+            "ip": "10.244.2.6"
+          }
+        ],
+        "qosClass": "Burstable",
+        "startTime": "2026-11-11T05:37:45Z"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "metadata": {
+        "annotations": {
+          "sarseg.io/revision-laboratorio": "v1"
+        },
+        "creationTimestamp": "2026-11-11T05:37:15Z",
+        "deletionGracePeriodSeconds": 30,
+        "deletionTimestamp": "2026-11-11T05:38:26Z",
+        "generateName": "grafana-5c4c8dcb6c-",
+        "labels": {
+          "app": "grafana",
+          "app.kubernetes.io/part-of": "sarseg-p2",
+          "pod-template-hash": "5c4c8dcb6c"
+        },
+        "name": "grafana-5c4c8dcb6c-2m86d",
+        "namespace": "sarseg-observabilidad",
+        "ownerReferences": [
+          {
+            "apiVersion": "apps/v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "ReplicaSet",
+            "name": "grafana-5c4c8dcb6c",
+            "uid": "40f67a79-e420-4a37-af00-a5670bec29f4"
+          }
+        ],
+        "resourceVersion": "1016",
+        "uid": "58a617df-67f9-4a4c-b393-9f0565693113"
+      },
+      "spec": {
+        "affinity": {
+          "nodeAffinity": {
+            "requiredDuringSchedulingIgnoredDuringExecution": {
+              "nodeSelectorTerms": [
+                {
+                  "matchExpressions": [
+                    {
+                      "key": "node-role.kubernetes.io/control-plane",
+                      "operator": "DoesNotExist"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "automountServiceAccountToken": false,
+        "containers": [
+          {
+            "env": [
+              {
+                "name": "GF_AUTH_ANONYMOUS_ENABLED",
+                "value": "true"
+              },
+              {
+                "name": "GF_AUTH_ANONYMOUS_ORG_ROLE",
+                "value": "Viewer"
+              },
+              {
+                "name": "GF_AUTH_DISABLE_LOGIN_FORM",
+                "value": "true"
+              },
+              {
+                "name": "GF_SECURITY_DISABLE_INITIAL_ADMIN_CREATION",
+                "value": "true"
+              },
+              {
+                "name": "GF_USERS_ALLOW_SIGN_UP",
+                "value": "false"
+              },
+              {
+                "name": "GF_ANALYTICS_REPORTING_ENABLED",
+                "value": "false"
+              },
+              {
+                "name": "GF_ANALYTICS_CHECK_FOR_UPDATES",
+                "value": "false"
+              },
+              {
+                "name": "GF_ANALYTICS_CHECK_FOR_PLUGIN_UPDATES",
+                "value": "false"
+              },
+              {
+                "name": "GF_PLUGINS_PREINSTALL_DISABLED",
+                "value": "true"
+              },
+              {
+                "name": "GF_METRICS_ENABLED",
+                "value": "true"
+              },
+              {
+                "name": "GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH",
+                "value": "/var/lib/grafana/dashboards/sarseg-operacion.json"
+              }
+            ],
+            "image": "grafana/grafana:12.3.0",
+            "imagePullPolicy": "IfNotPresent",
+            "lifecycle": {
+              "preStop": {
+                "exec": {
+                  "command": [
+                    "sh",
+                    "-c",
+                    "sleep 10"
+                  ]
+                }
+              }
+            },
+            "livenessProbe": {
+              "failureThreshold": 3,
+              "httpGet": {
+                "path": "/api/health",
+                "port": "http",
+                "scheme": "HTTP"
+              },
+              "periodSeconds": 10,
+              "successThreshold": 1,
+              "timeoutSeconds": 1
+            },
+            "name": "grafana",
+            "ports": [
+              {
+                "containerPort": 3000,
+                "name": "http",
+                "protocol": "TCP"
+              }
+            ],
+            "readinessProbe": {
+              "failureThreshold": 3,
+              "httpGet": {
+                "path": "/api/health",
+                "port": "http",
+                "scheme": "HTTP"
+              },
+              "periodSeconds": 3,
+              "successThreshold": 1,
+              "timeoutSeconds": 1
+            },
+            "resources": {
+              "limits": {
+                "cpu": "500m",
+                "memory": "512Mi"
+              },
+              "requests": {
+                "cpu": "100m",
+                "memory": "160Mi"
+              }
+            },
+            "securityContext": {
+              "allowPrivilegeEscalation": false,
+              "capabilities": {
+                "drop": [
+                  "ALL"
+                ]
+              }
+            },
+            "startupProbe": {
+              "failureThreshold": 60,
+              "httpGet": {
+                "path": "/api/health",
+                "port": "http",
+                "scheme": "HTTP"
+              },
+              "periodSeconds": 2,
+              "successThreshold": 1,
+              "timeoutSeconds": 1
+            },
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "volumeMounts": [
+              {
+                "mountPath": "/var/lib/grafana",
+                "name": "data"
+              },
+              {
+                "mountPath": "/etc/grafana/provisioning/datasources",
+                "name": "datasources",
+                "readOnly": true
+              },
+              {
+                "mountPath": "/etc/grafana/provisioning/dashboards",
+                "name": "providers",
+                "readOnly": true
+              },
+              {
+                "mountPath": "/var/lib/grafana/dashboards",
+                "name": "dashboards",
+                "readOnly": true
+              }
+            ]
+          }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "enableServiceLinks": true,
+        "nodeName": "sarseg-p2-evidencia-worker2",
+        "preemptionPolicy": "PreemptLowerPriority",
+        "priority": 0,
+        "restartPolicy": "Always",
+        "schedulerName": "default-scheduler",
+        "securityContext": {
+          "fsGroup": 472,
+          "runAsGroup": 472,
+          "runAsNonRoot": true,
+          "runAsUser": 472,
+          "seccompProfile": {
+            "type": "RuntimeDefault"
+          }
+        },
+        "serviceAccount": "default",
+        "serviceAccountName": "default",
+        "terminationGracePeriodSeconds": 30,
+        "tolerations": [
+          {
+            "effect": "NoExecute",
+            "key": "node.kubernetes.io/not-ready",
+            "operator": "Exists",
+            "tolerationSeconds": 300
+          },
+          {
+            "effect": "NoExecute",
+            "key": "node.kubernetes.io/unreachable",
+            "operator": "Exists",
+            "tolerationSeconds": 300
+          }
+        ],
+        "topologySpreadConstraints": [
+          {
+            "labelSelector": {
+              "matchLabels": {
+                "app": "grafana"
+              }
+            },
+            "maxSkew": 1,
+            "topologyKey": "kubernetes.io/hostname",
+            "whenUnsatisfiable": "DoNotSchedule"
+          }
+        ],
+        "volumes": [
+          {
+            "emptyDir": {},
+            "name": "data"
+          },
+          {
+            "configMap": {
+              "defaultMode": 420,
+              "name": "grafana-datasources-hb9k56hh4h"
+            },
+            "name": "datasources"
+          },
+          {
+            "configMap": {
+              "defaultMode": 420,
+              "name": "grafana-providers-45khmht664"
+            },
+            "name": "providers"
+          },
+          {
+            "configMap": {
+              "defaultMode": 420,
+              "name": "grafana-dashboards-89ddfk27g6"
+            },
+            "name": "dashboards"
+          }
+        ]
+      },
+      "status": {
+        "conditions": [
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-11T05:37:17Z",
+            "status": "True",
+            "type": "PodReadyToStartContainers"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-11T05:37:15Z",
+            "status": "True",
+            "type": "Initialized"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-11T05:37:27Z",
+            "status": "True",
+            "type": "Ready"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-11T05:37:27Z",
+            "status": "True",
+            "type": "ContainersReady"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-11T05:37:15Z",
+            "status": "True",
+            "type": "PodScheduled"
+          }
+        ],
+        "containerStatuses": [
+          {
+            "containerID": "containerd://6be50877dda07ba4ae41c46febd99d6c40417d82a86bd051595d65e43eba2c07",
+            "image": "docker.io/grafana/grafana:12.3.0",
+            "imageID": "docker.io/grafana/grafana@sha256:70d9599b186ce287be0d2c5ba9a78acb2e86c1a68c9c41449454d0fc3eeb84e8",
+            "lastState": {},
+            "name": "grafana",
+            "ready": true,
+            "restartCount": 0,
+            "started": true,
+            "state": {
+              "running": {
+                "startedAt": "2026-11-11T05:37:16Z"
+              }
+            },
+            "volumeMounts": [
+              {
+                "mountPath": "/var/lib/grafana",
+                "name": "data"
+              },
+              {
+                "mountPath": "/etc/grafana/provisioning/datasources",
+                "name": "datasources",
+                "readOnly": true,
+                "recursiveReadOnly": "Disabled"
+              },
+              {
+                "mountPath": "/etc/grafana/provisioning/dashboards",
+                "name": "providers",
+                "readOnly": true,
+                "recursiveReadOnly": "Disabled"
+              },
+              {
+                "mountPath": "/var/lib/grafana/dashboards",
+                "name": "dashboards",
+                "readOnly": true,
+                "recursiveReadOnly": "Disabled"
+              }
+            ]
+          }
+        ],
+        "hostIP": "172.20.0.6",
+        "hostIPs": [
+          {
+            "ip": "172.20.0.6"
+          }
+        ],
+        "phase": "Running",
+        "podIP": "10.244.2.5",
+        "podIPs": [
+          {
+            "ip": "10.244.2.5"
+          }
+        ],
+        "qosClass": "Burstable",
+        "startTime": "2026-11-11T05:37:15Z"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "metadata": {
+        "creationTimestamp": "2026-11-11T05:35:52Z",
+        "generateName": "kube-state-metrics-5ccfd57cc8-",
+        "labels": {
+          "app": "kube-state-metrics",
+          "pod-template-hash": "5ccfd57cc8"
+        },
+        "name": "kube-state-metrics-5ccfd57cc8-bfqbw",
+        "namespace": "sarseg-observabilidad",
+        "ownerReferences": [
+          {
+            "apiVersion": "apps/v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "ReplicaSet",
+            "name": "kube-state-metrics-5ccfd57cc8",
+            "uid": "a2c9cabd-eb99-454a-9694-2c001323115a"
+          }
+        ],
+        "resourceVersion": "711",
+        "uid": "da927cc7-7e3e-4bfb-b83f-9caaeb2bb80c"
+      },
+      "spec": {
+        "containers": [
+          {
+            "args": [
+              "--namespaces=sarseg-observabilidad",
+              "--resources=deployments,replicasets,pods"
+            ],
+            "image": "registry.k8s.io/kube-state-metrics/kube-state-metrics:v2.16.0",
+            "imagePullPolicy": "IfNotPresent",
+            "livenessProbe": {
+              "failureThreshold": 3,
+              "httpGet": {
+                "path": "/livez",
+                "port": "metrics",
+                "scheme": "HTTP"
+              },
+              "periodSeconds": 10,
+              "successThreshold": 1,
+              "timeoutSeconds": 1
+            },
+            "name": "kube-state-metrics",
+            "ports": [
+              {
+                "containerPort": 8080,
+                "name": "metrics",
+                "protocol": "TCP"
+              },
+              {
+                "containerPort": 8081,
+                "name": "telemetry",
+                "protocol": "TCP"
+              }
+            ],
+            "readinessProbe": {
+              "failureThreshold": 3,
+              "httpGet": {
+                "path": "/readyz",
+                "port": "telemetry",
+                "scheme": "HTTP"
+              },
+              "periodSeconds": 10,
+              "successThreshold": 1,
+              "timeoutSeconds": 1
+            },
+            "resources": {
+              "limits": {
+                "cpu": "200m",
+                "memory": "128Mi"
+              },
+              "requests": {
+                "cpu": "30m",
+                "memory": "48Mi"
+              }
+            },
+            "securityContext": {
+              "allowPrivilegeEscalation": false,
+              "capabilities": {
+                "drop": [
+                  "ALL"
+                ]
+              }
+            },
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "volumeMounts": [
+              {
+                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                "name": "kube-api-access-h9zs7",
+                "readOnly": true
+              }
+            ]
+          }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "enableServiceLinks": true,
+        "nodeName": "sarseg-p2-evidencia-worker2",
+        "preemptionPolicy": "PreemptLowerPriority",
+        "priority": 0,
+        "restartPolicy": "Always",
+        "schedulerName": "default-scheduler",
+        "securityContext": {
+          "runAsNonRoot": true,
+          "runAsUser": 65534,
+          "seccompProfile": {
+            "type": "RuntimeDefault"
+          }
+        },
+        "serviceAccount": "kube-state-metrics",
+        "serviceAccountName": "kube-state-metrics",
+        "terminationGracePeriodSeconds": 30,
+        "tolerations": [
+          {
+            "effect": "NoExecute",
+            "key": "node.kubernetes.io/not-ready",
+            "operator": "Exists",
+            "tolerationSeconds": 300
+          },
+          {
+            "effect": "NoExecute",
+            "key": "node.kubernetes.io/unreachable",
+            "operator": "Exists",
+            "tolerationSeconds": 300
+          }
+        ],
+        "volumes": [
+          {
+            "name": "kube-api-access-h9zs7",
+            "projected": {
+              "defaultMode": 420,
+              "sources": [
+                {
+                  "serviceAccountToken": {
+                    "expirationSeconds": 3607,
+                    "path": "token"
+                  }
+                },
+                {
+                  "configMap": {
+                    "items": [
+                      {
+                        "key": "ca.crt",
+                        "path": "ca.crt"
+                      }
+                    ],
+                    "name": "kube-root-ca.crt"
+                  }
+                },
+                {
+                  "downwardAPI": {
+                    "items": [
+                      {
+                        "fieldRef": {
+                          "apiVersion": "v1",
+                          "fieldPath": "metadata.namespace"
+                        },
+                        "path": "namespace"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "status": {
+        "conditions": [
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-11T05:36:25Z",
+            "status": "True",
+            "type": "PodReadyToStartContainers"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-11T05:35:54Z",
+            "status": "True",
+            "type": "Initialized"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-11T05:36:26Z",
+            "status": "True",
+            "type": "Ready"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-11T05:36:26Z",
+            "status": "True",
+            "type": "ContainersReady"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-11T05:35:54Z",
+            "status": "True",
+            "type": "PodScheduled"
+          }
+        ],
+        "containerStatuses": [
+          {
+            "containerID": "containerd://a5ec49aad36e396956c4e3cdde0150bac1009b34c2d3ab664f2ac9309067557b",
+            "image": "registry.k8s.io/kube-state-metrics/kube-state-metrics:v2.16.0",
+            "imageID": "registry.k8s.io/kube-state-metrics/kube-state-metrics@sha256:e750cd4b43f782e3106537026c2995cac85d921aedea334e1d16caad7877c360",
+            "lastState": {},
+            "name": "kube-state-metrics",
+            "ready": true,
+            "restartCount": 0,
+            "started": true,
+            "state": {
+              "running": {
+                "startedAt": "2026-11-11T05:36:25Z"
+              }
+            },
+            "volumeMounts": [
+              {
+                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                "name": "kube-api-access-h9zs7",
+                "readOnly": true,
+                "recursiveReadOnly": "Disabled"
+              }
+            ]
+          }
+        ],
+        "hostIP": "172.20.0.6",
+        "hostIPs": [
+          {
+            "ip": "172.20.0.6"
+          }
+        ],
+        "phase": "Running",
+        "podIP": "10.244.2.4",
+        "podIPs": [
+          {
+            "ip": "10.244.2.4"
+          }
+        ],
+        "qosClass": "Burstable",
+        "startTime": "2026-11-11T05:35:54Z"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "metadata": {
+        "creationTimestamp": "2026-11-11T05:35:52Z",
+        "generateName": "prometheus-6798b5c955-",
+        "labels": {
+          "app": "prometheus",
+          "pod-template-hash": "6798b5c955"
+        },
+        "name": "prometheus-6798b5c955-t4q2g",
+        "namespace": "sarseg-observabilidad",
+        "ownerReferences": [
+          {
+            "apiVersion": "apps/v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "ReplicaSet",
+            "name": "prometheus-6798b5c955",
+            "uid": "99a6e6ea-b631-41a3-af0f-a76b7c086b40"
+          }
+        ],
+        "resourceVersion": "642",
+        "uid": "b575d63f-ca7e-4f71-a42b-bb2d9c034b2a"
+      },
+      "spec": {
+        "automountServiceAccountToken": false,
+        "containers": [
+          {
+            "args": [
+              "--config.file=/etc/prometheus/prometheus.yml",
+              "--storage.tsdb.path=/prometheus",
+              "--storage.tsdb.retention.time=6h",
+              "--storage.tsdb.retention.size=512MB"
+            ],
+            "image": "prom/prometheus:v3.5.0",
+            "imagePullPolicy": "IfNotPresent",
+            "livenessProbe": {
+              "failureThreshold": 3,
+              "httpGet": {
+                "path": "/-/healthy",
+                "port": "http",
+                "scheme": "HTTP"
+              },
+              "periodSeconds": 10,
+              "successThreshold": 1,
+              "timeoutSeconds": 1
+            },
+            "name": "prometheus",
+            "ports": [
+              {
+                "containerPort": 9090,
+                "name": "http",
+                "protocol": "TCP"
+              }
+            ],
+            "readinessProbe": {
+              "failureThreshold": 3,
+              "httpGet": {
+                "path": "/-/ready",
+                "port": "http",
+                "scheme": "HTTP"
+              },
+              "periodSeconds": 10,
+              "successThreshold": 1,
+              "timeoutSeconds": 1
+            },
+            "resources": {
+              "limits": {
+                "cpu": "500m",
+                "memory": "512Mi"
+              },
+              "requests": {
+                "cpu": "100m",
+                "memory": "128Mi"
+              }
+            },
+            "securityContext": {
+              "allowPrivilegeEscalation": false,
+              "capabilities": {
+                "drop": [
+                  "ALL"
+                ]
+              }
+            },
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "volumeMounts": [
+              {
+                "mountPath": "/etc/prometheus",
+                "name": "config",
+                "readOnly": true
+              },
+              {
+                "mountPath": "/prometheus",
+                "name": "data"
+              }
+            ]
+          }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "enableServiceLinks": true,
+        "nodeName": "sarseg-p2-evidencia-worker2",
+        "preemptionPolicy": "PreemptLowerPriority",
+        "priority": 0,
+        "restartPolicy": "Always",
+        "schedulerName": "default-scheduler",
+        "securityContext": {
+          "fsGroup": 65534,
+          "runAsGroup": 65534,
+          "runAsNonRoot": true,
+          "runAsUser": 65534,
+          "seccompProfile": {
+            "type": "RuntimeDefault"
+          }
+        },
+        "serviceAccount": "default",
+        "serviceAccountName": "default",
+        "terminationGracePeriodSeconds": 30,
+        "tolerations": [
+          {
+            "effect": "NoExecute",
+            "key": "node.kubernetes.io/not-ready",
+            "operator": "Exists",
+            "tolerationSeconds": 300
+          },
+          {
+            "effect": "NoExecute",
+            "key": "node.kubernetes.io/unreachable",
+            "operator": "Exists",
+            "tolerationSeconds": 300
+          }
+        ],
+        "volumes": [
+          {
+            "configMap": {
+              "defaultMode": 420,
+              "name": "prometheus-config-t2852m8864"
+            },
+            "name": "config"
+          },
+          {
+            "emptyDir": {
+              "sizeLimit": "1Gi"
+            },
+            "name": "data"
+          }
+        ]
+      },
+      "status": {
+        "conditions": [
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-11T05:36:05Z",
+            "status": "True",
+            "type": "PodReadyToStartContainers"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-11T05:35:54Z",
+            "status": "True",
+            "type": "Initialized"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-11T05:36:05Z",
+            "status": "True",
+            "type": "Ready"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-11T05:36:05Z",
+            "status": "True",
+            "type": "ContainersReady"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-11T05:35:54Z",
+            "status": "True",
+            "type": "PodScheduled"
+          }
+        ],
+        "containerStatuses": [
+          {
+            "containerID": "containerd://247e753b71bde30e2cd9965b3ebd980aa18c6497c68f65e14ed9bc7ce7c3b6b5",
+            "image": "docker.io/prom/prometheus:v3.5.0",
+            "imageID": "docker.io/prom/prometheus@sha256:63805ebb8d2b3920190daf1cb14a60871b16fd38bed42b857a3182bc621f4996",
+            "lastState": {},
+            "name": "prometheus",
+            "ready": true,
+            "restartCount": 0,
+            "started": true,
+            "state": {
+              "running": {
+                "startedAt": "2026-11-11T05:36:04Z"
+              }
+            },
+            "volumeMounts": [
+              {
+                "mountPath": "/etc/prometheus",
+                "name": "config",
+                "readOnly": true,
+                "recursiveReadOnly": "Disabled"
+              },
+              {
+                "mountPath": "/prometheus",
+                "name": "data"
+              }
+            ]
+          }
+        ],
+        "hostIP": "172.20.0.6",
+        "hostIPs": [
+          {
+            "ip": "172.20.0.6"
+          }
+        ],
+        "phase": "Running",
+        "podIP": "10.244.2.3",
+        "podIPs": [
+          {
+            "ip": "10.244.2.3"
+          }
+        ],
+        "qosClass": "Burstable",
+        "startTime": "2026-11-11T05:35:54Z"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "annotations": {
+          "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Service\",\"metadata\":{\"annotations\":{},\"name\":\"grafana\",\"namespace\":\"sarseg-observabilidad\"},\"spec\":{\"ports\":[{\"name\":\"http\",\"nodePort\":30300,\"port\":3000,\"targetPort\":\"http\"}],\"selector\":{\"app\":\"grafana\"},\"type\":\"NodePort\"}}\n"
+        },
+        "creationTimestamp": "2026-11-11T05:35:52Z",
+        "name": "grafana",
+        "namespace": "sarseg-observabilidad",
+        "resourceVersion": "527",
+        "uid": "db49a4c3-d7fa-413a-a561-bca506241434"
+      },
+      "spec": {
+        "clusterIP": "10.96.191.16",
+        "clusterIPs": [
+          "10.96.191.16"
+        ],
+        "externalTrafficPolicy": "Cluster",
+        "internalTrafficPolicy": "Cluster",
+        "ipFamilies": [
+          "IPv4"
+        ],
+        "ipFamilyPolicy": "SingleStack",
+        "ports": [
+          {
+            "name": "http",
+            "nodePort": 30300,
+            "port": 3000,
+            "protocol": "TCP",
+            "targetPort": "http"
+          }
+        ],
+        "selector": {
+          "app": "grafana"
+        },
+        "sessionAffinity": "None",
+        "type": "NodePort"
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "annotations": {
+          "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Service\",\"metadata\":{\"annotations\":{},\"name\":\"kube-state-metrics\",\"namespace\":\"sarseg-observabilidad\"},\"spec\":{\"ports\":[{\"name\":\"metrics\",\"port\":8080,\"targetPort\":\"metrics\"}],\"selector\":{\"app\":\"kube-state-metrics\"}}}\n"
+        },
+        "creationTimestamp": "2026-11-11T05:35:52Z",
+        "name": "kube-state-metrics",
+        "namespace": "sarseg-observabilidad",
+        "resourceVersion": "531",
+        "uid": "d110e9c7-a520-428e-ad95-66379edd8420"
+      },
+      "spec": {
+        "clusterIP": "10.96.77.197",
+        "clusterIPs": [
+          "10.96.77.197"
+        ],
+        "internalTrafficPolicy": "Cluster",
+        "ipFamilies": [
+          "IPv4"
+        ],
+        "ipFamilyPolicy": "SingleStack",
+        "ports": [
+          {
+            "name": "metrics",
+            "port": 8080,
+            "protocol": "TCP",
+            "targetPort": "metrics"
+          }
+        ],
+        "selector": {
+          "app": "kube-state-metrics"
+        },
+        "sessionAffinity": "None",
+        "type": "ClusterIP"
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "annotations": {
+          "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Service\",\"metadata\":{\"annotations\":{},\"name\":\"prometheus\",\"namespace\":\"sarseg-observabilidad\"},\"spec\":{\"ports\":[{\"name\":\"http\",\"port\":9090,\"targetPort\":\"http\"}],\"selector\":{\"app\":\"prometheus\"}}}\n"
+        },
+        "creationTimestamp": "2026-11-11T05:35:52Z",
+        "name": "prometheus",
+        "namespace": "sarseg-observabilidad",
+        "resourceVersion": "536",
+        "uid": "9d35e7ec-c1f9-4150-97c6-f478e621ebb9"
+      },
+      "spec": {
+        "clusterIP": "10.96.127.57",
+        "clusterIPs": [
+          "10.96.127.57"
+        ],
+        "internalTrafficPolicy": "Cluster",
+        "ipFamilies": [
+          "IPv4"
+        ],
+        "ipFamilyPolicy": "SingleStack",
+        "ports": [
+          {
+            "name": "http",
+            "port": 9090,
+            "protocol": "TCP",
+            "targetPort": "http"
+          }
+        ],
+        "selector": {
+          "app": "prometheus"
+        },
+        "sessionAffinity": "None",
+        "type": "ClusterIP"
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    {
+      "addressType": "IPv4",
+      "apiVersion": "discovery.k8s.io/v1",
+      "endpoints": [
+        {
+          "addresses": [
+            "10.244.2.5"
+          ],
+          "conditions": {
+            "ready": false,
+            "serving": true,
+            "terminating": true
+          },
+          "nodeName": "sarseg-p2-evidencia-worker2",
+          "targetRef": {
+            "kind": "Pod",
+            "name": "grafana-5c4c8dcb6c-2m86d",
+            "namespace": "sarseg-observabilidad",
+            "uid": "58a617df-67f9-4a4c-b393-9f0565693113"
+          }
+        },
+        {
+          "addresses": [
+            "10.244.1.4"
+          ],
+          "conditions": {
+            "ready": true,
+            "serving": true,
+            "terminating": false
+          },
+          "nodeName": "sarseg-p2-evidencia-worker",
+          "targetRef": {
+            "kind": "Pod",
+            "name": "grafana-557d55f7c-8855v",
+            "namespace": "sarseg-observabilidad",
+            "uid": "3ebf737a-8859-495e-a370-120cbc56a0e7"
+          }
+        },
+        {
+          "addresses": [
+            "10.244.2.6"
+          ],
+          "conditions": {
+            "ready": true,
+            "serving": true,
+            "terminating": false
+          },
+          "nodeName": "sarseg-p2-evidencia-worker2",
+          "targetRef": {
+            "kind": "Pod",
+            "name": "grafana-557d55f7c-mgstk",
+            "namespace": "sarseg-observabilidad",
+            "uid": "2548a084-91c0-4de3-9bef-95be3884af03"
+          }
+        }
+      ],
+      "kind": "EndpointSlice",
+      "metadata": {
+        "creationTimestamp": "2026-11-11T05:35:52Z",
+        "generateName": "grafana-",
+        "generation": 20,
+        "labels": {
+          "endpointslice.kubernetes.io/managed-by": "endpointslice-controller.k8s.io",
+          "kubernetes.io/service-name": "grafana"
+        },
+        "name": "grafana-pmk2s",
+        "namespace": "sarseg-observabilidad",
+        "ownerReferences": [
+          {
+            "apiVersion": "v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "Service",
+            "name": "grafana",
+            "uid": "db49a4c3-d7fa-413a-a561-bca506241434"
+          }
+        ],
+        "resourceVersion": "1019",
+        "uid": "3f03e0f1-1829-43f5-9f07-6f6f671ffde7"
+      },
+      "ports": [
+        {
+          "name": "http",
+          "port": 3000,
+          "protocol": "TCP"
+        }
+      ]
+    },
+    {
+      "addressType": "IPv4",
+      "apiVersion": "discovery.k8s.io/v1",
+      "endpoints": [
+        {
+          "addresses": [
+            "10.244.2.4"
+          ],
+          "conditions": {
+            "ready": true,
+            "serving": true,
+            "terminating": false
+          },
+          "nodeName": "sarseg-p2-evidencia-worker2",
+          "targetRef": {
+            "kind": "Pod",
+            "name": "kube-state-metrics-5ccfd57cc8-bfqbw",
+            "namespace": "sarseg-observabilidad",
+            "uid": "da927cc7-7e3e-4bfb-b83f-9caaeb2bb80c"
+          }
+        }
+      ],
+      "kind": "EndpointSlice",
+      "metadata": {
+        "annotations": {
+          "endpoints.kubernetes.io/last-change-trigger-time": "2026-11-11T05:36:26Z"
+        },
+        "creationTimestamp": "2026-11-11T05:35:52Z",
+        "generateName": "kube-state-metrics-",
+        "generation": 3,
+        "labels": {
+          "endpointslice.kubernetes.io/managed-by": "endpointslice-controller.k8s.io",
+          "kubernetes.io/service-name": "kube-state-metrics"
+        },
+        "name": "kube-state-metrics-q2rck",
+        "namespace": "sarseg-observabilidad",
+        "ownerReferences": [
+          {
+            "apiVersion": "v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "Service",
+            "name": "kube-state-metrics",
+            "uid": "d110e9c7-a520-428e-ad95-66379edd8420"
+          }
+        ],
+        "resourceVersion": "713",
+        "uid": "5bed1902-5a34-4695-9e93-4d1d8fabc37f"
+      },
+      "ports": [
+        {
+          "name": "metrics",
+          "port": 8080,
+          "protocol": "TCP"
+        }
+      ]
+    },
+    {
+      "addressType": "IPv4",
+      "apiVersion": "discovery.k8s.io/v1",
+      "endpoints": [
+        {
+          "addresses": [
+            "10.244.2.3"
+          ],
+          "conditions": {
+            "ready": true,
+            "serving": true,
+            "terminating": false
+          },
+          "nodeName": "sarseg-p2-evidencia-worker2",
+          "targetRef": {
+            "kind": "Pod",
+            "name": "prometheus-6798b5c955-t4q2g",
+            "namespace": "sarseg-observabilidad",
+            "uid": "b575d63f-ca7e-4f71-a42b-bb2d9c034b2a"
+          }
+        }
+      ],
+      "kind": "EndpointSlice",
+      "metadata": {
+        "annotations": {
+          "endpoints.kubernetes.io/last-change-trigger-time": "2026-11-11T05:36:05Z"
+        },
+        "creationTimestamp": "2026-11-11T05:35:52Z",
+        "generateName": "prometheus-",
+        "generation": 3,
+        "labels": {
+          "endpointslice.kubernetes.io/managed-by": "endpointslice-controller.k8s.io",
+          "kubernetes.io/service-name": "prometheus"
+        },
+        "name": "prometheus-kvpft",
+        "namespace": "sarseg-observabilidad",
+        "ownerReferences": [
+          {
+            "apiVersion": "v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "Service",
+            "name": "prometheus",
+            "uid": "9d35e7ec-c1f9-4150-97c6-f478e621ebb9"
+          }
+        ],
+        "resourceVersion": "644",
+        "uid": "44d32c17-ebd8-49d7-af90-c81f3030d0e5"
+      },
+      "ports": [
+        {
+          "name": "http",
+          "port": 9090,
+          "protocol": "TCP"
+        }
+      ]
+    }
+  ],
+  "kind": "List",
+  "metadata": {
+    "resourceVersion": ""
+  }
+}

@@ -1,4 +1,4 @@
-"""Pruebas reales de Deployment y ReplicaSet, solo en el cluster sarseg-p2."""
+"""Pruebas reales de Deployment y ReplicaSet en los dos contextos locales de la practica."""
 from __future__ import annotations
 
 import argparse
@@ -25,7 +25,15 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", default="docs/evidencias/ejecucion")
     parser.add_argument("--render", action="store_true", help="Exportar capturas con el renderer local")
+    parser.add_argument("--context", default="kind-sarseg-p2", choices=["kind-sarseg-p2", "kind-sarseg-p2-evidencia"])
+    parser.add_argument("--base-url", default="http://127.0.0.1:13000", choices=["http://127.0.0.1:13000", "http://127.0.0.1:13010"])
     args = parser.parse_args()
+    global BASE, KUBECTL
+    BASE = args.base_url
+    KUBECTL = ["kubectl", "--context", args.context]
+    expected_url = "http://127.0.0.1:13010" if args.context.endswith("-evidencia") else "http://127.0.0.1:13000"
+    if BASE != expected_url:
+        raise SystemExit("El contexto y el puerto deben corresponder al mismo laboratorio.")
     out = ROOT / args.output
     out.mkdir(parents=True, exist_ok=True)
     if (out / "resultados.json").exists():
@@ -33,7 +41,7 @@ def main():
     records = []
     samples = []
     stop = threading.Event()
-    result = {"started_utc": now(), "context": "kind-sarseg-p2", "namespace": NS, "checks": {}}
+    result = {"started_utc": now(), "context": args.context, "base_url": BASE, "namespace": NS, "checks": {}}
 
     def save(name, value):
         (out / name).write_text(json.dumps(value, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -91,7 +99,8 @@ def main():
         if not args.render:
             return
         token = (ROOT / ".local/renderer-token.txt").read_text().strip()
-        target = "http://sarseg-p2-control-plane:30300/d/sarseg-operacion/sarseg?orgId=1&from=now-15m&to=now&kiosk=tv"
+        node_name = "sarseg-p2-evidencia-control-plane" if args.context.endswith("-evidencia") else "sarseg-p2-control-plane"
+        target = "http://" + node_name + ":30300/d/sarseg-operacion/sarseg?orgId=1&from=now-15m&to=now&kiosk=tv"
         query = urllib.parse.urlencode({"url": target, "width": 1500, "height": 950,
                                        "deviceScaleFactor": 1, "timeout": 90, "encoding": "png"})
         req = urllib.request.Request("http://127.0.0.1:18081/render?" + query, headers={"X-Auth-Token": token})
@@ -138,7 +147,7 @@ def main():
         save("grafana-health.json", {"url": BASE + "/api/health", "http": status, "response": health, "time_utc": now()})
         svc = get("service/grafana")
         assert svc["spec"]["type"] == "NodePort" and svc["spec"]["ports"][0]["nodePort"] == 30300
-        mark("exposure", "HTTP 200 en 127.0.0.1:13000 y Service NodePort 30300")
+        mark("exposure", "HTTP 200 en " + BASE + " y Service NodePort 30300")
         dashboard = http("/api/dashboards/uid/sarseg-operacion")[1]
         assert len(dashboard["dashboard"]["panels"]) == 7
         save("dashboard-api.json", dashboard)
@@ -153,6 +162,7 @@ def main():
         assert command("auth", "can-i", "list", "secrets", account, expected=1).strip() == "no"
         mark("rbac", "kube-state-metrics puede listar Pods y no puede listar Secrets")
         snapshot("01-inicial")
+        render("01-grafana-inicial.png")
         worker.start()
         command("scale", "deployment/grafana", "--replicas=3")
         wait_replicas(3)
