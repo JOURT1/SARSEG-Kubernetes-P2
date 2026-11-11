@@ -14,6 +14,10 @@ Este repositorio contiene únicamente infraestructura y documentación de la pr�
 - [Guía de entrega y correspondencia con la consigna](docs/ENTREGA.md).
 - [Evidencias originales y hashes](docs/evidencias/README.md).
 
+La edición ampliada utiliza APA 7, carátula con el logotipo oficial de la UDLA,
+autor Jhoel Suárez y veintiséis capturas de principio a fin. Documenta requisitos,
+creación del clúster, configuración, despliegue, exposición y todas las pruebas.
+
 ## Inicio rápido
 
 Con Docker Desktop Linux iniciado, PowerShell 7 y kubectl 1.32:
@@ -56,6 +60,12 @@ se conserva su evidencia y la corrección de drenaje en [incidencias](docs/INCID
 [GitHub Actions también completó el protocolo en un clúster independiente](https://github.com/JOURT1/SARSEG-Kubernetes-P2/actions/runs/42963098362).
 El muestreo de solicitudes no equivale a una garantía de disponibilidad absoluta.
 
+La reproducción separada para el informe se conserva en
+[recorrido APA 7](docs/evidencias/recorrido-apa7). Creó el clúster desde cero y
+aprobó once comprobaciones y 109 de 109 muestras HTTP. Usa el contexto
+kind-sarseg-p2-evidencia y el puerto 13010; el laboratorio original conserva
+kind-sarseg-p2 y el puerto 13000. Los UIDs y mediciones se identifican por ejecución.
+
 ## Organización del trabajo
 
 | Rama conservada | Avance |
@@ -65,6 +75,7 @@ El muestreo de solicitudes no equivale a una garantía de disponibilidad absolut
 | codex/metricas-sarseg | Fuentes reales y tablero, PR 2 |
 | codex/pruebas-deployment-replicaset | Pruebas, correcciones y evidencia, PR 3 |
 | codex/informe-evidencias | Informe, referencias y guía de entrega, PR 4 |
+| codex/informe-apa7 | Reproducción desde cero, carátula APA 7 y secuencia completa de capturas |
 
 Los [pull requests](https://github.com/JOURT1/SARSEG-Kubernetes-P2/pulls?q=is%3Apr)
 conservan los commits por avance y se integran mediante merge commits.
