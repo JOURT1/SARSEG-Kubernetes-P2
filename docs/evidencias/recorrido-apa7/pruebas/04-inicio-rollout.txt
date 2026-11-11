@@ -1,0 +1,22 @@
+NAME                                 READY   UP-TO-DATE   AVAILABLE   AGE    CONTAINERS           IMAGES                                                          SELECTOR
+deployment.apps/grafana              2/2     1            2           101s   grafana              grafana/grafana:12.3.0                                          app=grafana
+deployment.apps/kube-state-metrics   1/1     1            1           101s   kube-state-metrics   registry.k8s.io/kube-state-metrics/kube-state-metrics:v2.16.0   app=kube-state-metrics
+deployment.apps/prometheus           1/1     1            1           101s   prometheus           prom/prometheus:v3.5.0                                          app=prometheus
+
+NAME                                            DESIRED   CURRENT   READY   AGE    CONTAINERS           IMAGES                                                          SELECTOR
+replicaset.apps/grafana-557d55f7c               1         1         0       0s     grafana              grafana/grafana:12.3.0                                          app=grafana,pod-template-hash=557d55f7c
+replicaset.apps/grafana-5c4c8dcb6c              2         2         2       101s   grafana              grafana/grafana:12.3.0                                          app=grafana,pod-template-hash=5c4c8dcb6c
+replicaset.apps/kube-state-metrics-5ccfd57cc8   1         1         1       101s   kube-state-metrics   registry.k8s.io/kube-state-metrics/kube-state-metrics:v2.16.0   app=kube-state-metrics,pod-template-hash=5ccfd57cc8
+replicaset.apps/prometheus-6798b5c955           1         1         1       101s   prometheus           prom/prometheus:v3.5.0                                          app=prometheus,pod-template-hash=6798b5c955
+
+NAME                                      READY   STATUS              RESTARTS   AGE    IP           NODE                          NOMINATED NODE   READINESS GATES
+pod/grafana-557d55f7c-8855v               0/1     ContainerCreating   0          0s     <none>       sarseg-p2-evidencia-worker    <none>           <none>
+pod/grafana-5c4c8dcb6c-2m86d              1/1     Running             0          18s    10.244.2.5   sarseg-p2-evidencia-worker2   <none>           <none>
+pod/grafana-5c4c8dcb6c-khkqv              1/1     Running             0          101s   10.244.1.2   sarseg-p2-evidencia-worker    <none>           <none>
+pod/kube-state-metrics-5ccfd57cc8-bfqbw   1/1     Running             0          101s   10.244.2.4   sarseg-p2-evidencia-worker2   <none>           <none>
+pod/prometheus-6798b5c955-t4q2g           1/1     Running             0          101s   10.244.2.3   sarseg-p2-evidencia-worker2   <none>           <none>
+
+NAME                         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE    SELECTOR
+service/grafana              NodePort    10.96.191.16   <none>        3000:30300/TCP   101s   app=grafana
+service/kube-state-metrics   ClusterIP   10.96.77.197   <none>        8080/TCP         101s   app=kube-state-metrics
+service/prometheus           ClusterIP   10.96.127.57   <none>        9090/TCP         101s   app=prometheus
