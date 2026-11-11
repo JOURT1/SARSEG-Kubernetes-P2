@@ -2,7 +2,7 @@
 
 ## Requisitos
 
-Docker Desktop iniciado con motor Linux, kubectl 1.32 y PowerShell. kind 0.27.0
+Docker Desktop iniciado con motor Linux, kubectl 1.32 y PowerShell 7. kind 0.27.0
 se descarga desde el repositorio oficial y se valida con su SHA256. El clúster
 usa Kubernetes 1.32.2 para coincidir con el cliente disponible en la computadora.
 Son versiones fijadas para reproducir esta práctica, no una recomendación de
@@ -29,6 +29,20 @@ Invoke-RestMethod http://127.0.0.1:13000/api/health
 
 Todos los comandos identifican el contexto y el namespace para evitar operar
 sobre otro clúster. El script no modifica proyectos de aplicación existentes.
+
+## Exportación opcional de capturas
+
+```powershell
+.\scripts\Export-Dashboard.ps1
+python scripts/test_lab.py --render
+```
+
+El primer comando levanta el servicio oficial Grafana Image Renderer como un
+contenedor auxiliar de Docker, fuera de Kubernetes. Escribe un token aleatorio
+únicamente en .local, ignorado por Git, y publica el servicio solo en loopback.
+No altera las réplicas ni las métricas del clúster. Las imágenes obtenidas son
+exportaciones reales de la interfaz, no ilustraciones ni registros convertidos
+en capturas. Para ejecutar el protocolo sin imágenes, omite --render.
 
 ## Recreación y limpieza opcional
 
