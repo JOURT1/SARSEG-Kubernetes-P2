@@ -1,6 +1,6 @@
-# Recorrido documentado para el informe APA 7
+# Archivo histórico: Recorrido documentado para el informe APA 7
 
-El informe incluye **26 pasos, 26 figuras y 15 referencias**. Los archivos de
+Este recorrido fue sustituido en el PDF por [23 capturas de interfaces reales](../capturas-reales/README.md). Esta carpeta conserva la edición histórica de 26 pasos y sus registros. Los archivos de
 esta carpeta conservan los datos de cada paso y las imágenes originales.
 
 - `pasos.json`: comandos, salidas, fuentes, clasificación y fecha de lectura.

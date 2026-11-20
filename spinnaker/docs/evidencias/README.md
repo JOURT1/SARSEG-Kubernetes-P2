@@ -1,9 +1,14 @@
 # Evidencias originales de la ejecución
 
-La ampliación del informe con 26 pasos ilustrados está en
-[recorrido APA 7](recorrido-apa7/README.md). Conserva las pruebas originales y
-añade lecturas documentales del 20 de noviembre de 2026, sin reinstalar el
-clúster ni repetir o simular el escalamiento.
+La edición actual del informe usa exclusivamente
+[capturas directas de interfaces reales](capturas-reales/README.md), tomadas
+el 20 de noviembre de 2026. Incluye una nueva prueba de carga observada en
+Headlamp: **2 -> 5 -> 2**. Las imágenes y sus huellas están en
+`capturas-reales/pasos.json` y `capturas-reales/SHA256SUMS.txt`.
+
+Las carpetas y capturas descritas a continuación son el archivo histórico de
+la primera ejecución. Los visores documentales y el recorrido APA anterior
+se conservan como respaldo, pero no se utilizan como figuras del PDF actual.
 
 Fecha local: **19 de noviembre de 2026, America/Guayaquil**. Los registros
 internos usan UTC, por eso sus marcas comienzan por 2026-11-20.
