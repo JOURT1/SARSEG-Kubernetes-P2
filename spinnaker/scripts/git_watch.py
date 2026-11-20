@@ -59,7 +59,7 @@ def tick(branch):
         return False
     logging.info("Git changed: %s; starting Spinnaker", sha)
     response = request("/pipelines/sarseg/deploy-git", {"type": "manual", "user": "local-git-poller",
-        "parameters": {"gitSha": sha, "gitBranch": branch}, "artifacts": artifacts})
+        "parameters": {"gitSha": sha, "gitBranch": branch}})
     ref = response["ref"]
     if not ref.startswith("/pipelines/"):
         raise ValueError(f"Unexpected execution reference: {ref}")
@@ -68,7 +68,7 @@ def tick(branch):
         result = request(ref)
         status = result.get("status")
         if status == "SUCCEEDED":
-            state = {"sha": sha, "digest": digest, "execution": ref, "branch": branch,
+            state = {"sha": sha, "digest": digest, "execution": ref, "branch": branch, "artifacts": artifacts,
                      "completedAt": datetime.now(timezone.utc).isoformat()}
             state_path.write_text(json.dumps(state, indent=2))
             (LOCAL / "last-execution.json").write_text(json.dumps(result, indent=2))
