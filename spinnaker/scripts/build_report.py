@@ -113,7 +113,7 @@ def main():
     p("<br/>Los YAML completos están en el repositorio. La API, PostgreSQL y la plataforma se preparan como infraestructura de apoyo. Los tres recursos evaluados se instalan mediante Spinnaker, sin kubectl apply manual sobre ellos.")
 
     page("4. Estado inicial: dos réplicas")
-    figure("01-inicial.jpg", "Figura 1. Captura del visor de salidas originales de kubectl: Deployment 2/2, NodePort, HPA y métricas de los Pods. El JSON del mismo nombre conserva hora, comandos y salidas.", 395)
+    figure("01-inicial.jpg", "Figura 1. Captura del visor resumido de registros originales de kubectl: Deployment 2/2, NodePort, HPA y métricas de los Pods. El JSON del mismo nombre conserva hora, comandos y salidas.", 395)
 
     page("5. Aplicación SARSEG accesible")
     figure("02-sarseg-web.jpg", "Figura 2. Interfaz real de SARSEG servida desde Kubernetes por el NodePort. Se comprobó HTTP 200, /health/ready y login administrativo HTTP 200, sin publicar contraseñas o respuestas de autenticación.", 365)

@@ -1,0 +1,57 @@
+[
+  {
+    "check": "initial-two-ready",
+    "passed": true,
+    "detail": "2 Pods Ready"
+  },
+  {
+    "check": "resources-and-selectors",
+    "passed": true,
+    "detail": "Service and Deployment labels match; CPU request configured"
+  },
+  {
+    "check": "nodeport",
+    "passed": true,
+    "detail": "80 -> named http -> 8080; NodePort 30380 -> localhost:14800"
+  },
+  {
+    "check": "hpa-spec",
+    "passed": true,
+    "detail": "min=2 max=5 CPU=50%"
+  },
+  {
+    "check": "web-and-api",
+    "passed": true,
+    "detail": "HTTP 200 web and API database readiness"
+  },
+  {
+    "check": "real-sarseg-login",
+    "passed": true,
+    "detail": "Admin login HTTP 200; credentials and response excluded from evidence"
+  },
+  {
+    "check": "metrics-server",
+    "passed": true,
+    "detail": "CPU and memory metrics available for SARSEG Pods"
+  },
+  {
+    "check": "automatic-git-deployment",
+    "passed": true,
+    "detail": "commit 3a1c721e4f71729f628d267d52264f96a1944ab5; execution /pipelines/01M7VMP5J4C39HZM0Y8G8C4GX1; revision gitops-verificado-045046"
+  },
+  {
+    "check": "spinnaker-three-stages",
+    "passed": true,
+    "detail": "Deployment, Service and HPA artifact stages SUCCEEDED"
+  },
+  {
+    "check": "cpu-scale-up",
+    "passed": true,
+    "detail": "HPA increased from 2 to 5 Ready replicas under real HTTP load"
+  },
+  {
+    "check": "cpu-scale-down",
+    "passed": true,
+    "detail": "HPA returned from 5 to 2 Ready replicas after load stopped"
+  }
+]

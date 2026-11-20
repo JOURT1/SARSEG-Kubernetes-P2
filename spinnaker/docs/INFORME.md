@@ -60,7 +60,7 @@ Commit: `3a1c721e4f71729f628d267d52264f96a1944ab5`. Rama: `codex/spinnaker-local
 
 ![Dos réplicas](evidencias/06-reduccion-dos.jpg)
 
-Las capturas de estados Kubernetes muestran un visor de salidas originales, identificado expresamente como registro, con comandos y fecha UTC. La fecha local de la ejecución es 19 de noviembre de 2026 (America/Guayaquil). Los archivos JSON/TXT permiten revisar los datos sin depender de las imágenes.
+Las capturas de estados Kubernetes muestran un visor resumido generado desde las salidas originales, identificado expresamente como registro, con comandos y fecha UTC. La fecha local de la ejecución es 19 de noviembre de 2026 (America/Guayaquil). Los archivos JSON/TXT permiten revisar los datos sin depender de las imágenes.
 
 ## Verificación y reproducción
 

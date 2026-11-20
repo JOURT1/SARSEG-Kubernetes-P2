@@ -1,0 +1,103 @@
+<!doctype html><html lang="es"><meta charset="utf-8"><title>Cambio Git desplegado automáticamente</title><style>body{margin:0;padding:36px;background:#f4f7fa;color:#12273b;font:17px Arial}header{color:#246782;font-size:16px;font-weight:bold;letter-spacing:2px}h1{font-size:32px;margin:12px 0}p{line-height:1.5}h2{font:15px Consolas;margin-top:24px}pre{background:white;padding:18px;border:1px solid #ccd6df;font:15px/1.5 Consolas;white-space:pre-wrap}footer{margin-top:20px;font-size:13px;color:#526477}</style><header>SARSEG / SPINNAKER / EVIDENCIA REAL</header><h1>Cambio Git desplegado automáticamente</h1><p>El sondeo inicia Spinnaker; Clouddriver aplica los artefactos del SHA inmutable.</p><p>2026-11-20T04:51:25.651155+00:00 · contexto kind-sarseg-spinnaker</p><h2>kubectl --context kind-sarseg-spinnaker -n sarseg-dev get deployment,service,hpa,pods</h2><pre>NAME                         READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/api          1/1     1            1           12m
+deployment.apps/postgres     1/1     1            1           12m
+deployment.apps/sarseg-web   2/2     2            2           6m33s
+
+NAME                 TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
+service/api          ClusterIP   10.96.142.87   &lt;none&gt;        8080/TCP       12m
+service/postgres     ClusterIP   10.96.221.33   &lt;none&gt;        5432/TCP       12m
+service/sarseg-web   NodePort    10.96.101.63   &lt;none&gt;        80:30380/TCP   6m26s
+
+NAME                                             REFERENCE               TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/sarseg-web   Deployment/sarseg-web   cpu: &lt;unknown&gt;/50%   2         5         2          6m18s
+
+NAME                              READY   STATUS    RESTARTS   AGE
+pod/api-68ff9488c4-bpx8s          1/1     Running   0          6m34s
+pod/postgres-588b6d799d-x644n     1/1     Running   0          12m
+pod/sarseg-web-5d49f74cf4-kcvbw   1/1     Running   0          29s
+pod/sarseg-web-5d49f74cf4-rdjb6   1/1     Running   0          26s
+</pre><h2>kubectl --context kind-sarseg-spinnaker -n sarseg-dev top pods</h2><pre>NAME                          CPU(cores)   MEMORY(bytes)   
+api-68ff9488c4-bpx8s          13m          154Mi           
+postgres-588b6d799d-x644n     4m           39Mi            
+sarseg-web-5d49f74cf4-kcvbw   11m          11Mi            
+sarseg-web-5d49f74cf4-rdjb6   16m          11Mi            
+</pre><details><summary>HPA original</summary><pre>{
+  &quot;spec&quot;: {
+    &quot;behavior&quot;: {
+      &quot;scaleDown&quot;: {
+        &quot;policies&quot;: [
+          {
+            &quot;periodSeconds&quot;: 15,
+            &quot;type&quot;: &quot;Pods&quot;,
+            &quot;value&quot;: 3
+          }
+        ],
+        &quot;selectPolicy&quot;: &quot;Max&quot;,
+        &quot;stabilizationWindowSeconds&quot;: 60
+      },
+      &quot;scaleUp&quot;: {
+        &quot;policies&quot;: [
+          {
+            &quot;periodSeconds&quot;: 15,
+            &quot;type&quot;: &quot;Pods&quot;,
+            &quot;value&quot;: 3
+          }
+        ],
+        &quot;selectPolicy&quot;: &quot;Max&quot;,
+        &quot;stabilizationWindowSeconds&quot;: 0
+      }
+    },
+    &quot;maxReplicas&quot;: 5,
+    &quot;metrics&quot;: [
+      {
+        &quot;resource&quot;: {
+          &quot;name&quot;: &quot;cpu&quot;,
+          &quot;target&quot;: {
+            &quot;averageUtilization&quot;: 50,
+            &quot;type&quot;: &quot;Utilization&quot;
+          }
+        },
+        &quot;type&quot;: &quot;Resource&quot;
+      }
+    ],
+    &quot;minReplicas&quot;: 2,
+    &quot;scaleTargetRef&quot;: {
+      &quot;apiVersion&quot;: &quot;apps/v1&quot;,
+      &quot;kind&quot;: &quot;Deployment&quot;,
+      &quot;name&quot;: &quot;sarseg-web&quot;
+    }
+  },
+  &quot;status&quot;: {
+    &quot;conditions&quot;: [
+      {
+        &quot;lastTransitionTime&quot;: &quot;2026-11-20T04:45:22Z&quot;,
+        &quot;message&quot;: &quot;the HPA controller was able to get the target&#x27;s current scale&quot;,
+        &quot;reason&quot;: &quot;SucceededGetScale&quot;,
+        &quot;status&quot;: &quot;True&quot;,
+        &quot;type&quot;: &quot;AbleToScale&quot;
+      },
+      {
+        &quot;lastTransitionTime&quot;: &quot;2026-11-20T04:51:07Z&quot;,
+        &quot;message&quot;: &quot;the HPA was unable to compute the replica count: failed to get cpu utilization: did not receive metrics for targeted pods (pods might be unready)&quot;,
+        &quot;reason&quot;: &quot;FailedGetResourceMetric&quot;,
+        &quot;status&quot;: &quot;False&quot;,
+        &quot;type&quot;: &quot;ScalingActive&quot;
+      },
+      {
+        &quot;lastTransitionTime&quot;: &quot;2026-11-20T04:49:22Z&quot;,
+        &quot;message&quot;: &quot;the desired replica count is less than the minimum replica count&quot;,
+        &quot;reason&quot;: &quot;TooFewReplicas&quot;,
+        &quot;status&quot;: &quot;True&quot;,
+        &quot;type&quot;: &quot;ScalingLimited&quot;
+      }
+    ],
+    &quot;currentMetrics&quot;: [
+      {
+        &quot;type&quot;: &quot;&quot;
+      }
+    ],
+    &quot;currentReplicas&quot;: 2,
+    &quot;desiredReplicas&quot;: 2,
+    &quot;lastScaleTime&quot;: &quot;2026-11-20T04:49:07Z&quot;
+  }
+}</pre></details><footer>Visor de salidas originales de kubectl. Captura de un registro de ejecución; no es una terminal ni un estado en vivo.</footer></html>
