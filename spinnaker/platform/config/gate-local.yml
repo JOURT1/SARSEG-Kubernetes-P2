@@ -1,0 +1,15 @@
+server:
+  port: 8084
+cors:
+  allowedOriginsPattern: '^http://(127\.0\.0\.1|localhost):14900$'
+security:
+  basicform:
+    enabled: false
+  oauth2:
+    enabled: false
+fiat:
+  enabled: false
+redis:
+  connection: redis://redis:6379
+api-tokens:
+  enabled: false

@@ -1,0 +1,739 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: spinnaker
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: sarseg-dev
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: clouddriver
+  namespace: spinnaker
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: spinnaker-deployer
+  namespace: sarseg-dev
+rules:
+- apiGroups:
+  - ''
+  - apps
+  - autoscaling
+  - batch
+  resources:
+  - pods
+  - pods/log
+  - services
+  - configmaps
+  - deployments
+  - deployments/scale
+  - replicasets
+  - horizontalpodautoscalers
+  - jobs
+  - events
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: spinnaker-deployer
+  namespace: sarseg-dev
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: spinnaker-deployer
+subjects:
+- kind: ServiceAccount
+  name: clouddriver
+  namespace: spinnaker
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: spinnaker-local-discovery
+rules:
+- apiGroups:
+  - ''
+  resources:
+  - namespaces
+  - nodes
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - apiextensions.k8s.io
+  resources:
+  - customresourcedefinitions
+  verbs:
+  - get
+  - list
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: spinnaker-local-discovery
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: spinnaker-local-discovery
+subjects:
+- kind: ServiceAccount
+  name: clouddriver
+  namespace: spinnaker
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: spinnaker-config
+  namespace: spinnaker
+data:
+  spinnaker.yml: "services:\n  clouddriver:\n    baseUrl: http://clouddriver:7002\n\
+    \    enabled: true\n  deck:\n    baseUrl: http://127.0.0.1:14900\n    enabled:\
+    \ true\n  echo:\n    enabled: false\n  fiat:\n    enabled: false\n  front50:\n\
+    \    baseUrl: http://front50:8080\n    enabled: true\n  gate:\n    baseUrl: http://gate:8084\n\
+    \    enabled: true\n  igor:\n    enabled: false\n  kayenta:\n    enabled: false\n\
+    \  keel:\n    enabled: false\n  orca:\n    baseUrl: http://orca:8083\n    enabled:\
+    \ true\n  rosco:\n    enabled: false\nspring.config.import: optional:file:/opt/spinnaker/config/*/\n"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: clouddriver-config
+  namespace: spinnaker
+data:
+  clouddriver-local.yml: "sql:\n  enabled: true\n  taskRepository:\n    enabled: true\n\
+    \  cache:\n    enabled: true\n    readBatchSize: 500\n    writeBatchSize: 300\n\
+    \  scheduler:\n    enabled: true\n  unknown-agent-cleanup-agent:\n    enabled:\
+    \ true\n  connectionPools:\n    default:\n      default: true\n      jdbcUrl:\
+    \ jdbc:mysql://mysql:3306/clouddriver\n      user: clouddriver_service\n     \
+    \ password: ${SPIN_SQL_PASSWORD}\n  migration:\n    user: clouddriver_migrate\n\
+    \    jdbcUrl: jdbc:mysql://mysql:3306/clouddriver\n    password: ${SPIN_SQL_PASSWORD}\n\
+    redis:\n  enabled: false\n  cache:\n    enabled: false\n  scheduler:\n    enabled:\
+    \ false\n  taskRepository:\n    enabled: false\nkubernetes:\n  enabled: true\n\
+    \  accounts:\n  - name: sarseg-local\n    providerVersion: V2\n    serviceAccount:\
+    \ true\n    namespaces:\n    - sarseg-dev\n    kinds:\n    - deployment\n    -\
+    \ replicaSet\n    - pod\n    - service\n    - horizontalPodAutoscaler\n    - configMap\n\
+    \    - job\n    - event\n    cacheThreads: 1\n    cachingPolicies:\n    - kubernetesKind:\
+    \ Deployment\n      maxEntriesPerAgent: 50\nartifacts:\n  http:\n    enabled:\
+    \ true\n    accounts:\n    - name: public-git-http\n"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: front50-config
+  namespace: spinnaker
+data:
+  front50-local.yml: "sql:\n  enabled: true\n  connectionPools:\n    default:\n  \
+    \    default: true\n      # additional connection pool parameters are available\
+    \ here,\n      # for more detail and to view defaults, see:\n      # https://github.com/spinnaker/kork/blob/master/kork-sql/src/main/kotlin/com/netflix/spinnaker/kork/sql/config/ConnectionPoolProperties.kt\n\
+    \      jdbcUrl: jdbc:mysql://mysql:3306/front50\n      user: front50_service\n\
+    \      password: ${SPIN_SQL_PASSWORD}\n  migration:\n    jdbcUrl: jdbc:mysql://mysql:3306/front50\n\
+    \    user: front50_migrate\n    password: ${SPIN_SQL_PASSWORD}\n"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: orca-config
+  namespace: spinnaker
+data:
+  orca-local.yml: "sql:\n  enabled: true\n  connectionPools:\n    default:\n     \
+    \ default: true\n      jdbcUrl: jdbc:mysql://mysql:3306/orca\n      user: orca_service\n\
+    \      password: ${SPIN_SQL_PASSWORD}\n      connectionTimeout: 5000\n      maxLifetime:\
+    \ 30000\n      maxPoolSize: 50\n  migration:\n    jdbcUrl: jdbc:mysql://mysql:3306/orca\n\
+    \    user: orca_migrate\n    password: ${SPIN_SQL_PASSWORD}\nexecutionRepository:\n\
+    \  sql:\n    enabled: true\n  redis:\n    enabled: false\nmonitor:\n  activeExecutions:\n\
+    \    redis: false\nkeiko:\n  queue:\n    sql:\n      enabled: false\n    redis:\n\
+    \      enabled: true\nqueue:\n  zombieCheck:\n    enabled: true\n  pendingExecutionService:\n\
+    \    sql:\n      enabled: false\n    redis:\n      enabled: true\nredis:\n  connection:\
+    \ redis://redis:6379\ntasks:\n  useManagedServiceAccounts: false\n"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gate-config
+  namespace: spinnaker
+data:
+  gate-local.yml: "server:\n  port: 8084\ncors:\n  allowedOriginsPattern: '^http://(127\\\
+    .0\\.0\\.1|localhost):14900$'\nsecurity:\n  basicform:\n    enabled: false\n \
+    \ oauth2:\n    enabled: false\nfiat:\n  enabled: false\nredis:\n  connection:\
+    \ redis://redis:6379\napi-tokens:\n  enabled: false\n"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-init
+  namespace: spinnaker
+data:
+  init.sh: "#!/bin/sh\nset -eu\nfor db in clouddriver front50 orca; do\n  mysql -uroot\
+    \ -p\"$MYSQL_ROOT_PASSWORD\" <<SQL\nCREATE DATABASE IF NOT EXISTS $db CHARACTER\
+    \ SET utf8mb4 COLLATE utf8mb4_unicode_ci;\nCREATE USER IF NOT EXISTS '${db}_service'@'%'\
+    \ IDENTIFIED BY '$SPIN_SQL_PASSWORD';\nCREATE USER IF NOT EXISTS '${db}_migrate'@'%'\
+    \ IDENTIFIED BY '$SPIN_SQL_PASSWORD';\nGRANT SELECT, INSERT, UPDATE, DELETE, CREATE,\
+    \ EXECUTE, SHOW VIEW ON $db.* TO '${db}_service'@'%';\nGRANT ALL PRIVILEGES ON\
+    \ $db.* TO '${db}_migrate'@'%';\nSQL\ndone\n"
+  config.cnf: '[mysqld]
+
+    transaction_isolation=READ-COMMITTED
+
+    innodb_buffer_pool_size=128M
+
+    max_connections=160
+
+    '
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-data
+  namespace: spinnaker
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: redis-data
+  namespace: spinnaker
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  namespace: spinnaker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:8.0.45
+        ports:
+        - containerPort: 3306
+        resources:
+          requests:
+            cpu: 100m
+            memory: 768Mi
+          limits:
+            cpu: '2'
+            memory: 768Mi
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: spinnaker-local-secrets
+              key: MYSQL_ROOT_PASSWORD
+        - name: SPIN_SQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: spinnaker-local-secrets
+              key: SPIN_SQL_PASSWORD
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/mysql
+        - name: init
+          mountPath: /docker-entrypoint-initdb.d/init.sh
+          subPath: init.sh
+        - name: init
+          mountPath: /etc/mysql/conf.d/local.cnf
+          subPath: config.cnf
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: mysql-data
+      - name: init
+        configMap:
+          name: mysql-init
+          defaultMode: 493
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  namespace: spinnaker
+spec:
+  selector:
+    app: mysql
+  type: ClusterIP
+  ports:
+  - port: 3306
+    targetPort: 3306
+    name: http
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  namespace: spinnaker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis
+        image: redis:7.4.2-alpine
+        ports:
+        - containerPort: 6379
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: '2'
+            memory: 128Mi
+        env: []
+        volumeMounts:
+        - name: data
+          mountPath: /data
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: redis-data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  namespace: spinnaker
+spec:
+  selector:
+    app: redis
+  type: ClusterIP
+  ports:
+  - port: 6379
+    targetPort: 6379
+    name: http
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clouddriver
+  namespace: spinnaker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: clouddriver
+  template:
+    metadata:
+      labels:
+        app: clouddriver
+    spec:
+      containers:
+      - name: clouddriver
+        image: ghcr.io/spinnaker/clouddriver:2026.4.1
+        ports:
+        - containerPort: 7002
+        resources:
+          requests:
+            cpu: 100m
+            memory: 1536Mi
+          limits:
+            cpu: '2'
+            memory: 1536Mi
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: local
+        - name: JAVA_OPTS
+          value: -XX:MaxRAMPercentage=65.0
+        volumeMounts:
+        - name: config
+          mountPath: /opt/spinnaker/config
+          readOnly: true
+        envFrom:
+        - secretRef:
+            name: spinnaker-local-secrets
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 7002
+          periodSeconds: 10
+          timeoutSeconds: 3
+      volumes:
+      - name: config
+        projected:
+          sources:
+          - configMap:
+              name: spinnaker-config
+          - configMap:
+              name: clouddriver-config
+      serviceAccountName: clouddriver
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: clouddriver
+  namespace: spinnaker
+spec:
+  selector:
+    app: clouddriver
+  type: ClusterIP
+  ports:
+  - port: 7002
+    targetPort: 7002
+    name: http
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: front50
+  namespace: spinnaker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: front50
+  template:
+    metadata:
+      labels:
+        app: front50
+    spec:
+      containers:
+      - name: front50
+        image: ghcr.io/spinnaker/front50:2026.4.1
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            cpu: 100m
+            memory: 768Mi
+          limits:
+            cpu: '2'
+            memory: 768Mi
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: local
+        - name: JAVA_OPTS
+          value: -XX:MaxRAMPercentage=65.0
+        volumeMounts:
+        - name: config
+          mountPath: /opt/spinnaker/config
+          readOnly: true
+        envFrom:
+        - secretRef:
+            name: spinnaker-local-secrets
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          periodSeconds: 10
+          timeoutSeconds: 3
+      volumes:
+      - name: config
+        projected:
+          sources:
+          - configMap:
+              name: spinnaker-config
+          - configMap:
+              name: front50-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: front50
+  namespace: spinnaker
+spec:
+  selector:
+    app: front50
+  type: ClusterIP
+  ports:
+  - port: 8080
+    targetPort: 8080
+    name: http
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orca
+  namespace: spinnaker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: orca
+  template:
+    metadata:
+      labels:
+        app: orca
+    spec:
+      containers:
+      - name: orca
+        image: ghcr.io/spinnaker/orca:2026.4.1
+        ports:
+        - containerPort: 8083
+        resources:
+          requests:
+            cpu: 100m
+            memory: 1536Mi
+          limits:
+            cpu: '2'
+            memory: 1536Mi
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: local
+        - name: JAVA_OPTS
+          value: -XX:MaxRAMPercentage=65.0
+        volumeMounts:
+        - name: config
+          mountPath: /opt/spinnaker/config
+          readOnly: true
+        envFrom:
+        - secretRef:
+            name: spinnaker-local-secrets
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8083
+          periodSeconds: 10
+          timeoutSeconds: 3
+      volumes:
+      - name: config
+        projected:
+          sources:
+          - configMap:
+              name: spinnaker-config
+          - configMap:
+              name: orca-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: orca
+  namespace: spinnaker
+spec:
+  selector:
+    app: orca
+  type: ClusterIP
+  ports:
+  - port: 8083
+    targetPort: 8083
+    name: http
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gate
+  namespace: spinnaker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gate
+  template:
+    metadata:
+      labels:
+        app: gate
+    spec:
+      containers:
+      - name: gate
+        image: ghcr.io/spinnaker/gate:2026.4.1
+        ports:
+        - containerPort: 8084
+        resources:
+          requests:
+            cpu: 100m
+            memory: 768Mi
+          limits:
+            cpu: '2'
+            memory: 768Mi
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: local
+        - name: JAVA_OPTS
+          value: -XX:MaxRAMPercentage=65.0
+        volumeMounts:
+        - name: config
+          mountPath: /opt/spinnaker/config
+          readOnly: true
+        envFrom:
+        - secretRef:
+            name: spinnaker-local-secrets
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8084
+          periodSeconds: 10
+          timeoutSeconds: 3
+      volumes:
+      - name: config
+        projected:
+          sources:
+          - configMap:
+              name: spinnaker-config
+          - configMap:
+              name: gate-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gate
+  namespace: spinnaker
+spec:
+  selector:
+    app: gate
+  type: NodePort
+  ports:
+  - port: 8084
+    targetPort: 8084
+    name: http
+    nodePort: 30884
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: deck-config
+  namespace: spinnaker
+data:
+  settings.js: "'use strict';\n\n// these are the primary settings to change here.\
+    \  The rest should read the window.settings stuff\nvar gateHost = 'http://127.0.0.1:14884';\n\
+    var fiatEnabled = false;\n\nvar atlasWebComponentsUrl = '{%canary.atlasWebComponentsUrl%}';\n\
+    var authEnabled = false;\nvar authEndpoint = gateHost + '/auth/user';\nvar bakeryDetailUrl\
+    \ = gateHost + '/bakery/logs/{{context.region}}/{{context.status.resourceId}}';\n\
+    var canaryFeatureDisabled = '{%canary.featureEnabled%}' !== 'true';\nvar canaryStagesEnabled\
+    \ = '{%canary.stages%}' === 'true';\nvar chaosEnabled = '{%features.chaos%}' ===\
+    \ 'true';\nvar defaultCanaryJudge = '{%canary.defaultJudge%}';\nvar defaultMetricsStore\
+    \ = '{%canary.defaultMetricsStore%}';\nvar defaultMetricsAccountName = '{%canary.defaultMetricsAccount%}';\n\
+    var defaultStorageAccountName = '{%canary.defaultStorageAccount%}';\n\nvar manualJudgmentParentPipelineEnabled\
+    \ = '{%features.manualJudgmentParentPipeline%}' === 'true';\nvar mineCanaryEnabled\
+    \ = '{%features.mineCanary%}' === 'true';\nvar pipelineTemplatesEnabled = '{%features.pipelineTemplates%}'\
+    \ === 'true';\nvar reduxLoggerEnabled = '{%canary.reduxLogger%}' === 'true';\n\
+    var showAllConfigsEnabled = '{%canary.showAllCanaryConfigs%}' === 'true';\nvar\
+    \ dynamicRollbackTimeoutEnabled = '{%feature.dynamicRollbackTimeout%}' === 'true';\n\
+    var slack = {\n  botName: '{%notifications.slack.botName%}',\n  enabled: '{%notifications.slack.enabled%}'\
+    \ === 'true',\n};\nvar sms = {\n  enabled: '{%notifications.twilio.enabled%}'\
+    \ === 'true',\n};\nvar githubStatus = {\n  enabled: '{%notifications.github-status.enabled%}'\
+    \ === 'true',\n};\nvar templatesEnabled = '{%canary.templatesEnabled%}' === 'true';\n\
+    var timezone = '{%timezone%}';\nvar version = '{%version%}';\n\n// Cloud Providers\n\
+    var appengine = {\n  defaults: {\n    account: '{%appengine.default.account%}',\n\
+    \  },\n};\nvar oracle = {\n  defaults: {\n    account: '{%oracle.default.account%}',\n\
+    \    bakeryRegions: '{%oracle.default.bakeryRegions%}',\n    region: '{%oracle.default.region%}',\n\
+    \  },\n};\nvar aws = {\n  defaults: {\n    account: '{%aws.default.account%}',\n\
+    \    region: '{%aws.default.region%}',\n  },\n};\nvar azure = {\n  defaults: {\n\
+    \    account: '{%azure.default.account%}',\n    region: '{%azure.default.region%}',\n\
+    \  },\n};\nvar cloudfoundry = {\n  defaults: {\n    account: '{%cloudfoundry.default.account%}',\n\
+    \  },\n};\nvar cloudrun = {\n  defaults: {\n    account: '{%cloudrun.default.account%}',\n\
+    \  },\n};\nvar dcos = {\n  defaults: {\n    account: '{%dcos.default.account%}',\n\
+    \  },\n};\nvar ecs = {\n  defaults: {\n    account: '{%ecs.default.account%}',\n\
+    \  },\n};\nvar gce = {\n  defaults: {\n    account: '{%google.default.account%}',\n\
+    \    region: '{%google.default.region%}',\n    zone: '{%google.default.zone%}',\n\
+    \  },\n};\nvar huaweicloud = {\n  defaults: {\n    account: '{%huaweicloud.default.account%}',\n\
+    \    region: '{%huaweicloud.default.region%}',\n  },\n};\nvar tencentcloud = {\n\
+    \  defaults: {\n    account: '{%tencentcloud.default.account%}',\n    region:\
+    \ '{%tencentcloud.default.region%}',\n  },\n};\n\nwindow.spinnakerSettings = {\n\
+    \  authEnabled: authEnabled,\n  authEndpoint: authEndpoint,\n  bakeryDetailUrl:\
+    \ bakeryDetailUrl,\n  canary: {\n    atlasWebComponentsUrl: atlasWebComponentsUrl,\n\
+    \    defaultJudge: defaultCanaryJudge,\n    featureDisabled: canaryFeatureDisabled,\n\
+    \    reduxLogger: reduxLoggerEnabled,\n    metricsAccountName: defaultMetricsAccountName,\n\
+    \    metricStore: defaultMetricsStore,\n    showAllConfigs: showAllConfigsEnabled,\n\
+    \    stagesEnabled: canaryStagesEnabled,\n    storageAccountName: defaultStorageAccountName,\n\
+    \    templatesEnabled: templatesEnabled,\n  },\n  defaultInstancePort: 80,\n \
+    \ defaultTimeZone: timezone, // see http://momentjs.com/timezone/docs/#/data-utilities/\n\
+    \  feature: {\n    canary: mineCanaryEnabled,\n    chaosMonkey: chaosEnabled,\n\
+    \    fiatEnabled: fiatEnabled,\n    pipelineTemplates: pipelineTemplatesEnabled,\n\
+    \    roscoMode: true,\n    dynamicRollbackTimeout: dynamicRollbackTimeoutEnabled,\n\
+    \  },\n  gateUrl: gateHost,\n  notifications: {\n    email: {\n      enabled:\
+    \ true,\n    },\n    githubStatus: githubStatus,\n    googlechat: {\n      enabled:\
+    \ true,\n    },\n    microsoftteams: {\n      enabled: true,\n    },\n    pubsub:\
+    \ {\n      enabled: true,\n    },\n    cdevents: {\n      enabled: true,\n   \
+    \ },\n    slack: slack,\n    sms: sms,\n  },\n  providers: {\n    appengine: appengine,\n\
+    \    aws: aws,\n    azure: azure,\n    cloudfoundry: cloudfoundry,\n    cloudrun:\
+    \ cloudrun,\n    dcos: dcos,\n    ecs: ecs,\n    gce: gce,\n    huaweicloud: huaweicloud,\n\
+    \    kubernetes: {},\n    oracle: oracle,\n    tencentcloud: tencentcloud,\n \
+    \ },\n  version: version,\n};\n"
+  settings-local.js: 'window.spinnakerSettings.authEnabled = false;
+
+    window.spinnakerSettings.feature.kubernetesRawResources = true;
+
+    window.spinnakerSettings.kubernetesAdHocInfraWritesEnabled = true;
+
+    '
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deck
+  namespace: spinnaker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deck
+  template:
+    metadata:
+      labels:
+        app: deck
+    spec:
+      containers:
+      - name: deck
+        image: ghcr.io/spinnaker/deck:2026.4.1
+        ports:
+        - containerPort: 9000
+        resources:
+          requests:
+            cpu: 100m
+            memory: 192Mi
+          limits:
+            cpu: '2'
+            memory: 192Mi
+        env:
+        - name: DECK_HOST
+          value: 0.0.0.0
+        - name: DECK_PORT
+          value: '9000'
+        volumeMounts:
+        - name: config
+          mountPath: /opt/spinnaker/config
+          readOnly: true
+      volumes:
+      - name: config
+        configMap:
+          name: deck-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: deck
+  namespace: spinnaker
+spec:
+  selector:
+    app: deck
+  type: NodePort
+  ports:
+  - port: 9000
+    targetPort: 9000
+    name: http
+    nodePort: 30900
