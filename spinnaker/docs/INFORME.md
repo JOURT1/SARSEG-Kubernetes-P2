@@ -1,7 +1,7 @@
 # Automatización de la configuración continua de SARSEG mediante Spinnaker y Kubernetes
 
 
-Joel Suárez
+Jhoel Suarez
 
 
 
@@ -74,476 +74,422 @@ Se utilizó un clúster kind independiente dentro de Docker Desktop, sin crear s
 
 | Acceso local | SARSEG 14800; Gate 14884; Deck 14900 |
 
-Las pruebas funcionales se realizaron entre el 19 y el 20 de noviembre de 2026. La ampliación documental se tomó el día 20. Cada figura distingue lecturas actuales, archivos versionados, interfaces nativas y registros históricos. Se preservan los JSON originales, las capturas y su índice de integridad.
+Las pruebas funcionales se realizaron entre el 19 y el 20 de noviembre de 2026. La ampliación documental se tomó el día 20. Se repitió la prueba de carga para capturar directamente las pantallas del HPA en dos, cinco y nuevamente dos réplicas. Todas las figuras de esta edición proceden de interfaces reales de GitHub, Spinnaker, Headlamp o SARSEG; no se utilizan visores documentales ni capturas de código. El índice registra URL, fecha UTC y huella SHA-256 de cada imagen.
 
 Se adopta carátula estudiantil, márgenes de 2,54 cm, Times New Roman de 12 puntos, interlineado doble, paginación superior y referencias con sangría francesa. Las figuras tienen número, título en cursiva y nota de fuente (American Psychological Association, s. f.-a, s. f.-b). El logotipo oficial es una adaptación institucional solicitada (Universidad de Las Américas, s. f.).
 
 
-### Paso 1. Repositorio y organización del trabajo
+### Paso 1. Repositorio público del proyecto SARSEG
 
 
-Se identificó el repositorio público y se separó el trabajo en ramas de implementación y documentación. Los commits y pull requests permiten revisar cada avance sin concentrar toda la entrega en un único cambio (JOURT1, 2026b) (Figura 1).
+Se abrió el repositorio público en GitHub. Esta es la fuente versionada de los recursos del laboratorio y el punto de entrega del informe (JOURT1, 2026b).
 
 
 **Figura 1**
 
-*Repositorio y organización del trabajo*
+*Repositorio público del proyecto SARSEG*
 
 
-![Repositorio y organización del trabajo](evidencias/recorrido-apa7/capturas/paso-01.jpg)
+![Repositorio público del proyecto SARSEG](evidencias/capturas-reales/01-github-repositorio.jpg)
 
 
-Nota. Elaboración propia: visor documental de lectura actual. Fuente completa: recorrido-apa7/pasos.json, paso 01.
+Nota. Captura directa de GitHub. Tomada el 20 de noviembre de 2026. Elaboración propia. Se conserva la imagen completa, sin modificar su contenido. Fuente: https://github.com/JOURT1/SARSEG-Kubernetes-P2
 
 
 
-### Paso 2. Docker y herramientas disponibles
+### Paso 2. Organización del trabajo mediante ramas
 
 
-Se verificaron Docker Engine, los recursos disponibles, kind y kubectl antes de utilizar el clúster. Docker Desktop proporciona el entorno local para ejecutar contenedores y herramientas de desarrollo (Docker, s. f.) (Figura 2).
+Se verificó la separación de las ramas de implementación y documentación. Las ramas permiten revisar cambios antes de integrarlos a main (JOURT1, 2026b).
 
 
 **Figura 2**
 
-*Docker y herramientas disponibles*
+*Organización del trabajo mediante ramas*
 
 
-![Docker y herramientas disponibles](evidencias/recorrido-apa7/capturas/paso-02.jpg)
+![Organización del trabajo mediante ramas](evidencias/capturas-reales/03-github-ramas.jpg)
 
 
-Nota. Elaboración propia: visor documental de lectura actual. Fuente completa: recorrido-apa7/pasos.json, paso 02.
+Nota. Captura directa de GitHub. Tomada el 20 de noviembre de 2026. Elaboración propia. Se conserva la imagen completa, sin modificar su contenido. Fuente: https://github.com/JOURT1/SARSEG-Kubernetes-P2/branches
 
 
 
-### Paso 3. Configuración del clúster local
+### Paso 3. Historial de commits separados
 
 
-Se creó el clúster independiente con kind create cluster --config spinnaker/cluster.yml --wait 180s. El archivo fija Kubernetes v1.32.2 y publica SARSEG, Gate y Deck exclusivamente en 127.0.0.1 (Kubernetes SIGs, s. f.-a) (Figura 3).
+Se revisó el historial de cambios. La implementación, la demostración automática y la documentación se conservaron como avances independientes (JOURT1, 2026b).
 
 
 **Figura 3**
 
-*Configuración del clúster local*
+*Historial de commits separados*
 
 
-![Configuración del clúster local](evidencias/recorrido-apa7/capturas/paso-03.jpg)
+![Historial de commits separados](evidencias/capturas-reales/04-github-commits.jpg)
 
 
-Nota. Elaboración propia: visor documental de archivo versionado. Fuente completa: recorrido-apa7/pasos.json, paso 03.
+Nota. Captura directa de GitHub. Tomada el 20 de noviembre de 2026. Elaboración propia. Se conserva la imagen completa, sin modificar su contenido. Fuente: https://github.com/JOURT1/SARSEG-Kubernetes-P2/commits/main/
 
 
 
-### Paso 4. Verificación del nodo y del contenedor
+### Paso 4. Pull request de integración de Spinnaker
 
 
-Se comprobó que el nodo estuviera Ready y que el contenedor del clúster siguiera activo. Esta lectura verifica la disponibilidad del entorno ya creado antes de interpretar los estados de la aplicación (Kubernetes SIGs, s. f.-a) (Figura 4).
+El pull request 9 documenta la integración de SARSEG con Spinnaker, el seguimiento de Git y la prueba del HPA. Su descripción permite revisar el alcance del laboratorio (JOURT1, 2026b).
 
 
 **Figura 4**
 
-*Verificación del nodo y del contenedor*
+*Pull request de integración de Spinnaker*
 
 
-![Verificación del nodo y del contenedor](evidencias/recorrido-apa7/capturas/paso-04.jpg)
+![Pull request de integración de Spinnaker](evidencias/capturas-reales/05-github-integracion.jpg)
 
 
-Nota. Elaboración propia: visor documental de lectura actual. Fuente completa: recorrido-apa7/pasos.json, paso 04.
+Nota. Captura directa de GitHub. Tomada el 20 de noviembre de 2026. Elaboración propia. Se conserva la imagen completa, sin modificar su contenido. Fuente: https://github.com/JOURT1/SARSEG-Kubernetes-P2/pull/9
 
 
 
-### Paso 5. Imágenes reales de SARSEG construidas
+### Paso 5. Validación automática en GitHub Actions
 
 
-Se compilaron web y API con deploy/web.Dockerfile y deploy/api.Dockerfile y se cargaron mediante kind load docker-image. La captura inspecciona sus identificadores y commit de origen, sin publicar el código privado (JOURT1, 2026b) (Figura 5).
+Se abrió la ejecución de GitHub Actions correspondiente a la integración. La pantalla presenta la validación satisfactoria; la comprobación local de Kubernetes se documenta en los pasos siguientes (JOURT1, 2026b).
 
 
 **Figura 5**
 
-*Imágenes reales de SARSEG construidas*
+*Validación automática en GitHub Actions*
 
 
-![Imágenes reales de SARSEG construidas](evidencias/recorrido-apa7/capturas/paso-05.jpg)
+![Validación automática en GitHub Actions](evidencias/capturas-reales/06-github-validacion.jpg)
 
 
-Nota. Elaboración propia: visor documental de lectura actual. Fuente completa: recorrido-apa7/pasos.json, paso 05.
+Nota. Captura directa de GitHub. Tomada el 20 de noviembre de 2026. Elaboración propia. Se conserva la imagen completa, sin modificar su contenido. Fuente: https://github.com/JOURT1/SARSEG-Kubernetes-P2/actions/runs/44677978819
 
 
 
-### Paso 6. Namespaces, secretos locales y permisos
+### Paso 6. Carpeta con los tres manifiestos Kubernetes
 
 
-Se prepararon namespaces independientes y secretos locales excluidos de Git. La cuenta de Clouddriver puede crear Deployments en sarseg-dev y no en default; la comprobación muestra la limitación de sus permisos (JOURT1, 2026b) (Figura 6).
+Se comprobó en GitHub la existencia de deployment.yml, service.yml y hpa.yml en la ruta spinnaker/k8s. Los tres archivos se mantienen separados y son los artefactos que consume el pipeline (JOURT1, 2026b).
 
 
 **Figura 6**
 
-*Namespaces, secretos locales y permisos*
+*Carpeta con los tres manifiestos Kubernetes*
 
 
-![Namespaces, secretos locales y permisos](evidencias/recorrido-apa7/capturas/paso-06.jpg)
+![Carpeta con los tres manifiestos Kubernetes](evidencias/capturas-reales/02-github-manifiestos.jpg)
 
 
-Nota. Elaboración propia: visor documental de lectura actual. Fuente completa: recorrido-apa7/pasos.json, paso 06.
+Nota. Captura directa de GitHub. Tomada el 20 de noviembre de 2026. Elaboración propia. Se conserva la imagen completa, sin modificar su contenido. Fuente: https://github.com/JOURT1/SARSEG-Kubernetes-P2/tree/main/spinnaker/k8s
 
 
 
-### Paso 7. Plataforma mínima de Spinnaker disponible
+### Paso 7. Clúster local disponible en Headlamp
 
 
-Se instaló la plataforma mediante scripts/bootstrap.py y se verificaron Deck, Gate, Orca, Clouddriver y Front50, con MySQL y Redis. La configuración parte del instalador oficial y omite componentes innecesarios para esta práctica (Spinnaker, 2026) (Figura 7).
+Se abrió Headlamp conectado al clúster real sarseg-spinnaker. La vista general presenta el nodo disponible, los Pods y las métricas del entorno. Headlamp se usa como visor con permisos de lectura (Headlamp, s. f.).
 
 
 **Figura 7**
 
-*Plataforma mínima de Spinnaker disponible*
+*Clúster local disponible en Headlamp*
 
 
-![Plataforma mínima de Spinnaker disponible](evidencias/recorrido-apa7/capturas/paso-07.jpg)
+![Clúster local disponible en Headlamp](evidencias/capturas-reales/17-kubernetes-cluster.jpg)
 
 
-Nota. Elaboración propia: visor documental de lectura actual. Fuente completa: recorrido-apa7/pasos.json, paso 07.
+Nota. Captura directa de Headlamp conectado al clúster local. Tomada el 20 de noviembre de 2026. Elaboración propia. Se conserva la imagen completa, sin modificar su contenido. Fuente: http://127.0.0.1:14666/c/sarseg-spinnaker/
 
 
 
-### Paso 8. Metrics Server y mediciones de CPU
+### Paso 8. Metrics Server operativo
 
 
-Se comprobó que metrics.k8s.io entregara consumo de CPU y memoria de los Pods web. El HPA necesita estas métricas y solicitudes de CPU definidas para calcular utilización (Kubernetes SIGs, s. f.-b) (Figura 8).
+Se verificó que Metrics Server tuviera una réplica disponible en kube-system. El HPA necesita la API de métricas y los requests de CPU configurados en los contenedores (Kubernetes, s. f.-b; Kubernetes SIGs, s. f.-b).
 
 
 **Figura 8**
 
-*Metrics Server y mediciones de CPU*
+*Metrics Server operativo*
 
 
-![Metrics Server y mediciones de CPU](evidencias/recorrido-apa7/capturas/paso-08.jpg)
+![Metrics Server operativo](evidencias/capturas-reales/26-metrics-server.jpg)
 
 
-Nota. Elaboración propia: visor documental de lectura actual. Fuente completa: recorrido-apa7/pasos.json, paso 08.
+Nota. Captura directa de Headlamp conectado al clúster local. Tomada el 20 de noviembre de 2026. Elaboración propia. Se conserva la imagen completa, sin modificar su contenido. Fuente: http://127.0.0.1:14666/c/sarseg-spinnaker/deployments/kube-system/metrics-server
 
 
 
-### Paso 9. Deployment: réplicas, etiquetas y selector
+### Paso 9. Etapa de despliegue del Deployment
 
 
-Se configuraron dos réplicas iniciales y un selector app=sarseg-web coincidente con las etiquetas de la plantilla de Pods. El Deployment administra las revisiones y la cantidad deseada de instancias (Kubernetes, s. f.-a) (Figura 9).
+Se inspeccionó la primera etapa Deploy (Manifest) del pipeline deploy-git. La cuenta sarseg-local y el namespace sarseg-dev identifican el destino local; el manifiesto se obtiene como artefacto (Spinnaker, s. f.-a, s. f.-b).
 
 
 **Figura 9**
 
-*Deployment: réplicas, etiquetas y selector*
+*Etapa de despliegue del Deployment*
 
 
-![Deployment: réplicas, etiquetas y selector](evidencias/recorrido-apa7/capturas/paso-09.jpg)
+![Etapa de despliegue del Deployment](evidencias/capturas-reales/09-spinnaker-etapa-deployment.jpg)
 
 
-Nota. Elaboración propia: visor documental de archivo versionado. Fuente completa: recorrido-apa7/pasos.json, paso 09.
+Nota. Captura directa de Spinnaker Deck. Tomada el 20 de noviembre de 2026. Elaboración propia. Se conserva la imagen completa, sin modificar su contenido. Fuente: http://127.0.0.1:14900/#/applications/sarseg/executions/configure/sarseg-deploy-git
 
 
 
-### Paso 10. Deployment: puerto y recursos por Pod
+### Paso 10. Etapa de despliegue del Service
 
 
-Se expuso el puerto 8080 con el nombre http y se definieron requests, limits y probes HTTP. Las solicitudes de CPU son la referencia para la métrica porcentual del HPA (Kubernetes, s. f.-c) (Figura 10).
+Se revisó la etapa Deploy service.yml y su dependencia de la etapa anterior. Esta secuencia aplica el Service que selecciona los Pods de la aplicación (Spinnaker, s. f.-b).
 
 
 **Figura 10**
 
-*Deployment: puerto y recursos por Pod*
+*Etapa de despliegue del Service*
 
 
-![Deployment: puerto y recursos por Pod](evidencias/recorrido-apa7/capturas/paso-10.jpg)
+![Etapa de despliegue del Service](evidencias/capturas-reales/10-spinnaker-etapa-service.jpg)
 
 
-Nota. Elaboración propia: visor documental de archivo versionado. Fuente completa: recorrido-apa7/pasos.json, paso 10.
+Nota. Captura directa de Spinnaker Deck. Tomada el 20 de noviembre de 2026. Elaboración propia. Se conserva la imagen completa, sin modificar su contenido. Fuente: http://127.0.0.1:14900/#/applications/sarseg/executions/configure/sarseg-deploy-git
 
 
 
-### Paso 11. Service: exposición mediante NodePort
+### Paso 11. Etapa de despliegue del HPA
 
 
-Se creó un Service NodePort con puerto 80, targetPort http y NodePort 30380. Su selector dirige el tráfico a los Pods web y kind lo expone en el puerto local 14800 (Kubernetes, s. f.-d) (Figura 11).
+Se revisó la tercera etapa, Deploy hpa.yml, dirigida al mismo namespace. Spinnaker aplica el HPA después del Deployment y del Service (Spinnaker, s. f.-b).
 
 
 **Figura 11**
 
-*Service: exposición mediante NodePort*
+*Etapa de despliegue del HPA*
 
 
-![Service: exposición mediante NodePort](evidencias/recorrido-apa7/capturas/paso-11.jpg)
+![Etapa de despliegue del HPA](evidencias/capturas-reales/11-spinnaker-etapa-hpa.jpg)
 
 
-Nota. Elaboración propia: visor documental de archivo versionado. Fuente completa: recorrido-apa7/pasos.json, paso 11.
+Nota. Captura directa de Spinnaker Deck. Tomada el 20 de noviembre de 2026. Elaboración propia. Se conserva la imagen completa, sin modificar su contenido. Fuente: http://127.0.0.1:14900/#/applications/sarseg/executions/configure/sarseg-deploy-git
 
 
 
-### Paso 12. HPA: política de escalamiento por CPU
+### Paso 12. Ejecuciones satisfactorias del pipeline
 
 
-Se configuró el HPA para sarseg-web con mínimo dos, máximo cinco y CPU objetivo del 50%. La reducción usa una ventana de estabilización de 60 segundos para evitar ajustes ante variaciones breves (Kubernetes, s. f.-b) (Figura 12).
+La pantalla nativa de Deck muestra ejecuciones en SUCCEEDED iniciadas por local-git-poller. El adaptador detecta cambios de los manifiestos y solicita la ejecución a Gate; las tres etapas despliegan los recursos (JOURT1, 2026a).
 
 
 **Figura 12**
 
-*HPA: política de escalamiento por CPU*
+*Ejecuciones satisfactorias del pipeline*
 
 
-![HPA: política de escalamiento por CPU](evidencias/recorrido-apa7/capturas/paso-12.jpg)
+![Ejecuciones satisfactorias del pipeline](evidencias/capturas-reales/07-spinnaker-ejecuciones.jpg)
 
 
-Nota. Elaboración propia: visor documental de archivo versionado. Fuente completa: recorrido-apa7/pasos.json, paso 12.
+Nota. Captura directa de Spinnaker Deck. Tomada el 20 de noviembre de 2026. Elaboración propia. Se conserva la imagen completa, sin modificar su contenido. Fuente: http://127.0.0.1:14900/#/applications/sarseg/executions
 
 
 
-### Paso 13. Aplicación y cuenta Kubernetes en Spinnaker
+### Paso 13. Revisión Git y etapas de la ejecución
 
 
-Se registró la aplicación sarseg y la cuenta Kubernetes sarseg-local, limitada a sarseg-dev. La cuenta public-git-http permite recuperar los manifiestos del repositorio público durante el despliegue (Spinnaker, s. f.-a, s. f.-b) (Figura 13).
+Se expandieron los parámetros y detalles de la ejecución de main. El parámetro gitSha vincula los artefactos a una revisión inmutable del repositorio; las etapas muestran el resultado satisfactorio (JOURT1, 2026a; Spinnaker, s. f.-a).
 
 
 **Figura 13**
 
-*Aplicación y cuenta Kubernetes en Spinnaker*
+*Revisión Git y etapas de la ejecución*
 
 
-![Aplicación y cuenta Kubernetes en Spinnaker](evidencias/recorrido-apa7/capturas/paso-13.jpg)
+![Revisión Git y etapas de la ejecución](evidencias/capturas-reales/08-spinnaker-pipeline-main.jpg)
 
 
-Nota. Elaboración propia: visor documental de lectura actual. Fuente completa: recorrido-apa7/pasos.json, paso 13.
+Nota. Captura directa de Spinnaker Deck. Tomada el 20 de noviembre de 2026. Elaboración propia. Se conserva la imagen completa, sin modificar su contenido. Fuente: http://127.0.0.1:14900/#/applications/sarseg/executions
 
 
 
-### Paso 14. Pipeline: tres etapas Deploy (Manifest)
+### Paso 14. Deployment administrado por Spinnaker
 
 
-Se definieron tres etapas Deploy (Manifest), una por cada YAML. Las referencias HTTP incorporan parameters.gitSha, por lo que todos los archivos de una ejecución proceden del mismo commit inmutable (Spinnaker, s. f.-a) (Figura 14).
+Se abrió el detalle del Deployment en Deck. La cuenta, el namespace, las etiquetas y las condiciones de disponibilidad permiten relacionar el recurso desplegado con la aplicación SARSEG (JOURT1, 2026a).
 
 
 **Figura 14**
 
-*Pipeline: tres etapas Deploy (Manifest)*
+*Deployment administrado por Spinnaker*
 
 
-![Pipeline: tres etapas Deploy (Manifest)](evidencias/recorrido-apa7/capturas/paso-14.jpg)
+![Deployment administrado por Spinnaker](evidencias/capturas-reales/14-spinnaker-deployment.jpg)
 
 
-Nota. Elaboración propia: visor documental de archivo versionado. Fuente completa: recorrido-apa7/pasos.json, paso 14.
+Nota. Captura directa de Spinnaker Deck. Tomada el 20 de noviembre de 2026. Elaboración propia. Se conserva la imagen completa, sin modificar su contenido. Fuente: http://127.0.0.1:14900/#/applications/sarseg/clusters
 
 
 
-### Paso 15. Sondeo Git y disparo automático del pipeline
+### Paso 15. Etiquetas y selector del Deployment activo
 
 
-Se implementó un sondeo cada 20 segundos. Cuando cambia el contenido de los manifiestos, solicita a Gate una ejecución y confirma la revisión únicamente al recibir SUCCEEDED. El adaptador no aplica recursos directamente (JOURT1, 2026b) (Figura 15).
+Se inspeccionó el Deployment directamente en Kubernetes. El selector app: sarseg-web coincide con la etiqueta de sus Pods. La política RollingUpdate permite actualizar la aplicación manteniendo disponibilidad (Kubernetes, s. f.-a).
 
 
 **Figura 15**
 
-*Sondeo Git y disparo automático del pipeline*
+*Etiquetas y selector del Deployment activo*
 
 
-![Sondeo Git y disparo automático del pipeline](evidencias/recorrido-apa7/capturas/paso-15.jpg)
+![Etiquetas y selector del Deployment activo](evidencias/capturas-reales/18-kubernetes-deployment.jpg)
 
 
-Nota. Elaboración propia: visor documental de lectura actual y archivo versionado. Fuente completa: recorrido-apa7/pasos.json, paso 15.
+Nota. Captura directa de Headlamp conectado al clúster local. Tomada el 20 de noviembre de 2026. Elaboración propia. Se conserva la imagen completa, sin modificar su contenido. Fuente: http://127.0.0.1:14666/c/sarseg-spinnaker/deployments/sarseg-dev/sarseg-web
 
 
 
-### Paso 16. Incidencia inicial y corrección de artefactos
+### Paso 16. Service NodePort y selección de Pods
 
 
-La primera configuración de artefactos produjo una ejecución TERMINAL. Se corrigió declarando el artefacto HTTP en cada etapa y resolviendo su referencia con gitSha. Las ejecuciones posteriores verificaron la corrección (JOURT1, 2026a) (Figura 16).
+La pantalla del Service confirma el tipo NodePort y el selector app: sarseg-web. Esta asociación dirige el tráfico únicamente a los Pods de la aplicación (Kubernetes, s. f.-d).
 
 
 **Figura 16**
 
-*Incidencia inicial y corrección de artefactos*
+*Service NodePort y selección de Pods*
 
 
-![Incidencia inicial y corrección de artefactos](evidencias/recorrido-apa7/capturas/paso-16.jpg)
+![Service NodePort y selección de Pods](evidencias/capturas-reales/21-service-nodeport.jpg)
 
 
-Nota. Elaboración propia: visor documental de registro histórico. Fuente completa: recorrido-apa7/pasos.json, paso 16.
+Nota. Captura directa de Headlamp conectado al clúster local. Tomada el 20 de noviembre de 2026. Elaboración propia. Se conserva la imagen completa, sin modificar su contenido. Fuente: http://127.0.0.1:14666/c/sarseg-spinnaker/services/sarseg-dev/sarseg-web
 
 
 
-### Paso 17. Primer despliegue completo desde Git
+### Paso 17. Puertos y endpoints reales del Service
 
 
-Se ejecutó el primer despliegue completo desde Git. Gate conserva SUCCEEDED en las etapas Deployment, Service y HPA, además de los parámetros y referencias utilizados por Spinnaker (JOURT1, 2026a) (Figura 17).
+La sección Ports muestra el puerto 80, el destino con nombre http y el NodePort 30380. Los endpoints resuelven al puerto 8080 de los Pods disponibles (Kubernetes, s. f.-d).
 
 
 **Figura 17**
 
-*Primer despliegue completo desde Git*
+*Puertos y endpoints reales del Service*
 
 
-![Primer despliegue completo desde Git](evidencias/recorrido-apa7/capturas/paso-17.jpg)
+![Puertos y endpoints reales del Service](evidencias/capturas-reales/22-service-puertos.jpg)
 
 
-Nota. Elaboración propia: visor documental de registro histórico. Fuente completa: recorrido-apa7/pasos.json, paso 17.
+Nota. Captura directa de Headlamp conectado al clúster local. Tomada el 20 de noviembre de 2026. Elaboración propia. Se conserva la imagen completa, sin modificar su contenido. Fuente: http://127.0.0.1:14666/c/sarseg-spinnaker/services/sarseg-dev/sarseg-web
 
 
 
-### Paso 18. Comprobación HTTP por el NodePort
+### Paso 18. Aplicación SARSEG accesible en el navegador
 
 
-Se comprobó el acceso a la web y a /health/ready por el NodePort. Ambas solicitudes respondieron HTTP 200 y la API informó ready, lo que acredita conectividad con PostgreSQL en el laboratorio (JOURT1, 2026a) (Figura 18).
+Se accedió a la web real de SARSEG desde el puerto local 14800, mapeado al NodePort del clúster kind. La pantalla de inicio de sesión confirma que la aplicación web responde (JOURT1, 2026a; Kubernetes SIGs, s. f.-a).
 
 
 **Figura 18**
 
-*Comprobación HTTP por el NodePort*
+*Aplicación SARSEG accesible en el navegador*
 
 
-![Comprobación HTTP por el NodePort](evidencias/recorrido-apa7/capturas/paso-18.jpg)
+![Aplicación SARSEG accesible en el navegador](evidencias/capturas-reales/16-sarseg-web.jpg)
 
 
-Nota. Elaboración propia: visor documental de lectura actual. Fuente completa: recorrido-apa7/pasos.json, paso 18.
+Nota. Captura directa de SARSEG. Tomada el 20 de noviembre de 2026. Elaboración propia. Se conserva la imagen completa, sin modificar su contenido. Fuente: http://127.0.0.1:14800/
 
 
 
-### Paso 19. Aplicación SARSEG en el navegador
+### Paso 19. HPA en reposo: dos réplicas y objetivo del 50 %
 
 
-Se abrió la página real de SARSEG en el navegador mediante el puerto local 14800. La captura muestra la interfaz Ionic/Angular servida desde Kubernetes y complementa la verificación HTTP anterior (JOURT1, 2026b) (Figura 19).
+Antes de generar carga se capturó el HPA con dos réplicas, mínimo dos, máximo cinco y objetivo de utilización de CPU del 50 %. La referencia apunta al Deployment sarseg-web (Kubernetes, s. f.-b).
 
 
 **Figura 19**
 
-*Aplicación SARSEG en el navegador*
+*HPA en reposo: dos réplicas y objetivo del 50 %*
 
 
-![Aplicación SARSEG en el navegador](evidencias/recorrido-apa7/capturas/paso-19.jpg)
+![HPA en reposo: dos réplicas y objetivo del 50 %](evidencias/capturas-reales/19-hpa-dos-replicas.jpg)
 
 
-Nota. Captura directa del navegador del 20 de noviembre de 2026. Fuente: http://127.0.0.1:14800.
+Nota. Captura directa de Headlamp conectado al clúster local. Tomada el 20 de noviembre de 2026. Elaboración propia. Se conserva la imagen completa, sin modificar su contenido. Fuente: http://127.0.0.1:14666/c/sarseg-spinnaker/horizontalpodautoscalers
 
 
 
-### Paso 20. Publicación del cambio Git de la prueba
+### Paso 20. Condiciones del HPA y métricas válidas
 
 
-Se publicó un commit que modifica sarseg.edu/revision en la plantilla de Pods. La diferencia Git identifica el cambio utilizado para demostrar detección y despliegue automáticos sin aplicar manualmente los tres YAML (JOURT1, 2026a) (Figura 20).
+La vista de detalle presenta AbleToScale y ScalingActive en True. ValidMetricFound indica que el controlador pudo calcular las réplicas a partir de la utilización de CPU; el límite mínimo mantiene dos instancias (Kubernetes, s. f.-b).
 
 
 **Figura 20**
 
-*Publicación del cambio Git de la prueba*
+*Condiciones del HPA y métricas válidas*
 
 
-![Publicación del cambio Git de la prueba](evidencias/recorrido-apa7/capturas/paso-20.jpg)
+![Condiciones del HPA y métricas válidas](evidencias/capturas-reales/20-hpa-detalle.jpg)
 
 
-Nota. Elaboración propia: visor documental de registro git histórico. Fuente completa: recorrido-apa7/pasos.json, paso 20.
+Nota. Captura directa de Headlamp conectado al clúster local. Tomada el 20 de noviembre de 2026. Elaboración propia. Se conserva la imagen completa, sin modificar su contenido. Fuente: http://127.0.0.1:14666/c/sarseg-spinnaker/horizontalpodautoscalers/sarseg-dev/sarseg-web
 
 
 
-### Paso 21. Spinnaker despliega automáticamente la revisión
+### Paso 21. Aumento automático a cinco réplicas bajo carga
 
 
-El sondeo inició Spinnaker para el SHA publicado. La captura nativa de Deck muestra parámetros y tres etapas correctas; la prueba también verificó la nueva anotación de revisión en Kubernetes (JOURT1, 2026a) (Figura 21).
+Se generó tráfico HTTP real mediante un Job temporal. La pantalla del HPA registró 640 % de utilización respecto de los requests, frente al objetivo del 50 %, y cinco réplicas. No se cambió manualmente la capacidad (Kubernetes, s. f.-b, s. f.-c).
 
 
 **Figura 21**
 
-*Spinnaker despliega automáticamente la revisión*
+*Aumento automático a cinco réplicas bajo carga*
 
 
-![Spinnaker despliega automáticamente la revisión](evidencias/recorrido-apa7/capturas/paso-21.jpg)
+![Aumento automático a cinco réplicas bajo carga](evidencias/capturas-reales/23-hpa-cinco-replicas.jpg)
 
 
-Nota. Captura nativa de Deck de la prueba original. Ejecución 01M7VMP5J4C39HZM0Y8G8C4GX1; registro preservado en git-execution.json.
+Nota. Captura directa de Headlamp conectado al clúster local. Tomada el 20 de noviembre de 2026. Elaboración propia. Se conserva la imagen completa, sin modificar su contenido. Fuente: http://127.0.0.1:14666/c/sarseg-spinnaker/horizontalpodautoscalers
 
 
 
-### Paso 22. Generación de carga HTTP temporal
+### Paso 22. Deployment con cinco réplicas disponibles
 
 
-Se generaron solicitudes HTTP con un Job temporal de 48 trabajadores, limitado a una CPU. El objetivo fue producir consumo real en la web para que el HPA ajustara la capacidad, sin kubectl scale (JOURT1, 2026a) (Figura 22).
+Durante la prueba, el Deployment confirmó cinco réplicas deseadas, listas, actualizadas y disponibles. Esta observación complementa el contador del HPA con el estado real de la carga de trabajo (JOURT1, 2026a).
 
 
 **Figura 22**
 
-*Generación de carga HTTP temporal*
+*Deployment con cinco réplicas disponibles*
 
 
-![Generación de carga HTTP temporal](evidencias/recorrido-apa7/capturas/paso-22.jpg)
+![Deployment con cinco réplicas disponibles](evidencias/capturas-reales/24-kubernetes-cinco-pods.jpg)
 
 
-Nota. Elaboración propia: visor documental de archivo y registro históricos. Fuente completa: recorrido-apa7/pasos.json, paso 22.
+Nota. Captura directa de Headlamp conectado al clúster local. Tomada el 20 de noviembre de 2026. Elaboración propia. Se conserva la imagen completa, sin modificar su contenido. Fuente: http://127.0.0.1:14666/c/sarseg-spinnaker/deployments/sarseg-dev/sarseg-web
 
 
 
-### Paso 23. HPA: incremento automático a cinco réplicas
+### Paso 23. Reducción automática a dos réplicas
 
 
-Bajo carga, el Deployment alcanzó cinco Pods Ready y el HPA registró cinco réplicas actuales y deseadas. La utilización superó el objetivo del 50%, activando el aumento automático (Kubernetes, s. f.-b; JOURT1, 2026a) (Figura 23).
+Después de retirar el Job de carga, se esperó la actualización de métricas y la ventana de estabilización. El HPA volvió a dos réplicas, respetando el mínimo definido (Kubernetes, s. f.-b).
 
 
 **Figura 23**
 
-*HPA: incremento automático a cinco réplicas*
+*Reducción automática a dos réplicas*
 
 
-![HPA: incremento automático a cinco réplicas](evidencias/recorrido-apa7/capturas/paso-23.jpg)
+![Reducción automática a dos réplicas](evidencias/capturas-reales/25-hpa-retorno-dos.jpg)
 
 
-Nota. Visor de registros de la prueba original del 19 de noviembre. Sus comandos, estados y fechas UTC están preservados en JSON.
-
-
-
-### Paso 24. HPA: retorno automático a dos réplicas
-
-
-Al retirar la carga, el HPA redujo la capacidad a dos Pods Ready. La evidencia final confirma dos réplicas en el Deployment y en el contador del HPA después de la estabilización configurada (JOURT1, 2026a) (Figura 24).
-
-
-**Figura 24**
-
-*HPA: retorno automático a dos réplicas*
-
-
-![HPA: retorno automático a dos réplicas](evidencias/recorrido-apa7/capturas/paso-24.jpg)
-
-
-Nota. Visor de registros de la prueba original del 19 de noviembre. Sus comandos, estados y fechas UTC están preservados en JSON.
-
-
-
-### Paso 25. Integración en main y validación final
-
-
-Se integraron implementación y evidencias mediante los pull requests 8 y 9. La rama main quedó desplegada correctamente y la validación adicional de GitHub Actions finalizó con éxito (JOURT1, 2026b) (Figura 25).
-
-
-**Figura 25**
-
-*Integración en main y validación final*
-
-
-![Integración en main y validación final](evidencias/recorrido-apa7/capturas/paso-25.jpg)
-
-
-Nota. Elaboración propia: visor documental de lectura actual y ejecuciones anteriores. Fuente completa: recorrido-apa7/pasos.json, paso 25.
-
-
-
-### Paso 26. Repositorio público y archivos de entrega
-
-
-Se verificó el acceso público al repositorio y la presencia de deployment.yml, service.yml y hpa.yml en main. La entrega reúne estos archivos, el pipeline, los scripts reproducibles y el informe con evidencias (JOURT1, 2026b) (Figura 26).
-
-
-**Figura 26**
-
-*Repositorio público y archivos de entrega*
-
-
-![Repositorio público y archivos de entrega](evidencias/recorrido-apa7/capturas/paso-26.jpg)
-
-
-Nota. Captura directa del navegador del 20 de noviembre de 2026. Fuente: GitHub público.
+Nota. Captura directa de Headlamp conectado al clúster local. Tomada el 20 de noviembre de 2026. Elaboración propia. Se conserva la imagen completa, sin modificar su contenido. Fuente: http://127.0.0.1:14666/c/sarseg-spinnaker/horizontalpodautoscalers
 
 
 
@@ -584,7 +530,7 @@ Las once comprobaciones finalizaron correctamente. La Tabla 2 vincula cada condi
 
 El cambio Git verificado fue 3a1c721e4f71729f628d267d52264f96a1944ab5. La ejecución 01M7VMP5J4C39HZM0Y8G8C4GX1 terminó en SUCCEEDED y aplicó la revisión esperada. La evidencia de carga muestra cinco Pods Ready; después de retirarla, Deployment y HPA volvieron a dos.
 
-La muestra de aumento registró 764% de utilización respecto de los requests. Esto no significa exceder el límite de CPU: el porcentaje se calcula sobre la solicitud de 25m por Pod. El objetivo del 50% equivale a 12,5m por Pod, por lo que la carga justificó el escalamiento (Kubernetes, s. f.-b, s. f.-c).
+La captura de esta edición registró 640% de utilización respecto de los requests. Esto no significa exceder el límite de CPU: el porcentaje se calcula sobre la solicitud de 25m por Pod. El objetivo del 50% equivale a 12,5m por Pod, por lo que la carga justificó el escalamiento (Kubernetes, s. f.-b, s. f.-c).
 
 
 ## Incidencias, límites y conclusiones
@@ -607,6 +553,9 @@ American Psychological Association. (s. f.-b). <i>Title page setup.</i> https://
 
 
 Docker. (s. f.). <i>Docker Desktop.</i> Docker Docs. https://docs.docker.com/desktop/
+
+
+Headlamp. (s. f.). <i>In-cluster.</i> https://headlamp.dev/docs/latest/installation/in-cluster/
 
 
 JOURT1. (2026a). <i>Resultados y evidencias originales del laboratorio SARSEG con Spinnaker</i> [Conjunto de datos]. GitHub. https://github.com/JOURT1/SARSEG-Kubernetes-P2/tree/main/spinnaker/docs/evidencias
@@ -633,160 +582,24 @@ Kubernetes SIGs. (s. f.-a). <i>Configuration.</i> kind. https://kind.sigs.k8s.io
 Kubernetes SIGs. (s. f.-b). <i>Metrics Server</i> (Versión 0.8.1) [Software]. GitHub. https://github.com/kubernetes-sigs/metrics-server/tree/v0.8.1
 
 
+Spinnaker. (2026). <i>Spinnaker Kustomize</i> (Versión 2026.4.1) [Software]. GitHub. https://github.com/spinnaker/spinnaker/tree/1b3ed435fe5341b41dcbbdce999cb771145166a8/spinnaker-kustomize
+
+
 Spinnaker. (s. f.-a). <i>HTTP file.</i> https://spinnaker.io/docs/reference/artifacts/types/http-file/
 
 
 Spinnaker. (s. f.-b). <i>Kubernetes provider overview.</i> https://spinnaker.io/docs/reference/providers/kubernetes/
 
 
-Spinnaker. (2026). <i>Spinnaker Kustomize</i> (Versión 2026.4.1) [Software]. GitHub. https://github.com/spinnaker/spinnaker/tree/1b3ed435fe5341b41dcbbdce999cb771145166a8/spinnaker-kustomize
-
-
 Universidad de Las Américas. (s. f.). <i>Marca UDLA.</i> https://www.udla.edu.ec/la-udla/marca-udla/
 
 
 
-## Apéndice A
+## Trazabilidad de la entrega
 
 
-Los siguientes listados reproducen los tres archivos utilizados. Se mantienen separados para facilitar la revisión de la consigna y su relación con las figuras 9 a 12. Fuente: repositorio del laboratorio (JOURT1, 2026b).
+El repositorio público reúne los tres manifiestos Kubernetes, el pipeline de Spinnaker, la configuración del laboratorio y este informe. La carpeta capturas-reales conserva las imágenes originales y un índice con fuente, fecha y huella de integridad. Los archivos de registros de las pruebas iniciales permanecen disponibles como material de respaldo, fuera de las figuras de esta edición.
 
+Headlamp se añadió únicamente para observar los recursos mediante una interfaz Kubernetes real. Usa una cuenta de servicio con permisos de lectura y un puerto limitado a la computadora local. No sustituye a Spinnaker: el pipeline continúa siendo el responsable de aplicar los manifiestos (Headlamp, s. f.; JOURT1, 2026b).
 
-### deployment.yml
-
-
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: sarseg-web
-  namespace: sarseg-dev
-  labels:
-    app: sarseg-web
-    app.kubernetes.io/part-of: sarseg
-  annotations:
-    strategy.spinnaker.io/use-source-capacity: 'true'
-spec:
-  replicas: 2
-  revisionHistoryLimit: 3
-  selector:
-    matchLabels:
-      app: sarseg-web
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 0
-  template:
-    metadata:
-      labels:
-        app: sarseg-web
-        app.kubernetes.io/part-of: sarseg
-      annotations:
-        sarseg.edu/revision: 'gitops-verificado-045046'
-    spec:
-      containers:
-        - name: web
-          image: sarseg-web:9984bc57
-          imagePullPolicy: IfNotPresent
-          env:
-            - name: DOMAIN
-              value: ':8080'
-          ports:
-            - name: http
-              containerPort: 8080
-          resources:
-            requests:
-              cpu: 25m
-              memory: 32Mi
-            limits:
-              cpu: 250m
-              memory: 128Mi
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
-            periodSeconds: 5
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-            initialDelaySeconds: 10
-            periodSeconds: 10
-```
-
-
-
-### service.yml
-
-
-```yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: sarseg-web
-  namespace: sarseg-dev
-  labels:
-    app: sarseg-web
-spec:
-  type: NodePort
-  selector:
-    app: sarseg-web
-  ports:
-    - name: http
-      protocol: TCP
-      port: 80
-      targetPort: http
-      nodePort: 30380
-```
-
-
-
-### hpa.yml
-
-
-```yaml
-apiVersion: autoscaling/v2
-kind: HorizontalPodAutoscaler
-metadata:
-  name: sarseg-web
-  namespace: sarseg-dev
-spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: sarseg-web
-  minReplicas: 2
-  maxReplicas: 5
-  metrics:
-    - type: Resource
-      resource:
-        name: cpu
-        target:
-          type: Utilization
-          averageUtilization: 50
-  behavior:
-    scaleUp:
-      stabilizationWindowSeconds: 0
-      policies:
-        - type: Pods
-          value: 3
-          periodSeconds: 15
-    scaleDown:
-      stabilizationWindowSeconds: 60
-      policies:
-        - type: Pods
-          value: 3
-          periodSeconds: 15
-```
-
-
-
-## Apéndice B
-
-
-El punto de entrada es spinnaker/scripts/Start-Lab.ps1. Para reutilizar imágenes compiladas se usa -SkipBuild. La rama seguida por defecto es main. Para repetir una demostración con un commit nuevo, el sondeo debe seguir la misma rama donde se publicará el cambio.
-
-docs/evidencias conserva las once comprobaciones, los estados del HPA y las ejecuciones de Gate. recorrido-apa7/pasos.json contiene las lecturas de los 26 pasos; capturas/ conserva las imágenes y encuadres.json identifica el recorte del visor en el PDF. Los archivos originales no se editan al maquetar las figuras.
-
-SHA256SUMS.txt permite comprobar la integridad del recorrido. El trabajo se conserva en ramas y commits separados. El logotipo se mantiene en su PNG original y su procedencia se registra en docs/assets/FUENTE-LOGOTIPO.md.
+Las credenciales y el código privado de la aplicación no forman parte de la entrega pública. La reproducción completa requiere acceso autorizado al repositorio original de SARSEG o a las imágenes compiladas. La implementación se conserva en ramas y commits separados.

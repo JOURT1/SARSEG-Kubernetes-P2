@@ -1,4 +1,4 @@
-"""APA 7 student report with 26 documented steps and complete manifests."""
+"""APA 7 student report with authentic native-interface screenshots."""
 from html import escape
 import json
 from pathlib import Path
@@ -10,16 +10,16 @@ from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.utils import ImageReader
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.platypus import BaseDocTemplate, Flowable, Frame, Image, KeepTogether, PageBreak, PageTemplate, Paragraph, Preformatted, Spacer, Table, TableStyle
+from reportlab.platypus import BaseDocTemplate, Flowable, Frame, Image, KeepTogether, PageBreak, PageTemplate, Paragraph, Spacer, Table, TableStyle
 
 LAB=Path(__file__).resolve().parents[1]
 E=LAB/'docs/evidencias'
-WALK=E/'recorrido-apa7'
-CAPS=WALK/'capturas'
+WALK=E/'capturas-reales'
+CAPS=WALK
 OUT=LAB/'output/pdf/Informe-SARSEG-Spinnaker-P2.pdf'
 META=json.loads((LAB/'docs/DATOS-INFORME.json').read_text(encoding='utf-8'))
 STEPS=json.loads((WALK/'pasos.json').read_text(encoding='utf-8'))
-FRAMES={x['id']:x for x in json.loads((WALK/'encuadres.json').read_text())}
+
 RESULTS=json.loads((E/'results.json').read_text())
 STATE=json.loads((E/'git-state.json').read_text())
 REPO='https://github.com/JOURT1/SARSEG-Kubernetes-P2'
@@ -28,7 +28,7 @@ WIDTH,HEIGHT=letter
 MARGIN=72
 TW=WIDTH-144
 TH=HEIGHT-144
-for face,file in [('TimesAPA','times.ttf'),('TimesAPABold','timesbd.ttf'),('TimesAPAItalic','timesi.ttf'),('TimesAPABoldItalic','timesbi.ttf'),('CodeAPA','consola.ttf')]:
+for face,file in [('TimesAPA','times.ttf'),('TimesAPABold','timesbd.ttf'),('TimesAPAItalic','timesi.ttf'),('TimesAPABoldItalic','timesbi.ttf')]:
     pdfmetrics.registerFont(TTFont(face,str(Path('C:/Windows/Fonts')/file)))
 pdfmetrics.registerFontFamily('TimesAPA',normal='TimesAPA',bold='TimesAPABold',italic='TimesAPAItalic',boldItalic='TimesAPABoldItalic')
 S={
@@ -42,8 +42,7 @@ S={
 'note':ParagraphStyle('APA note',fontName='TimesAPA',fontSize=12,leading=24),
 'reference':ParagraphStyle('APA reference',fontName='TimesAPA',fontSize=12,leading=24,leftIndent=36,firstLineIndent=-36,splitLongWords=True),
 'cell':ParagraphStyle('APA cell',fontName='TimesAPA',fontSize=10.5,leading=14),
-'cell_bold':ParagraphStyle('APA cell bold',fontName='TimesAPABold',fontSize=10.5,leading=14),
-'code':ParagraphStyle('APA code',fontName='CodeAPA',fontSize=9.5,leading=12)}
+'cell_bold':ParagraphStyle('APA cell bold',fontName='TimesAPABold',fontSize=10.5,leading=14)}
 STORY=[]
 MD=[]
 FIGURES=[]
@@ -63,66 +62,26 @@ def table(number,title,headers,rows,widths):
     STORY.append(t)
     MD.extend(['\n**Tabla '+str(number)+'. '+title+'**\n','| '+' | '.join(headers)+' |','|'+'|'.join(['---']*len(headers))+'|'])
     MD.extend('| '+' | '.join(str(x) for x in row)+' |' for row in rows)
-class EvidenceImage(Flowable):
-    """Clip only the PDF placement; retain every original browser image."""
-    def __init__(self,path,maxh,frame=None):
-        Flowable.__init__(self);self.path=path
-        with PILImage.open(path) as im:self.sw,self.sh=im.size
-        self.cw=frame['width'] if frame else self.sw
-        self.ch=frame['height'] if frame else self.sh
-        assert self.cw<=self.sw and self.ch<=self.sh,(path,frame)
-        self.scale=min(TW/self.cw,maxh/self.ch)
-        self.width=self.cw*self.scale;self.height=self.ch*self.scale;self.hAlign='LEFT'
-    def draw(self):
-        c=self.canv;c.saveState();clip=c.beginPath();clip.rect(0,0,self.width,self.height);c.clipPath(clip,stroke=0,fill=0)
-        c.drawImage(ImageReader(str(self.path)),0,-(self.sh-self.ch)*self.scale,width=self.sw*self.scale,height=self.sh*self.scale,mask='auto')
-        c.restoreState()
-D={
-'01':'Se identificó el repositorio público y se separó el trabajo en ramas de implementación y documentación. Los commits y pull requests permiten revisar cada avance sin concentrar toda la entrega en un único cambio (JOURT1, 2026b).',
-'02':'Se verificaron Docker Engine, los recursos disponibles, kind y kubectl antes de utilizar el clúster. Docker Desktop proporciona el entorno local para ejecutar contenedores y herramientas de desarrollo (Docker, s. f.).',
-'03':'Se creó el clúster independiente con kind create cluster --config spinnaker/cluster.yml --wait 180s. El archivo fija Kubernetes v1.32.2 y publica SARSEG, Gate y Deck exclusivamente en 127.0.0.1 (Kubernetes SIGs, s. f.-a).',
-'04':'Se comprobó que el nodo estuviera Ready y que el contenedor del clúster siguiera activo. Esta lectura verifica la disponibilidad del entorno ya creado antes de interpretar los estados de la aplicación (Kubernetes SIGs, s. f.-a).',
-'05':'Se compilaron web y API con deploy/web.Dockerfile y deploy/api.Dockerfile y se cargaron mediante kind load docker-image. La captura inspecciona sus identificadores y commit de origen, sin publicar el código privado (JOURT1, 2026b).',
-'06':'Se prepararon namespaces independientes y secretos locales excluidos de Git. La cuenta de Clouddriver puede crear Deployments en sarseg-dev y no en default; la comprobación muestra la limitación de sus permisos (JOURT1, 2026b).',
-'07':'Se instaló la plataforma mediante scripts/bootstrap.py y se verificaron Deck, Gate, Orca, Clouddriver y Front50, con MySQL y Redis. La configuración parte del instalador oficial y omite componentes innecesarios para esta práctica (Spinnaker, 2026).',
-'08':'Se comprobó que metrics.k8s.io entregara consumo de CPU y memoria de los Pods web. El HPA necesita estas métricas y solicitudes de CPU definidas para calcular utilización (Kubernetes SIGs, s. f.-b).',
-'09':'Se configuraron dos réplicas iniciales y un selector app=sarseg-web coincidente con las etiquetas de la plantilla de Pods. El Deployment administra las revisiones y la cantidad deseada de instancias (Kubernetes, s. f.-a).',
-'10':'Se expuso el puerto 8080 con el nombre http y se definieron requests, limits y probes HTTP. Las solicitudes de CPU son la referencia para la métrica porcentual del HPA (Kubernetes, s. f.-c).',
-'11':'Se creó un Service NodePort con puerto 80, targetPort http y NodePort 30380. Su selector dirige el tráfico a los Pods web y kind lo expone en el puerto local 14800 (Kubernetes, s. f.-d).',
-'12':'Se configuró el HPA para sarseg-web con mínimo dos, máximo cinco y CPU objetivo del 50%. La reducción usa una ventana de estabilización de 60 segundos para evitar ajustes ante variaciones breves (Kubernetes, s. f.-b).',
-'13':'Se registró la aplicación sarseg y la cuenta Kubernetes sarseg-local, limitada a sarseg-dev. La cuenta public-git-http permite recuperar los manifiestos del repositorio público durante el despliegue (Spinnaker, s. f.-a, s. f.-b).',
-'14':'Se definieron tres etapas Deploy (Manifest), una por cada YAML. Las referencias HTTP incorporan parameters.gitSha, por lo que todos los archivos de una ejecución proceden del mismo commit inmutable (Spinnaker, s. f.-a).',
-'15':'Se implementó un sondeo cada 20 segundos. Cuando cambia el contenido de los manifiestos, solicita a Gate una ejecución y confirma la revisión únicamente al recibir SUCCEEDED. El adaptador no aplica recursos directamente (JOURT1, 2026b).',
-'16':'La primera configuración de artefactos produjo una ejecución TERMINAL. Se corrigió declarando el artefacto HTTP en cada etapa y resolviendo su referencia con gitSha. Las ejecuciones posteriores verificaron la corrección (JOURT1, 2026a).',
-'17':'Se ejecutó el primer despliegue completo desde Git. Gate conserva SUCCEEDED en las etapas Deployment, Service y HPA, además de los parámetros y referencias utilizados por Spinnaker (JOURT1, 2026a).',
-'18':'Se comprobó el acceso a la web y a /health/ready por el NodePort. Ambas solicitudes respondieron HTTP 200 y la API informó ready, lo que acredita conectividad con PostgreSQL en el laboratorio (JOURT1, 2026a).',
-'19':'Se abrió la página real de SARSEG en el navegador mediante el puerto local 14800. La captura muestra la interfaz Ionic/Angular servida desde Kubernetes y complementa la verificación HTTP anterior (JOURT1, 2026b).',
-'20':'Se publicó un commit que modifica sarseg.edu/revision en la plantilla de Pods. La diferencia Git identifica el cambio utilizado para demostrar detección y despliegue automáticos sin aplicar manualmente los tres YAML (JOURT1, 2026a).',
-'21':'El sondeo inició Spinnaker para el SHA publicado. La captura nativa de Deck muestra parámetros y tres etapas correctas; la prueba también verificó la nueva anotación de revisión en Kubernetes (JOURT1, 2026a).',
-'22':'Se generaron solicitudes HTTP con un Job temporal de 48 trabajadores, limitado a una CPU. El objetivo fue producir consumo real en la web para que el HPA ajustara la capacidad, sin kubectl scale (JOURT1, 2026a).',
-'23':'Bajo carga, el Deployment alcanzó cinco Pods Ready y el HPA registró cinco réplicas actuales y deseadas. La utilización superó el objetivo del 50%, activando el aumento automático (Kubernetes, s. f.-b; JOURT1, 2026a).',
-'24':'Al retirar la carga, el HPA redujo la capacidad a dos Pods Ready. La evidencia final confirma dos réplicas en el Deployment y en el contador del HPA después de la estabilización configurada (JOURT1, 2026a).',
-'25':'Se integraron implementación y evidencias mediante los pull requests 8 y 9. La rama main quedó desplegada correctamente y la validación adicional de GitHub Actions finalizó con éxito (JOURT1, 2026b).',
-'26':'Se verificó el acceso público al repositorio y la presencia de deployment.yml, service.yml y hpa.yml en main. La entrega reúne estos archivos, el pipeline, los scripts reproducibles y el informe con evidencias (JOURT1, 2026b).'}
 def photo(step):
-    key=step['id'];n=int(key);path=CAPS/f'paso-{key}.jpg';assert path.exists(),path
+    n=step['number'];path=CAPS/step['file'];assert path.exists(),path
     flows=[]
-    if key=='01':para('Procedimiento paso a paso','title',flows)
+    if n==1:para('Procedimiento paso a paso','title',flows)
     para(f"Paso {n}. {escape(step['title'])}",'step',flows)
-    description=D[key].rstrip('.')+f' (Figura {n}).'
-    para(description,'body',flows);flows.append(Spacer(1,12))
-    para('Figura '+str(n),'figure',flows);para(escape(step['title']),'figure_title',flows)
-    if key in ['19','26']:note='Captura directa del navegador del 20 de noviembre de 2026. Fuente: '+step['source']+'.'
-    elif key=='21':note='Captura nativa de Deck de la prueba original. Ejecución 01M7VMP5J4C39HZM0Y8G8C4GX1; registro preservado en git-execution.json.'
-    elif key in ['23','24']:note='Visor de registros de la prueba original del 19 de noviembre. Sus comandos, estados y fechas UTC están preservados en JSON.'
-    else:note='Elaboración propia: visor documental de '+step['category'].lower()+'. Fuente completa: recorrido-apa7/pasos.json, paso '+key+'.'
+    para(step['description']+f' (Figura {n}).','body',flows)
+    flows.append(Spacer(1,12))
+    para('Figura '+str(n),'figure',flows)
+    para(escape(step['title']),'figure_title',flows)
+    note='Captura directa de '+('GitHub' if 'github.com' in step['source'] else 'SARSEG' if ':14800' in step['source'] else 'Spinnaker Deck' if ':14900' in step['source'] else 'Headlamp conectado al clúster local')+'. Tomada el 20 de noviembre de 2026. Elaboración propia. Se conserva la imagen completa, sin modificar su contenido.'
     np=Paragraph('<i>Nota.</i> '+escape(note),S['note'])
-    overhead=sum(f.wrap(TW,TH)[1] for f in flows)+np.wrap(TW,TH)[1]+4
-    assert TH-overhead>190,(key,TH-overhead)
-    im=EvidenceImage(path,TH-overhead,FRAMES.get(key))
-    flows.extend([im,Spacer(1,4),np]);STORY.extend([PageBreak(),KeepTogether(flows)])
-    FIGURES.append({'number':n,'title':step['title'],'image':path.relative_to(LAB).as_posix(),'source':step['source'],'kind':step['category'],'description':D[key],'imageWidth':im.width,'imageHeight':im.height,'note':note})
-    MD.extend(['\n### Paso '+str(n)+'. '+step['title']+'\n',description,'\n**Figura '+str(n)+'**\n\n*'+step['title']+'*\n','!['+step['title']+'](evidencias/recorrido-apa7/capturas/paso-'+key+'.jpg)','\nNota. '+note+'\n'])
+    overhead=sum(f.wrap(TW,TH)[1] for f in flows)+np.wrap(TW,TH)[1]+8
+    with PILImage.open(path) as src:iw,ih=src.size
+    scale=min(TW/iw,(TH-overhead)/ih)
+    assert scale>0,(n,overhead)
+    im=Image(str(path),width=iw*scale,height=ih*scale,hAlign='LEFT')
+    flows.extend([im,Spacer(1,8),np]);STORY.extend([PageBreak(),KeepTogether(flows)])
+    FIGURES.append({**step,'image':path.relative_to(LAB).as_posix(),'note':note})
+    MD.extend(['\n### Paso '+str(n)+'. '+step['title']+'\n',step['description'],'\n**Figura '+str(n)+'**\n\n*'+step['title']+'*\n','!['+step['title']+'](evidencias/capturas-reales/'+step['file']+')','\nNota. '+note+' Fuente: '+step['source']+'\n'])
+
 def page_number(c,doc):
     c.saveState();c.setFont('TimesAPA',12);c.drawRightString(WIDTH-MARGIN,HEIGHT-36,str(doc.page));c.restoreState()
 class APAReport(BaseDocTemplate):
@@ -133,6 +92,7 @@ class APAReport(BaseDocTemplate):
 REFERENCES=[
 ('American Psychological Association. (s. f.-a). <i>Figure setup.</i>','https://apastyle.apa.org/style-grammar-guidelines/tables-figures/figures'),
 ('American Psychological Association. (s. f.-b). <i>Title page setup.</i>','https://apastyle.apa.org/style-grammar-guidelines/paper-format/title-page'),
+('Headlamp. (s. f.). <i>In-cluster.</i>','https://headlamp.dev/docs/latest/installation/in-cluster/'),
 ('Docker. (s. f.). <i>Docker Desktop.</i> Docker Docs.','https://docs.docker.com/desktop/'),
 ('JOURT1. (2026a). <i>Resultados y evidencias originales del laboratorio SARSEG con Spinnaker</i> [Conjunto de datos]. GitHub.',REPO+'/tree/main/spinnaker/docs/evidencias'),
 ('JOURT1. (2026b). <i>SARSEG Kubernetes P2: Laboratorio local de configuración continua con Spinnaker</i> [Repositorio de código]. GitHub.',REPO+'/tree/main/spinnaker'),
@@ -147,7 +107,7 @@ REFERENCES=[
 ('Spinnaker. (s. f.-b). <i>Kubernetes provider overview.</i>','https://spinnaker.io/docs/reference/providers/kubernetes/'),
 ('Universidad de Las Américas. (s. f.). <i>Marca UDLA.</i>','https://www.udla.edu.ec/la-udla/marca-udla/')]
 def main():
-    assert len(STEPS)==26 and len(RESULTS)==11 and all(x['passed'] for x in RESULTS)
+    assert len(STEPS)==23 and len(RESULTS)==11 and all(x['passed'] for x in RESULTS)
     STORY.clear();MD.clear();FIGURES.clear()
     STORY.append(Spacer(1,12));STORY.append(Image(str(LAB/'docs/assets/udla-logo-oficial.png'),width=270,height=90,hAlign='CENTER'))
     STORY.append(Spacer(1,24));para(TITLE,'title');STORY.append(Spacer(1,24))
@@ -180,7 +140,7 @@ def main():
     ['HPA','Mínimo 2; máximo 5; CPU 50%; reducción estable 60 s'],
     ['Acceso local','SARSEG 14800; Gate 14884; Deck 14900']],[120,TW-120])
     para('Trazabilidad y presentación de las figuras','step')
-    prose('Las pruebas funcionales se realizaron entre el 19 y el 20 de noviembre de 2026. La ampliación documental se tomó el día 20. Cada figura distingue lecturas actuales, archivos versionados, interfaces nativas y registros históricos. Se preservan los JSON originales, las capturas y su índice de integridad.')
+    prose('Las pruebas funcionales se realizaron entre el 19 y el 20 de noviembre de 2026. La ampliación documental se tomó el día 20. Se repitió la prueba de carga para capturar directamente las pantallas del HPA en dos, cinco y nuevamente dos réplicas. Todas las figuras de esta edición proceden de interfaces reales de GitHub, Spinnaker, Headlamp o SARSEG; no se utilizan visores documentales ni capturas de código. El índice registra URL, fecha UTC y huella SHA-256 de cada imagen.')
     prose('Se adopta carátula estudiantil, márgenes de 2,54 cm, Times New Roman de 12 puntos, interlineado doble, paginación superior y referencias con sangría francesa. Las figuras tienen número, título en cursiva y nota de fuente (American Psychological Association, s. f.-a, s. f.-b). El logotipo oficial es una adaptación institucional solicitada (Universidad de Las Américas, s. f.).')
     for step in STEPS:photo(step)
     heading('Resultados y discusión',True)
@@ -189,37 +149,22 @@ def main():
     table(2,'Verificaciones de integración de SARSEG y Spinnaker',['Comprobación','Resultado'],[[label,'Aprobado'] for label in labels],[350,118])
     STORY.append(Spacer(1,12))
     prose('El cambio Git verificado fue '+STATE['sha']+'. La ejecución '+STATE['execution'].removeprefix('/pipelines/')+' terminó en SUCCEEDED y aplicó la revisión esperada. La evidencia de carga muestra cinco Pods Ready; después de retirarla, Deployment y HPA volvieron a dos.')
-    prose('La muestra de aumento registró 764% de utilización respecto de los requests. Esto no significa exceder el límite de CPU: el porcentaje se calcula sobre la solicitud de 25m por Pod. El objetivo del 50% equivale a 12,5m por Pod, por lo que la carga justificó el escalamiento (Kubernetes, s. f.-b, s. f.-c).')
+    prose('La captura de esta edición registró 640% de utilización respecto de los requests. Esto no significa exceder el límite de CPU: el porcentaje se calcula sobre la solicitud de 25m por Pod. El objetivo del 50% equivale a 12,5m por Pod, por lo que la carga justificó el escalamiento (Kubernetes, s. f.-b, s. f.-c).')
     heading('Incidencias, límites y conclusiones',True)
     prose('La primera definición del pipeline no enlazó el artefacto esperado y terminó en TERMINAL. La corrección declaró el artefacto HTTP en la etapa y parametrizó su referencia con gitSha. Las ejecuciones posteriores verificaron los tres manifiestos. También se añadió una espera de PostgreSQL antes de iniciar la API para evitar fallos durante el arranque.')
     prose('La infraestructura se ejecuta en una computadora, con puertos limitados a loopback y configuración de desarrollo. La web y la API se construyen desde el repositorio privado original, cuyo código y credenciales no se publican. La reproducción completa requiere permiso para obtener ese código o disponer de las imágenes locales compiladas.')
     prose('Se cumplió el objetivo de desplegar SARSEG automáticamente desde Git con Spinnaker. El Deployment inició con dos réplicas, el Service permitió acceso por NodePort, Metrics Server suministró métricas y el HPA ajustó la capacidad de dos a cinco y nuevamente a dos. La detección Git quedó documentada como adaptación local con diferencias frente a Argo CD.')
     heading('Referencias',True)
-    ordered_references=REFERENCES[:11]+[REFERENCES[12],REFERENCES[13],REFERENCES[11],REFERENCES[14]]
+    ordered_references=sorted(REFERENCES,key=lambda item:(item[0].split('. (')[0].casefold(),item[0]))
     for prefix,url in ordered_references:
         STORY.append(KeepTogether([Paragraph(prefix+' <link href="'+escape(url,quote=True)+'">'+escape(url)+'</link>',S['reference'])]))
         MD.append(prefix+' '+url+'\n')
-    heading('Apéndice A',True);para('Manifiestos Kubernetes completos','title')
-    prose('Los siguientes listados reproducen los tres archivos utilizados. Se mantienen separados para facilitar la revisión de la consigna y su relación con las figuras 9 a 12. Fuente: repositorio del laboratorio (JOURT1, 2026b).')
-    for i,name in enumerate(['deployment.yml','service.yml','hpa.yml']):
-        if i:STORY.append(PageBreak())
-        para(name,'step');content=(LAB/'k8s'/name).read_text(encoding='utf-8')
-        if name=='deployment.yml':
-            lines=content.splitlines()
-            STORY.append(Preformatted('\n'.join(lines[:32]),S['code'],maxLineLength=85,splitChars=' ,'))
-            STORY.append(PageBreak());para('deployment.yml (continuación): contenedor y probes','step')
-            STORY.append(Preformatted('\n'.join(lines[32:]),S['code'],maxLineLength=85,splitChars=' ,'))
-        else:
-            STORY.append(Preformatted(content,S['code'],maxLineLength=85,splitChars=' ,'))
-        MD.extend(['\n### '+name+'\n','\x60\x60\x60yaml\n'+content+'\x60\x60\x60\n'])
-    heading('Apéndice B',True);para('Reproducción y archivos de evidencia','title')
-    prose('El punto de entrada es spinnaker/scripts/Start-Lab.ps1. Para reutilizar imágenes compiladas se usa -SkipBuild. La rama seguida por defecto es main. Para repetir una demostración con un commit nuevo, el sondeo debe seguir la misma rama donde se publicará el cambio.')
-    STORY.append(Preformatted('python -m pip install -r spinnaker/requirements.txt\n.\\spinnaker\\scripts\\Start-Lab.ps1 -SkipBuild\n\n# Prueba con publicacion de un commit real:\npython spinnaker/scripts/verify_lab.py --publish-change',S['code']))
-    STORY.append(Spacer(1,24))
-    prose('docs/evidencias conserva las once comprobaciones, los estados del HPA y las ejecuciones de Gate. recorrido-apa7/pasos.json contiene las lecturas de los 26 pasos; capturas/ conserva las imágenes y encuadres.json identifica el recorte del visor en el PDF. Los archivos originales no se editan al maquetar las figuras.')
-    prose('SHA256SUMS.txt permite comprobar la integridad del recorrido. El trabajo se conserva en ramas y commits separados. El logotipo se mantiene en su PNG original y su procedencia se registra en docs/assets/FUENTE-LOGOTIPO.md.')
+    heading('Trazabilidad de la entrega',True)
+    prose('El repositorio público reúne los tres manifiestos Kubernetes, el pipeline de Spinnaker, la configuración del laboratorio y este informe. La carpeta capturas-reales conserva las imágenes originales y un índice con fuente, fecha y huella de integridad. Los archivos de registros de las pruebas iniciales permanecen disponibles como material de respaldo, fuera de las figuras de esta edición.')
+    prose('Headlamp se añadió únicamente para observar los recursos mediante una interfaz Kubernetes real. Usa una cuenta de servicio con permisos de lectura y un puerto limitado a la computadora local. No sustituye a Spinnaker: el pipeline continúa siendo el responsable de aplicar los manifiestos (Headlamp, s. f.; JOURT1, 2026b).')
+    prose('Las credenciales y el código privado de la aplicación no forman parte de la entrega pública. La reproducción completa requiere acceso autorizado al repositorio original de SARSEG o a las imágenes compiladas. La implementación se conserva en ramas y commits separados.')
     OUT.parent.mkdir(parents=True,exist_ok=True)
-    doc=APAReport(str(OUT),pagesize=letter,leftMargin=72,rightMargin=72,topMargin=72,bottomMargin=72,title=TITLE,author=META['autor'],subject='Informe estudiantil APA 7 con 26 figuras y referencias')
+    doc=APAReport(str(OUT),pagesize=letter,leftMargin=72,rightMargin=72,topMargin=72,bottomMargin=72,title=TITLE,author=META['autor'],subject='Informe estudiantil APA 7 con 23 capturas reales de interfaces y referencias')
     frame=Frame(72,72,TW,TH,leftPadding=0,rightPadding=0,topPadding=0,bottomPadding=0,id='apa')
     doc.addPageTemplates(PageTemplate(id='APA7',frames=[frame],onPage=page_number));doc.build(STORY)
     (LAB/'docs/INFORME.md').write_text('\n\n'.join(MD)+'\n',encoding='utf-8',newline='\n')

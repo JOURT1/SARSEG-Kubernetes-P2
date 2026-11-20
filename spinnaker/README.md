@@ -6,18 +6,23 @@ independiente y todos los accesos se publican únicamente en `127.0.0.1`.
 
 ## Entrega
 
-- [Informe PDF en formato APA 7 con 26 figuras](output/pdf/Informe-SARSEG-Spinnaker-P2.pdf).
+- [Informe PDF en formato APA 7 con 23 capturas reales](output/pdf/Informe-SARSEG-Spinnaker-P2.pdf).
 - [Informe y correspondencia con la consigna](docs/INFORME.md).
 - [Deployment](k8s/deployment.yml), [Service](k8s/service.yml) y [HPA](k8s/hpa.yml).
 - [Pipeline exportado de Spinnaker](pipeline.json).
 - [Resultados y evidencias originales](docs/evidencias/).
 - Repositorio público: <https://github.com/JOURT1/SARSEG-Kubernetes-P2>.
 
-El informe ampliado incluye carátula con el logotipo oficial de la UDLA y autor
-Joel Suárez, procedimiento en 26 pasos ilustrados, 15 referencias y los tres
-YAML completos como apéndice. Las capturas distinguen interfaces nativas,
-archivos versionados y registros originales de las pruebas. El recorrido está
-en [evidencias APA 7](docs/evidencias/recorrido-apa7/).
+El informe incluye carátula con el logotipo oficial de la UDLA y autor
+**Jhoel Suarez**, 23 pasos ilustrados y 16 referencias. Todas las figuras son
+capturas directas de GitHub, Spinnaker, Headlamp y SARSEG. La prueba de carga
+se repitió para fotografiar el escalamiento real **2 -> 5 -> 2** en Headlamp.
+El PDF no incluye listados de código ni visores documentales de registros.
+
+Las imágenes originales y su índice están en
+[capturas reales](docs/evidencias/capturas-reales/README.md).
+Headlamp v0.46.0 se usa como visor local con permisos de lectura; su manifiesto
+está en [headlamp-readonly.yml](platform/headlamp-readonly.yml).
 
 ## Qué se implementa
 
