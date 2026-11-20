@@ -25,7 +25,7 @@ spec:
         app: sarseg-web
         app.kubernetes.io/part-of: sarseg
       annotations:
-        sarseg.edu/revision: 'entrega-inicial'
+        sarseg.edu/revision: 'gitops-verificado-044534'
     spec:
       containers:
         - name: web
