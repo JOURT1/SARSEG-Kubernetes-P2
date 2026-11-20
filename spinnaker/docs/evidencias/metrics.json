@@ -1,0 +1,101 @@
+{
+  "kind": "PodMetricsList",
+  "apiVersion": "metrics.k8s.io/v1beta1",
+  "metadata": {},
+  "items": [
+    {
+      "metadata": {
+        "name": "api-68ff9488c4-bpx8s",
+        "namespace": "sarseg-dev",
+        "creationTimestamp": "2026-11-20T04:50:46Z",
+        "labels": {
+          "app": "sarseg-api",
+          "pod-template-hash": "68ff9488c4"
+        }
+      },
+      "timestamp": "2026-11-20T04:50:35Z",
+      "window": "18.832s",
+      "containers": [
+        {
+          "name": "api",
+          "usage": {
+            "cpu": "13183092n",
+            "memory": "125816Ki"
+          }
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "name": "postgres-588b6d799d-x644n",
+        "namespace": "sarseg-dev",
+        "creationTimestamp": "2026-11-20T04:50:46Z",
+        "labels": {
+          "app": "postgres",
+          "pod-template-hash": "588b6d799d"
+        }
+      },
+      "timestamp": "2026-11-20T04:50:29Z",
+      "window": "19.402s",
+      "containers": [
+        {
+          "name": "postgres",
+          "usage": {
+            "cpu": "3333625n",
+            "memory": "39804Ki"
+          }
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "name": "sarseg-web-c8746df99-72gtm",
+        "namespace": "sarseg-dev",
+        "creationTimestamp": "2026-11-20T04:50:46Z",
+        "labels": {
+          "app": "sarseg-web",
+          "app.kubernetes.io/managed-by": "spinnaker",
+          "app.kubernetes.io/name": "sarseg",
+          "app.kubernetes.io/part-of": "sarseg",
+          "pod-template-hash": "c8746df99"
+        }
+      },
+      "timestamp": "2026-11-20T04:50:29Z",
+      "window": "18.535s",
+      "containers": [
+        {
+          "name": "web",
+          "usage": {
+            "cpu": "251200n",
+            "memory": "16356Ki"
+          }
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "name": "sarseg-web-c8746df99-76bnb",
+        "namespace": "sarseg-dev",
+        "creationTimestamp": "2026-11-20T04:50:46Z",
+        "labels": {
+          "app": "sarseg-web",
+          "app.kubernetes.io/managed-by": "spinnaker",
+          "app.kubernetes.io/name": "sarseg",
+          "app.kubernetes.io/part-of": "sarseg",
+          "pod-template-hash": "c8746df99"
+        }
+      },
+      "timestamp": "2026-11-20T04:50:27Z",
+      "window": "16.401s",
+      "containers": [
+        {
+          "name": "web",
+          "usage": {
+            "cpu": "300591n",
+            "memory": "14064Ki"
+          }
+        }
+      ]
+    }
+  ]
+}

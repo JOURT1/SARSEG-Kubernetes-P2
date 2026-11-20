@@ -1,0 +1,464 @@
+[
+  {
+    "time": "2026-11-20T04:51:26.523604+00:00",
+    "deployment": {
+      "availableReplicas": 2,
+      "conditions": [
+        {
+          "lastTransitionTime": "2026-11-20T04:47:09Z",
+          "lastUpdateTime": "2026-11-20T04:47:09Z",
+          "message": "Deployment has minimum availability.",
+          "reason": "MinimumReplicasAvailable",
+          "status": "True",
+          "type": "Available"
+        },
+        {
+          "lastTransitionTime": "2026-11-20T04:44:52Z",
+          "lastUpdateTime": "2026-11-20T04:51:01Z",
+          "message": "ReplicaSet \"sarseg-web-5d49f74cf4\" has successfully progressed.",
+          "reason": "NewReplicaSetAvailable",
+          "status": "True",
+          "type": "Progressing"
+        }
+      ],
+      "observedGeneration": 5,
+      "readyReplicas": 2,
+      "replicas": 2,
+      "updatedReplicas": 2
+    },
+    "hpa": {
+      "conditions": [
+        {
+          "lastTransitionTime": "2026-11-20T04:45:22Z",
+          "message": "the HPA controller was able to get the target's current scale",
+          "reason": "SucceededGetScale",
+          "status": "True",
+          "type": "AbleToScale"
+        },
+        {
+          "lastTransitionTime": "2026-11-20T04:51:07Z",
+          "message": "the HPA was unable to compute the replica count: failed to get cpu utilization: did not receive metrics for targeted pods (pods might be unready)",
+          "reason": "FailedGetResourceMetric",
+          "status": "False",
+          "type": "ScalingActive"
+        },
+        {
+          "lastTransitionTime": "2026-11-20T04:49:22Z",
+          "message": "the desired replica count is less than the minimum replica count",
+          "reason": "TooFewReplicas",
+          "status": "True",
+          "type": "ScalingLimited"
+        }
+      ],
+      "currentMetrics": [
+        {
+          "type": ""
+        }
+      ],
+      "currentReplicas": 2,
+      "desiredReplicas": 2,
+      "lastScaleTime": "2026-11-20T04:49:07Z"
+    }
+  },
+  {
+    "time": "2026-11-20T04:51:36.806838+00:00",
+    "deployment": {
+      "availableReplicas": 2,
+      "conditions": [
+        {
+          "lastTransitionTime": "2026-11-20T04:47:09Z",
+          "lastUpdateTime": "2026-11-20T04:47:09Z",
+          "message": "Deployment has minimum availability.",
+          "reason": "MinimumReplicasAvailable",
+          "status": "True",
+          "type": "Available"
+        },
+        {
+          "lastTransitionTime": "2026-11-20T04:44:52Z",
+          "lastUpdateTime": "2026-11-20T04:51:01Z",
+          "message": "ReplicaSet \"sarseg-web-5d49f74cf4\" has successfully progressed.",
+          "reason": "NewReplicaSetAvailable",
+          "status": "True",
+          "type": "Progressing"
+        }
+      ],
+      "observedGeneration": 5,
+      "readyReplicas": 2,
+      "replicas": 2,
+      "updatedReplicas": 2
+    },
+    "hpa": {
+      "conditions": [
+        {
+          "lastTransitionTime": "2026-11-20T04:45:22Z",
+          "message": "the HPA controller was able to get the target's current scale",
+          "reason": "SucceededGetScale",
+          "status": "True",
+          "type": "AbleToScale"
+        },
+        {
+          "lastTransitionTime": "2026-11-20T04:51:07Z",
+          "message": "the HPA was unable to compute the replica count: failed to get cpu utilization: did not receive metrics for targeted pods (pods might be unready)",
+          "reason": "FailedGetResourceMetric",
+          "status": "False",
+          "type": "ScalingActive"
+        },
+        {
+          "lastTransitionTime": "2026-11-20T04:49:22Z",
+          "message": "the desired replica count is less than the minimum replica count",
+          "reason": "TooFewReplicas",
+          "status": "True",
+          "type": "ScalingLimited"
+        }
+      ],
+      "currentMetrics": [
+        {
+          "type": ""
+        }
+      ],
+      "currentReplicas": 2,
+      "desiredReplicas": 2,
+      "lastScaleTime": "2026-11-20T04:49:07Z"
+    }
+  },
+  {
+    "time": "2026-11-20T04:51:47.188544+00:00",
+    "deployment": {
+      "availableReplicas": 2,
+      "conditions": [
+        {
+          "lastTransitionTime": "2026-11-20T04:47:09Z",
+          "lastUpdateTime": "2026-11-20T04:47:09Z",
+          "message": "Deployment has minimum availability.",
+          "reason": "MinimumReplicasAvailable",
+          "status": "True",
+          "type": "Available"
+        },
+        {
+          "lastTransitionTime": "2026-11-20T04:44:52Z",
+          "lastUpdateTime": "2026-11-20T04:51:01Z",
+          "message": "ReplicaSet \"sarseg-web-5d49f74cf4\" has successfully progressed.",
+          "reason": "NewReplicaSetAvailable",
+          "status": "True",
+          "type": "Progressing"
+        }
+      ],
+      "observedGeneration": 5,
+      "readyReplicas": 2,
+      "replicas": 2,
+      "updatedReplicas": 2
+    },
+    "hpa": {
+      "conditions": [
+        {
+          "lastTransitionTime": "2026-11-20T04:45:22Z",
+          "message": "recommended size matches current size",
+          "reason": "ReadyForNewScale",
+          "status": "True",
+          "type": "AbleToScale"
+        },
+        {
+          "lastTransitionTime": "2026-11-20T04:51:37Z",
+          "message": "the HPA was able to successfully calculate a replica count from cpu resource utilization (percentage of request)",
+          "reason": "ValidMetricFound",
+          "status": "True",
+          "type": "ScalingActive"
+        },
+        {
+          "lastTransitionTime": "2026-11-20T04:49:22Z",
+          "message": "the desired replica count is less than the minimum replica count",
+          "reason": "TooFewReplicas",
+          "status": "True",
+          "type": "ScalingLimited"
+        }
+      ],
+      "currentMetrics": [
+        {
+          "resource": {
+            "current": {
+              "averageUtilization": 4,
+              "averageValue": "1m"
+            },
+            "name": "cpu"
+          },
+          "type": "Resource"
+        }
+      ],
+      "currentReplicas": 2,
+      "desiredReplicas": 2,
+      "lastScaleTime": "2026-11-20T04:49:07Z"
+    }
+  },
+  {
+    "time": "2026-11-20T04:51:57.468209+00:00",
+    "deployment": {
+      "availableReplicas": 2,
+      "conditions": [
+        {
+          "lastTransitionTime": "2026-11-20T04:47:09Z",
+          "lastUpdateTime": "2026-11-20T04:47:09Z",
+          "message": "Deployment has minimum availability.",
+          "reason": "MinimumReplicasAvailable",
+          "status": "True",
+          "type": "Available"
+        },
+        {
+          "lastTransitionTime": "2026-11-20T04:44:52Z",
+          "lastUpdateTime": "2026-11-20T04:51:01Z",
+          "message": "ReplicaSet \"sarseg-web-5d49f74cf4\" has successfully progressed.",
+          "reason": "NewReplicaSetAvailable",
+          "status": "True",
+          "type": "Progressing"
+        }
+      ],
+      "observedGeneration": 5,
+      "readyReplicas": 2,
+      "replicas": 2,
+      "updatedReplicas": 2
+    },
+    "hpa": {
+      "conditions": [
+        {
+          "lastTransitionTime": "2026-11-20T04:45:22Z",
+          "message": "recommended size matches current size",
+          "reason": "ReadyForNewScale",
+          "status": "True",
+          "type": "AbleToScale"
+        },
+        {
+          "lastTransitionTime": "2026-11-20T04:51:37Z",
+          "message": "the HPA was able to successfully calculate a replica count from cpu resource utilization (percentage of request)",
+          "reason": "ValidMetricFound",
+          "status": "True",
+          "type": "ScalingActive"
+        },
+        {
+          "lastTransitionTime": "2026-11-20T04:49:22Z",
+          "message": "the desired replica count is less than the minimum replica count",
+          "reason": "TooFewReplicas",
+          "status": "True",
+          "type": "ScalingLimited"
+        }
+      ],
+      "currentMetrics": [
+        {
+          "resource": {
+            "current": {
+              "averageUtilization": 4,
+              "averageValue": "1m"
+            },
+            "name": "cpu"
+          },
+          "type": "Resource"
+        }
+      ],
+      "currentReplicas": 2,
+      "desiredReplicas": 2,
+      "lastScaleTime": "2026-11-20T04:49:07Z"
+    }
+  },
+  {
+    "time": "2026-11-20T04:52:07.807872+00:00",
+    "deployment": {
+      "availableReplicas": 2,
+      "conditions": [
+        {
+          "lastTransitionTime": "2026-11-20T04:47:09Z",
+          "lastUpdateTime": "2026-11-20T04:47:09Z",
+          "message": "Deployment has minimum availability.",
+          "reason": "MinimumReplicasAvailable",
+          "status": "True",
+          "type": "Available"
+        },
+        {
+          "lastTransitionTime": "2026-11-20T04:44:52Z",
+          "lastUpdateTime": "2026-11-20T04:51:01Z",
+          "message": "ReplicaSet \"sarseg-web-5d49f74cf4\" has successfully progressed.",
+          "reason": "NewReplicaSetAvailable",
+          "status": "True",
+          "type": "Progressing"
+        }
+      ],
+      "observedGeneration": 5,
+      "readyReplicas": 2,
+      "replicas": 2,
+      "updatedReplicas": 2
+    },
+    "hpa": {
+      "conditions": [
+        {
+          "lastTransitionTime": "2026-11-20T04:45:22Z",
+          "message": "the HPA controller was able to update the target scale to 5",
+          "reason": "SucceededRescale",
+          "status": "True",
+          "type": "AbleToScale"
+        },
+        {
+          "lastTransitionTime": "2026-11-20T04:51:37Z",
+          "message": "the HPA was able to successfully calculate a replica count from cpu resource utilization (percentage of request)",
+          "reason": "ValidMetricFound",
+          "status": "True",
+          "type": "ScalingActive"
+        },
+        {
+          "lastTransitionTime": "2026-11-20T04:49:22Z",
+          "message": "the desired replica count is more than the maximum replica count",
+          "reason": "TooManyReplicas",
+          "status": "True",
+          "type": "ScalingLimited"
+        }
+      ],
+      "currentMetrics": [
+        {
+          "resource": {
+            "current": {
+              "averageUtilization": 578,
+              "averageValue": "144m"
+            },
+            "name": "cpu"
+          },
+          "type": "Resource"
+        }
+      ],
+      "currentReplicas": 2,
+      "desiredReplicas": 5,
+      "lastScaleTime": "2026-11-20T04:52:07Z"
+    }
+  },
+  {
+    "time": "2026-11-20T04:52:18.120495+00:00",
+    "deployment": {
+      "availableReplicas": 5,
+      "conditions": [
+        {
+          "lastTransitionTime": "2026-11-20T04:44:52Z",
+          "lastUpdateTime": "2026-11-20T04:51:01Z",
+          "message": "ReplicaSet \"sarseg-web-5d49f74cf4\" has successfully progressed.",
+          "reason": "NewReplicaSetAvailable",
+          "status": "True",
+          "type": "Progressing"
+        },
+        {
+          "lastTransitionTime": "2026-11-20T04:52:09Z",
+          "lastUpdateTime": "2026-11-20T04:52:09Z",
+          "message": "Deployment has minimum availability.",
+          "reason": "MinimumReplicasAvailable",
+          "status": "True",
+          "type": "Available"
+        }
+      ],
+      "observedGeneration": 6,
+      "readyReplicas": 5,
+      "replicas": 5,
+      "updatedReplicas": 5
+    },
+    "hpa": {
+      "conditions": [
+        {
+          "lastTransitionTime": "2026-11-20T04:45:22Z",
+          "message": "the HPA controller was able to update the target scale to 5",
+          "reason": "SucceededRescale",
+          "status": "True",
+          "type": "AbleToScale"
+        },
+        {
+          "lastTransitionTime": "2026-11-20T04:51:37Z",
+          "message": "the HPA was able to successfully calculate a replica count from cpu resource utilization (percentage of request)",
+          "reason": "ValidMetricFound",
+          "status": "True",
+          "type": "ScalingActive"
+        },
+        {
+          "lastTransitionTime": "2026-11-20T04:49:22Z",
+          "message": "the desired replica count is more than the maximum replica count",
+          "reason": "TooManyReplicas",
+          "status": "True",
+          "type": "ScalingLimited"
+        }
+      ],
+      "currentMetrics": [
+        {
+          "resource": {
+            "current": {
+              "averageUtilization": 578,
+              "averageValue": "144m"
+            },
+            "name": "cpu"
+          },
+          "type": "Resource"
+        }
+      ],
+      "currentReplicas": 2,
+      "desiredReplicas": 5,
+      "lastScaleTime": "2026-11-20T04:52:07Z"
+    }
+  },
+  {
+    "time": "2026-11-20T04:52:28.424217+00:00",
+    "deployment": {
+      "availableReplicas": 5,
+      "conditions": [
+        {
+          "lastTransitionTime": "2026-11-20T04:44:52Z",
+          "lastUpdateTime": "2026-11-20T04:51:01Z",
+          "message": "ReplicaSet \"sarseg-web-5d49f74cf4\" has successfully progressed.",
+          "reason": "NewReplicaSetAvailable",
+          "status": "True",
+          "type": "Progressing"
+        },
+        {
+          "lastTransitionTime": "2026-11-20T04:52:09Z",
+          "lastUpdateTime": "2026-11-20T04:52:09Z",
+          "message": "Deployment has minimum availability.",
+          "reason": "MinimumReplicasAvailable",
+          "status": "True",
+          "type": "Available"
+        }
+      ],
+      "observedGeneration": 6,
+      "readyReplicas": 5,
+      "replicas": 5,
+      "updatedReplicas": 5
+    },
+    "hpa": {
+      "conditions": [
+        {
+          "lastTransitionTime": "2026-11-20T04:45:22Z",
+          "message": "recommended size matches current size",
+          "reason": "ReadyForNewScale",
+          "status": "True",
+          "type": "AbleToScale"
+        },
+        {
+          "lastTransitionTime": "2026-11-20T04:51:37Z",
+          "message": "the HPA was able to successfully calculate a replica count from cpu resource utilization (percentage of request)",
+          "reason": "ValidMetricFound",
+          "status": "True",
+          "type": "ScalingActive"
+        },
+        {
+          "lastTransitionTime": "2026-11-20T04:49:22Z",
+          "message": "the desired replica count is more than the maximum replica count",
+          "reason": "TooManyReplicas",
+          "status": "True",
+          "type": "ScalingLimited"
+        }
+      ],
+      "currentMetrics": [
+        {
+          "resource": {
+            "current": {
+              "averageUtilization": 764,
+              "averageValue": "191m"
+            },
+            "name": "cpu"
+          },
+          "type": "Resource"
+        }
+      ],
+      "currentReplicas": 5,
+      "desiredReplicas": 5,
+      "lastScaleTime": "2026-11-20T04:52:07Z"
+    }
+  }
+]

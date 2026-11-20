@@ -160,7 +160,7 @@ with concurrent.futures.ThreadPoolExecutor(max_workers=48) as p:print(sum(p.map(
     check("cpu-scale-up", dep["status"].get("readyReplicas") == 5, "HPA increased from 2 to 5 Ready replicas under real HTTP load")
     snapshot("05-carga-cinco", "HPA: cinco réplicas bajo carga", "El HPA elevó las réplicas automáticamente. No se ejecutó kubectl scale.")
     run(K + ["-n", "sarseg-dev", "delete", "job", "sarseg-cpu-load", "--wait=true", "--timeout=30s"])
-    dep, hpa = monitor_until(lambda d,h: d["spec"]["replicas"] == 2 and d["status"].get("replicas") == d["status"].get("readyReplicas") == 2, 360, "hpa-down.json")
+    dep, hpa = monitor_until(lambda d,h: d["spec"]["replicas"] == 2 and d["status"].get("replicas") == d["status"].get("readyReplicas") == 2 and h["status"].get("currentReplicas") == 2, 360, "hpa-down.json")
     check("cpu-scale-down", dep["status"].get("readyReplicas") == 2, "HPA returned from 5 to 2 Ready replicas after load stopped")
     snapshot("06-reduccion-dos", "HPA: regreso a dos réplicas", "Carga retirada; estabilización de reducción de 60 segundos.")
     (OUT / "events.txt").write_text(run(K + ["-n", "sarseg-dev", "get", "events", "--sort-by=.lastTimestamp"]), encoding="utf-8")

@@ -1,0 +1,30 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: sarseg-cpu-load
+  namespace: sarseg-dev
+spec:
+  backoffLimit: 0
+  ttlSecondsAfterFinished: 300
+  activeDeadlineSeconds: 260
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: http-load
+        image: python:3.13-alpine
+        command:
+        - python
+        - -u
+        - -c
+        - "import concurrent.futures,time,urllib.request\nend=time.monotonic()+240\n\
+          def load(i):\n n=0\n while time.monotonic()<end:\n  try:\n   with urllib.request.urlopen('http://sarseg-web/?load='+str(n),timeout=3)\
+          \ as r:r.read()\n   n+=1\n  except Exception:pass\n return n\nwith concurrent.futures.ThreadPoolExecutor(max_workers=48)\
+          \ as p:print(sum(p.map(load,range(48))))\n"
+        resources:
+          requests:
+            cpu: 250m
+            memory: 64Mi
+          limits:
+            cpu: '1'
+            memory: 128Mi

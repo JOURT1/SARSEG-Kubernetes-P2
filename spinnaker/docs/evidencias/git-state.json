@@ -1,0 +1,30 @@
+{
+  "sha": "3a1c721e4f71729f628d267d52264f96a1944ab5",
+  "digest": "316dd36014752bb90e54cbbc6b7a7c456ef9edbf9cd6f732c54fb686d55b6dcf",
+  "execution": "/pipelines/01M7VMP5J4C39HZM0Y8G8C4GX1",
+  "branch": "codex/spinnaker-local",
+  "artifacts": [
+    {
+      "type": "http/file",
+      "name": "deployment.yml",
+      "reference": "https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/3a1c721e4f71729f628d267d52264f96a1944ab5/spinnaker/k8s/deployment.yml",
+      "version": "3a1c721e4f71729f628d267d52264f96a1944ab5",
+      "artifactAccount": "public-git-http"
+    },
+    {
+      "type": "http/file",
+      "name": "service.yml",
+      "reference": "https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/3a1c721e4f71729f628d267d52264f96a1944ab5/spinnaker/k8s/service.yml",
+      "version": "3a1c721e4f71729f628d267d52264f96a1944ab5",
+      "artifactAccount": "public-git-http"
+    },
+    {
+      "type": "http/file",
+      "name": "hpa.yml",
+      "reference": "https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/3a1c721e4f71729f628d267d52264f96a1944ab5/spinnaker/k8s/hpa.yml",
+      "version": "3a1c721e4f71729f628d267d52264f96a1944ab5",
+      "artifactAccount": "public-git-http"
+    }
+  ],
+  "completedAt": "2026-11-20T04:51:20.883372+00:00"
+}

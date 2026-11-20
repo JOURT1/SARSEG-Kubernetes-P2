@@ -1,0 +1,118 @@
+<!doctype html><html lang="es"><meta charset="utf-8"><title>HPA: cinco réplicas bajo carga</title><style>body{margin:0;padding:36px;background:#f4f7fa;color:#12273b;font:17px Arial}header{color:#246782;font-size:16px;font-weight:bold;letter-spacing:2px}h1{font-size:32px;margin:12px 0}p{line-height:1.5}h2{font:15px Consolas;margin-top:24px}pre{background:white;padding:18px;border:1px solid #ccd6df;font:15px/1.5 Consolas;white-space:pre-wrap}footer{margin-top:20px;font-size:13px;color:#526477}</style><header>SARSEG / SPINNAKER / EVIDENCIA REAL</header><h1>HPA: cinco réplicas bajo carga</h1><p>El HPA elevó las réplicas automáticamente. No se ejecutó kubectl scale.</p><p>2026-11-20T04:52:28.891520+00:00 · contexto kind-sarseg-spinnaker</p><h2>kubectl --context kind-sarseg-spinnaker -n sarseg-dev get deployment,service,hpa,pods</h2><pre>NAME                         READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/api          1/1     1            1           13m
+deployment.apps/postgres     1/1     1            1           13m
+deployment.apps/sarseg-web   5/5     5            5           7m36s
+
+NAME                 TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
+service/api          ClusterIP   10.96.142.87   &lt;none&gt;        8080/TCP       13m
+service/postgres     ClusterIP   10.96.221.33   &lt;none&gt;        5432/TCP       13m
+service/sarseg-web   NodePort    10.96.101.63   &lt;none&gt;        80:30380/TCP   7m29s
+
+NAME                                             REFERENCE               TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/sarseg-web   Deployment/sarseg-web   cpu: 764%/50%   2         5         5          7m21s
+
+NAME                              READY   STATUS    RESTARTS   AGE
+pod/api-68ff9488c4-bpx8s          1/1     Running   0          7m37s
+pod/postgres-588b6d799d-x644n     1/1     Running   0          13m
+pod/sarseg-cpu-load-l4bkc         1/1     Running   0          62s
+pod/sarseg-web-5d49f74cf4-4pl2p   1/1     Running   0          21s
+pod/sarseg-web-5d49f74cf4-bdw65   1/1     Running   0          21s
+pod/sarseg-web-5d49f74cf4-kcvbw   1/1     Running   0          92s
+pod/sarseg-web-5d49f74cf4-p59lf   1/1     Running   0          21s
+pod/sarseg-web-5d49f74cf4-rdjb6   1/1     Running   0          89s
+</pre><h2>kubectl --context kind-sarseg-spinnaker -n sarseg-dev top pods</h2><pre>NAME                          CPU(cores)   MEMORY(bytes)   
+api-68ff9488c4-bpx8s          13m          157Mi           
+postgres-588b6d799d-x644n     3m           38Mi            
+sarseg-cpu-load-l4bkc         1001m        50Mi            
+sarseg-web-5d49f74cf4-4pl2p   87m          13Mi            
+sarseg-web-5d49f74cf4-bdw65   87m          14Mi            
+sarseg-web-5d49f74cf4-kcvbw   138m         17Mi            
+sarseg-web-5d49f74cf4-p59lf   88m          15Mi            
+sarseg-web-5d49f74cf4-rdjb6   87m          15Mi            
+</pre><details><summary>HPA original</summary><pre>{
+  &quot;spec&quot;: {
+    &quot;behavior&quot;: {
+      &quot;scaleDown&quot;: {
+        &quot;policies&quot;: [
+          {
+            &quot;periodSeconds&quot;: 15,
+            &quot;type&quot;: &quot;Pods&quot;,
+            &quot;value&quot;: 3
+          }
+        ],
+        &quot;selectPolicy&quot;: &quot;Max&quot;,
+        &quot;stabilizationWindowSeconds&quot;: 60
+      },
+      &quot;scaleUp&quot;: {
+        &quot;policies&quot;: [
+          {
+            &quot;periodSeconds&quot;: 15,
+            &quot;type&quot;: &quot;Pods&quot;,
+            &quot;value&quot;: 3
+          }
+        ],
+        &quot;selectPolicy&quot;: &quot;Max&quot;,
+        &quot;stabilizationWindowSeconds&quot;: 0
+      }
+    },
+    &quot;maxReplicas&quot;: 5,
+    &quot;metrics&quot;: [
+      {
+        &quot;resource&quot;: {
+          &quot;name&quot;: &quot;cpu&quot;,
+          &quot;target&quot;: {
+            &quot;averageUtilization&quot;: 50,
+            &quot;type&quot;: &quot;Utilization&quot;
+          }
+        },
+        &quot;type&quot;: &quot;Resource&quot;
+      }
+    ],
+    &quot;minReplicas&quot;: 2,
+    &quot;scaleTargetRef&quot;: {
+      &quot;apiVersion&quot;: &quot;apps/v1&quot;,
+      &quot;kind&quot;: &quot;Deployment&quot;,
+      &quot;name&quot;: &quot;sarseg-web&quot;
+    }
+  },
+  &quot;status&quot;: {
+    &quot;conditions&quot;: [
+      {
+        &quot;lastTransitionTime&quot;: &quot;2026-11-20T04:45:22Z&quot;,
+        &quot;message&quot;: &quot;recommended size matches current size&quot;,
+        &quot;reason&quot;: &quot;ReadyForNewScale&quot;,
+        &quot;status&quot;: &quot;True&quot;,
+        &quot;type&quot;: &quot;AbleToScale&quot;
+      },
+      {
+        &quot;lastTransitionTime&quot;: &quot;2026-11-20T04:51:37Z&quot;,
+        &quot;message&quot;: &quot;the HPA was able to successfully calculate a replica count from cpu resource utilization (percentage of request)&quot;,
+        &quot;reason&quot;: &quot;ValidMetricFound&quot;,
+        &quot;status&quot;: &quot;True&quot;,
+        &quot;type&quot;: &quot;ScalingActive&quot;
+      },
+      {
+        &quot;lastTransitionTime&quot;: &quot;2026-11-20T04:49:22Z&quot;,
+        &quot;message&quot;: &quot;the desired replica count is more than the maximum replica count&quot;,
+        &quot;reason&quot;: &quot;TooManyReplicas&quot;,
+        &quot;status&quot;: &quot;True&quot;,
+        &quot;type&quot;: &quot;ScalingLimited&quot;
+      }
+    ],
+    &quot;currentMetrics&quot;: [
+      {
+        &quot;resource&quot;: {
+          &quot;current&quot;: {
+            &quot;averageUtilization&quot;: 764,
+            &quot;averageValue&quot;: &quot;191m&quot;
+          },
+          &quot;name&quot;: &quot;cpu&quot;
+        },
+        &quot;type&quot;: &quot;Resource&quot;
+      }
+    ],
+    &quot;currentReplicas&quot;: 5,
+    &quot;desiredReplicas&quot;: 5,
+    &quot;lastScaleTime&quot;: &quot;2026-11-20T04:52:07Z&quot;
+  }
+}</pre></details><footer>Visor de salidas originales de kubectl. Captura de un registro de ejecución; no es una terminal ni un estado en vivo.</footer></html>
