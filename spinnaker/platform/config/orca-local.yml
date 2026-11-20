@@ -1,0 +1,41 @@
+sql:
+  enabled: true
+  connectionPools:
+    default:
+      default: true
+      jdbcUrl: jdbc:mysql://mysql:3306/orca
+      user: orca_service
+      password: ${SPIN_SQL_PASSWORD}
+      connectionTimeout: 5000
+      maxLifetime: 30000
+      maxPoolSize: 50
+  migration:
+    jdbcUrl: jdbc:mysql://mysql:3306/orca
+    user: orca_migrate
+    password: ${SPIN_SQL_PASSWORD}
+executionRepository:
+  sql:
+    enabled: true
+  redis:
+    enabled: false
+monitor:
+  activeExecutions:
+    redis: false
+keiko:
+  queue:
+    sql:
+      enabled: false
+    redis:
+      enabled: true
+queue:
+  zombieCheck:
+    enabled: true
+  pendingExecutionService:
+    sql:
+      enabled: false
+    redis:
+      enabled: true
+redis:
+  connection: redis://redis:6379
+tasks:
+  useManagedServiceAccounts: false

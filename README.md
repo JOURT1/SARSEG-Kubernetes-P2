@@ -1,5 +1,9 @@
 # SARSEG en Kubernetes
 
+**Nueva práctica P2: [configuración continua con Spinnaker](spinnaker/README.md)**.
+Incluye Deployment, Service NodePort, HPA 2-5 por CPU y despliegue automático
+desde Git en un clúster local independiente. [Informe con capturas](spinnaker/output/pdf/Informe-SARSEG-Spinnaker-P2.pdf).
+
 Práctica P2 de configuración de clúster, Deployment y ReplicaSet. Se despliega
 Grafana para observar infraestructura de laboratorio relacionada con SARSEG,
 un sistema de registro de asistencia con API .NET, PostgreSQL e interfaz Ionic/Angular.

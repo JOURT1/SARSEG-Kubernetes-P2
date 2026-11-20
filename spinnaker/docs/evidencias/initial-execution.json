@@ -1,0 +1,2765 @@
+{
+  "additionalHeaders": {},
+  "application": "sarseg",
+  "authentication": {
+    "allowedAccounts": [
+      "sarseg-local"
+    ],
+    "user": "anonymous"
+  },
+  "buildTime": 1795149958985,
+  "canceled": false,
+  "endTime": 1795149980607,
+  "id": "01M7VMD3T805VHK2M65EK3YCH8",
+  "initialConfig": {},
+  "keepWaitingPipelines": false,
+  "limitConcurrent": true,
+  "maxConcurrentExecutions": 0,
+  "name": "deploy-git",
+  "notifications": [],
+  "origin": "api",
+  "pipelineConfigId": "sarseg-deploy-git",
+  "rootId": "01M7VMD3T805VHK2M65EK3YCH8",
+  "stages": [
+    {
+      "context": {
+        "account": "sarseg-local",
+        "artifacts": [
+          {
+            "customKind": false,
+            "location": "sarseg-dev",
+            "metadata": {
+              "account": "sarseg-local"
+            },
+            "name": "sarseg-web",
+            "reference": "sarseg-web",
+            "type": "kubernetes/deployment",
+            "version": ""
+          }
+        ],
+        "cloudProvider": "kubernetes",
+        "deploy.account.name": "sarseg-local",
+        "deploy.server.groups": {},
+        "failedManifests": [],
+        "kato.last.task.id": {
+          "id": "01M7VMDA5R5MAH6MVV2QH8B8ZQ"
+        },
+        "kato.result.expected": false,
+        "kato.task.firstNotFoundRetry": -1,
+        "kato.task.lastStatus": "SUCCEEDED",
+        "kato.task.notFoundRetryCount": 0,
+        "kato.task.terminalRetryCount": 0,
+        "kato.tasks": [
+          {
+            "history": [
+              {
+                "phase": "ORCHESTRATION",
+                "status": "Initializing Orchestration Task"
+              },
+              {
+                "phase": "ORCHESTRATION",
+                "status": "Processing op: KubernetesDeployManifestOperation"
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Beginning deployment of manifests in account sarseg-local ..."
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Sorting manifests by priority..."
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Deploy order is: deployment sarseg-web"
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Binding artifacts in deployment sarseg-web..."
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Finding deployer for deployment..."
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Bound artifacts: []..."
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Finding deployer for deployment..."
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Annotating manifest deployment sarseg-web with artifact, relationships & moniker..."
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Checking if all requested artifacts were bound..."
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Finding deployer for deployment..."
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Submitting manifest deployment sarseg-web to kubernetes master..."
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Deploy manifest task completed successfully for manifest deployment sarseg-web in account sarseg-local"
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Deploy manifest task completed successfully for all manifests in account sarseg-local"
+              },
+              {
+                "phase": "ORCHESTRATION",
+                "status": "Orchestration completed."
+              },
+              {
+                "phase": "ORCHESTRATION",
+                "status": "Orchestration completed."
+              }
+            ],
+            "id": "01M7VMD4DCNHM7BX7QW1DJRXES",
+            "outputs": [],
+            "resultObjects": [
+              {
+                "boundArtifacts": [],
+                "createdArtifacts": [
+                  {
+                    "customKind": false,
+                    "location": "sarseg-dev",
+                    "metadata": {
+                      "account": "sarseg-local"
+                    },
+                    "name": "sarseg-web",
+                    "reference": "sarseg-web",
+                    "type": "kubernetes/deployment",
+                    "version": ""
+                  }
+                ],
+                "manifestNamesByNamespace": {
+                  "sarseg-dev": [
+                    "deployment sarseg-web"
+                  ]
+                },
+                "manifests": [
+                  {
+                    "apiVersion": "apps/v1",
+                    "kind": "Deployment",
+                    "metadata": {
+                      "annotations": {
+                        "artifact.spinnaker.io/location": "sarseg-dev",
+                        "artifact.spinnaker.io/name": "sarseg-web",
+                        "artifact.spinnaker.io/type": "kubernetes/deployment",
+                        "artifact.spinnaker.io/version": "",
+                        "deployment.kubernetes.io/revision": "1",
+                        "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"metadata\":{\"annotations\":{\"artifact.spinnaker.io/location\":\"sarseg-dev\",\"artifact.spinnaker.io/name\":\"sarseg-web\",\"artifact.spinnaker.io/type\":\"kubernetes/deployment\",\"artifact.spinnaker.io/version\":\"\",\"moniker.spinnaker.io/application\":\"sarseg\",\"moniker.spinnaker.io/cluster\":\"deployment sarseg-web\",\"strategy.spinnaker.io/use-source-capacity\":\"true\"},\"labels\":{\"app\":\"sarseg-web\",\"app.kubernetes.io/managed-by\":\"spinnaker\",\"app.kubernetes.io/name\":\"sarseg\",\"app.kubernetes.io/part-of\":\"sarseg\"},\"name\":\"sarseg-web\",\"namespace\":\"sarseg-dev\"},\"spec\":{\"replicas\":2,\"revisionHistoryLimit\":3,\"selector\":{\"matchLabels\":{\"app\":\"sarseg-web\"}},\"strategy\":{\"rollingUpdate\":{\"maxSurge\":1,\"maxUnavailable\":0},\"type\":\"RollingUpdate\"},\"template\":{\"metadata\":{\"annotations\":{\"artifact.spinnaker.io/location\":\"sarseg-dev\",\"artifact.spinnaker.io/name\":\"sarseg-web\",\"artifact.spinnaker.io/type\":\"kubernetes/deployment\",\"artifact.spinnaker.io/version\":\"\",\"moniker.spinnaker.io/application\":\"sarseg\",\"moniker.spinnaker.io/cluster\":\"deployment sarseg-web\",\"sarseg.edu/revision\":\"gitops-verificado-044534\"},\"labels\":{\"app\":\"sarseg-web\",\"app.kubernetes.io/managed-by\":\"spinnaker\",\"app.kubernetes.io/name\":\"sarseg\",\"app.kubernetes.io/part-of\":\"sarseg\"}},\"spec\":{\"containers\":[{\"env\":[{\"name\":\"DOMAIN\",\"value\":\":8080\"}],\"image\":\"sarseg-web:9984bc57\",\"imagePullPolicy\":\"IfNotPresent\",\"livenessProbe\":{\"httpGet\":{\"path\":\"/\",\"port\":\"http\"},\"initialDelaySeconds\":10,\"periodSeconds\":10},\"name\":\"web\",\"ports\":[{\"containerPort\":8080,\"name\":\"http\"}],\"readinessProbe\":{\"httpGet\":{\"path\":\"/\",\"port\":\"http\"},\"periodSeconds\":5},\"resources\":{\"limits\":{\"cpu\":\"250m\",\"memory\":\"128Mi\"},\"requests\":{\"cpu\":\"25m\",\"memory\":\"32Mi\"}}}]}}}}\n",
+                        "moniker.spinnaker.io/application": "sarseg",
+                        "moniker.spinnaker.io/cluster": "deployment sarseg-web",
+                        "strategy.spinnaker.io/use-source-capacity": "true"
+                      },
+                      "creationTimestamp": "2026-11-20T04:44:52Z",
+                      "generation": 2.0,
+                      "labels": {
+                        "app": "sarseg-web",
+                        "app.kubernetes.io/managed-by": "spinnaker",
+                        "app.kubernetes.io/name": "sarseg",
+                        "app.kubernetes.io/part-of": "sarseg"
+                      },
+                      "name": "sarseg-web",
+                      "namespace": "sarseg-dev",
+                      "resourceVersion": "1886",
+                      "uid": "560dad5d-3d7f-4c98-8315-0a703e4790a5"
+                    },
+                    "spec": {
+                      "progressDeadlineSeconds": 600.0,
+                      "replicas": 2.0,
+                      "revisionHistoryLimit": 3.0,
+                      "selector": {
+                        "matchLabels": {
+                          "app": "sarseg-web"
+                        }
+                      },
+                      "strategy": {
+                        "rollingUpdate": {
+                          "maxSurge": 1.0,
+                          "maxUnavailable": 0.0
+                        },
+                        "type": "RollingUpdate"
+                      },
+                      "template": {
+                        "metadata": {
+                          "annotations": {
+                            "artifact.spinnaker.io/location": "sarseg-dev",
+                            "artifact.spinnaker.io/name": "sarseg-web",
+                            "artifact.spinnaker.io/type": "kubernetes/deployment",
+                            "artifact.spinnaker.io/version": "",
+                            "moniker.spinnaker.io/application": "sarseg",
+                            "moniker.spinnaker.io/cluster": "deployment sarseg-web",
+                            "sarseg.edu/revision": "gitops-verificado-044534"
+                          },
+                          "labels": {
+                            "app": "sarseg-web",
+                            "app.kubernetes.io/managed-by": "spinnaker",
+                            "app.kubernetes.io/name": "sarseg",
+                            "app.kubernetes.io/part-of": "sarseg"
+                          }
+                        },
+                        "spec": {
+                          "containers": [
+                            {
+                              "env": [
+                                {
+                                  "name": "DOMAIN",
+                                  "value": ":8080"
+                                }
+                              ],
+                              "image": "sarseg-web:9984bc57",
+                              "imagePullPolicy": "IfNotPresent",
+                              "livenessProbe": {
+                                "failureThreshold": 3.0,
+                                "httpGet": {
+                                  "path": "/",
+                                  "port": "http",
+                                  "scheme": "HTTP"
+                                },
+                                "initialDelaySeconds": 10.0,
+                                "periodSeconds": 10.0,
+                                "successThreshold": 1.0,
+                                "timeoutSeconds": 1.0
+                              },
+                              "name": "web",
+                              "ports": [
+                                {
+                                  "containerPort": 8080.0,
+                                  "name": "http",
+                                  "protocol": "TCP"
+                                }
+                              ],
+                              "readinessProbe": {
+                                "failureThreshold": 3.0,
+                                "httpGet": {
+                                  "path": "/",
+                                  "port": "http",
+                                  "scheme": "HTTP"
+                                },
+                                "periodSeconds": 5.0,
+                                "successThreshold": 1.0,
+                                "timeoutSeconds": 1.0
+                              },
+                              "resources": {
+                                "limits": {
+                                  "cpu": "250m",
+                                  "memory": "128Mi"
+                                },
+                                "requests": {
+                                  "cpu": "25m",
+                                  "memory": "32Mi"
+                                }
+                              },
+                              "terminationMessagePath": "/dev/termination-log",
+                              "terminationMessagePolicy": "File"
+                            }
+                          ],
+                          "dnsPolicy": "ClusterFirst",
+                          "restartPolicy": "Always",
+                          "schedulerName": "default-scheduler",
+                          "securityContext": {},
+                          "terminationGracePeriodSeconds": 30.0
+                        }
+                      }
+                    },
+                    "status": {
+                      "availableReplicas": 2.0,
+                      "conditions": [
+                        {
+                          "lastTransitionTime": "2026-11-20T04:44:55Z",
+                          "lastUpdateTime": "2026-11-20T04:44:55Z",
+                          "message": "Deployment has minimum availability.",
+                          "reason": "MinimumReplicasAvailable",
+                          "status": "True",
+                          "type": "Available"
+                        },
+                        {
+                          "lastTransitionTime": "2026-11-20T04:44:52Z",
+                          "lastUpdateTime": "2026-11-20T04:44:55Z",
+                          "message": "ReplicaSet \"sarseg-web-577947b5c7\" has successfully progressed.",
+                          "reason": "NewReplicaSetAvailable",
+                          "status": "True",
+                          "type": "Progressing"
+                        }
+                      ],
+                      "observedGeneration": 1.0,
+                      "readyReplicas": 2.0,
+                      "replicas": 2.0,
+                      "updatedReplicas": 2.0
+                    }
+                  }
+                ]
+              }
+            ],
+            "status": {
+              "completed": true,
+              "failed": false,
+              "retryable": false
+            }
+          },
+          {
+            "history": [
+              {
+                "phase": "ORCHESTRATION",
+                "status": "Initializing Orchestration Task"
+              },
+              {
+                "phase": "ORCHESTRATION",
+                "status": "Processing op: KubernetesCleanupArtifactsOperation"
+              },
+              {
+                "phase": "ORCHESTRATION",
+                "status": "Orchestration completed."
+              },
+              {
+                "phase": "ORCHESTRATION",
+                "status": "Orchestration completed."
+              }
+            ],
+            "id": "01M7VMDA5R5MAH6MVV2QH8B8ZQ",
+            "outputs": [],
+            "resultObjects": [
+              {
+                "boundArtifacts": [],
+                "createdArtifacts": [],
+                "manifestNamesByNamespace": {}
+              }
+            ],
+            "status": {
+              "completed": true,
+              "failed": false,
+              "retryable": false
+            }
+          }
+        ],
+        "manifestArtifact": {
+          "artifactAccount": "public-git-http",
+          "name": "deployment.yml",
+          "reference": "https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/0f101e672795b832f1e4474b85c5db915c194ec5/spinnaker/k8s/deployment.yml",
+          "type": "http/file"
+        },
+        "manifestArtifactAccount": "public-git-http",
+        "manifests": [
+          {
+            "apiVersion": "apps/v1",
+            "kind": "Deployment",
+            "metadata": {
+              "annotations": {
+                "strategy.spinnaker.io/use-source-capacity": "true"
+              },
+              "labels": {
+                "app": "sarseg-web",
+                "app.kubernetes.io/part-of": "sarseg"
+              },
+              "name": "sarseg-web",
+              "namespace": "sarseg-dev"
+            },
+            "spec": {
+              "replicas": 2,
+              "revisionHistoryLimit": 3,
+              "selector": {
+                "matchLabels": {
+                  "app": "sarseg-web"
+                }
+              },
+              "strategy": {
+                "rollingUpdate": {
+                  "maxSurge": 1,
+                  "maxUnavailable": 0
+                },
+                "type": "RollingUpdate"
+              },
+              "template": {
+                "metadata": {
+                  "annotations": {
+                    "sarseg.edu/revision": "gitops-verificado-044534"
+                  },
+                  "labels": {
+                    "app": "sarseg-web",
+                    "app.kubernetes.io/part-of": "sarseg"
+                  }
+                },
+                "spec": {
+                  "containers": [
+                    {
+                      "env": [
+                        {
+                          "name": "DOMAIN",
+                          "value": ":8080"
+                        }
+                      ],
+                      "image": "sarseg-web:9984bc57",
+                      "imagePullPolicy": "IfNotPresent",
+                      "livenessProbe": {
+                        "httpGet": {
+                          "path": "/",
+                          "port": "http"
+                        },
+                        "initialDelaySeconds": 10,
+                        "periodSeconds": 10
+                      },
+                      "name": "web",
+                      "ports": [
+                        {
+                          "containerPort": 8080,
+                          "name": "http"
+                        }
+                      ],
+                      "readinessProbe": {
+                        "httpGet": {
+                          "path": "/",
+                          "port": "http"
+                        },
+                        "periodSeconds": 5
+                      },
+                      "resources": {
+                        "limits": {
+                          "cpu": "250m",
+                          "memory": "128Mi"
+                        },
+                        "requests": {
+                          "cpu": "25m",
+                          "memory": "32Mi"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "messages": [],
+        "moniker": {
+          "app": "sarseg"
+        },
+        "namespaceOverride": "sarseg-dev",
+        "optionalArtifacts": [
+          {
+            "artifactAccount": "public-git-http",
+            "customKind": false,
+            "metadata": {},
+            "name": "deployment.yml",
+            "reference": "https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/0f101e672795b832f1e4474b85c5db915c194ec5/spinnaker/k8s/deployment.yml",
+            "type": "http/file",
+            "version": "0f101e672795b832f1e4474b85c5db915c194ec5"
+          },
+          {
+            "artifactAccount": "public-git-http",
+            "customKind": false,
+            "metadata": {},
+            "name": "service.yml",
+            "reference": "https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/0f101e672795b832f1e4474b85c5db915c194ec5/spinnaker/k8s/service.yml",
+            "type": "http/file",
+            "version": "0f101e672795b832f1e4474b85c5db915c194ec5"
+          },
+          {
+            "artifactAccount": "public-git-http",
+            "customKind": false,
+            "metadata": {},
+            "name": "hpa.yml",
+            "reference": "https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/0f101e672795b832f1e4474b85c5db915c194ec5/spinnaker/k8s/hpa.yml",
+            "type": "http/file",
+            "version": "0f101e672795b832f1e4474b85c5db915c194ec5"
+          }
+        ],
+        "outputs.boundArtifacts": [],
+        "outputs.createdArtifacts": [
+          {
+            "customKind": false,
+            "location": "sarseg-dev",
+            "metadata": {
+              "account": "sarseg-local"
+            },
+            "name": "sarseg-web",
+            "reference": "sarseg-web",
+            "type": "kubernetes/deployment",
+            "version": ""
+          }
+        ],
+        "outputs.manifestNamesByNamespace": {
+          "sarseg-dev": [
+            "deployment sarseg-web"
+          ]
+        },
+        "outputs.manifests": [
+          {
+            "apiVersion": "apps/v1",
+            "kind": "Deployment",
+            "metadata": {
+              "annotations": {
+                "artifact.spinnaker.io/location": "sarseg-dev",
+                "artifact.spinnaker.io/name": "sarseg-web",
+                "artifact.spinnaker.io/type": "kubernetes/deployment",
+                "artifact.spinnaker.io/version": "",
+                "deployment.kubernetes.io/revision": "1",
+                "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"metadata\":{\"annotations\":{\"artifact.spinnaker.io/location\":\"sarseg-dev\",\"artifact.spinnaker.io/name\":\"sarseg-web\",\"artifact.spinnaker.io/type\":\"kubernetes/deployment\",\"artifact.spinnaker.io/version\":\"\",\"moniker.spinnaker.io/application\":\"sarseg\",\"moniker.spinnaker.io/cluster\":\"deployment sarseg-web\",\"strategy.spinnaker.io/use-source-capacity\":\"true\"},\"labels\":{\"app\":\"sarseg-web\",\"app.kubernetes.io/managed-by\":\"spinnaker\",\"app.kubernetes.io/name\":\"sarseg\",\"app.kubernetes.io/part-of\":\"sarseg\"},\"name\":\"sarseg-web\",\"namespace\":\"sarseg-dev\"},\"spec\":{\"replicas\":2,\"revisionHistoryLimit\":3,\"selector\":{\"matchLabels\":{\"app\":\"sarseg-web\"}},\"strategy\":{\"rollingUpdate\":{\"maxSurge\":1,\"maxUnavailable\":0},\"type\":\"RollingUpdate\"},\"template\":{\"metadata\":{\"annotations\":{\"artifact.spinnaker.io/location\":\"sarseg-dev\",\"artifact.spinnaker.io/name\":\"sarseg-web\",\"artifact.spinnaker.io/type\":\"kubernetes/deployment\",\"artifact.spinnaker.io/version\":\"\",\"moniker.spinnaker.io/application\":\"sarseg\",\"moniker.spinnaker.io/cluster\":\"deployment sarseg-web\",\"sarseg.edu/revision\":\"gitops-verificado-044534\"},\"labels\":{\"app\":\"sarseg-web\",\"app.kubernetes.io/managed-by\":\"spinnaker\",\"app.kubernetes.io/name\":\"sarseg\",\"app.kubernetes.io/part-of\":\"sarseg\"}},\"spec\":{\"containers\":[{\"env\":[{\"name\":\"DOMAIN\",\"value\":\":8080\"}],\"image\":\"sarseg-web:9984bc57\",\"imagePullPolicy\":\"IfNotPresent\",\"livenessProbe\":{\"httpGet\":{\"path\":\"/\",\"port\":\"http\"},\"initialDelaySeconds\":10,\"periodSeconds\":10},\"name\":\"web\",\"ports\":[{\"containerPort\":8080,\"name\":\"http\"}],\"readinessProbe\":{\"httpGet\":{\"path\":\"/\",\"port\":\"http\"},\"periodSeconds\":5},\"resources\":{\"limits\":{\"cpu\":\"250m\",\"memory\":\"128Mi\"},\"requests\":{\"cpu\":\"25m\",\"memory\":\"32Mi\"}}}]}}}}\n",
+                "moniker.spinnaker.io/application": "sarseg",
+                "moniker.spinnaker.io/cluster": "deployment sarseg-web",
+                "strategy.spinnaker.io/use-source-capacity": "true"
+              },
+              "creationTimestamp": "2026-11-20T04:44:52Z",
+              "generation": 2.0,
+              "labels": {
+                "app": "sarseg-web",
+                "app.kubernetes.io/managed-by": "spinnaker",
+                "app.kubernetes.io/name": "sarseg",
+                "app.kubernetes.io/part-of": "sarseg"
+              },
+              "name": "sarseg-web",
+              "namespace": "sarseg-dev",
+              "resourceVersion": "1886",
+              "uid": "560dad5d-3d7f-4c98-8315-0a703e4790a5"
+            },
+            "spec": {
+              "progressDeadlineSeconds": 600.0,
+              "replicas": 2.0,
+              "revisionHistoryLimit": 3.0,
+              "selector": {
+                "matchLabels": {
+                  "app": "sarseg-web"
+                }
+              },
+              "strategy": {
+                "rollingUpdate": {
+                  "maxSurge": 1.0,
+                  "maxUnavailable": 0.0
+                },
+                "type": "RollingUpdate"
+              },
+              "template": {
+                "metadata": {
+                  "annotations": {
+                    "artifact.spinnaker.io/location": "sarseg-dev",
+                    "artifact.spinnaker.io/name": "sarseg-web",
+                    "artifact.spinnaker.io/type": "kubernetes/deployment",
+                    "artifact.spinnaker.io/version": "",
+                    "moniker.spinnaker.io/application": "sarseg",
+                    "moniker.spinnaker.io/cluster": "deployment sarseg-web",
+                    "sarseg.edu/revision": "gitops-verificado-044534"
+                  },
+                  "labels": {
+                    "app": "sarseg-web",
+                    "app.kubernetes.io/managed-by": "spinnaker",
+                    "app.kubernetes.io/name": "sarseg",
+                    "app.kubernetes.io/part-of": "sarseg"
+                  }
+                },
+                "spec": {
+                  "containers": [
+                    {
+                      "env": [
+                        {
+                          "name": "DOMAIN",
+                          "value": ":8080"
+                        }
+                      ],
+                      "image": "sarseg-web:9984bc57",
+                      "imagePullPolicy": "IfNotPresent",
+                      "livenessProbe": {
+                        "failureThreshold": 3.0,
+                        "httpGet": {
+                          "path": "/",
+                          "port": "http",
+                          "scheme": "HTTP"
+                        },
+                        "initialDelaySeconds": 10.0,
+                        "periodSeconds": 10.0,
+                        "successThreshold": 1.0,
+                        "timeoutSeconds": 1.0
+                      },
+                      "name": "web",
+                      "ports": [
+                        {
+                          "containerPort": 8080.0,
+                          "name": "http",
+                          "protocol": "TCP"
+                        }
+                      ],
+                      "readinessProbe": {
+                        "failureThreshold": 3.0,
+                        "httpGet": {
+                          "path": "/",
+                          "port": "http",
+                          "scheme": "HTTP"
+                        },
+                        "periodSeconds": 5.0,
+                        "successThreshold": 1.0,
+                        "timeoutSeconds": 1.0
+                      },
+                      "resources": {
+                        "limits": {
+                          "cpu": "250m",
+                          "memory": "128Mi"
+                        },
+                        "requests": {
+                          "cpu": "25m",
+                          "memory": "32Mi"
+                        }
+                      },
+                      "terminationMessagePath": "/dev/termination-log",
+                      "terminationMessagePolicy": "File"
+                    }
+                  ],
+                  "dnsPolicy": "ClusterFirst",
+                  "restartPolicy": "Always",
+                  "schedulerName": "default-scheduler",
+                  "securityContext": {},
+                  "terminationGracePeriodSeconds": 30.0
+                }
+              }
+            },
+            "status": {
+              "availableReplicas": 2.0,
+              "conditions": [
+                {
+                  "lastTransitionTime": "2026-11-20T04:44:55Z",
+                  "lastUpdateTime": "2026-11-20T04:44:55Z",
+                  "message": "Deployment has minimum availability.",
+                  "reason": "MinimumReplicasAvailable",
+                  "status": "True",
+                  "type": "Available"
+                },
+                {
+                  "lastTransitionTime": "2026-11-20T04:44:52Z",
+                  "lastUpdateTime": "2026-11-20T04:44:55Z",
+                  "message": "ReplicaSet \"sarseg-web-577947b5c7\" has successfully progressed.",
+                  "reason": "NewReplicaSetAvailable",
+                  "status": "True",
+                  "type": "Progressing"
+                }
+              ],
+              "observedGeneration": 1.0,
+              "readyReplicas": 2.0,
+              "replicas": 2.0,
+              "updatedReplicas": 2.0
+            }
+          }
+        ],
+        "requiredArtifacts": [],
+        "skipExpressionEvaluation": false,
+        "source": "artifact",
+        "stableManifests": [
+          {
+            "location": "sarseg-dev",
+            "manifestName": "deployment sarseg-web"
+          }
+        ],
+        "stageTimeoutMs": 300000,
+        "trafficManagement": {
+          "enabled": false,
+          "options": {
+            "enableTraffic": true
+          }
+        }
+      },
+      "endTime": 1795149966303,
+      "id": "01M7VMD3T9MYZT4WGDJEZJ9AZ9",
+      "name": "Deploy deployment.yml",
+      "outputs": {
+        "artifacts": [
+          {
+            "customKind": false,
+            "location": "sarseg-dev",
+            "metadata": {
+              "account": "sarseg-local"
+            },
+            "name": "sarseg-web",
+            "reference": "sarseg-web",
+            "type": "kubernetes/deployment",
+            "version": ""
+          }
+        ],
+        "manifests": [
+          {
+            "apiVersion": "apps/v1",
+            "kind": "Deployment",
+            "metadata": {
+              "annotations": {
+                "strategy.spinnaker.io/use-source-capacity": "true"
+              },
+              "labels": {
+                "app": "sarseg-web",
+                "app.kubernetes.io/part-of": "sarseg"
+              },
+              "name": "sarseg-web",
+              "namespace": "sarseg-dev"
+            },
+            "spec": {
+              "replicas": 2,
+              "revisionHistoryLimit": 3,
+              "selector": {
+                "matchLabels": {
+                  "app": "sarseg-web"
+                }
+              },
+              "strategy": {
+                "rollingUpdate": {
+                  "maxSurge": 1,
+                  "maxUnavailable": 0
+                },
+                "type": "RollingUpdate"
+              },
+              "template": {
+                "metadata": {
+                  "annotations": {
+                    "sarseg.edu/revision": "gitops-verificado-044534"
+                  },
+                  "labels": {
+                    "app": "sarseg-web",
+                    "app.kubernetes.io/part-of": "sarseg"
+                  }
+                },
+                "spec": {
+                  "containers": [
+                    {
+                      "env": [
+                        {
+                          "name": "DOMAIN",
+                          "value": ":8080"
+                        }
+                      ],
+                      "image": "sarseg-web:9984bc57",
+                      "imagePullPolicy": "IfNotPresent",
+                      "livenessProbe": {
+                        "httpGet": {
+                          "path": "/",
+                          "port": "http"
+                        },
+                        "initialDelaySeconds": 10,
+                        "periodSeconds": 10
+                      },
+                      "name": "web",
+                      "ports": [
+                        {
+                          "containerPort": 8080,
+                          "name": "http"
+                        }
+                      ],
+                      "readinessProbe": {
+                        "httpGet": {
+                          "path": "/",
+                          "port": "http"
+                        },
+                        "periodSeconds": 5
+                      },
+                      "resources": {
+                        "limits": {
+                          "cpu": "250m",
+                          "memory": "128Mi"
+                        },
+                        "requests": {
+                          "cpu": "25m",
+                          "memory": "32Mi"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "optionalArtifacts": [
+          {
+            "artifactAccount": "public-git-http",
+            "customKind": false,
+            "metadata": {},
+            "name": "deployment.yml",
+            "reference": "https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/0f101e672795b832f1e4474b85c5db915c194ec5/spinnaker/k8s/deployment.yml",
+            "type": "http/file",
+            "version": "0f101e672795b832f1e4474b85c5db915c194ec5"
+          },
+          {
+            "artifactAccount": "public-git-http",
+            "customKind": false,
+            "metadata": {},
+            "name": "service.yml",
+            "reference": "https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/0f101e672795b832f1e4474b85c5db915c194ec5/spinnaker/k8s/service.yml",
+            "type": "http/file",
+            "version": "0f101e672795b832f1e4474b85c5db915c194ec5"
+          },
+          {
+            "artifactAccount": "public-git-http",
+            "customKind": false,
+            "metadata": {},
+            "name": "hpa.yml",
+            "reference": "https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/0f101e672795b832f1e4474b85c5db915c194ec5/spinnaker/k8s/hpa.yml",
+            "type": "http/file",
+            "version": "0f101e672795b832f1e4474b85c5db915c194ec5"
+          }
+        ],
+        "outputs.boundArtifacts": [],
+        "outputs.createdArtifacts": [
+          {
+            "customKind": false,
+            "location": "sarseg-dev",
+            "metadata": {
+              "account": "sarseg-local"
+            },
+            "name": "sarseg-web",
+            "reference": "sarseg-web",
+            "type": "kubernetes/deployment",
+            "version": ""
+          }
+        ],
+        "outputs.manifestNamesByNamespace": {
+          "sarseg-dev": [
+            "deployment sarseg-web"
+          ]
+        },
+        "outputs.manifests": [
+          {
+            "apiVersion": "apps/v1",
+            "kind": "Deployment",
+            "metadata": {
+              "annotations": {
+                "artifact.spinnaker.io/location": "sarseg-dev",
+                "artifact.spinnaker.io/name": "sarseg-web",
+                "artifact.spinnaker.io/type": "kubernetes/deployment",
+                "artifact.spinnaker.io/version": "",
+                "deployment.kubernetes.io/revision": "1",
+                "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"metadata\":{\"annotations\":{\"artifact.spinnaker.io/location\":\"sarseg-dev\",\"artifact.spinnaker.io/name\":\"sarseg-web\",\"artifact.spinnaker.io/type\":\"kubernetes/deployment\",\"artifact.spinnaker.io/version\":\"\",\"moniker.spinnaker.io/application\":\"sarseg\",\"moniker.spinnaker.io/cluster\":\"deployment sarseg-web\",\"strategy.spinnaker.io/use-source-capacity\":\"true\"},\"labels\":{\"app\":\"sarseg-web\",\"app.kubernetes.io/managed-by\":\"spinnaker\",\"app.kubernetes.io/name\":\"sarseg\",\"app.kubernetes.io/part-of\":\"sarseg\"},\"name\":\"sarseg-web\",\"namespace\":\"sarseg-dev\"},\"spec\":{\"replicas\":2,\"revisionHistoryLimit\":3,\"selector\":{\"matchLabels\":{\"app\":\"sarseg-web\"}},\"strategy\":{\"rollingUpdate\":{\"maxSurge\":1,\"maxUnavailable\":0},\"type\":\"RollingUpdate\"},\"template\":{\"metadata\":{\"annotations\":{\"artifact.spinnaker.io/location\":\"sarseg-dev\",\"artifact.spinnaker.io/name\":\"sarseg-web\",\"artifact.spinnaker.io/type\":\"kubernetes/deployment\",\"artifact.spinnaker.io/version\":\"\",\"moniker.spinnaker.io/application\":\"sarseg\",\"moniker.spinnaker.io/cluster\":\"deployment sarseg-web\",\"sarseg.edu/revision\":\"gitops-verificado-044534\"},\"labels\":{\"app\":\"sarseg-web\",\"app.kubernetes.io/managed-by\":\"spinnaker\",\"app.kubernetes.io/name\":\"sarseg\",\"app.kubernetes.io/part-of\":\"sarseg\"}},\"spec\":{\"containers\":[{\"env\":[{\"name\":\"DOMAIN\",\"value\":\":8080\"}],\"image\":\"sarseg-web:9984bc57\",\"imagePullPolicy\":\"IfNotPresent\",\"livenessProbe\":{\"httpGet\":{\"path\":\"/\",\"port\":\"http\"},\"initialDelaySeconds\":10,\"periodSeconds\":10},\"name\":\"web\",\"ports\":[{\"containerPort\":8080,\"name\":\"http\"}],\"readinessProbe\":{\"httpGet\":{\"path\":\"/\",\"port\":\"http\"},\"periodSeconds\":5},\"resources\":{\"limits\":{\"cpu\":\"250m\",\"memory\":\"128Mi\"},\"requests\":{\"cpu\":\"25m\",\"memory\":\"32Mi\"}}}]}}}}\n",
+                "moniker.spinnaker.io/application": "sarseg",
+                "moniker.spinnaker.io/cluster": "deployment sarseg-web",
+                "strategy.spinnaker.io/use-source-capacity": "true"
+              },
+              "creationTimestamp": "2026-11-20T04:44:52Z",
+              "generation": 2.0,
+              "labels": {
+                "app": "sarseg-web",
+                "app.kubernetes.io/managed-by": "spinnaker",
+                "app.kubernetes.io/name": "sarseg",
+                "app.kubernetes.io/part-of": "sarseg"
+              },
+              "name": "sarseg-web",
+              "namespace": "sarseg-dev",
+              "resourceVersion": "1886",
+              "uid": "560dad5d-3d7f-4c98-8315-0a703e4790a5"
+            },
+            "spec": {
+              "progressDeadlineSeconds": 600.0,
+              "replicas": 2.0,
+              "revisionHistoryLimit": 3.0,
+              "selector": {
+                "matchLabels": {
+                  "app": "sarseg-web"
+                }
+              },
+              "strategy": {
+                "rollingUpdate": {
+                  "maxSurge": 1.0,
+                  "maxUnavailable": 0.0
+                },
+                "type": "RollingUpdate"
+              },
+              "template": {
+                "metadata": {
+                  "annotations": {
+                    "artifact.spinnaker.io/location": "sarseg-dev",
+                    "artifact.spinnaker.io/name": "sarseg-web",
+                    "artifact.spinnaker.io/type": "kubernetes/deployment",
+                    "artifact.spinnaker.io/version": "",
+                    "moniker.spinnaker.io/application": "sarseg",
+                    "moniker.spinnaker.io/cluster": "deployment sarseg-web",
+                    "sarseg.edu/revision": "gitops-verificado-044534"
+                  },
+                  "labels": {
+                    "app": "sarseg-web",
+                    "app.kubernetes.io/managed-by": "spinnaker",
+                    "app.kubernetes.io/name": "sarseg",
+                    "app.kubernetes.io/part-of": "sarseg"
+                  }
+                },
+                "spec": {
+                  "containers": [
+                    {
+                      "env": [
+                        {
+                          "name": "DOMAIN",
+                          "value": ":8080"
+                        }
+                      ],
+                      "image": "sarseg-web:9984bc57",
+                      "imagePullPolicy": "IfNotPresent",
+                      "livenessProbe": {
+                        "failureThreshold": 3.0,
+                        "httpGet": {
+                          "path": "/",
+                          "port": "http",
+                          "scheme": "HTTP"
+                        },
+                        "initialDelaySeconds": 10.0,
+                        "periodSeconds": 10.0,
+                        "successThreshold": 1.0,
+                        "timeoutSeconds": 1.0
+                      },
+                      "name": "web",
+                      "ports": [
+                        {
+                          "containerPort": 8080.0,
+                          "name": "http",
+                          "protocol": "TCP"
+                        }
+                      ],
+                      "readinessProbe": {
+                        "failureThreshold": 3.0,
+                        "httpGet": {
+                          "path": "/",
+                          "port": "http",
+                          "scheme": "HTTP"
+                        },
+                        "periodSeconds": 5.0,
+                        "successThreshold": 1.0,
+                        "timeoutSeconds": 1.0
+                      },
+                      "resources": {
+                        "limits": {
+                          "cpu": "250m",
+                          "memory": "128Mi"
+                        },
+                        "requests": {
+                          "cpu": "25m",
+                          "memory": "32Mi"
+                        }
+                      },
+                      "terminationMessagePath": "/dev/termination-log",
+                      "terminationMessagePolicy": "File"
+                    }
+                  ],
+                  "dnsPolicy": "ClusterFirst",
+                  "restartPolicy": "Always",
+                  "schedulerName": "default-scheduler",
+                  "securityContext": {},
+                  "terminationGracePeriodSeconds": 30.0
+                }
+              }
+            },
+            "status": {
+              "availableReplicas": 2.0,
+              "conditions": [
+                {
+                  "lastTransitionTime": "2026-11-20T04:44:55Z",
+                  "lastUpdateTime": "2026-11-20T04:44:55Z",
+                  "message": "Deployment has minimum availability.",
+                  "reason": "MinimumReplicasAvailable",
+                  "status": "True",
+                  "type": "Available"
+                },
+                {
+                  "lastTransitionTime": "2026-11-20T04:44:52Z",
+                  "lastUpdateTime": "2026-11-20T04:44:55Z",
+                  "message": "ReplicaSet \"sarseg-web-577947b5c7\" has successfully progressed.",
+                  "reason": "NewReplicaSetAvailable",
+                  "status": "True",
+                  "type": "Progressing"
+                }
+              ],
+              "observedGeneration": 1.0,
+              "readyReplicas": 2.0,
+              "replicas": 2.0,
+              "updatedReplicas": 2.0
+            }
+          }
+        ],
+        "requiredArtifacts": []
+      },
+      "refId": "1",
+      "requisiteStageRefIds": [],
+      "startTime": 1795149959128,
+      "status": "SUCCEEDED",
+      "tasks": [
+        {
+          "endTime": 1795149959458,
+          "id": "1",
+          "implementingClass": "com.netflix.spinnaker.orca.clouddriver.tasks.manifest.ResolveDeploySourceManifestTask",
+          "loopEnd": false,
+          "loopStart": false,
+          "name": "resolveDeploySourceManifest",
+          "stageEnd": false,
+          "stageStart": true,
+          "startTime": 1795149959183,
+          "status": "SUCCEEDED",
+          "taskExceptionDetails": {}
+        },
+        {
+          "endTime": 1795149959676,
+          "id": "2",
+          "implementingClass": "com.netflix.spinnaker.orca.clouddriver.tasks.manifest.DeployManifestTask",
+          "loopEnd": false,
+          "loopStart": false,
+          "name": "deployManifest",
+          "stageEnd": false,
+          "stageStart": false,
+          "startTime": 1795149959512,
+          "status": "SUCCEEDED",
+          "taskExceptionDetails": {}
+        },
+        {
+          "endTime": 1795149964912,
+          "id": "3",
+          "implementingClass": "com.netflix.spinnaker.orca.clouddriver.tasks.manifest.MonitorDeployManifestTask",
+          "loopEnd": false,
+          "loopStart": false,
+          "name": "monitorDeploy",
+          "stageEnd": false,
+          "stageStart": false,
+          "startTime": 1795149959732,
+          "status": "SUCCEEDED",
+          "taskExceptionDetails": {}
+        },
+        {
+          "endTime": 1795149965077,
+          "id": "4",
+          "implementingClass": "com.netflix.spinnaker.orca.clouddriver.tasks.manifest.PromoteManifestKatoOutputsTask",
+          "loopEnd": false,
+          "loopStart": false,
+          "name": "promoteOutputs",
+          "stageEnd": false,
+          "stageStart": false,
+          "startTime": 1795149964967,
+          "status": "SUCCEEDED",
+          "taskExceptionDetails": {}
+        },
+        {
+          "endTime": 1795149965355,
+          "id": "5",
+          "implementingClass": "com.netflix.spinnaker.orca.clouddriver.tasks.manifest.WaitForManifestStableTask",
+          "loopEnd": false,
+          "loopStart": false,
+          "name": "waitForManifestToStabilize",
+          "stageEnd": false,
+          "stageStart": false,
+          "startTime": 1795149965133,
+          "status": "SUCCEEDED",
+          "taskExceptionDetails": {}
+        },
+        {
+          "endTime": 1795149965578,
+          "id": "6",
+          "implementingClass": "com.netflix.spinnaker.orca.clouddriver.tasks.artifacts.CleanupArtifactsTask",
+          "loopEnd": false,
+          "loopStart": false,
+          "name": "cleanupArtifacts",
+          "stageEnd": false,
+          "stageStart": false,
+          "startTime": 1795149965411,
+          "status": "SUCCEEDED",
+          "taskExceptionDetails": {}
+        },
+        {
+          "endTime": 1795149965747,
+          "id": "7",
+          "implementingClass": "com.netflix.spinnaker.orca.clouddriver.tasks.MonitorKatoTask",
+          "loopEnd": false,
+          "loopStart": false,
+          "name": "monitorCleanup",
+          "stageEnd": false,
+          "stageStart": false,
+          "startTime": 1795149965635,
+          "status": "SUCCEEDED",
+          "taskExceptionDetails": {}
+        },
+        {
+          "endTime": 1795149966021,
+          "id": "8",
+          "implementingClass": "com.netflix.spinnaker.orca.clouddriver.tasks.manifest.PromoteManifestKatoOutputsTask",
+          "loopEnd": false,
+          "loopStart": false,
+          "name": "promoteOutputs",
+          "stageEnd": false,
+          "stageStart": false,
+          "startTime": 1795149965855,
+          "status": "SUCCEEDED",
+          "taskExceptionDetails": {}
+        },
+        {
+          "endTime": 1795149966245,
+          "id": "9",
+          "implementingClass": "com.netflix.spinnaker.orca.pipeline.tasks.artifacts.BindProducedArtifactsTask",
+          "loopEnd": false,
+          "loopStart": false,
+          "name": "bindProducedArtifacts",
+          "stageEnd": true,
+          "stageStart": false,
+          "startTime": 1795149966075,
+          "status": "SUCCEEDED",
+          "taskExceptionDetails": {}
+        }
+      ],
+      "type": "deployManifest"
+    },
+    {
+      "context": {
+        "account": "sarseg-local",
+        "artifacts": [
+          {
+            "customKind": false,
+            "location": "sarseg-dev",
+            "metadata": {
+              "account": "sarseg-local"
+            },
+            "name": "sarseg-web",
+            "reference": "sarseg-web",
+            "type": "kubernetes/service",
+            "version": ""
+          }
+        ],
+        "cloudProvider": "kubernetes",
+        "deploy.account.name": "sarseg-local",
+        "deploy.server.groups": {},
+        "failedManifests": [],
+        "kato.last.task.id": {
+          "id": "01M7VMDH6MD3EFN1CGS8KVEWW5"
+        },
+        "kato.result.expected": false,
+        "kato.task.firstNotFoundRetry": -1,
+        "kato.task.lastStatus": "SUCCEEDED",
+        "kato.task.notFoundRetryCount": 0,
+        "kato.task.terminalRetryCount": 0,
+        "kato.tasks": [
+          {
+            "history": [
+              {
+                "phase": "ORCHESTRATION",
+                "status": "Initializing Orchestration Task"
+              },
+              {
+                "phase": "ORCHESTRATION",
+                "status": "Processing op: KubernetesDeployManifestOperation"
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Beginning deployment of manifests in account sarseg-local ..."
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Sorting manifests by priority..."
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Deploy order is: service sarseg-web"
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Binding artifacts in service sarseg-web..."
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Finding deployer for service..."
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Bound artifacts: []..."
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Finding deployer for service..."
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Annotating manifest service sarseg-web with artifact, relationships & moniker..."
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Checking if all requested artifacts were bound..."
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Finding deployer for service..."
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Submitting manifest service sarseg-web to kubernetes master..."
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Deploy manifest task completed successfully for manifest service sarseg-web in account sarseg-local"
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Deploy manifest task completed successfully for all manifests in account sarseg-local"
+              },
+              {
+                "phase": "ORCHESTRATION",
+                "status": "Orchestration completed."
+              },
+              {
+                "phase": "ORCHESTRATION",
+                "status": "Orchestration completed."
+              }
+            ],
+            "id": "01M7VMDBGSM87HTZH7Z3J4P25S",
+            "outputs": [],
+            "resultObjects": [
+              {
+                "boundArtifacts": [],
+                "createdArtifacts": [
+                  {
+                    "customKind": false,
+                    "location": "sarseg-dev",
+                    "metadata": {
+                      "account": "sarseg-local"
+                    },
+                    "name": "sarseg-web",
+                    "reference": "sarseg-web",
+                    "type": "kubernetes/service",
+                    "version": ""
+                  }
+                ],
+                "manifestNamesByNamespace": {
+                  "sarseg-dev": [
+                    "service sarseg-web"
+                  ]
+                },
+                "manifests": [
+                  {
+                    "apiVersion": "v1",
+                    "kind": "Service",
+                    "metadata": {
+                      "annotations": {
+                        "artifact.spinnaker.io/location": "sarseg-dev",
+                        "artifact.spinnaker.io/name": "sarseg-web",
+                        "artifact.spinnaker.io/type": "kubernetes/service",
+                        "artifact.spinnaker.io/version": "",
+                        "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Service\",\"metadata\":{\"annotations\":{\"artifact.spinnaker.io/location\":\"sarseg-dev\",\"artifact.spinnaker.io/name\":\"sarseg-web\",\"artifact.spinnaker.io/type\":\"kubernetes/service\",\"artifact.spinnaker.io/version\":\"\",\"moniker.spinnaker.io/application\":\"sarseg\",\"moniker.spinnaker.io/cluster\":\"service sarseg-web\"},\"labels\":{\"app\":\"sarseg-web\",\"app.kubernetes.io/managed-by\":\"spinnaker\",\"app.kubernetes.io/name\":\"sarseg\"},\"name\":\"sarseg-web\",\"namespace\":\"sarseg-dev\"},\"spec\":{\"ports\":[{\"name\":\"http\",\"nodePort\":30380,\"port\":80,\"protocol\":\"TCP\",\"targetPort\":\"http\"}],\"selector\":{\"app\":\"sarseg-web\"},\"type\":\"NodePort\"}}\n",
+                        "moniker.spinnaker.io/application": "sarseg",
+                        "moniker.spinnaker.io/cluster": "service sarseg-web"
+                      },
+                      "creationTimestamp": "2026-11-20T04:44:59Z",
+                      "labels": {
+                        "app": "sarseg-web",
+                        "app.kubernetes.io/managed-by": "spinnaker",
+                        "app.kubernetes.io/name": "sarseg"
+                      },
+                      "name": "sarseg-web",
+                      "namespace": "sarseg-dev",
+                      "resourceVersion": "1798",
+                      "uid": "d3dab050-c28b-4233-8a28-61a092dab865"
+                    },
+                    "spec": {
+                      "clusterIP": "10.96.101.63",
+                      "clusterIPs": [
+                        "10.96.101.63"
+                      ],
+                      "externalTrafficPolicy": "Cluster",
+                      "internalTrafficPolicy": "Cluster",
+                      "ipFamilies": [
+                        "IPv4"
+                      ],
+                      "ipFamilyPolicy": "SingleStack",
+                      "ports": [
+                        {
+                          "name": "http",
+                          "nodePort": 30380.0,
+                          "port": 80.0,
+                          "protocol": "TCP",
+                          "targetPort": "http"
+                        }
+                      ],
+                      "selector": {
+                        "app": "sarseg-web"
+                      },
+                      "sessionAffinity": "None",
+                      "type": "NodePort"
+                    },
+                    "status": {
+                      "loadBalancer": {}
+                    }
+                  }
+                ]
+              }
+            ],
+            "status": {
+              "completed": true,
+              "failed": false,
+              "retryable": false
+            }
+          },
+          {
+            "history": [
+              {
+                "phase": "ORCHESTRATION",
+                "status": "Initializing Orchestration Task"
+              },
+              {
+                "phase": "ORCHESTRATION",
+                "status": "Processing op: KubernetesCleanupArtifactsOperation"
+              },
+              {
+                "phase": "ORCHESTRATION",
+                "status": "Orchestration completed."
+              },
+              {
+                "phase": "ORCHESTRATION",
+                "status": "Orchestration completed."
+              }
+            ],
+            "id": "01M7VMDH6MD3EFN1CGS8KVEWW5",
+            "outputs": [],
+            "resultObjects": [
+              {
+                "boundArtifacts": [],
+                "createdArtifacts": [],
+                "manifestNamesByNamespace": {}
+              }
+            ],
+            "status": {
+              "completed": true,
+              "failed": false,
+              "retryable": false
+            }
+          }
+        ],
+        "manifestArtifact": {
+          "artifactAccount": "public-git-http",
+          "name": "service.yml",
+          "reference": "https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/0f101e672795b832f1e4474b85c5db915c194ec5/spinnaker/k8s/service.yml",
+          "type": "http/file"
+        },
+        "manifestArtifactAccount": "public-git-http",
+        "manifests": [
+          {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "metadata": {
+              "labels": {
+                "app": "sarseg-web"
+              },
+              "name": "sarseg-web",
+              "namespace": "sarseg-dev"
+            },
+            "spec": {
+              "ports": [
+                {
+                  "name": "http",
+                  "nodePort": 30380,
+                  "port": 80,
+                  "protocol": "TCP",
+                  "targetPort": "http"
+                }
+              ],
+              "selector": {
+                "app": "sarseg-web"
+              },
+              "type": "NodePort"
+            }
+          }
+        ],
+        "messages": [],
+        "moniker": {
+          "app": "sarseg"
+        },
+        "namespaceOverride": "sarseg-dev",
+        "optionalArtifacts": [
+          {
+            "customKind": false,
+            "location": "sarseg-dev",
+            "metadata": {
+              "account": "sarseg-local"
+            },
+            "name": "sarseg-web",
+            "reference": "sarseg-web",
+            "type": "kubernetes/deployment",
+            "version": ""
+          },
+          {
+            "artifactAccount": "public-git-http",
+            "customKind": false,
+            "metadata": {},
+            "name": "deployment.yml",
+            "reference": "https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/0f101e672795b832f1e4474b85c5db915c194ec5/spinnaker/k8s/deployment.yml",
+            "type": "http/file",
+            "version": "0f101e672795b832f1e4474b85c5db915c194ec5"
+          },
+          {
+            "artifactAccount": "public-git-http",
+            "customKind": false,
+            "metadata": {},
+            "name": "service.yml",
+            "reference": "https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/0f101e672795b832f1e4474b85c5db915c194ec5/spinnaker/k8s/service.yml",
+            "type": "http/file",
+            "version": "0f101e672795b832f1e4474b85c5db915c194ec5"
+          },
+          {
+            "artifactAccount": "public-git-http",
+            "customKind": false,
+            "metadata": {},
+            "name": "hpa.yml",
+            "reference": "https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/0f101e672795b832f1e4474b85c5db915c194ec5/spinnaker/k8s/hpa.yml",
+            "type": "http/file",
+            "version": "0f101e672795b832f1e4474b85c5db915c194ec5"
+          }
+        ],
+        "outputs.boundArtifacts": [],
+        "outputs.createdArtifacts": [
+          {
+            "customKind": false,
+            "location": "sarseg-dev",
+            "metadata": {
+              "account": "sarseg-local"
+            },
+            "name": "sarseg-web",
+            "reference": "sarseg-web",
+            "type": "kubernetes/service",
+            "version": ""
+          }
+        ],
+        "outputs.manifestNamesByNamespace": {
+          "sarseg-dev": [
+            "service sarseg-web"
+          ]
+        },
+        "outputs.manifests": [
+          {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "metadata": {
+              "annotations": {
+                "artifact.spinnaker.io/location": "sarseg-dev",
+                "artifact.spinnaker.io/name": "sarseg-web",
+                "artifact.spinnaker.io/type": "kubernetes/service",
+                "artifact.spinnaker.io/version": "",
+                "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Service\",\"metadata\":{\"annotations\":{\"artifact.spinnaker.io/location\":\"sarseg-dev\",\"artifact.spinnaker.io/name\":\"sarseg-web\",\"artifact.spinnaker.io/type\":\"kubernetes/service\",\"artifact.spinnaker.io/version\":\"\",\"moniker.spinnaker.io/application\":\"sarseg\",\"moniker.spinnaker.io/cluster\":\"service sarseg-web\"},\"labels\":{\"app\":\"sarseg-web\",\"app.kubernetes.io/managed-by\":\"spinnaker\",\"app.kubernetes.io/name\":\"sarseg\"},\"name\":\"sarseg-web\",\"namespace\":\"sarseg-dev\"},\"spec\":{\"ports\":[{\"name\":\"http\",\"nodePort\":30380,\"port\":80,\"protocol\":\"TCP\",\"targetPort\":\"http\"}],\"selector\":{\"app\":\"sarseg-web\"},\"type\":\"NodePort\"}}\n",
+                "moniker.spinnaker.io/application": "sarseg",
+                "moniker.spinnaker.io/cluster": "service sarseg-web"
+              },
+              "creationTimestamp": "2026-11-20T04:44:59Z",
+              "labels": {
+                "app": "sarseg-web",
+                "app.kubernetes.io/managed-by": "spinnaker",
+                "app.kubernetes.io/name": "sarseg"
+              },
+              "name": "sarseg-web",
+              "namespace": "sarseg-dev",
+              "resourceVersion": "1798",
+              "uid": "d3dab050-c28b-4233-8a28-61a092dab865"
+            },
+            "spec": {
+              "clusterIP": "10.96.101.63",
+              "clusterIPs": [
+                "10.96.101.63"
+              ],
+              "externalTrafficPolicy": "Cluster",
+              "internalTrafficPolicy": "Cluster",
+              "ipFamilies": [
+                "IPv4"
+              ],
+              "ipFamilyPolicy": "SingleStack",
+              "ports": [
+                {
+                  "name": "http",
+                  "nodePort": 30380.0,
+                  "port": 80.0,
+                  "protocol": "TCP",
+                  "targetPort": "http"
+                }
+              ],
+              "selector": {
+                "app": "sarseg-web"
+              },
+              "sessionAffinity": "None",
+              "type": "NodePort"
+            },
+            "status": {
+              "loadBalancer": {}
+            }
+          }
+        ],
+        "requiredArtifacts": [],
+        "skipExpressionEvaluation": false,
+        "source": "artifact",
+        "stableManifests": [
+          {
+            "location": "sarseg-dev",
+            "manifestName": "service sarseg-web"
+          }
+        ],
+        "stageTimeoutMs": 300000,
+        "trafficManagement": {
+          "enabled": false,
+          "options": {
+            "enableTraffic": true
+          }
+        }
+      },
+      "endTime": 1795149973444,
+      "id": "01M7VMD3T9D0J3FWM8H5QJYNJS",
+      "name": "Deploy service.yml",
+      "outputs": {
+        "artifacts": [
+          {
+            "customKind": false,
+            "location": "sarseg-dev",
+            "metadata": {
+              "account": "sarseg-local"
+            },
+            "name": "sarseg-web",
+            "reference": "sarseg-web",
+            "type": "kubernetes/service",
+            "version": ""
+          }
+        ],
+        "manifests": [
+          {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "metadata": {
+              "labels": {
+                "app": "sarseg-web"
+              },
+              "name": "sarseg-web",
+              "namespace": "sarseg-dev"
+            },
+            "spec": {
+              "ports": [
+                {
+                  "name": "http",
+                  "nodePort": 30380,
+                  "port": 80,
+                  "protocol": "TCP",
+                  "targetPort": "http"
+                }
+              ],
+              "selector": {
+                "app": "sarseg-web"
+              },
+              "type": "NodePort"
+            }
+          }
+        ],
+        "optionalArtifacts": [
+          {
+            "customKind": false,
+            "location": "sarseg-dev",
+            "metadata": {
+              "account": "sarseg-local"
+            },
+            "name": "sarseg-web",
+            "reference": "sarseg-web",
+            "type": "kubernetes/deployment",
+            "version": ""
+          },
+          {
+            "artifactAccount": "public-git-http",
+            "customKind": false,
+            "metadata": {},
+            "name": "deployment.yml",
+            "reference": "https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/0f101e672795b832f1e4474b85c5db915c194ec5/spinnaker/k8s/deployment.yml",
+            "type": "http/file",
+            "version": "0f101e672795b832f1e4474b85c5db915c194ec5"
+          },
+          {
+            "artifactAccount": "public-git-http",
+            "customKind": false,
+            "metadata": {},
+            "name": "service.yml",
+            "reference": "https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/0f101e672795b832f1e4474b85c5db915c194ec5/spinnaker/k8s/service.yml",
+            "type": "http/file",
+            "version": "0f101e672795b832f1e4474b85c5db915c194ec5"
+          },
+          {
+            "artifactAccount": "public-git-http",
+            "customKind": false,
+            "metadata": {},
+            "name": "hpa.yml",
+            "reference": "https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/0f101e672795b832f1e4474b85c5db915c194ec5/spinnaker/k8s/hpa.yml",
+            "type": "http/file",
+            "version": "0f101e672795b832f1e4474b85c5db915c194ec5"
+          }
+        ],
+        "outputs.boundArtifacts": [],
+        "outputs.createdArtifacts": [
+          {
+            "customKind": false,
+            "location": "sarseg-dev",
+            "metadata": {
+              "account": "sarseg-local"
+            },
+            "name": "sarseg-web",
+            "reference": "sarseg-web",
+            "type": "kubernetes/service",
+            "version": ""
+          }
+        ],
+        "outputs.manifestNamesByNamespace": {
+          "sarseg-dev": [
+            "service sarseg-web"
+          ]
+        },
+        "outputs.manifests": [
+          {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "metadata": {
+              "annotations": {
+                "artifact.spinnaker.io/location": "sarseg-dev",
+                "artifact.spinnaker.io/name": "sarseg-web",
+                "artifact.spinnaker.io/type": "kubernetes/service",
+                "artifact.spinnaker.io/version": "",
+                "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Service\",\"metadata\":{\"annotations\":{\"artifact.spinnaker.io/location\":\"sarseg-dev\",\"artifact.spinnaker.io/name\":\"sarseg-web\",\"artifact.spinnaker.io/type\":\"kubernetes/service\",\"artifact.spinnaker.io/version\":\"\",\"moniker.spinnaker.io/application\":\"sarseg\",\"moniker.spinnaker.io/cluster\":\"service sarseg-web\"},\"labels\":{\"app\":\"sarseg-web\",\"app.kubernetes.io/managed-by\":\"spinnaker\",\"app.kubernetes.io/name\":\"sarseg\"},\"name\":\"sarseg-web\",\"namespace\":\"sarseg-dev\"},\"spec\":{\"ports\":[{\"name\":\"http\",\"nodePort\":30380,\"port\":80,\"protocol\":\"TCP\",\"targetPort\":\"http\"}],\"selector\":{\"app\":\"sarseg-web\"},\"type\":\"NodePort\"}}\n",
+                "moniker.spinnaker.io/application": "sarseg",
+                "moniker.spinnaker.io/cluster": "service sarseg-web"
+              },
+              "creationTimestamp": "2026-11-20T04:44:59Z",
+              "labels": {
+                "app": "sarseg-web",
+                "app.kubernetes.io/managed-by": "spinnaker",
+                "app.kubernetes.io/name": "sarseg"
+              },
+              "name": "sarseg-web",
+              "namespace": "sarseg-dev",
+              "resourceVersion": "1798",
+              "uid": "d3dab050-c28b-4233-8a28-61a092dab865"
+            },
+            "spec": {
+              "clusterIP": "10.96.101.63",
+              "clusterIPs": [
+                "10.96.101.63"
+              ],
+              "externalTrafficPolicy": "Cluster",
+              "internalTrafficPolicy": "Cluster",
+              "ipFamilies": [
+                "IPv4"
+              ],
+              "ipFamilyPolicy": "SingleStack",
+              "ports": [
+                {
+                  "name": "http",
+                  "nodePort": 30380.0,
+                  "port": 80.0,
+                  "protocol": "TCP",
+                  "targetPort": "http"
+                }
+              ],
+              "selector": {
+                "app": "sarseg-web"
+              },
+              "sessionAffinity": "None",
+              "type": "NodePort"
+            },
+            "status": {
+              "loadBalancer": {}
+            }
+          }
+        ],
+        "requiredArtifacts": []
+      },
+      "refId": "2",
+      "requisiteStageRefIds": [
+        "1"
+      ],
+      "startTime": 1795149966358,
+      "status": "SUCCEEDED",
+      "tasks": [
+        {
+          "endTime": 1795149966737,
+          "id": "1",
+          "implementingClass": "com.netflix.spinnaker.orca.clouddriver.tasks.manifest.ResolveDeploySourceManifestTask",
+          "loopEnd": false,
+          "loopStart": false,
+          "name": "resolveDeploySourceManifest",
+          "stageEnd": false,
+          "stageStart": true,
+          "startTime": 1795149966410,
+          "status": "SUCCEEDED",
+          "taskExceptionDetails": {}
+        },
+        {
+          "endTime": 1795149966957,
+          "id": "2",
+          "implementingClass": "com.netflix.spinnaker.orca.clouddriver.tasks.manifest.DeployManifestTask",
+          "loopEnd": false,
+          "loopStart": false,
+          "name": "deployManifest",
+          "stageEnd": false,
+          "stageStart": false,
+          "startTime": 1795149966793,
+          "status": "SUCCEEDED",
+          "taskExceptionDetails": {}
+        },
+        {
+          "endTime": 1795149972173,
+          "id": "3",
+          "implementingClass": "com.netflix.spinnaker.orca.clouddriver.tasks.manifest.MonitorDeployManifestTask",
+          "loopEnd": false,
+          "loopStart": false,
+          "name": "monitorDeploy",
+          "stageEnd": false,
+          "stageStart": false,
+          "startTime": 1795149967012,
+          "status": "SUCCEEDED",
+          "taskExceptionDetails": {}
+        },
+        {
+          "endTime": 1795149972339,
+          "id": "4",
+          "implementingClass": "com.netflix.spinnaker.orca.clouddriver.tasks.manifest.PromoteManifestKatoOutputsTask",
+          "loopEnd": false,
+          "loopStart": false,
+          "name": "promoteOutputs",
+          "stageEnd": false,
+          "stageStart": false,
+          "startTime": 1795149972228,
+          "status": "SUCCEEDED",
+          "taskExceptionDetails": {}
+        },
+        {
+          "endTime": 1795149972560,
+          "id": "5",
+          "implementingClass": "com.netflix.spinnaker.orca.clouddriver.tasks.manifest.WaitForManifestStableTask",
+          "loopEnd": false,
+          "loopStart": false,
+          "name": "waitForManifestToStabilize",
+          "stageEnd": false,
+          "stageStart": false,
+          "startTime": 1795149972394,
+          "status": "SUCCEEDED",
+          "taskExceptionDetails": {}
+        },
+        {
+          "endTime": 1795149972780,
+          "id": "6",
+          "implementingClass": "com.netflix.spinnaker.orca.clouddriver.tasks.artifacts.CleanupArtifactsTask",
+          "loopEnd": false,
+          "loopStart": false,
+          "name": "cleanupArtifacts",
+          "stageEnd": false,
+          "stageStart": false,
+          "startTime": 1795149972614,
+          "status": "SUCCEEDED",
+          "taskExceptionDetails": {}
+        },
+        {
+          "endTime": 1795149973004,
+          "id": "7",
+          "implementingClass": "com.netflix.spinnaker.orca.clouddriver.tasks.MonitorKatoTask",
+          "loopEnd": false,
+          "loopStart": false,
+          "name": "monitorCleanup",
+          "stageEnd": false,
+          "stageStart": false,
+          "startTime": 1795149972837,
+          "status": "SUCCEEDED",
+          "taskExceptionDetails": {}
+        },
+        {
+          "endTime": 1795149973169,
+          "id": "8",
+          "implementingClass": "com.netflix.spinnaker.orca.clouddriver.tasks.manifest.PromoteManifestKatoOutputsTask",
+          "loopEnd": false,
+          "loopStart": false,
+          "name": "promoteOutputs",
+          "stageEnd": false,
+          "stageStart": false,
+          "startTime": 1795149973058,
+          "status": "SUCCEEDED",
+          "taskExceptionDetails": {}
+        },
+        {
+          "endTime": 1795149973335,
+          "id": "9",
+          "implementingClass": "com.netflix.spinnaker.orca.pipeline.tasks.artifacts.BindProducedArtifactsTask",
+          "loopEnd": false,
+          "loopStart": false,
+          "name": "bindProducedArtifacts",
+          "stageEnd": true,
+          "stageStart": false,
+          "startTime": 1795149973225,
+          "status": "SUCCEEDED",
+          "taskExceptionDetails": {}
+        }
+      ],
+      "type": "deployManifest"
+    },
+    {
+      "context": {
+        "account": "sarseg-local",
+        "artifacts": [
+          {
+            "customKind": false,
+            "location": "sarseg-dev",
+            "metadata": {
+              "account": "sarseg-local"
+            },
+            "name": "sarseg-web",
+            "reference": "sarseg-web",
+            "type": "kubernetes/horizontalpodautoscaler",
+            "version": ""
+          }
+        ],
+        "cloudProvider": "kubernetes",
+        "deploy.account.name": "sarseg-local",
+        "deploy.server.groups": {},
+        "failedManifests": [],
+        "kato.last.task.id": {
+          "id": "01M7VMDR6H9ESSRMZX5D37ZJ83"
+        },
+        "kato.result.expected": false,
+        "kato.task.firstNotFoundRetry": -1,
+        "kato.task.lastStatus": "SUCCEEDED",
+        "kato.task.notFoundRetryCount": 0,
+        "kato.task.terminalRetryCount": 0,
+        "kato.tasks": [
+          {
+            "history": [
+              {
+                "phase": "ORCHESTRATION",
+                "status": "Initializing Orchestration Task"
+              },
+              {
+                "phase": "ORCHESTRATION",
+                "status": "Processing op: KubernetesDeployManifestOperation"
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Beginning deployment of manifests in account sarseg-local ..."
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Sorting manifests by priority..."
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Deploy order is: horizontalpodautoscaler sarseg-web"
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Binding artifacts in horizontalpodautoscaler sarseg-web..."
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Finding deployer for horizontalpodautoscaler..."
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Bound artifacts: [Artifact(type=kubernetes/deployment, customKind=false, name=sarseg-web, version=, location=sarseg-dev, reference=sarseg-web, metadata={account=sarseg-local}, artifactAccount=null, provenance=null, uuid=null)]..."
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Finding deployer for horizontalpodautoscaler..."
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Annotating manifest horizontalpodautoscaler sarseg-web with artifact, relationships & moniker..."
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Checking if all requested artifacts were bound..."
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Finding deployer for horizontalpodautoscaler..."
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Submitting manifest horizontalpodautoscaler sarseg-web to kubernetes master..."
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Deploy manifest task completed successfully for manifest horizontalpodautoscaler sarseg-web in account sarseg-local"
+              },
+              {
+                "phase": "DEPLOY_KUBERNETES_MANIFEST",
+                "status": "Deploy manifest task completed successfully for all manifests in account sarseg-local"
+              },
+              {
+                "phase": "ORCHESTRATION",
+                "status": "Orchestration completed."
+              },
+              {
+                "phase": "ORCHESTRATION",
+                "status": "Orchestration completed."
+              }
+            ],
+            "id": "01M7VMDJEC9Q66TM8C76VC11QH",
+            "outputs": [],
+            "resultObjects": [
+              {
+                "boundArtifacts": [
+                  {
+                    "customKind": false,
+                    "location": "sarseg-dev",
+                    "metadata": {
+                      "account": "sarseg-local"
+                    },
+                    "name": "sarseg-web",
+                    "reference": "sarseg-web",
+                    "type": "kubernetes/deployment",
+                    "version": ""
+                  }
+                ],
+                "createdArtifacts": [
+                  {
+                    "customKind": false,
+                    "location": "sarseg-dev",
+                    "metadata": {
+                      "account": "sarseg-local"
+                    },
+                    "name": "sarseg-web",
+                    "reference": "sarseg-web",
+                    "type": "kubernetes/horizontalpodautoscaler",
+                    "version": ""
+                  }
+                ],
+                "manifestNamesByNamespace": {
+                  "sarseg-dev": [
+                    "horizontalpodautoscaler sarseg-web"
+                  ]
+                },
+                "manifests": [
+                  {
+                    "apiVersion": "autoscaling/v2",
+                    "kind": "HorizontalPodAutoscaler",
+                    "metadata": {
+                      "annotations": {
+                        "artifact.spinnaker.io/location": "sarseg-dev",
+                        "artifact.spinnaker.io/name": "sarseg-web",
+                        "artifact.spinnaker.io/type": "kubernetes/horizontalpodautoscaler",
+                        "artifact.spinnaker.io/version": "",
+                        "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"autoscaling/v2\",\"kind\":\"HorizontalPodAutoscaler\",\"metadata\":{\"annotations\":{\"artifact.spinnaker.io/location\":\"sarseg-dev\",\"artifact.spinnaker.io/name\":\"sarseg-web\",\"artifact.spinnaker.io/type\":\"kubernetes/horizontalpodautoscaler\",\"artifact.spinnaker.io/version\":\"\",\"moniker.spinnaker.io/application\":\"sarseg\",\"moniker.spinnaker.io/cluster\":\"horizontalpodautoscaler sarseg-web\"},\"labels\":{\"app.kubernetes.io/managed-by\":\"spinnaker\",\"app.kubernetes.io/name\":\"sarseg\"},\"name\":\"sarseg-web\",\"namespace\":\"sarseg-dev\"},\"spec\":{\"behavior\":{\"scaleDown\":{\"policies\":[{\"periodSeconds\":15,\"type\":\"Pods\",\"value\":3}],\"stabilizationWindowSeconds\":60},\"scaleUp\":{\"policies\":[{\"periodSeconds\":15,\"type\":\"Pods\",\"value\":3}],\"stabilizationWindowSeconds\":0}},\"maxReplicas\":5,\"metrics\":[{\"resource\":{\"name\":\"cpu\",\"target\":{\"averageUtilization\":50,\"type\":\"Utilization\"}},\"type\":\"Resource\"}],\"minReplicas\":2,\"scaleTargetRef\":{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"name\":\"sarseg-web\"}}}\n",
+                        "moniker.spinnaker.io/application": "sarseg",
+                        "moniker.spinnaker.io/cluster": "horizontalpodautoscaler sarseg-web"
+                      },
+                      "creationTimestamp": "2026-11-20T04:45:07Z",
+                      "labels": {
+                        "app.kubernetes.io/managed-by": "spinnaker",
+                        "app.kubernetes.io/name": "sarseg"
+                      },
+                      "name": "sarseg-web",
+                      "namespace": "sarseg-dev",
+                      "resourceVersion": "1969",
+                      "uid": "6214c1da-d158-4393-9ce6-0a7742da2100"
+                    },
+                    "spec": {
+                      "behavior": {
+                        "scaleDown": {
+                          "policies": [
+                            {
+                              "periodSeconds": 15.0,
+                              "type": "Pods",
+                              "value": 3.0
+                            }
+                          ],
+                          "selectPolicy": "Max",
+                          "stabilizationWindowSeconds": 60.0
+                        },
+                        "scaleUp": {
+                          "policies": [
+                            {
+                              "periodSeconds": 15.0,
+                              "type": "Pods",
+                              "value": 3.0
+                            }
+                          ],
+                          "selectPolicy": "Max",
+                          "stabilizationWindowSeconds": 0.0
+                        }
+                      },
+                      "maxReplicas": 5.0,
+                      "metrics": [
+                        {
+                          "resource": {
+                            "name": "cpu",
+                            "target": {
+                              "averageUtilization": 50.0,
+                              "type": "Utilization"
+                            }
+                          },
+                          "type": "Resource"
+                        }
+                      ],
+                      "minReplicas": 2.0,
+                      "scaleTargetRef": {
+                        "apiVersion": "apps/v1",
+                        "kind": "Deployment",
+                        "name": "sarseg-web"
+                      }
+                    },
+                    "status": {
+                      "conditions": [
+                        {
+                          "lastTransitionTime": "2026-11-20T04:45:22Z",
+                          "message": "the HPA controller was able to get the target's current scale",
+                          "reason": "SucceededGetScale",
+                          "status": "True",
+                          "type": "AbleToScale"
+                        },
+                        {
+                          "lastTransitionTime": "2026-11-20T04:46:07Z",
+                          "message": "the HPA was unable to compute the replica count: failed to get cpu utilization: unable to get metrics for resource cpu: no metrics returned from resource metrics API",
+                          "reason": "FailedGetResourceMetric",
+                          "status": "False",
+                          "type": "ScalingActive"
+                        },
+                        {
+                          "lastTransitionTime": "2026-11-20T04:45:22Z",
+                          "message": "the desired count is within the acceptable range",
+                          "reason": "DesiredWithinRange",
+                          "status": "False",
+                          "type": "ScalingLimited"
+                        }
+                      ],
+                      "currentMetrics": [
+                        {
+                          "type": ""
+                        }
+                      ],
+                      "currentReplicas": 2.0,
+                      "desiredReplicas": 2.0
+                    }
+                  }
+                ]
+              }
+            ],
+            "status": {
+              "completed": true,
+              "failed": false,
+              "retryable": false
+            }
+          },
+          {
+            "history": [
+              {
+                "phase": "ORCHESTRATION",
+                "status": "Initializing Orchestration Task"
+              },
+              {
+                "phase": "ORCHESTRATION",
+                "status": "Processing op: KubernetesCleanupArtifactsOperation"
+              },
+              {
+                "phase": "ORCHESTRATION",
+                "status": "Orchestration completed."
+              },
+              {
+                "phase": "ORCHESTRATION",
+                "status": "Orchestration completed."
+              }
+            ],
+            "id": "01M7VMDR6H9ESSRMZX5D37ZJ83",
+            "outputs": [],
+            "resultObjects": [
+              {
+                "boundArtifacts": [],
+                "createdArtifacts": [],
+                "manifestNamesByNamespace": {}
+              }
+            ],
+            "status": {
+              "completed": true,
+              "failed": false,
+              "retryable": false
+            }
+          }
+        ],
+        "manifestArtifact": {
+          "artifactAccount": "public-git-http",
+          "name": "hpa.yml",
+          "reference": "https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/0f101e672795b832f1e4474b85c5db915c194ec5/spinnaker/k8s/hpa.yml",
+          "type": "http/file"
+        },
+        "manifestArtifactAccount": "public-git-http",
+        "manifests": [
+          {
+            "apiVersion": "autoscaling/v2",
+            "kind": "HorizontalPodAutoscaler",
+            "metadata": {
+              "name": "sarseg-web",
+              "namespace": "sarseg-dev"
+            },
+            "spec": {
+              "behavior": {
+                "scaleDown": {
+                  "policies": [
+                    {
+                      "periodSeconds": 15,
+                      "type": "Pods",
+                      "value": 3
+                    }
+                  ],
+                  "stabilizationWindowSeconds": 60
+                },
+                "scaleUp": {
+                  "policies": [
+                    {
+                      "periodSeconds": 15,
+                      "type": "Pods",
+                      "value": 3
+                    }
+                  ],
+                  "stabilizationWindowSeconds": 0
+                }
+              },
+              "maxReplicas": 5,
+              "metrics": [
+                {
+                  "resource": {
+                    "name": "cpu",
+                    "target": {
+                      "averageUtilization": 50,
+                      "type": "Utilization"
+                    }
+                  },
+                  "type": "Resource"
+                }
+              ],
+              "minReplicas": 2,
+              "scaleTargetRef": {
+                "apiVersion": "apps/v1",
+                "kind": "Deployment",
+                "name": "sarseg-web"
+              }
+            }
+          }
+        ],
+        "messages": [],
+        "moniker": {
+          "app": "sarseg"
+        },
+        "namespaceOverride": "sarseg-dev",
+        "optionalArtifacts": [
+          {
+            "customKind": false,
+            "location": "sarseg-dev",
+            "metadata": {
+              "account": "sarseg-local"
+            },
+            "name": "sarseg-web",
+            "reference": "sarseg-web",
+            "type": "kubernetes/service",
+            "version": ""
+          },
+          {
+            "customKind": false,
+            "location": "sarseg-dev",
+            "metadata": {
+              "account": "sarseg-local"
+            },
+            "name": "sarseg-web",
+            "reference": "sarseg-web",
+            "type": "kubernetes/deployment",
+            "version": ""
+          },
+          {
+            "artifactAccount": "public-git-http",
+            "customKind": false,
+            "metadata": {},
+            "name": "deployment.yml",
+            "reference": "https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/0f101e672795b832f1e4474b85c5db915c194ec5/spinnaker/k8s/deployment.yml",
+            "type": "http/file",
+            "version": "0f101e672795b832f1e4474b85c5db915c194ec5"
+          },
+          {
+            "artifactAccount": "public-git-http",
+            "customKind": false,
+            "metadata": {},
+            "name": "service.yml",
+            "reference": "https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/0f101e672795b832f1e4474b85c5db915c194ec5/spinnaker/k8s/service.yml",
+            "type": "http/file",
+            "version": "0f101e672795b832f1e4474b85c5db915c194ec5"
+          },
+          {
+            "artifactAccount": "public-git-http",
+            "customKind": false,
+            "metadata": {},
+            "name": "hpa.yml",
+            "reference": "https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/0f101e672795b832f1e4474b85c5db915c194ec5/spinnaker/k8s/hpa.yml",
+            "type": "http/file",
+            "version": "0f101e672795b832f1e4474b85c5db915c194ec5"
+          }
+        ],
+        "outputs.boundArtifacts": [
+          {
+            "customKind": false,
+            "location": "sarseg-dev",
+            "metadata": {
+              "account": "sarseg-local"
+            },
+            "name": "sarseg-web",
+            "reference": "sarseg-web",
+            "type": "kubernetes/deployment",
+            "version": ""
+          }
+        ],
+        "outputs.createdArtifacts": [
+          {
+            "customKind": false,
+            "location": "sarseg-dev",
+            "metadata": {
+              "account": "sarseg-local"
+            },
+            "name": "sarseg-web",
+            "reference": "sarseg-web",
+            "type": "kubernetes/horizontalpodautoscaler",
+            "version": ""
+          }
+        ],
+        "outputs.manifestNamesByNamespace": {
+          "sarseg-dev": [
+            "horizontalpodautoscaler sarseg-web"
+          ]
+        },
+        "outputs.manifests": [
+          {
+            "apiVersion": "autoscaling/v2",
+            "kind": "HorizontalPodAutoscaler",
+            "metadata": {
+              "annotations": {
+                "artifact.spinnaker.io/location": "sarseg-dev",
+                "artifact.spinnaker.io/name": "sarseg-web",
+                "artifact.spinnaker.io/type": "kubernetes/horizontalpodautoscaler",
+                "artifact.spinnaker.io/version": "",
+                "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"autoscaling/v2\",\"kind\":\"HorizontalPodAutoscaler\",\"metadata\":{\"annotations\":{\"artifact.spinnaker.io/location\":\"sarseg-dev\",\"artifact.spinnaker.io/name\":\"sarseg-web\",\"artifact.spinnaker.io/type\":\"kubernetes/horizontalpodautoscaler\",\"artifact.spinnaker.io/version\":\"\",\"moniker.spinnaker.io/application\":\"sarseg\",\"moniker.spinnaker.io/cluster\":\"horizontalpodautoscaler sarseg-web\"},\"labels\":{\"app.kubernetes.io/managed-by\":\"spinnaker\",\"app.kubernetes.io/name\":\"sarseg\"},\"name\":\"sarseg-web\",\"namespace\":\"sarseg-dev\"},\"spec\":{\"behavior\":{\"scaleDown\":{\"policies\":[{\"periodSeconds\":15,\"type\":\"Pods\",\"value\":3}],\"stabilizationWindowSeconds\":60},\"scaleUp\":{\"policies\":[{\"periodSeconds\":15,\"type\":\"Pods\",\"value\":3}],\"stabilizationWindowSeconds\":0}},\"maxReplicas\":5,\"metrics\":[{\"resource\":{\"name\":\"cpu\",\"target\":{\"averageUtilization\":50,\"type\":\"Utilization\"}},\"type\":\"Resource\"}],\"minReplicas\":2,\"scaleTargetRef\":{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"name\":\"sarseg-web\"}}}\n",
+                "moniker.spinnaker.io/application": "sarseg",
+                "moniker.spinnaker.io/cluster": "horizontalpodautoscaler sarseg-web"
+              },
+              "creationTimestamp": "2026-11-20T04:45:07Z",
+              "labels": {
+                "app.kubernetes.io/managed-by": "spinnaker",
+                "app.kubernetes.io/name": "sarseg"
+              },
+              "name": "sarseg-web",
+              "namespace": "sarseg-dev",
+              "resourceVersion": "1969",
+              "uid": "6214c1da-d158-4393-9ce6-0a7742da2100"
+            },
+            "spec": {
+              "behavior": {
+                "scaleDown": {
+                  "policies": [
+                    {
+                      "periodSeconds": 15.0,
+                      "type": "Pods",
+                      "value": 3.0
+                    }
+                  ],
+                  "selectPolicy": "Max",
+                  "stabilizationWindowSeconds": 60.0
+                },
+                "scaleUp": {
+                  "policies": [
+                    {
+                      "periodSeconds": 15.0,
+                      "type": "Pods",
+                      "value": 3.0
+                    }
+                  ],
+                  "selectPolicy": "Max",
+                  "stabilizationWindowSeconds": 0.0
+                }
+              },
+              "maxReplicas": 5.0,
+              "metrics": [
+                {
+                  "resource": {
+                    "name": "cpu",
+                    "target": {
+                      "averageUtilization": 50.0,
+                      "type": "Utilization"
+                    }
+                  },
+                  "type": "Resource"
+                }
+              ],
+              "minReplicas": 2.0,
+              "scaleTargetRef": {
+                "apiVersion": "apps/v1",
+                "kind": "Deployment",
+                "name": "sarseg-web"
+              }
+            },
+            "status": {
+              "conditions": [
+                {
+                  "lastTransitionTime": "2026-11-20T04:45:22Z",
+                  "message": "the HPA controller was able to get the target's current scale",
+                  "reason": "SucceededGetScale",
+                  "status": "True",
+                  "type": "AbleToScale"
+                },
+                {
+                  "lastTransitionTime": "2026-11-20T04:46:07Z",
+                  "message": "the HPA was unable to compute the replica count: failed to get cpu utilization: unable to get metrics for resource cpu: no metrics returned from resource metrics API",
+                  "reason": "FailedGetResourceMetric",
+                  "status": "False",
+                  "type": "ScalingActive"
+                },
+                {
+                  "lastTransitionTime": "2026-11-20T04:45:22Z",
+                  "message": "the desired count is within the acceptable range",
+                  "reason": "DesiredWithinRange",
+                  "status": "False",
+                  "type": "ScalingLimited"
+                }
+              ],
+              "currentMetrics": [
+                {
+                  "type": ""
+                }
+              ],
+              "currentReplicas": 2.0,
+              "desiredReplicas": 2.0
+            }
+          }
+        ],
+        "requiredArtifacts": [],
+        "skipExpressionEvaluation": false,
+        "source": "artifact",
+        "stableManifests": [
+          {
+            "location": "sarseg-dev",
+            "manifestName": "horizontalpodautoscaler sarseg-web"
+          }
+        ],
+        "stageTimeoutMs": 300000,
+        "trafficManagement": {
+          "enabled": false,
+          "options": {
+            "enableTraffic": true
+          }
+        }
+      },
+      "endTime": 1795149980552,
+      "id": "01M7VMD3T9BA2QFZM9TEBZVVZR",
+      "name": "Deploy hpa.yml",
+      "outputs": {
+        "artifacts": [
+          {
+            "customKind": false,
+            "location": "sarseg-dev",
+            "metadata": {
+              "account": "sarseg-local"
+            },
+            "name": "sarseg-web",
+            "reference": "sarseg-web",
+            "type": "kubernetes/horizontalpodautoscaler",
+            "version": ""
+          }
+        ],
+        "manifests": [
+          {
+            "apiVersion": "autoscaling/v2",
+            "kind": "HorizontalPodAutoscaler",
+            "metadata": {
+              "name": "sarseg-web",
+              "namespace": "sarseg-dev"
+            },
+            "spec": {
+              "behavior": {
+                "scaleDown": {
+                  "policies": [
+                    {
+                      "periodSeconds": 15,
+                      "type": "Pods",
+                      "value": 3
+                    }
+                  ],
+                  "stabilizationWindowSeconds": 60
+                },
+                "scaleUp": {
+                  "policies": [
+                    {
+                      "periodSeconds": 15,
+                      "type": "Pods",
+                      "value": 3
+                    }
+                  ],
+                  "stabilizationWindowSeconds": 0
+                }
+              },
+              "maxReplicas": 5,
+              "metrics": [
+                {
+                  "resource": {
+                    "name": "cpu",
+                    "target": {
+                      "averageUtilization": 50,
+                      "type": "Utilization"
+                    }
+                  },
+                  "type": "Resource"
+                }
+              ],
+              "minReplicas": 2,
+              "scaleTargetRef": {
+                "apiVersion": "apps/v1",
+                "kind": "Deployment",
+                "name": "sarseg-web"
+              }
+            }
+          }
+        ],
+        "optionalArtifacts": [
+          {
+            "customKind": false,
+            "location": "sarseg-dev",
+            "metadata": {
+              "account": "sarseg-local"
+            },
+            "name": "sarseg-web",
+            "reference": "sarseg-web",
+            "type": "kubernetes/service",
+            "version": ""
+          },
+          {
+            "customKind": false,
+            "location": "sarseg-dev",
+            "metadata": {
+              "account": "sarseg-local"
+            },
+            "name": "sarseg-web",
+            "reference": "sarseg-web",
+            "type": "kubernetes/deployment",
+            "version": ""
+          },
+          {
+            "artifactAccount": "public-git-http",
+            "customKind": false,
+            "metadata": {},
+            "name": "deployment.yml",
+            "reference": "https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/0f101e672795b832f1e4474b85c5db915c194ec5/spinnaker/k8s/deployment.yml",
+            "type": "http/file",
+            "version": "0f101e672795b832f1e4474b85c5db915c194ec5"
+          },
+          {
+            "artifactAccount": "public-git-http",
+            "customKind": false,
+            "metadata": {},
+            "name": "service.yml",
+            "reference": "https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/0f101e672795b832f1e4474b85c5db915c194ec5/spinnaker/k8s/service.yml",
+            "type": "http/file",
+            "version": "0f101e672795b832f1e4474b85c5db915c194ec5"
+          },
+          {
+            "artifactAccount": "public-git-http",
+            "customKind": false,
+            "metadata": {},
+            "name": "hpa.yml",
+            "reference": "https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/0f101e672795b832f1e4474b85c5db915c194ec5/spinnaker/k8s/hpa.yml",
+            "type": "http/file",
+            "version": "0f101e672795b832f1e4474b85c5db915c194ec5"
+          }
+        ],
+        "outputs.boundArtifacts": [
+          {
+            "customKind": false,
+            "location": "sarseg-dev",
+            "metadata": {
+              "account": "sarseg-local"
+            },
+            "name": "sarseg-web",
+            "reference": "sarseg-web",
+            "type": "kubernetes/deployment",
+            "version": ""
+          }
+        ],
+        "outputs.createdArtifacts": [
+          {
+            "customKind": false,
+            "location": "sarseg-dev",
+            "metadata": {
+              "account": "sarseg-local"
+            },
+            "name": "sarseg-web",
+            "reference": "sarseg-web",
+            "type": "kubernetes/horizontalpodautoscaler",
+            "version": ""
+          }
+        ],
+        "outputs.manifestNamesByNamespace": {
+          "sarseg-dev": [
+            "horizontalpodautoscaler sarseg-web"
+          ]
+        },
+        "outputs.manifests": [
+          {
+            "apiVersion": "autoscaling/v2",
+            "kind": "HorizontalPodAutoscaler",
+            "metadata": {
+              "annotations": {
+                "artifact.spinnaker.io/location": "sarseg-dev",
+                "artifact.spinnaker.io/name": "sarseg-web",
+                "artifact.spinnaker.io/type": "kubernetes/horizontalpodautoscaler",
+                "artifact.spinnaker.io/version": "",
+                "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"autoscaling/v2\",\"kind\":\"HorizontalPodAutoscaler\",\"metadata\":{\"annotations\":{\"artifact.spinnaker.io/location\":\"sarseg-dev\",\"artifact.spinnaker.io/name\":\"sarseg-web\",\"artifact.spinnaker.io/type\":\"kubernetes/horizontalpodautoscaler\",\"artifact.spinnaker.io/version\":\"\",\"moniker.spinnaker.io/application\":\"sarseg\",\"moniker.spinnaker.io/cluster\":\"horizontalpodautoscaler sarseg-web\"},\"labels\":{\"app.kubernetes.io/managed-by\":\"spinnaker\",\"app.kubernetes.io/name\":\"sarseg\"},\"name\":\"sarseg-web\",\"namespace\":\"sarseg-dev\"},\"spec\":{\"behavior\":{\"scaleDown\":{\"policies\":[{\"periodSeconds\":15,\"type\":\"Pods\",\"value\":3}],\"stabilizationWindowSeconds\":60},\"scaleUp\":{\"policies\":[{\"periodSeconds\":15,\"type\":\"Pods\",\"value\":3}],\"stabilizationWindowSeconds\":0}},\"maxReplicas\":5,\"metrics\":[{\"resource\":{\"name\":\"cpu\",\"target\":{\"averageUtilization\":50,\"type\":\"Utilization\"}},\"type\":\"Resource\"}],\"minReplicas\":2,\"scaleTargetRef\":{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"name\":\"sarseg-web\"}}}\n",
+                "moniker.spinnaker.io/application": "sarseg",
+                "moniker.spinnaker.io/cluster": "horizontalpodautoscaler sarseg-web"
+              },
+              "creationTimestamp": "2026-11-20T04:45:07Z",
+              "labels": {
+                "app.kubernetes.io/managed-by": "spinnaker",
+                "app.kubernetes.io/name": "sarseg"
+              },
+              "name": "sarseg-web",
+              "namespace": "sarseg-dev",
+              "resourceVersion": "1969",
+              "uid": "6214c1da-d158-4393-9ce6-0a7742da2100"
+            },
+            "spec": {
+              "behavior": {
+                "scaleDown": {
+                  "policies": [
+                    {
+                      "periodSeconds": 15.0,
+                      "type": "Pods",
+                      "value": 3.0
+                    }
+                  ],
+                  "selectPolicy": "Max",
+                  "stabilizationWindowSeconds": 60.0
+                },
+                "scaleUp": {
+                  "policies": [
+                    {
+                      "periodSeconds": 15.0,
+                      "type": "Pods",
+                      "value": 3.0
+                    }
+                  ],
+                  "selectPolicy": "Max",
+                  "stabilizationWindowSeconds": 0.0
+                }
+              },
+              "maxReplicas": 5.0,
+              "metrics": [
+                {
+                  "resource": {
+                    "name": "cpu",
+                    "target": {
+                      "averageUtilization": 50.0,
+                      "type": "Utilization"
+                    }
+                  },
+                  "type": "Resource"
+                }
+              ],
+              "minReplicas": 2.0,
+              "scaleTargetRef": {
+                "apiVersion": "apps/v1",
+                "kind": "Deployment",
+                "name": "sarseg-web"
+              }
+            },
+            "status": {
+              "conditions": [
+                {
+                  "lastTransitionTime": "2026-11-20T04:45:22Z",
+                  "message": "the HPA controller was able to get the target's current scale",
+                  "reason": "SucceededGetScale",
+                  "status": "True",
+                  "type": "AbleToScale"
+                },
+                {
+                  "lastTransitionTime": "2026-11-20T04:46:07Z",
+                  "message": "the HPA was unable to compute the replica count: failed to get cpu utilization: unable to get metrics for resource cpu: no metrics returned from resource metrics API",
+                  "reason": "FailedGetResourceMetric",
+                  "status": "False",
+                  "type": "ScalingActive"
+                },
+                {
+                  "lastTransitionTime": "2026-11-20T04:45:22Z",
+                  "message": "the desired count is within the acceptable range",
+                  "reason": "DesiredWithinRange",
+                  "status": "False",
+                  "type": "ScalingLimited"
+                }
+              ],
+              "currentMetrics": [
+                {
+                  "type": ""
+                }
+              ],
+              "currentReplicas": 2.0,
+              "desiredReplicas": 2.0
+            }
+          }
+        ],
+        "requiredArtifacts": []
+      },
+      "refId": "3",
+      "requisiteStageRefIds": [
+        "2"
+      ],
+      "startTime": 1795149973500,
+      "status": "SUCCEEDED",
+      "tasks": [
+        {
+          "endTime": 1795149973831,
+          "id": "1",
+          "implementingClass": "com.netflix.spinnaker.orca.clouddriver.tasks.manifest.ResolveDeploySourceManifestTask",
+          "loopEnd": false,
+          "loopStart": false,
+          "name": "resolveDeploySourceManifest",
+          "stageEnd": false,
+          "stageStart": true,
+          "startTime": 1795149973554,
+          "status": "SUCCEEDED",
+          "taskExceptionDetails": {}
+        },
+        {
+          "endTime": 1795149974045,
+          "id": "2",
+          "implementingClass": "com.netflix.spinnaker.orca.clouddriver.tasks.manifest.DeployManifestTask",
+          "loopEnd": false,
+          "loopStart": false,
+          "name": "deployManifest",
+          "stageEnd": false,
+          "stageStart": false,
+          "startTime": 1795149973880,
+          "status": "SUCCEEDED",
+          "taskExceptionDetails": {}
+        },
+        {
+          "endTime": 1795149979275,
+          "id": "3",
+          "implementingClass": "com.netflix.spinnaker.orca.clouddriver.tasks.manifest.MonitorDeployManifestTask",
+          "loopEnd": false,
+          "loopStart": false,
+          "name": "monitorDeploy",
+          "stageEnd": false,
+          "stageStart": false,
+          "startTime": 1795149974101,
+          "status": "SUCCEEDED",
+          "taskExceptionDetails": {}
+        },
+        {
+          "endTime": 1795149979444,
+          "id": "4",
+          "implementingClass": "com.netflix.spinnaker.orca.clouddriver.tasks.manifest.PromoteManifestKatoOutputsTask",
+          "loopEnd": false,
+          "loopStart": false,
+          "name": "promoteOutputs",
+          "stageEnd": false,
+          "stageStart": false,
+          "startTime": 1795149979331,
+          "status": "SUCCEEDED",
+          "taskExceptionDetails": {}
+        },
+        {
+          "endTime": 1795149979721,
+          "id": "5",
+          "implementingClass": "com.netflix.spinnaker.orca.clouddriver.tasks.manifest.WaitForManifestStableTask",
+          "loopEnd": false,
+          "loopStart": false,
+          "name": "waitForManifestToStabilize",
+          "stageEnd": false,
+          "stageStart": false,
+          "startTime": 1795149979499,
+          "status": "SUCCEEDED",
+          "taskExceptionDetails": {}
+        },
+        {
+          "endTime": 1795149979995,
+          "id": "6",
+          "implementingClass": "com.netflix.spinnaker.orca.clouddriver.tasks.artifacts.CleanupArtifactsTask",
+          "loopEnd": false,
+          "loopStart": false,
+          "name": "cleanupArtifacts",
+          "stageEnd": false,
+          "stageStart": false,
+          "startTime": 1795149979776,
+          "status": "SUCCEEDED",
+          "taskExceptionDetails": {}
+        },
+        {
+          "endTime": 1795149980162,
+          "id": "7",
+          "implementingClass": "com.netflix.spinnaker.orca.clouddriver.tasks.MonitorKatoTask",
+          "loopEnd": false,
+          "loopStart": false,
+          "name": "monitorCleanup",
+          "stageEnd": false,
+          "stageStart": false,
+          "startTime": 1795149980051,
+          "status": "SUCCEEDED",
+          "taskExceptionDetails": {}
+        },
+        {
+          "endTime": 1795149980329,
+          "id": "8",
+          "implementingClass": "com.netflix.spinnaker.orca.clouddriver.tasks.manifest.PromoteManifestKatoOutputsTask",
+          "loopEnd": false,
+          "loopStart": false,
+          "name": "promoteOutputs",
+          "stageEnd": false,
+          "stageStart": false,
+          "startTime": 1795149980218,
+          "status": "SUCCEEDED",
+          "taskExceptionDetails": {}
+        },
+        {
+          "endTime": 1795149980495,
+          "id": "9",
+          "implementingClass": "com.netflix.spinnaker.orca.pipeline.tasks.artifacts.BindProducedArtifactsTask",
+          "loopEnd": false,
+          "loopStart": false,
+          "name": "bindProducedArtifacts",
+          "stageEnd": true,
+          "stageStart": false,
+          "startTime": 1795149980384,
+          "status": "SUCCEEDED",
+          "taskExceptionDetails": {}
+        }
+      ],
+      "type": "deployManifest"
+    }
+  ],
+  "startTime": 1795149959074,
+  "status": "SUCCEEDED",
+  "systemNotifications": [],
+  "templateVariables": {},
+  "trigger": {
+    "artifacts": [
+      {
+        "artifactAccount": "public-git-http",
+        "customKind": false,
+        "metadata": {},
+        "name": "deployment.yml",
+        "reference": "https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/0f101e672795b832f1e4474b85c5db915c194ec5/spinnaker/k8s/deployment.yml",
+        "type": "http/file",
+        "version": "0f101e672795b832f1e4474b85c5db915c194ec5"
+      },
+      {
+        "artifactAccount": "public-git-http",
+        "customKind": false,
+        "metadata": {},
+        "name": "service.yml",
+        "reference": "https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/0f101e672795b832f1e4474b85c5db915c194ec5/spinnaker/k8s/service.yml",
+        "type": "http/file",
+        "version": "0f101e672795b832f1e4474b85c5db915c194ec5"
+      },
+      {
+        "artifactAccount": "public-git-http",
+        "customKind": false,
+        "metadata": {},
+        "name": "hpa.yml",
+        "reference": "https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/0f101e672795b832f1e4474b85c5db915c194ec5/spinnaker/k8s/hpa.yml",
+        "type": "http/file",
+        "version": "0f101e672795b832f1e4474b85c5db915c194ec5"
+      }
+    ],
+    "dryRun": false,
+    "expectedArtifacts": [],
+    "notifications": [],
+    "parameters": {
+      "gitBranch": "codex/spinnaker-local",
+      "gitSha": "0f101e672795b832f1e4474b85c5db915c194ec5"
+    },
+    "rebake": false,
+    "resolvedExpectedArtifacts": [],
+    "strategy": false,
+    "type": "manual",
+    "user": "local-git-poller"
+  },
+  "type": "PIPELINE"
+}

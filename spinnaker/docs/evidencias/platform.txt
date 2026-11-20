@@ -1,0 +1,26 @@
+NAME                               READY   STATUS    RESTARTS      AGE
+pod/clouddriver-76587d5f75-z7cj5   1/1     Running   2 (12m ago)   17m
+pod/deck-586bdd4898-vw6nh          1/1     Running   0             17m
+pod/front50-c48d585df-stdq4        1/1     Running   1 (12m ago)   17m
+pod/gate-58f597c69f-k29br          1/1     Running   0             17m
+pod/mysql-648f86fdf6-hj5zp         1/1     Running   0             17m
+pod/orca-69b59fc869-l6wpv          1/1     Running   1 (12m ago)   17m
+pod/redis-688c8d96d-sd8xj          1/1     Running   0             17m
+
+NAME                          READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/clouddriver   1/1     1            1           17m
+deployment.apps/deck          1/1     1            1           17m
+deployment.apps/front50       1/1     1            1           17m
+deployment.apps/gate          1/1     1            1           17m
+deployment.apps/mysql         1/1     1            1           17m
+deployment.apps/orca          1/1     1            1           17m
+deployment.apps/redis         1/1     1            1           17m
+
+NAME                  TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+service/clouddriver   ClusterIP   10.96.156.97    <none>        7002/TCP         17m
+service/deck          NodePort    10.96.203.102   <none>        9000:30900/TCP   17m
+service/front50       ClusterIP   10.96.45.164    <none>        8080/TCP         17m
+service/gate          NodePort    10.96.13.188    <none>        8084:30884/TCP   17m
+service/mysql         ClusterIP   10.96.224.47    <none>        3306/TCP         17m
+service/orca          ClusterIP   10.96.105.158   <none>        8083/TCP         17m
+service/redis         ClusterIP   10.96.222.190   <none>        6379/TCP         17m

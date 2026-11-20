@@ -1,0 +1,151 @@
+LAST SEEN   TYPE      REASON                         OBJECT                                  MESSAGE
+16m         Normal    SuccessfulCreate               replicaset/postgres-588b6d799d          Created pod: postgres-588b6d799d-x644n
+16m         Normal    SuccessfulCreate               replicaset/api-84bcc6f848               Created pod: api-84bcc6f848-2lt75
+16m         Normal    ExternalProvisioning           persistentvolumeclaim/sarseg-postgres   Waiting for a volume to be created either by the external provisioner 'rancher.io/local-path' or manually by the system administrator. If volume creation is delayed, please verify that the provisioner is running and correctly registered.
+16m         Normal    Provisioning                   persistentvolumeclaim/sarseg-postgres   External provisioner is provisioning volume for claim "sarseg-dev/sarseg-postgres"
+16m         Normal    ScalingReplicaSet              deployment/api                          Scaled up replica set api-84bcc6f848 from 0 to 1
+16m         Normal    ScalingReplicaSet              deployment/postgres                     Scaled up replica set postgres-588b6d799d from 0 to 1
+16m         Normal    WaitForFirstConsumer           persistentvolumeclaim/sarseg-postgres   waiting for first consumer to be created before binding
+16m         Normal    Scheduled                      pod/api-84bcc6f848-2lt75                Successfully assigned sarseg-dev/api-84bcc6f848-2lt75 to sarseg-spinnaker-control-plane
+15m         Normal    ProvisioningSucceeded          persistentvolumeclaim/sarseg-postgres   Successfully provisioned volume pvc-93e60d24-2ea8-4a28-8433-0e1d932923a0
+15m         Normal    Scheduled                      pod/postgres-588b6d799d-x644n           Successfully assigned sarseg-dev/postgres-588b6d799d-x644n to sarseg-spinnaker-control-plane
+15m         Normal    Pulling                        pod/postgres-588b6d799d-x644n           Pulling image "postgres:17.11-alpine"
+13m         Normal    Started                        pod/api-84bcc6f848-2lt75                Started container api
+13m         Normal    Created                        pod/api-84bcc6f848-2lt75                Created container: api
+13m         Normal    Pulled                         pod/api-84bcc6f848-2lt75                Container image "sarseg-api:9984bc57" already present on machine
+12m         Normal    Created                        pod/postgres-588b6d799d-x644n           Created container: postgres
+12m         Normal    Started                        pod/postgres-588b6d799d-x644n           Started container postgres
+12m         Normal    Pulled                         pod/postgres-588b6d799d-x644n           Successfully pulled image "postgres:17.11-alpine" in 620ms (3m22.836s including waiting). Image size: 117214862 bytes.
+12m         Warning   Unhealthy                      pod/postgres-588b6d799d-x644n           Readiness probe failed: /var/run/postgresql:5432 - no response
+11m         Warning   BackOff                        pod/api-84bcc6f848-2lt75                Back-off restarting failed container api in pod api-84bcc6f848-2lt75_sarseg-dev(8a78cdbc-a247-49f7-98bd-18452db42e37)
+11m         Normal    SuccessfulDelete               replicaset/api-84bcc6f848               Deleted pod: api-84bcc6f848-2lt75
+11m         Normal    ScalingReplicaSet              deployment/api                          Scaled down replica set api-84bcc6f848 from 1 to 0
+11m         Normal    Scheduled                      pod/api-799d6c9c8f-n499d                Successfully assigned sarseg-dev/api-799d6c9c8f-n499d to sarseg-spinnaker-control-plane
+11m         Normal    ScalingReplicaSet              deployment/api                          Scaled up replica set api-799d6c9c8f from 0 to 1
+11m         Normal    SuccessfulCreate               replicaset/api-799d6c9c8f               Created pod: api-799d6c9c8f-n499d
+11m         Normal    Created                        pod/api-799d6c9c8f-n499d                Created container: api
+11m         Normal    Started                        pod/api-799d6c9c8f-n499d                Started container api
+11m         Normal    Pulled                         pod/api-799d6c9c8f-n499d                Container image "sarseg-api:9984bc57" already present on machine
+9m54s       Normal    ScalingReplicaSet              deployment/api                          Scaled down replica set api-799d6c9c8f from 1 to 0
+9m54s       Normal    SuccessfulDelete               replicaset/api-799d6c9c8f               Deleted pod: api-799d6c9c8f-n499d
+9m54s       Normal    Killing                        pod/api-799d6c9c8f-n499d                Stopping container api
+9m53s       Normal    Scheduled                      pod/api-68ff9488c4-bpx8s                Successfully assigned sarseg-dev/api-68ff9488c4-bpx8s to sarseg-spinnaker-control-plane
+9m53s       Normal    ScalingReplicaSet              deployment/api                          Scaled up replica set api-68ff9488c4 from 0 to 1
+9m53s       Normal    SuccessfulCreate               replicaset/api-68ff9488c4               Created pod: api-68ff9488c4-bpx8s
+9m52s       Normal    ScalingReplicaSet              deployment/sarseg-web                   Scaled up replica set sarseg-web-577947b5c7 from 0 to 2
+9m52s       Normal    SuccessfulCreate               replicaset/sarseg-web-577947b5c7        Created pod: sarseg-web-577947b5c7-5fvpn
+9m52s       Normal    Scheduled                      pod/sarseg-web-577947b5c7-5fvpn         Successfully assigned sarseg-dev/sarseg-web-577947b5c7-5fvpn to sarseg-spinnaker-control-plane
+9m52s       Normal    SuccessfulCreate               replicaset/sarseg-web-577947b5c7        Created pod: sarseg-web-577947b5c7-jdgth
+9m52s       Normal    Scheduled                      pod/sarseg-web-577947b5c7-jdgth         Successfully assigned sarseg-dev/sarseg-web-577947b5c7-jdgth to sarseg-spinnaker-control-plane
+9m52s       Normal    Created                        pod/api-68ff9488c4-bpx8s                Created container: wait-for-postgres
+9m52s       Normal    Pulled                         pod/api-68ff9488c4-bpx8s                Container image "postgres:17.11-alpine" already present on machine
+9m51s       Normal    Started                        pod/sarseg-web-577947b5c7-jdgth         Started container web
+9m51s       Normal    Created                        pod/sarseg-web-577947b5c7-5fvpn         Created container: web
+9m51s       Normal    Started                        pod/api-68ff9488c4-bpx8s                Started container wait-for-postgres
+9m51s       Normal    Created                        pod/sarseg-web-577947b5c7-jdgth         Created container: web
+9m51s       Normal    Pulled                         pod/api-68ff9488c4-bpx8s                Container image "sarseg-api:9984bc57" already present on machine
+9m51s       Warning   Unhealthy                      pod/sarseg-web-577947b5c7-5fvpn         Readiness probe failed: Get "http://10.244.0.20:8080/": dial tcp 10.244.0.20:8080: connect: connection refused
+9m51s       Normal    Started                        pod/sarseg-web-577947b5c7-5fvpn         Started container web
+9m51s       Normal    Pulled                         pod/sarseg-web-577947b5c7-jdgth         Container image "sarseg-web:9984bc57" already present on machine
+9m51s       Normal    Pulled                         pod/sarseg-web-577947b5c7-5fvpn         Container image "sarseg-web:9984bc57" already present on machine
+9m51s       Normal    Created                        pod/api-68ff9488c4-bpx8s                Created container: api
+9m51s       Warning   Unhealthy                      pod/sarseg-web-577947b5c7-jdgth         Readiness probe failed: Get "http://10.244.0.21:8080/": dial tcp 10.244.0.21:8080: connect: connection refused
+9m50s       Normal    Started                        pod/api-68ff9488c4-bpx8s                Started container api
+8m44s       Normal    Scheduled                      pod/sarseg-web-c8746df99-72gtm          Successfully assigned sarseg-dev/sarseg-web-c8746df99-72gtm to sarseg-spinnaker-control-plane
+8m44s       Normal    SuccessfulCreate               replicaset/sarseg-web-c8746df99         Created pod: sarseg-web-c8746df99-72gtm
+8m44s       Normal    Created                        pod/sarseg-web-c8746df99-72gtm          Created container: web
+8m44s       Normal    Pulled                         pod/sarseg-web-c8746df99-72gtm          Container image "sarseg-web:9984bc57" already present on machine
+8m44s       Normal    ScalingReplicaSet              deployment/sarseg-web                   Scaled up replica set sarseg-web-c8746df99 from 0 to 1
+8m43s       Normal    Started                        pod/sarseg-web-c8746df99-72gtm          Started container web
+8m42s       Normal    Scheduled                      pod/sarseg-web-c8746df99-76bnb          Successfully assigned sarseg-dev/sarseg-web-c8746df99-76bnb to sarseg-spinnaker-control-plane
+8m42s       Normal    Killing                        pod/sarseg-web-577947b5c7-5fvpn         Stopping container web
+8m42s       Normal    ScalingReplicaSet              deployment/sarseg-web                   Scaled up replica set sarseg-web-c8746df99 from 1 to 2
+8m42s       Normal    Created                        pod/sarseg-web-c8746df99-76bnb          Created container: web
+8m42s       Normal    Pulled                         pod/sarseg-web-c8746df99-76bnb          Container image "sarseg-web:9984bc57" already present on machine
+8m42s       Normal    SuccessfulDelete               replicaset/sarseg-web-577947b5c7        Deleted pod: sarseg-web-577947b5c7-5fvpn
+8m42s       Normal    ScalingReplicaSet              deployment/sarseg-web                   Scaled down replica set sarseg-web-577947b5c7 from 2 to 1
+8m42s       Normal    SuccessfulCreate               replicaset/sarseg-web-c8746df99         Created pod: sarseg-web-c8746df99-76bnb
+8m41s       Normal    Started                        pod/sarseg-web-c8746df99-76bnb          Started container web
+8m39s       Normal    Killing                        pod/sarseg-web-577947b5c7-jdgth         Stopping container web
+8m39s       Normal    ScalingReplicaSet              deployment/sarseg-web                   Scaled down replica set sarseg-web-577947b5c7 from 1 to 0
+8m39s       Normal    SuccessfulDelete               replicaset/sarseg-web-577947b5c7        Deleted pod: sarseg-web-577947b5c7-jdgth
+8m16s       Normal    Scheduled                      pod/sarseg-cpu-load-8x7zt               Successfully assigned sarseg-dev/sarseg-cpu-load-8x7zt to sarseg-spinnaker-control-plane
+8m16s       Normal    Pulled                         pod/sarseg-cpu-load-8x7zt               Container image "python:3.13-alpine" already present on machine
+8m16s       Normal    Created                        pod/sarseg-cpu-load-8x7zt               Created container: http-load
+8m16s       Normal    SuccessfulCreate               job/sarseg-cpu-load                     Created pod: sarseg-cpu-load-8x7zt
+8m15s       Normal    Started                        pod/sarseg-cpu-load-8x7zt               Started container http-load
+7m37s       Normal    Scheduled                      pod/sarseg-web-c8746df99-qhsvp          Successfully assigned sarseg-dev/sarseg-web-c8746df99-qhsvp to sarseg-spinnaker-control-plane
+7m37s       Normal    Scheduled                      pod/sarseg-web-c8746df99-87w8r          Successfully assigned sarseg-dev/sarseg-web-c8746df99-87w8r to sarseg-spinnaker-control-plane
+7m37s       Normal    SuccessfulCreate               replicaset/sarseg-web-c8746df99         Created pod: sarseg-web-c8746df99-87w8r
+7m37s       Normal    Scheduled                      pod/sarseg-web-c8746df99-7f8kc          Successfully assigned sarseg-dev/sarseg-web-c8746df99-7f8kc to sarseg-spinnaker-control-plane
+7m37s       Normal    SuccessfulCreate               replicaset/sarseg-web-c8746df99         Created pod: sarseg-web-c8746df99-qhsvp
+7m37s       Normal    ScalingReplicaSet              deployment/sarseg-web                   Scaled up replica set sarseg-web-c8746df99 from 2 to 5
+7m37s       Normal    SuccessfulCreate               replicaset/sarseg-web-c8746df99         Created pod: sarseg-web-c8746df99-7f8kc
+7m36s       Normal    Created                        pod/sarseg-web-c8746df99-7f8kc          Created container: web
+7m36s       Normal    Pulled                         pod/sarseg-web-c8746df99-7f8kc          Container image "sarseg-web:9984bc57" already present on machine
+7m36s       Normal    Started                        pod/sarseg-web-c8746df99-qhsvp          Started container web
+7m36s       Normal    Created                        pod/sarseg-web-c8746df99-qhsvp          Created container: web
+7m36s       Normal    Pulled                         pod/sarseg-web-c8746df99-qhsvp          Container image "sarseg-web:9984bc57" already present on machine
+7m36s       Normal    Started                        pod/sarseg-web-c8746df99-87w8r          Started container web
+7m36s       Normal    Created                        pod/sarseg-web-c8746df99-87w8r          Created container: web
+7m36s       Normal    Pulled                         pod/sarseg-web-c8746df99-87w8r          Container image "sarseg-web:9984bc57" already present on machine
+7m36s       Normal    Started                        pod/sarseg-web-c8746df99-7f8kc          Started container web
+7m34s       Normal    Killing                        pod/sarseg-cpu-load-8x7zt               Stopping container http-load
+5m37s       Normal    SuccessfulDelete               replicaset/sarseg-web-c8746df99         Deleted pod: sarseg-web-c8746df99-qhsvp
+5m37s       Normal    SuccessfulDelete               replicaset/sarseg-web-c8746df99         Deleted pod: sarseg-web-c8746df99-87w8r
+5m37s       Normal    SuccessfulDelete               replicaset/sarseg-web-c8746df99         Deleted pod: sarseg-web-c8746df99-7f8kc
+5m37s       Normal    Killing                        pod/sarseg-web-c8746df99-7f8kc          Stopping container web
+5m37s       Normal    ScalingReplicaSet              deployment/sarseg-web                   Scaled down replica set sarseg-web-c8746df99 from 5 to 2
+5m37s       Normal    Killing                        pod/sarseg-web-c8746df99-qhsvp          Stopping container web
+5m37s       Normal    Killing                        pod/sarseg-web-c8746df99-87w8r          Stopping container web
+3m48s       Normal    SuccessfulCreate               replicaset/sarseg-web-5d49f74cf4        Created pod: sarseg-web-5d49f74cf4-kcvbw
+3m48s       Normal    ScalingReplicaSet              deployment/sarseg-web                   Scaled up replica set sarseg-web-5d49f74cf4 from 0 to 1
+3m48s       Normal    Scheduled                      pod/sarseg-web-5d49f74cf4-kcvbw         Successfully assigned sarseg-dev/sarseg-web-5d49f74cf4-kcvbw to sarseg-spinnaker-control-plane
+3m47s       Normal    Created                        pod/sarseg-web-5d49f74cf4-kcvbw         Created container: web
+3m47s       Normal    Started                        pod/sarseg-web-5d49f74cf4-kcvbw         Started container web
+3m47s       Normal    Pulled                         pod/sarseg-web-5d49f74cf4-kcvbw         Container image "sarseg-web:9984bc57" already present on machine
+3m47s       Warning   Unhealthy                      pod/sarseg-web-5d49f74cf4-kcvbw         Readiness probe failed: Get "http://10.244.0.28:8080/": dial tcp 10.244.0.28:8080: connect: connection refused
+3m46s       Normal    ScalingReplicaSet              deployment/sarseg-web                   Scaled down replica set sarseg-web-c8746df99 from 2 to 1
+3m45s       Normal    Scheduled                      pod/sarseg-web-5d49f74cf4-rdjb6         Successfully assigned sarseg-dev/sarseg-web-5d49f74cf4-rdjb6 to sarseg-spinnaker-control-plane
+3m45s       Normal    SuccessfulDelete               replicaset/sarseg-web-c8746df99         Deleted pod: sarseg-web-c8746df99-72gtm
+3m45s       Normal    SuccessfulCreate               replicaset/sarseg-web-5d49f74cf4        Created pod: sarseg-web-5d49f74cf4-rdjb6
+3m45s       Normal    Killing                        pod/sarseg-web-c8746df99-72gtm          Stopping container web
+3m45s       Normal    Pulled                         pod/sarseg-web-5d49f74cf4-rdjb6         Container image "sarseg-web:9984bc57" already present on machine
+3m45s       Normal    Created                        pod/sarseg-web-5d49f74cf4-rdjb6         Created container: web
+3m44s       Normal    Started                        pod/sarseg-web-5d49f74cf4-rdjb6         Started container web
+3m43s       Normal    SuccessfulDelete               replicaset/sarseg-web-c8746df99         Deleted pod: sarseg-web-c8746df99-76bnb
+3m43s       Normal    Killing                        pod/sarseg-web-c8746df99-76bnb          Stopping container web
+3m37s       Warning   FailedComputeMetricsReplicas   horizontalpodautoscaler/sarseg-web      invalid metrics (1 invalid out of 1), first error is: failed to get cpu resource metric value: failed to get cpu utilization: unable to get metrics for resource cpu: no metrics returned from resource metrics API
+3m37s       Warning   FailedGetResourceMetric        horizontalpodautoscaler/sarseg-web      failed to get cpu utilization: unable to get metrics for resource cpu: no metrics returned from resource metrics API
+3m22s       Warning   FailedComputeMetricsReplicas   horizontalpodautoscaler/sarseg-web      invalid metrics (1 invalid out of 1), first error is: failed to get cpu resource metric value: failed to get cpu utilization: did not receive metrics for targeted pods (pods might be unready)
+3m22s       Warning   FailedGetResourceMetric        horizontalpodautoscaler/sarseg-web      failed to get cpu utilization: did not receive metrics for targeted pods (pods might be unready)
+3m18s       Normal    SuccessfulCreate               job/sarseg-cpu-load                     Created pod: sarseg-cpu-load-l4bkc
+3m18s       Normal    Scheduled                      pod/sarseg-cpu-load-l4bkc               Successfully assigned sarseg-dev/sarseg-cpu-load-l4bkc to sarseg-spinnaker-control-plane
+3m18s       Normal    Pulled                         pod/sarseg-cpu-load-l4bkc               Container image "python:3.13-alpine" already present on machine
+3m18s       Normal    Created                        pod/sarseg-cpu-load-l4bkc               Created container: http-load
+3m17s       Normal    Started                        pod/sarseg-cpu-load-l4bkc               Started container http-load
+2m37s       Normal    SuccessfulRescale              horizontalpodautoscaler/sarseg-web      New size: 5; reason: cpu resource utilization (percentage of request) above target
+2m37s       Normal    Scheduled                      pod/sarseg-web-5d49f74cf4-bdw65         Successfully assigned sarseg-dev/sarseg-web-5d49f74cf4-bdw65 to sarseg-spinnaker-control-plane
+2m37s       Normal    Scheduled                      pod/sarseg-web-5d49f74cf4-4pl2p         Successfully assigned sarseg-dev/sarseg-web-5d49f74cf4-4pl2p to sarseg-spinnaker-control-plane
+2m37s       Normal    SuccessfulCreate               replicaset/sarseg-web-5d49f74cf4        Created pod: sarseg-web-5d49f74cf4-4pl2p
+2m37s       Normal    SuccessfulCreate               replicaset/sarseg-web-5d49f74cf4        Created pod: sarseg-web-5d49f74cf4-bdw65
+2m37s       Normal    SuccessfulCreate               replicaset/sarseg-web-5d49f74cf4        Created pod: sarseg-web-5d49f74cf4-p59lf
+2m37s       Normal    Scheduled                      pod/sarseg-web-5d49f74cf4-p59lf         Successfully assigned sarseg-dev/sarseg-web-5d49f74cf4-p59lf to sarseg-spinnaker-control-plane
+2m36s       Normal    Started                        pod/sarseg-web-5d49f74cf4-bdw65         Started container web
+2m36s       Normal    Created                        pod/sarseg-web-5d49f74cf4-bdw65         Created container: web
+2m36s       Normal    Pulled                         pod/sarseg-web-5d49f74cf4-p59lf         Container image "sarseg-web:9984bc57" already present on machine
+2m36s       Normal    Created                        pod/sarseg-web-5d49f74cf4-4pl2p         Created container: web
+2m36s       Normal    Started                        pod/sarseg-web-5d49f74cf4-4pl2p         Started container web
+2m36s       Normal    Created                        pod/sarseg-web-5d49f74cf4-p59lf         Created container: web
+2m36s       Normal    Started                        pod/sarseg-web-5d49f74cf4-p59lf         Started container web
+2m36s       Normal    Pulled                         pod/sarseg-web-5d49f74cf4-4pl2p         Container image "sarseg-web:9984bc57" already present on machine
+2m36s       Normal    Pulled                         pod/sarseg-web-5d49f74cf4-bdw65         Container image "sarseg-web:9984bc57" already present on machine
+2m15s       Normal    Killing                        pod/sarseg-cpu-load-l4bkc               Stopping container http-load
+7s          Normal    Killing                        pod/sarseg-web-5d49f74cf4-4pl2p         Stopping container web
+7s          Normal    Killing                        pod/sarseg-web-5d49f74cf4-bdw65         Stopping container web
+7s          Normal    Killing                        pod/sarseg-web-5d49f74cf4-kcvbw         Stopping container web
+7s          Normal    SuccessfulRescale              horizontalpodautoscaler/sarseg-web      New size: 2; reason: All metrics below target
+7s          Normal    SuccessfulDelete               replicaset/sarseg-web-5d49f74cf4        Deleted pod: sarseg-web-5d49f74cf4-kcvbw
+7s          Normal    SuccessfulDelete               replicaset/sarseg-web-5d49f74cf4        Deleted pod: sarseg-web-5d49f74cf4-bdw65
+7s          Normal    SuccessfulDelete               replicaset/sarseg-web-5d49f74cf4        Deleted pod: sarseg-web-5d49f74cf4-4pl2p
+7s          Normal    ScalingReplicaSet              deployment/sarseg-web                   (combined from similar events): Scaled down replica set sarseg-web-5d49f74cf4 from 5 to 2

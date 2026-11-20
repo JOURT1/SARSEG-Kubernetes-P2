@@ -1,0 +1,56 @@
+sql:
+  enabled: true
+  taskRepository:
+    enabled: true
+  cache:
+    enabled: true
+    readBatchSize: 500
+    writeBatchSize: 300
+  scheduler:
+    enabled: true
+  unknown-agent-cleanup-agent:
+    enabled: true
+  connectionPools:
+    default:
+      default: true
+      jdbcUrl: jdbc:mysql://mysql:3306/clouddriver
+      user: clouddriver_service
+      password: ${SPIN_SQL_PASSWORD}
+  migration:
+    user: clouddriver_migrate
+    jdbcUrl: jdbc:mysql://mysql:3306/clouddriver
+    password: ${SPIN_SQL_PASSWORD}
+redis:
+  enabled: false
+  cache:
+    enabled: false
+  scheduler:
+    enabled: false
+  taskRepository:
+    enabled: false
+kubernetes:
+  enabled: true
+  accounts:
+  - name: sarseg-local
+    providerVersion: V2
+    serviceAccount: true
+    namespaces:
+    - sarseg-dev
+    kinds:
+    - deployment
+    - replicaSet
+    - pod
+    - service
+    - horizontalPodAutoscaler
+    - configMap
+    - job
+    - event
+    cacheThreads: 1
+    cachingPolicies:
+    - kubernetesKind: Deployment
+      maxEntriesPerAgent: 50
+artifacts:
+  http:
+    enabled: true
+    accounts:
+    - name: public-git-http
