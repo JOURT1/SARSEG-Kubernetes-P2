@@ -1,0 +1,126 @@
+{
+  "id": "sarseg-deploy-git",
+  "application": "sarseg",
+  "name": "deploy-git",
+  "keepWaitingPipelines": false,
+  "limitConcurrent": true,
+  "triggers": [],
+  "expectedArtifacts": [
+    {
+      "id": "deployment",
+      "displayName": "deployment.yml",
+      "matchArtifact": {
+        "type": "http/file",
+        "name": "deployment.yml"
+      },
+      "useDefaultArtifact": false,
+      "usePriorArtifact": false
+    },
+    {
+      "id": "service",
+      "displayName": "service.yml",
+      "matchArtifact": {
+        "type": "http/file",
+        "name": "service.yml"
+      },
+      "useDefaultArtifact": false,
+      "usePriorArtifact": false
+    },
+    {
+      "id": "hpa",
+      "displayName": "hpa.yml",
+      "matchArtifact": {
+        "type": "http/file",
+        "name": "hpa.yml"
+      },
+      "useDefaultArtifact": false,
+      "usePriorArtifact": false
+    }
+  ],
+  "stages": [
+    {
+      "refId": "1",
+      "requisiteStageRefIds": [],
+      "name": "Deploy deployment.yml",
+      "type": "deployManifest",
+      "account": "sarseg-local",
+      "cloudProvider": "kubernetes",
+      "namespaceOverride": "sarseg-dev",
+      "source": "artifact",
+      "manifestArtifactId": "deployment",
+      "manifestArtifactAccount": "public-git-http",
+      "moniker": {
+        "app": "sarseg"
+      },
+      "skipExpressionEvaluation": false,
+      "stageTimeoutMs": 300000,
+      "trafficManagement": {
+        "enabled": false,
+        "options": {
+          "enableTraffic": true
+        }
+      }
+    },
+    {
+      "refId": "2",
+      "requisiteStageRefIds": [
+        "1"
+      ],
+      "name": "Deploy service.yml",
+      "type": "deployManifest",
+      "account": "sarseg-local",
+      "cloudProvider": "kubernetes",
+      "namespaceOverride": "sarseg-dev",
+      "source": "artifact",
+      "manifestArtifactId": "service",
+      "manifestArtifactAccount": "public-git-http",
+      "moniker": {
+        "app": "sarseg"
+      },
+      "skipExpressionEvaluation": false,
+      "stageTimeoutMs": 300000,
+      "trafficManagement": {
+        "enabled": false,
+        "options": {
+          "enableTraffic": true
+        }
+      }
+    },
+    {
+      "refId": "3",
+      "requisiteStageRefIds": [
+        "2"
+      ],
+      "name": "Deploy hpa.yml",
+      "type": "deployManifest",
+      "account": "sarseg-local",
+      "cloudProvider": "kubernetes",
+      "namespaceOverride": "sarseg-dev",
+      "source": "artifact",
+      "manifestArtifactId": "hpa",
+      "manifestArtifactAccount": "public-git-http",
+      "moniker": {
+        "app": "sarseg"
+      },
+      "skipExpressionEvaluation": false,
+      "stageTimeoutMs": 300000,
+      "trafficManagement": {
+        "enabled": false,
+        "options": {
+          "enableTraffic": true
+        }
+      }
+    }
+  ],
+  "parameterConfig": [
+    {
+      "name": "gitSha",
+      "required": true
+    },
+    {
+      "name": "gitBranch",
+      "required": true
+    }
+  ],
+  "description": "Git public -> immutable SHA HTTP artifacts -> Spinnaker -> SARSEG Kubernetes local"
+}
