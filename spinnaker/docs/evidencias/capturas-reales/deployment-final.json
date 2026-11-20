@@ -1,0 +1,153 @@
+{
+    "apiVersion": "apps/v1",
+    "kind": "Deployment",
+    "metadata": {
+        "annotations": {
+            "artifact.spinnaker.io/location": "sarseg-dev",
+            "artifact.spinnaker.io/name": "sarseg-web",
+            "artifact.spinnaker.io/type": "kubernetes/deployment",
+            "artifact.spinnaker.io/version": "",
+            "deployment.kubernetes.io/revision": "3",
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"metadata\":{\"annotations\":{\"artifact.spinnaker.io/location\":\"sarseg-dev\",\"artifact.spinnaker.io/name\":\"sarseg-web\",\"artifact.spinnaker.io/type\":\"kubernetes/deployment\",\"artifact.spinnaker.io/version\":\"\",\"moniker.spinnaker.io/application\":\"sarseg\",\"moniker.spinnaker.io/cluster\":\"deployment sarseg-web\",\"strategy.spinnaker.io/use-source-capacity\":\"true\"},\"labels\":{\"app\":\"sarseg-web\",\"app.kubernetes.io/managed-by\":\"spinnaker\",\"app.kubernetes.io/name\":\"sarseg\",\"app.kubernetes.io/part-of\":\"sarseg\"},\"name\":\"sarseg-web\",\"namespace\":\"sarseg-dev\"},\"spec\":{\"replicas\":2,\"revisionHistoryLimit\":3,\"selector\":{\"matchLabels\":{\"app\":\"sarseg-web\"}},\"strategy\":{\"rollingUpdate\":{\"maxSurge\":1,\"maxUnavailable\":0},\"type\":\"RollingUpdate\"},\"template\":{\"metadata\":{\"annotations\":{\"artifact.spinnaker.io/location\":\"sarseg-dev\",\"artifact.spinnaker.io/name\":\"sarseg-web\",\"artifact.spinnaker.io/type\":\"kubernetes/deployment\",\"artifact.spinnaker.io/version\":\"\",\"moniker.spinnaker.io/application\":\"sarseg\",\"moniker.spinnaker.io/cluster\":\"deployment sarseg-web\",\"sarseg.edu/revision\":\"gitops-verificado-045046\"},\"labels\":{\"app\":\"sarseg-web\",\"app.kubernetes.io/managed-by\":\"spinnaker\",\"app.kubernetes.io/name\":\"sarseg\",\"app.kubernetes.io/part-of\":\"sarseg\"}},\"spec\":{\"containers\":[{\"env\":[{\"name\":\"DOMAIN\",\"value\":\":8080\"}],\"image\":\"sarseg-web:9984bc57\",\"imagePullPolicy\":\"IfNotPresent\",\"livenessProbe\":{\"httpGet\":{\"path\":\"/\",\"port\":\"http\"},\"initialDelaySeconds\":10,\"periodSeconds\":10},\"name\":\"web\",\"ports\":[{\"containerPort\":8080,\"name\":\"http\"}],\"readinessProbe\":{\"httpGet\":{\"path\":\"/\",\"port\":\"http\"},\"periodSeconds\":5},\"resources\":{\"limits\":{\"cpu\":\"250m\",\"memory\":\"128Mi\"},\"requests\":{\"cpu\":\"25m\",\"memory\":\"32Mi\"}}}]}}}}\n",
+            "moniker.spinnaker.io/application": "sarseg",
+            "moniker.spinnaker.io/cluster": "deployment sarseg-web",
+            "strategy.spinnaker.io/use-source-capacity": "true"
+        },
+        "creationTimestamp": "2026-11-20T04:44:52Z",
+        "generation": 9,
+        "labels": {
+            "app": "sarseg-web",
+            "app.kubernetes.io/managed-by": "spinnaker",
+            "app.kubernetes.io/name": "sarseg",
+            "app.kubernetes.io/part-of": "sarseg"
+        },
+        "name": "sarseg-web",
+        "namespace": "sarseg-dev",
+        "resourceVersion": "6746",
+        "uid": "560dad5d-3d7f-4c98-8315-0a703e4790a5"
+    },
+    "spec": {
+        "progressDeadlineSeconds": 600,
+        "replicas": 2,
+        "revisionHistoryLimit": 3,
+        "selector": {
+            "matchLabels": {
+                "app": "sarseg-web"
+            }
+        },
+        "strategy": {
+            "rollingUpdate": {
+                "maxSurge": 1,
+                "maxUnavailable": 0
+            },
+            "type": "RollingUpdate"
+        },
+        "template": {
+            "metadata": {
+                "annotations": {
+                    "artifact.spinnaker.io/location": "sarseg-dev",
+                    "artifact.spinnaker.io/name": "sarseg-web",
+                    "artifact.spinnaker.io/type": "kubernetes/deployment",
+                    "artifact.spinnaker.io/version": "",
+                    "moniker.spinnaker.io/application": "sarseg",
+                    "moniker.spinnaker.io/cluster": "deployment sarseg-web",
+                    "sarseg.edu/revision": "gitops-verificado-045046"
+                },
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "sarseg-web",
+                    "app.kubernetes.io/managed-by": "spinnaker",
+                    "app.kubernetes.io/name": "sarseg",
+                    "app.kubernetes.io/part-of": "sarseg"
+                }
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "env": [
+                            {
+                                "name": "DOMAIN",
+                                "value": ":8080"
+                            }
+                        ],
+                        "image": "sarseg-web:9984bc57",
+                        "imagePullPolicy": "IfNotPresent",
+                        "livenessProbe": {
+                            "failureThreshold": 3,
+                            "httpGet": {
+                                "path": "/",
+                                "port": "http",
+                                "scheme": "HTTP"
+                            },
+                            "initialDelaySeconds": 10,
+                            "periodSeconds": 10,
+                            "successThreshold": 1,
+                            "timeoutSeconds": 1
+                        },
+                        "name": "web",
+                        "ports": [
+                            {
+                                "containerPort": 8080,
+                                "name": "http",
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "readinessProbe": {
+                            "failureThreshold": 3,
+                            "httpGet": {
+                                "path": "/",
+                                "port": "http",
+                                "scheme": "HTTP"
+                            },
+                            "periodSeconds": 5,
+                            "successThreshold": 1,
+                            "timeoutSeconds": 1
+                        },
+                        "resources": {
+                            "limits": {
+                                "cpu": "250m",
+                                "memory": "128Mi"
+                            },
+                            "requests": {
+                                "cpu": "25m",
+                                "memory": "32Mi"
+                            }
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File"
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "restartPolicy": "Always",
+                "schedulerName": "default-scheduler",
+                "securityContext": {},
+                "terminationGracePeriodSeconds": 30
+            }
+        }
+    },
+    "status": {
+        "availableReplicas": 2,
+        "conditions": [
+            {
+                "lastTransitionTime": "2026-11-20T04:44:52Z",
+                "lastUpdateTime": "2026-11-20T04:51:01Z",
+                "message": "ReplicaSet \"sarseg-web-5d49f74cf4\" has successfully progressed.",
+                "reason": "NewReplicaSetAvailable",
+                "status": "True",
+                "type": "Progressing"
+            },
+            {
+                "lastTransitionTime": "2026-11-20T05:38:42Z",
+                "lastUpdateTime": "2026-11-20T05:38:42Z",
+                "message": "Deployment has minimum availability.",
+                "reason": "MinimumReplicasAvailable",
+                "status": "True",
+                "type": "Available"
+            }
+        ],
+        "observedGeneration": 9,
+        "readyReplicas": 2,
+        "replicas": 2,
+        "updatedReplicas": 2
+    }
+}
