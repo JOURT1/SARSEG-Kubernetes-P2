@@ -62,8 +62,8 @@ add("ClusterRoleBinding", "spinnaker-local-discovery", api="rbac.authorization.k
 common = {"spring.config.import": "optional:file:/opt/spinnaker/config/*/", "services": {}}
 for name, port in {"clouddriver": 7002, "front50": 8080, "orca": 8083, "gate": 8084}.items():
     common["services"][name] = {"baseUrl": f"http://{name}:{port}", "enabled": True}
-for name in ["echo", "fiat", "igor", "kayenta", "keel", "rosco"]:
-    common["services"][name] = {"enabled": False}
+for name, port in {"echo": 8089, "fiat": 7003, "igor": 8088, "kayenta": 8090, "keel": 7010, "rosco": 8087}.items():
+    common["services"][name] = {"enabled": False, "baseUrl": f"http://{name}:{port}"}
 common["services"]["deck"] = {"baseUrl": "http://127.0.0.1:14900", "enabled": True}
 add("ConfigMap", "spinnaker-config", data={"spinnaker.yml": yaml.safe_dump(common)})
 for name in ["clouddriver", "front50", "orca", "gate"]:

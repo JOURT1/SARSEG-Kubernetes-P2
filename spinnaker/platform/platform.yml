@@ -102,11 +102,14 @@ metadata:
 data:
   spinnaker.yml: "services:\n  clouddriver:\n    baseUrl: http://clouddriver:7002\n\
     \    enabled: true\n  deck:\n    baseUrl: http://127.0.0.1:14900\n    enabled:\
-    \ true\n  echo:\n    enabled: false\n  fiat:\n    enabled: false\n  front50:\n\
-    \    baseUrl: http://front50:8080\n    enabled: true\n  gate:\n    baseUrl: http://gate:8084\n\
-    \    enabled: true\n  igor:\n    enabled: false\n  kayenta:\n    enabled: false\n\
-    \  keel:\n    enabled: false\n  orca:\n    baseUrl: http://orca:8083\n    enabled:\
-    \ true\n  rosco:\n    enabled: false\nspring.config.import: optional:file:/opt/spinnaker/config/*/\n"
+    \ true\n  echo:\n    baseUrl: http://echo:8089\n    enabled: false\n  fiat:\n\
+    \    baseUrl: http://fiat:7003\n    enabled: false\n  front50:\n    baseUrl: http://front50:8080\n\
+    \    enabled: true\n  gate:\n    baseUrl: http://gate:8084\n    enabled: true\n\
+    \  igor:\n    baseUrl: http://igor:8088\n    enabled: false\n  kayenta:\n    baseUrl:\
+    \ http://kayenta:8090\n    enabled: false\n  keel:\n    baseUrl: http://keel:7010\n\
+    \    enabled: false\n  orca:\n    baseUrl: http://orca:8083\n    enabled: true\n\
+    \  rosco:\n    baseUrl: http://rosco:8087\n    enabled: false\nspring.config.import:\
+    \ optional:file:/opt/spinnaker/config/*/\n"
 ---
 apiVersion: v1
 kind: ConfigMap

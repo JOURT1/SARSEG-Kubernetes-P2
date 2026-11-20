@@ -8,18 +8,18 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def definition():
-    expected, stages = [], []
+    stages = []
     for index, name in enumerate(FILES, 1):
         key = name.removesuffix(".yml")
-        expected.append({"id": key, "displayName": name, "matchArtifact": {"type": "http/file", "name": name},
-                         "useDefaultArtifact": False, "usePriorArtifact": False})
         stages.append({"refId": str(index), "requisiteStageRefIds": [] if index == 1 else [str(index - 1)],
             "name": "Deploy " + name, "type": "deployManifest", "account": "sarseg-local", "cloudProvider": "kubernetes",
-            "namespaceOverride": "sarseg-dev", "source": "artifact", "manifestArtifactId": key,
+            "namespaceOverride": "sarseg-dev", "source": "artifact",
+            "manifestArtifact": {"type": "http/file", "name": name, "artifactAccount": "public-git-http",
+                "reference": "https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/${parameters.gitSha}/spinnaker/k8s/" + name},
             "manifestArtifactAccount": "public-git-http", "moniker": {"app": "sarseg"}, "skipExpressionEvaluation": False,
             "stageTimeoutMs": 300000, "trafficManagement": {"enabled": False, "options": {"enableTraffic": True}}})
     return {"id": "sarseg-deploy-git", "application": "sarseg", "name": "deploy-git", "keepWaitingPipelines": False,
-            "limitConcurrent": True, "triggers": [], "expectedArtifacts": expected, "stages": stages,
+            "limitConcurrent": True, "triggers": [], "stages": stages,
             "parameterConfig": [{"name": "gitSha", "required": True}, {"name": "gitBranch", "required": True}],
             "description": "Git public -> immutable SHA HTTP artifacts -> Spinnaker -> SARSEG Kubernetes local"}
 

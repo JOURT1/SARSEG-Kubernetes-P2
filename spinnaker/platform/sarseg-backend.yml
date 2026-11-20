@@ -82,6 +82,13 @@ spec:
     metadata:
       labels: {app: sarseg-api}
     spec:
+      initContainers:
+        - name: wait-for-postgres
+          image: postgres:17.11-alpine
+          command: [sh, -c, 'until pg_isready -h postgres -U sarseg -d sarseg; do sleep 2; done']
+          resources:
+            requests: {cpu: 10m, memory: 16Mi}
+            limits: {cpu: 100m, memory: 64Mi}
       containers:
         - name: api
           image: sarseg-api:9984bc57

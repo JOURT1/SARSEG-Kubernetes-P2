@@ -5,38 +5,6 @@
   "keepWaitingPipelines": false,
   "limitConcurrent": true,
   "triggers": [],
-  "expectedArtifacts": [
-    {
-      "id": "deployment",
-      "displayName": "deployment.yml",
-      "matchArtifact": {
-        "type": "http/file",
-        "name": "deployment.yml"
-      },
-      "useDefaultArtifact": false,
-      "usePriorArtifact": false
-    },
-    {
-      "id": "service",
-      "displayName": "service.yml",
-      "matchArtifact": {
-        "type": "http/file",
-        "name": "service.yml"
-      },
-      "useDefaultArtifact": false,
-      "usePriorArtifact": false
-    },
-    {
-      "id": "hpa",
-      "displayName": "hpa.yml",
-      "matchArtifact": {
-        "type": "http/file",
-        "name": "hpa.yml"
-      },
-      "useDefaultArtifact": false,
-      "usePriorArtifact": false
-    }
-  ],
   "stages": [
     {
       "refId": "1",
@@ -47,7 +15,12 @@
       "cloudProvider": "kubernetes",
       "namespaceOverride": "sarseg-dev",
       "source": "artifact",
-      "manifestArtifactId": "deployment",
+      "manifestArtifact": {
+        "type": "http/file",
+        "name": "deployment.yml",
+        "artifactAccount": "public-git-http",
+        "reference": "https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/${parameters.gitSha}/spinnaker/k8s/deployment.yml"
+      },
       "manifestArtifactAccount": "public-git-http",
       "moniker": {
         "app": "sarseg"
@@ -72,7 +45,12 @@
       "cloudProvider": "kubernetes",
       "namespaceOverride": "sarseg-dev",
       "source": "artifact",
-      "manifestArtifactId": "service",
+      "manifestArtifact": {
+        "type": "http/file",
+        "name": "service.yml",
+        "artifactAccount": "public-git-http",
+        "reference": "https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/${parameters.gitSha}/spinnaker/k8s/service.yml"
+      },
       "manifestArtifactAccount": "public-git-http",
       "moniker": {
         "app": "sarseg"
@@ -97,7 +75,12 @@
       "cloudProvider": "kubernetes",
       "namespaceOverride": "sarseg-dev",
       "source": "artifact",
-      "manifestArtifactId": "hpa",
+      "manifestArtifact": {
+        "type": "http/file",
+        "name": "hpa.yml",
+        "artifactAccount": "public-git-http",
+        "reference": "https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/${parameters.gitSha}/spinnaker/k8s/hpa.yml"
+      },
       "manifestArtifactAccount": "public-git-http",
       "moniker": {
         "app": "sarseg"
