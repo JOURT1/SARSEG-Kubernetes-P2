@@ -55,7 +55,7 @@ def tick(branch):
     state_path = LOCAL / "watch-state.json"
     state = json.loads(state_path.read_text()) if state_path.exists() else {}
     sha, digest, artifacts = resolve_revision(branch)
-    if state.get("digest") == digest:
+    if state.get("digest") == digest and state.get("branch") == branch:
         return False
     logging.info("Git changed: %s; starting Spinnaker", sha)
     response = request("/pipelines/sarseg/deploy-git", {"type": "manual", "user": "local-git-poller",
@@ -85,7 +85,7 @@ def tick(branch):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--branch", default="codex/spinnaker-local")
+    parser.add_argument("--branch", default="main")
     parser.add_argument("--once", action="store_true")
     args = parser.parse_args()
     LOCAL.mkdir(parents=True, exist_ok=True)

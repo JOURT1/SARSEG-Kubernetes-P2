@@ -1,4 +1,4 @@
-param([string]$Branch = 'codex/spinnaker-local', [switch]$SkipBuild)
+param([string]$Branch = 'main', [switch]$SkipBuild)
 $ErrorActionPreference = 'Stop'
 $labRoot = Split-Path $PSScriptRoot -Parent
 $repoRoot = Split-Path $labRoot -Parent
@@ -43,6 +43,10 @@ if (Test-Path $pidPath) {
     $oldPid = [int](Get-Content $pidPath)
     $oldProcess = Get-CimInstance Win32_Process -Filter "ProcessId=$oldPid"
     $watchRunning = $null -ne $oldProcess -and $oldProcess.CommandLine -like '*git_watch.py*'
+    if ($watchRunning -and $oldProcess.CommandLine -notlike "*--branch $Branch*") {
+        Stop-Process -Id $oldPid
+        $watchRunning = $false
+    }
 }
 if (-not $watchRunning) {
     $process = Start-Process python -ArgumentList @('spinnaker/scripts/git_watch.py','--branch',$Branch) -WorkingDirectory $repoRoot -WindowStyle Hidden -PassThru -RedirectStandardOutput "$runtime/watch.stdout.log" -RedirectStandardError "$runtime/watch.stderr.log"
