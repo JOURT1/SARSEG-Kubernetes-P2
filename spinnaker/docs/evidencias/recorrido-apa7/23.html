@@ -1,0 +1,57 @@
+<!doctype html><html lang="es"><meta charset="utf-8"><title>Paso 23 · HPA: incremento automático a cinco réplicas</title>
+<style>*{box-sizing:border-box}body{margin:0;background:white;color:#172a3b;font:19px Arial}main{width:820px;padding:20px}header{font-size:12px;letter-spacing:1px;color:#52677a}h1{font-size:25px;line-height:1.2;margin:9px 0 12px}.meta{font-size:12px;color:#52677a;margin:8px 0 12px}table{border-collapse:collapse;width:100%;font-size:18px;margin:10px 0}th,td{padding:7px;border-bottom:1px solid #ccd8e0;text-align:left;vertical-align:top;overflow-wrap:anywhere}th{width:220px;background:#f2f5f7}h2{font:13px Consolas;margin:11px 0 5px}pre{font:17px/1.25 Consolas;background:#f4f7f9;border:1px solid #d1dce3;padding:10px;white-space:pre-wrap;overflow-wrap:anywhere;margin:0}footer{border-top:1px solid #bdcbd5;margin-top:12px;padding-top:8px;font-size:12px;line-height:1.35}.note{font-size:13px;line-height:1.35}</style>
+<main id="evidence"><header>SARSEG · SPINNAKER · REGISTRO DOCUMENTAL</header><h1>Paso 23. HPA: incremento automático a cinco réplicas</h1><div class="meta">Registro histórico · Lectura documental: 2026-11-20T05:12:54.449416+00:00 UTC</div>
+<table><tr><th>Hora de la prueba</th><td>2026-11-20T04:52:28.891520+00:00</td></tr><tr><th>HPA actual / deseado</th><td>5 / 5</td></tr><tr><th>CPU objetivo</th><td>50%</td></tr></table><section><h2>kubectl --context kind-sarseg-spinnaker -n sarseg-dev get deployment,service,hpa,pods</h2><pre>NAME                         READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/api          1/1     1            1           13m
+deployment.apps/postgres     1/1     1            1           13m
+deployment.apps/sarseg-web   5/5     5            5           7m36s
+
+NAME                 TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
+service/api          ClusterIP   10.96.142.87   &lt;none&gt;        8080/TCP       13m
+service/postgres     ClusterIP   10.96.221.33   &lt;none&gt;        5432/TCP       13m
+service/sarseg-web   NodePort    10.96.101.63   &lt;none&gt;        80:30380/TCP   7m29s
+
+NAME                                             REFERENCE               TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/sarseg-web   Deployment/sarseg-web   cpu: 764%/50%   2         5         5          7m21s
+
+NAME                              READY   STATUS    RESTARTS   AGE
+pod/api-68ff9488c4-bpx8s          1/1     Running   0          7m37s
+pod/postgres-588b6d799d-x644n     1/1     Running   0          13m
+pod/sarseg-cpu-load-l4bkc         1/1     Running   0          62s
+pod/sarseg-web-5d49f74cf4-4pl2p   1/1     Running   0          21s
+pod/sarseg-web-5d49f74cf4-bdw65   1/1     Running   0          21s
+pod/sarseg-web-5d49f74cf4-kcvbw   1/1     Running   0          92s
+pod/sarseg-web-5d49f74cf4-p59lf   1/1     Running   0          21s
+pod/sarseg-web-5d49f74cf4-rdjb6   1/1     Running   0          89s
+</pre></section><section><h2>kubectl --context kind-sarseg-spinnaker -n sarseg-dev top pods</h2><pre>NAME                          CPU(cores)   MEMORY(bytes)   
+api-68ff9488c4-bpx8s          13m          157Mi           
+postgres-588b6d799d-x644n     3m           38Mi            
+sarseg-cpu-load-l4bkc         1001m        50Mi            
+sarseg-web-5d49f74cf4-4pl2p   87m          13Mi            
+sarseg-web-5d49f74cf4-bdw65   87m          14Mi            
+sarseg-web-5d49f74cf4-kcvbw   138m         17Mi            
+sarseg-web-5d49f74cf4-p59lf   88m          15Mi            
+sarseg-web-5d49f74cf4-rdjb6   87m          15Mi            
+</pre></section><section><h2>kubectl --context kind-sarseg-spinnaker -n sarseg-dev get hpa sarseg-web -o yaml</h2><pre>apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  annotations:
+    artifact.spinnaker.io/location: sarseg-dev
+    artifact.spinnaker.io/name: sarseg-web
+    artifact.spinnaker.io/type: kubernetes/horizontalpodautoscaler
+    artifact.spinnaker.io/version: &quot;&quot;
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {&quot;apiVersion&quot;:&quot;autoscaling/v2&quot;,&quot;kind&quot;:&quot;HorizontalPodAutoscaler&quot;,&quot;metadata&quot;:{&quot;annotations&quot;:{&quot;artifact.spinnaker.io/location&quot;:&quot;sarseg-dev&quot;,&quot;artifact.spinnaker.io/name&quot;:&quot;sarseg-web&quot;,&quot;artifact.spinnaker.io/type&quot;:&quot;kubernetes/horizontalpodautoscaler&quot;,&quot;artifact.spinnaker.io/version&quot;:&quot;&quot;,&quot;moniker.spinnaker.io/application&quot;:&quot;sarseg&quot;,&quot;moniker.spinnaker.io/cluster&quot;:&quot;horizontalpodautoscaler sarseg-web&quot;},&quot;labels&quot;:{&quot;app.kubernetes.io/managed-by&quot;:&quot;spinnaker&quot;,&quot;app.kubernetes.io/name&quot;:&quot;sarseg&quot;},&quot;name&quot;:&quot;sarseg-web&quot;,&quot;namespace&quot;:&quot;sarseg-dev&quot;},&quot;spec&quot;:{&quot;behavior&quot;:{&quot;scaleDown&quot;:{&quot;policies&quot;:[{&quot;periodSeconds&quot;:15,&quot;type&quot;:&quot;Pods&quot;,&quot;value&quot;:3}],&quot;stabilizationWindowSeconds&quot;:60},&quot;scaleUp&quot;:{&quot;policies&quot;:[{&quot;periodSeconds&quot;:15,&quot;type&quot;:&quot;Pods&quot;,&quot;value&quot;:3}],&quot;stabilizationWindowSeconds&quot;:0}},&quot;maxReplicas&quot;:5,&quot;metrics&quot;:[{&quot;resource&quot;:{&quot;name&quot;:&quot;cpu&quot;,&quot;target&quot;:{&quot;averageUtilization&quot;:50,&quot;type&quot;:&quot;Utilization&quot;}},&quot;type&quot;:&quot;Resource&quot;}],&quot;minReplicas&quot;:2,&quot;scaleTargetRef&quot;:{&quot;apiVersion&quot;:&quot;apps/v1&quot;,&quot;kind&quot;:&quot;Deployment&quot;,&quot;name&quot;:&quot;sarseg-web&quot;}}}
+    moniker.spinnaker.io/application: sarseg
+    moniker.spinnaker.io/cluster: horizontalpodautoscaler sarseg-web
+  creationTimestamp: &quot;2026-11-20T04:45:07Z&quot;
+  labels:
+    app.kubernetes.io/managed-by: spinnaker
+    app.kubernetes.io/name: sarseg
+  name: sarseg-web
+  namespace: sarseg-dev
+  resourceVersion: &quot;2727&quot;
+  uid: 6214c1da-d158-4393-9ce6-0a7742da2100
+spec:
+[Registro completo en pasos.json]</pre></section><p class="note">La figura reutiliza la captura verificada de la ejecución original y conserva su fecha. No se presenta como una nueva prueba de carga.</p>
+<footer>Visor de registros reales o archivos versionados; no es una terminal ni una interfaz nativa.<br/>Fuente: docs/evidencias/05-carga-cinco.json. Datos completos: pasos.json, paso 23.</footer></main></html>

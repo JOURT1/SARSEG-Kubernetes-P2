@@ -1,0 +1,27 @@
+{
+  "id": "01M7VN99NMT0PDZ7XT255DRCMB",
+  "status": "SUCCEEDED",
+  "startTime": 1795150882543,
+  "endTime": 1795150904511,
+  "parameters": {
+    "gitBranch": "main",
+    "gitSha": "ce9d979df85e54c56a0c5856a92ee46f0de46300"
+  },
+  "stages": [
+    {
+      "name": "Deploy deployment.yml",
+      "status": "SUCCEEDED",
+      "source": "https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/ce9d979df85e54c56a0c5856a92ee46f0de46300/spinnaker/k8s/deployment.yml"
+    },
+    {
+      "name": "Deploy service.yml",
+      "status": "SUCCEEDED",
+      "source": "https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/ce9d979df85e54c56a0c5856a92ee46f0de46300/spinnaker/k8s/service.yml"
+    },
+    {
+      "name": "Deploy hpa.yml",
+      "status": "SUCCEEDED",
+      "source": "https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/ce9d979df85e54c56a0c5856a92ee46f0de46300/spinnaker/k8s/hpa.yml"
+    }
+  ]
+}

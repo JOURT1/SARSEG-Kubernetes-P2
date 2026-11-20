@@ -1,0 +1,707 @@
+[
+  {
+    "id": "01",
+    "title": "Repositorio y organización del trabajo",
+    "category": "Lectura actual",
+    "source": "Git local y GitHub público",
+    "capturedAt": "2026-11-20T05:12:51.944426+00:00",
+    "blocks": [
+      {
+        "command": "git remote -v",
+        "output": "origin\thttps://github.com/JOURT1/SARSEG-Kubernetes-P2.git (fetch)\norigin\thttps://github.com/JOURT1/SARSEG-Kubernetes-P2.git (push)\n",
+        "exitCode": 0
+      },
+      {
+        "command": "git branch --list main codex/spinnaker-*",
+        "output": "  codex/spinnaker-informe\n* codex/spinnaker-informe-apa7\n  codex/spinnaker-local\n  main\n",
+        "exitCode": 0
+      }
+    ],
+    "facts": [
+      [
+        "Repositorio",
+        "JOURT1/SARSEG-Kubernetes-P2"
+      ],
+      [
+        "Carpeta de la práctica",
+        "spinnaker/"
+      ]
+    ],
+    "note": "La instalación y las pruebas funcionales se ejecutaron entre el 19 y el 20 de noviembre. Esta toma documenta su trazabilidad."
+  },
+  {
+    "id": "02",
+    "title": "Docker y herramientas disponibles",
+    "category": "Lectura actual",
+    "source": "Docker, kind y kubectl",
+    "capturedAt": "2026-11-20T05:12:52.630160+00:00",
+    "blocks": [
+      {
+        "command": "docker version --format \"Docker Engine: {{.Server.Version}}\"",
+        "output": "Docker Engine: 28.1.1\n",
+        "exitCode": 0
+      },
+      {
+        "command": "docker info --format \"CPU disponibles: {{.NCPU}} | Memoria: {{.MemTotal}} bytes\"",
+        "output": "CPU disponibles: 24 | Memoria: 25149227008 bytes\n",
+        "exitCode": 0
+      },
+      {
+        "command": ".tools/kind.exe version",
+        "output": "kind v0.27.0 go1.23.6 windows/amd64\n",
+        "exitCode": 0
+      },
+      {
+        "command": "kubectl --context kind-sarseg-spinnaker version --client",
+        "output": "Client Version: v1.32.2\nKustomize Version: v5.5.0\n",
+        "exitCode": 0
+      }
+    ],
+    "facts": [],
+    "note": ""
+  },
+  {
+    "id": "03",
+    "title": "Configuración del clúster local",
+    "category": "Archivo versionado",
+    "source": "spinnaker/cluster.yml",
+    "capturedAt": "2026-11-20T05:12:52.630535+00:00",
+    "blocks": [
+      {
+        "command": "cluster.yml",
+        "output": "kind: Cluster\napiVersion: kind.x-k8s.io/v1alpha4\nname: sarseg-spinnaker\nnodes:\n  - role: control-plane\n    image: kindest/node:v1.32.2\n    extraPortMappings:\n      - containerPort: 30900\n        hostPort: 14900\n        listenAddress: 127.0.0.1\n      - containerPort: 30884\n        hostPort: 14884\n        listenAddress: 127.0.0.1\n      - containerPort: 30380\n        hostPort: 14800\n        listenAddress: 127.0.0.1\n",
+        "exitCode": null
+      }
+    ],
+    "facts": [],
+    "note": "El archivo fija el clúster sarseg-spinnaker, Kubernetes v1.32.2 y los puertos limitados a 127.0.0.1. Se documenta la configuración utilizada; no se afirma que esta captura muestre una nueva creación."
+  },
+  {
+    "id": "04",
+    "title": "Verificación del nodo y del contenedor",
+    "category": "Lectura actual",
+    "source": "Kubernetes y Docker",
+    "capturedAt": "2026-11-20T05:12:52.866773+00:00",
+    "blocks": [
+      {
+        "command": "kubectl --context kind-sarseg-spinnaker get nodes -o wide",
+        "output": "NAME                             STATUS   ROLES           AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                         KERNEL-VERSION                     CONTAINER-RUNTIME\nsarseg-spinnaker-control-plane   Ready    control-plane   38m   v1.32.2   172.20.0.9    <none>        Debian GNU/Linux 12 (bookworm)   6.6.87.1-microsoft-standard-WSL2   containerd://2.0.3\n",
+        "exitCode": 0
+      },
+      {
+        "command": "docker ps --filter name=sarseg-spinnaker --format \"{{.Names}} | {{.Status}} | {{.Ports}}\"",
+        "output": "sarseg-spinnaker-control-plane | Up 38 minutes | 127.0.0.1:49241->6443/tcp, 127.0.0.1:14800->30380/tcp, 127.0.0.1:14884->30884/tcp, 127.0.0.1:14900->30900/tcp\n",
+        "exitCode": 0
+      }
+    ],
+    "facts": [],
+    "note": ""
+  },
+  {
+    "id": "05",
+    "title": "Imágenes reales de SARSEG construidas",
+    "category": "Lectura actual",
+    "source": "Docker y commit privado de SARSEG",
+    "capturedAt": "2026-11-20T05:12:53.075454+00:00",
+    "blocks": [
+      {
+        "command": "docker image inspect sarseg-web:9984bc57 sarseg-api:9984bc57 --format \"{{.RepoTags}}\nID: {{.Id}}\nCreada: {{.Created}}\nTamaño: {{.Size}} bytes\n\"",
+        "output": "[sarseg-web:9984bc57]\nID: sha256:a0b4f2e70467587ed6c467505a2522319922a7c4d1cc3c9047a179db720178cc\nCreada: 2026-11-20T04:36:49.704279129Z\nTamaño: 23737486 bytes\n\n[sarseg-api:9984bc57]\nID: sha256:b8a72fc40ba7296463db291be4d910ddc6ffc5c6623c970684ec0fdb6e5213a1\nCreada: 2026-11-20T04:38:04.62287717Z\nTamaño: 65972095 bytes\n\n",
+        "exitCode": 0
+      },
+      {
+        "command": "git -C .local/sarseg-source rev-parse HEAD",
+        "output": "9984bc57f1e7252793f146a40542a60940b16463\n",
+        "exitCode": 0
+      }
+    ],
+    "facts": [],
+    "note": "Inspección de las imágenes compiladas en la implementación. El código fuente privado no se publica en el repositorio del informe."
+  },
+  {
+    "id": "06",
+    "title": "Namespaces, secretos locales y permisos",
+    "category": "Lectura actual",
+    "source": "Kubernetes RBAC y exclusión Git",
+    "capturedAt": "2026-11-20T05:12:53.538896+00:00",
+    "blocks": [
+      {
+        "command": "kubectl --context kind-sarseg-spinnaker get namespace spinnaker sarseg-dev",
+        "output": "NAME         STATUS   AGE\nspinnaker    Active   36m\nsarseg-dev   Active   36m\n",
+        "exitCode": 0
+      },
+      {
+        "command": "git check-ignore .local/spinnaker/credentials.json",
+        "output": ".local/spinnaker/credentials.json\n",
+        "exitCode": 0
+      },
+      {
+        "command": "kubectl --context kind-sarseg-spinnaker auth can-i create deployments -n sarseg-dev --as=system:serviceaccount:spinnaker:clouddriver",
+        "output": "yes\n",
+        "exitCode": 0
+      },
+      {
+        "command": "kubectl --context kind-sarseg-spinnaker auth can-i create deployments -n default --as=system:serviceaccount:spinnaker:clouddriver",
+        "output": "no\n",
+        "exitCode": 1
+      }
+    ],
+    "facts": [
+      [
+        "Escritura en sarseg-dev",
+        "Permitida"
+      ],
+      [
+        "Escritura en default",
+        "Denegada"
+      ],
+      [
+        "Contraseñas",
+        "No incluidas en la captura ni en Git"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "id": "07",
+    "title": "Plataforma mínima de Spinnaker disponible",
+    "category": "Lectura actual",
+    "source": "Kubernetes namespace spinnaker",
+    "capturedAt": "2026-11-20T05:12:53.837128+00:00",
+    "blocks": [
+      {
+        "command": "kubectl --context kind-sarseg-spinnaker -n spinnaker get deployments",
+        "output": "NAME          READY   UP-TO-DATE   AVAILABLE   AGE\nclouddriver   1/1     1            1           36m\ndeck          1/1     1            1           36m\nfront50       1/1     1            1           36m\ngate          1/1     1            1           36m\nmysql         1/1     1            1           36m\norca          1/1     1            1           36m\nredis         1/1     1            1           36m\n",
+        "exitCode": 0
+      },
+      {
+        "command": "kubectl --context kind-sarseg-spinnaker -n spinnaker get pods",
+        "output": "NAME                           READY   STATUS    RESTARTS      AGE\nclouddriver-76587d5f75-z7cj5   1/1     Running   2 (30m ago)   36m\ndeck-586bdd4898-vw6nh          1/1     Running   0             36m\nfront50-c48d585df-stdq4        1/1     Running   1 (30m ago)   36m\ngate-58f597c69f-k29br          1/1     Running   0             36m\nmysql-648f86fdf6-hj5zp         1/1     Running   0             36m\norca-69b59fc869-l6wpv          1/1     Running   1 (30m ago)   36m\nredis-688c8d96d-sd8xj          1/1     Running   0             36m\n",
+        "exitCode": 0
+      }
+    ],
+    "facts": [
+      [
+        "Servicios Spinnaker",
+        "Deck, Gate, Orca, Clouddriver y Front50"
+      ],
+      [
+        "Apoyo",
+        "MySQL y Redis"
+      ]
+    ],
+    "note": "Se comprueba la disponibilidad de los servicios instalados. El instalador y su procedencia están versionados en platform/."
+  },
+  {
+    "id": "08",
+    "title": "Metrics Server y mediciones de CPU",
+    "category": "Lectura actual",
+    "source": "API metrics.k8s.io",
+    "capturedAt": "2026-11-20T05:12:54.299674+00:00",
+    "blocks": [
+      {
+        "command": "kubectl --context kind-sarseg-spinnaker get apiservice v1beta1.metrics.k8s.io",
+        "output": "NAME                     SERVICE                      AVAILABLE   AGE\nv1beta1.metrics.k8s.io   kube-system/metrics-server   True        36m\n",
+        "exitCode": 0
+      },
+      {
+        "command": "kubectl --context kind-sarseg-spinnaker -n kube-system get deployment metrics-server",
+        "output": "NAME             READY   UP-TO-DATE   AVAILABLE   AGE\nmetrics-server   1/1     1            1           36m\n",
+        "exitCode": 0
+      },
+      {
+        "command": "kubectl --context kind-sarseg-spinnaker -n sarseg-dev top pods -l app=sarseg-web",
+        "output": "NAME                          CPU(cores)   MEMORY(bytes)   \nsarseg-web-5d49f74cf4-p59lf   1m           13Mi            \nsarseg-web-5d49f74cf4-rdjb6   1m           12Mi            \n",
+        "exitCode": 0
+      }
+    ],
+    "facts": [],
+    "note": ""
+  },
+  {
+    "id": "09",
+    "title": "Deployment: réplicas, etiquetas y selector",
+    "category": "Archivo versionado",
+    "source": "spinnaker/k8s/deployment.yml",
+    "capturedAt": "2026-11-20T05:12:54.300702+00:00",
+    "blocks": [
+      {
+        "command": "deployment.yml · fragmento de identidad y selector",
+        "output": "apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: sarseg-web\n  namespace: sarseg-dev\n  labels:\n    app: sarseg-web\n    app.kubernetes.io/part-of: sarseg\n  annotations:\n    strategy.spinnaker.io/use-source-capacity: 'true'\nspec:\n  replicas: 2\n  revisionHistoryLimit: 3\n  selector:\n    matchLabels:\n      app: sarseg-web\n  strategy:\n    type: RollingUpdate",
+        "exitCode": null
+      }
+    ],
+    "facts": [
+      [
+        "Réplicas iniciales",
+        "2"
+      ],
+      [
+        "Selector",
+        "app: sarseg-web"
+      ],
+      [
+        "Namespace",
+        "sarseg-dev"
+      ]
+    ],
+    "note": "El archivo completo se incluye en el Apéndice A. La anotación use-source-capacity conserva la capacidad administrada por el HPA en despliegues posteriores."
+  },
+  {
+    "id": "10",
+    "title": "Deployment: puerto y recursos por Pod",
+    "category": "Archivo versionado",
+    "source": "spinnaker/k8s/deployment.yml",
+    "capturedAt": "2026-11-20T05:12:54.300715+00:00",
+    "blocks": [
+      {
+        "command": "deployment.yml · fragmento del contenedor",
+        "output": "          imagePullPolicy: IfNotPresent\n          env:\n            - name: DOMAIN\n              value: ':8080'\n          ports:\n            - name: http\n              containerPort: 8080\n          resources:\n            requests:\n              cpu: 25m\n              memory: 32Mi\n            limits:\n              cpu: 250m\n              memory: 128Mi\n          readinessProbe:\n            httpGet:\n              path: /\n              port: http\n            periodSeconds: 5",
+        "exitCode": null
+      }
+    ],
+    "facts": [
+      [
+        "Requests",
+        "CPU 25m; memoria 32Mi"
+      ],
+      [
+        "Limits",
+        "CPU 250m; memoria 128Mi"
+      ],
+      [
+        "Probes",
+        "HTTP de disponibilidad y vida sobre /"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "id": "11",
+    "title": "Service: exposición mediante NodePort",
+    "category": "Archivo versionado",
+    "source": "spinnaker/k8s/service.yml",
+    "capturedAt": "2026-11-20T05:12:54.301376+00:00",
+    "blocks": [
+      {
+        "command": "service.yml",
+        "output": "apiVersion: v1\nkind: Service\nmetadata:\n  name: sarseg-web\n  namespace: sarseg-dev\n  labels:\n    app: sarseg-web\nspec:\n  type: NodePort\n  selector:\n    app: sarseg-web\n  ports:\n    - name: http\n      protocol: TCP\n      port: 80\n      targetPort: http\n      nodePort: 30380\n",
+        "exitCode": null
+      }
+    ],
+    "facts": [
+      [
+        "Ruta de tráfico",
+        "Windows:14800 → NodePort:30380 → Service:80 → Pod:http/8080"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "id": "12",
+    "title": "HPA: política de escalamiento por CPU",
+    "category": "Archivo versionado",
+    "source": "spinnaker/k8s/hpa.yml",
+    "capturedAt": "2026-11-20T05:12:54.301754+00:00",
+    "blocks": [
+      {
+        "command": "hpa.yml · objetivo y límites",
+        "output": "apiVersion: autoscaling/v2\nkind: HorizontalPodAutoscaler\nmetadata:\n  name: sarseg-web\n  namespace: sarseg-dev\nspec:\n  scaleTargetRef:\n    apiVersion: apps/v1\n    kind: Deployment\n    name: sarseg-web\n  minReplicas: 2\n  maxReplicas: 5\n  metrics:\n    - type: Resource\n      resource:\n        name: cpu\n        target:\n          type: Utilization\n          averageUtilization: 50\n  behavior:\n    scaleUp:\n      stabilizationWindowSeconds: 0\n      policies:\n        - type: Pods",
+        "exitCode": null
+      }
+    ],
+    "facts": [
+      [
+        "Mínimo / máximo",
+        "2 / 5 réplicas"
+      ],
+      [
+        "Objetivo",
+        "50% de la CPU solicitada"
+      ],
+      [
+        "Estabilización al reducir",
+        "60 segundos"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "id": "13",
+    "title": "Aplicación y cuenta Kubernetes en Spinnaker",
+    "category": "Lectura actual",
+    "source": "Gate API y configuración de Clouddriver",
+    "capturedAt": "2026-11-20T05:12:54.361347+00:00",
+    "blocks": [
+      {
+        "command": "GET /applications/sarseg · atributos seleccionados",
+        "output": "{\n  \"name\": \"sarseg\",\n  \"description\": \"SARSEG: despliegue GitOps local con Spinnaker\",\n  \"cloudProviders\": \"kubernetes\"\n}",
+        "exitCode": null
+      }
+    ],
+    "facts": [
+      [
+        "Aplicación",
+        "sarseg"
+      ],
+      [
+        "Cuenta Kubernetes",
+        "sarseg-local"
+      ],
+      [
+        "Namespace permitido",
+        "sarseg-dev"
+      ],
+      [
+        "Cuenta de artefactos HTTP",
+        "public-git-http"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "id": "14",
+    "title": "Pipeline: tres etapas Deploy (Manifest)",
+    "category": "Archivo versionado",
+    "source": "spinnaker/pipeline.json",
+    "capturedAt": "2026-11-20T05:12:54.361782+00:00",
+    "blocks": [],
+    "facts": [
+      [
+        "Deploy deployment.yml",
+        "https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/${parameters.gitSha}/spinnaker/k8s/deployment.yml"
+      ],
+      [
+        "Deploy service.yml",
+        "https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/${parameters.gitSha}/spinnaker/k8s/service.yml"
+      ],
+      [
+        "Deploy hpa.yml",
+        "https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/${parameters.gitSha}/spinnaker/k8s/hpa.yml"
+      ]
+    ],
+    "note": "Cada etapa resuelve el archivo desde una URL fijada por parameters.gitSha. Los tres archivos se leen directamente desde GitHub por Spinnaker."
+  },
+  {
+    "id": "15",
+    "title": "Sondeo Git y disparo automático del pipeline",
+    "category": "Lectura actual y archivo versionado",
+    "source": "git_watch.py y registro local del sondeo",
+    "capturedAt": "2026-11-20T05:12:54.362048+00:00",
+    "blocks": [
+      {
+        "command": "watch.stderr.log · últimas entradas públicas",
+        "output": "2026-11-20 00:01:22,465 INFO Git changed: ce9d979df85e54c56a0c5856a92ee46f0de46300; starting Spinnaker\n2026-11-20 00:01:47,633 INFO Spinnaker SUCCEEDED: /pipelines/01M7VN99NMT0PDZ7XT255DRCMB",
+        "exitCode": null
+      }
+    ],
+    "facts": [
+      [
+        "Intervalo",
+        "20 segundos"
+      ],
+      [
+        "Comparación",
+        "Contenido de deployment.yml, service.yml y hpa.yml"
+      ],
+      [
+        "Acción",
+        "POST a Gate para iniciar Orca"
+      ],
+      [
+        "Confirmación",
+        "Sólo se guarda la revisión cuando SUCCEEDED"
+      ]
+    ],
+    "note": "El adaptador no ejecuta kubectl ni aplica recursos. No equivale al self-healing continuo de Argo CD."
+  },
+  {
+    "id": "16",
+    "title": "Incidencia inicial y corrección de artefactos",
+    "category": "Registro histórico",
+    "source": "failed-execution.json y corrección d38b21b",
+    "capturedAt": "2026-11-20T05:12:54.362489+00:00",
+    "blocks": [
+      {
+        "command": "Resumen de la ejecución inicial fallida",
+        "output": "{\n  \"execution\": \"01M7VMA78ZVEVHT7R8DK3NS4SA\",\n  \"status\": \"TERMINAL\",\n  \"errors\": [\n    \"No manifest artifact was specified.\"\n  ]\n}",
+        "exitCode": null
+      }
+    ],
+    "facts": [
+      [
+        "Corrección",
+        "Definir el artefacto HTTP en cada etapa y resolver su URL con gitSha"
+      ],
+      [
+        "Verificación posterior",
+        "Las tres etapas finalizaron en SUCCEEDED"
+      ]
+    ],
+    "note": "Se conserva el error real sin el stack trace completo. La captura explica una incidencia resuelta; no representa el estado final."
+  },
+  {
+    "id": "17",
+    "title": "Primer despliegue completo desde Git",
+    "category": "Registro histórico",
+    "source": "docs/evidencias/initial-execution.json",
+    "capturedAt": "2026-11-20T05:12:54.363682+00:00",
+    "blocks": [
+      {
+        "command": "Gate · resumen de ejecución",
+        "output": "{\n  \"id\": \"01M7VMD3T805VHK2M65EK3YCH8\",\n  \"status\": \"SUCCEEDED\",\n  \"startTime\": 1795149959074,\n  \"endTime\": 1795149980607,\n  \"parameters\": {\n    \"gitBranch\": \"codex/spinnaker-local\",\n    \"gitSha\": \"0f101e672795b832f1e4474b85c5db915c194ec5\"\n  },\n  \"stages\": [\n    {\n      \"name\": \"Deploy deployment.yml\",\n      \"status\": \"SUCCEEDED\",\n      \"source\": \"https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/0f101e672795b832f1e4474b85c5db915c194ec5/spinnaker/k8s/deployment.yml\"\n    },\n    {\n      \"name\": \"Deploy service.yml\",\n      \"status\": \"SUCCEEDED\",\n      \"source\": \"https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/0f101e672795b832f1e4474b85c5db915c194ec5/spinnaker/k8s/service.yml\"\n    },\n    {\n      \"name\": \"Deploy hpa.yml\",\n      \"status\": \"SUCCEEDED\",\n      \"source\": \"https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/0f101e672795b832f1e4474b85c5db915c194ec5/spinnaker/k8s/hpa.yml\"\n    }\n  ]\n}",
+        "exitCode": null
+      }
+    ],
+    "facts": [
+      [
+        "Resultado",
+        "SUCCEEDED"
+      ]
+    ],
+    "note": "Se presentan los datos preservados de la primera ejecución exitosa, anteriores al cambio Git de la prueba."
+  },
+  {
+    "id": "18",
+    "title": "Comprobación HTTP por el NodePort",
+    "category": "Lectura actual",
+    "source": "http://127.0.0.1:14800",
+    "capturedAt": "2026-11-20T05:12:54.384908+00:00",
+    "blocks": [
+      {
+        "command": "Respuestas HTTP reales",
+        "output": "{\n  \"/\": {\n    \"HTTP\": 200\n  },\n  \"/health/ready\": {\n    \"HTTP\": 200,\n    \"body\": {\n      \"status\": \"ready\"\n    }\n  }\n}",
+        "exitCode": null
+      }
+    ],
+    "facts": [
+      [
+        "URL de SARSEG",
+        "http://127.0.0.1:14800"
+      ],
+      [
+        "API y PostgreSQL",
+        "Readiness ready"
+      ]
+    ],
+    "note": "La prueba de login HTTP 200 está conservada en results.json; sus contraseñas y respuesta se excluyeron de la evidencia."
+  },
+  {
+    "id": "19",
+    "title": "Aplicación SARSEG en el navegador",
+    "category": "Captura directa",
+    "source": "http://127.0.0.1:14800",
+    "capturedAt": "2026-11-20T05:12:54.384920+00:00",
+    "blocks": [],
+    "facts": [],
+    "note": "Esta figura utiliza una captura directa del navegador de la aplicación real."
+  },
+  {
+    "id": "20",
+    "title": "Publicación del cambio Git de la prueba",
+    "category": "Registro Git histórico",
+    "source": "commit 3a1c721e4f71729f628d267d52264f96a1944ab5",
+    "capturedAt": "2026-11-20T05:12:54.440908+00:00",
+    "blocks": [
+      {
+        "command": "git show --format=short --no-ext-diff 3a1c721 -- spinnaker/k8s/deployment.yml",
+        "output": "commit 3a1c721e4f71729f628d267d52264f96a1944ab5\nAuthor: jourt1 <jhoel.suarez@udla.edu.ec>\n\n    test(gitops): publish SARSEG revision for automatic deployment proof\n\ndiff --git a/spinnaker/k8s/deployment.yml b/spinnaker/k8s/deployment.yml\nindex 9d27b3c..c6263a3 100644\n--- a/spinnaker/k8s/deployment.yml\n+++ b/spinnaker/k8s/deployment.yml\n@@ -25,7 +25,7 @@ spec:\n         app: sarseg-web\n         app.kubernetes.io/part-of: sarseg\n       annotations:\n-        sarseg.edu/revision: 'gitops-verificado-044534'\n+        sarseg.edu/revision: 'gitops-verificado-045046'\n     spec:\n       containers:\n         - name: web\n",
+        "exitCode": 0
+      }
+    ],
+    "facts": [],
+    "note": "El commit cambia sarseg.edu/revision. La prueba original verifica el nuevo SHA y la anotación aplicada sin kubectl apply manual de los tres manifiestos."
+  },
+  {
+    "id": "21",
+    "title": "Spinnaker despliega automáticamente la revisión",
+    "category": "Captura directa y registro histórico",
+    "source": "Gate execution 01M7VMP5J4C39HZM0Y8G8C4GX1",
+    "capturedAt": "2026-11-20T05:12:54.442196+00:00",
+    "blocks": [
+      {
+        "command": "Ejecución comprobada",
+        "output": "{\n  \"id\": \"01M7VMP5J4C39HZM0Y8G8C4GX1\",\n  \"status\": \"SUCCEEDED\",\n  \"startTime\": 1795150255765,\n  \"endTime\": 1795150277508,\n  \"parameters\": {\n    \"gitBranch\": \"codex/spinnaker-local\",\n    \"gitSha\": \"3a1c721e4f71729f628d267d52264f96a1944ab5\"\n  },\n  \"stages\": [\n    {\n      \"name\": \"Deploy deployment.yml\",\n      \"status\": \"SUCCEEDED\",\n      \"source\": \"https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/3a1c721e4f71729f628d267d52264f96a1944ab5/spinnaker/k8s/deployment.yml\"\n    },\n    {\n      \"name\": \"Deploy service.yml\",\n      \"status\": \"SUCCEEDED\",\n      \"source\": \"https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/3a1c721e4f71729f628d267d52264f96a1944ab5/spinnaker/k8s/service.yml\"\n    },\n    {\n      \"name\": \"Deploy hpa.yml\",\n      \"status\": \"SUCCEEDED\",\n      \"source\": \"https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/3a1c721e4f71729f628d267d52264f96a1944ab5/spinnaker/k8s/hpa.yml\"\n    }\n  ]\n}",
+        "exitCode": null
+      }
+    ],
+    "facts": [
+      [
+        "Estado",
+        "SUCCEEDED"
+      ],
+      [
+        "SHA",
+        "3a1c721e4f71729f628d267d52264f96a1944ab5"
+      ]
+    ],
+    "note": "La figura muestra la interfaz nativa de Deck en la ejecución correspondiente al commit de la prueba."
+  },
+  {
+    "id": "22",
+    "title": "Generación de carga HTTP temporal",
+    "category": "Archivo y registro históricos",
+    "source": "docs/evidencias/load-job.yml",
+    "capturedAt": "2026-11-20T05:12:54.444925+00:00",
+    "blocks": [
+      {
+        "command": "Contenedor de carga · configuración preservada",
+        "output": "name: http-load\nimage: python:3.13-alpine\nresources:\n  requests:\n    cpu: 250m\n    memory: 64Mi\n  limits:\n    cpu: '1'\n    memory: 128Mi\n",
+        "exitCode": null
+      }
+    ],
+    "facts": [
+      [
+        "Destino HTTP",
+        "http://sarseg-web/"
+      ],
+      [
+        "Concurrencia",
+        "48 trabajadores"
+      ],
+      [
+        "Duración máxima",
+        "240 segundos; se retira al observar el escalado"
+      ],
+      [
+        "Método de escalado",
+        "HPA por CPU; no se ejecuta kubectl scale"
+      ]
+    ],
+    "note": "El Job de carga ya fue eliminado al finalizar la prueba; esta captura documenta el archivo realmente utilizado."
+  },
+  {
+    "id": "23",
+    "title": "HPA: incremento automático a cinco réplicas",
+    "category": "Registro histórico",
+    "source": "docs/evidencias/05-carga-cinco.json",
+    "capturedAt": "2026-11-20T05:12:54.449416+00:00",
+    "blocks": [
+      {
+        "command": "kubectl --context kind-sarseg-spinnaker -n sarseg-dev get deployment,service,hpa,pods",
+        "output": "NAME                         READY   UP-TO-DATE   AVAILABLE   AGE\ndeployment.apps/api          1/1     1            1           13m\ndeployment.apps/postgres     1/1     1            1           13m\ndeployment.apps/sarseg-web   5/5     5            5           7m36s\n\nNAME                 TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE\nservice/api          ClusterIP   10.96.142.87   <none>        8080/TCP       13m\nservice/postgres     ClusterIP   10.96.221.33   <none>        5432/TCP       13m\nservice/sarseg-web   NodePort    10.96.101.63   <none>        80:30380/TCP   7m29s\n\nNAME                                             REFERENCE               TARGETS         MINPODS   MAXPODS   REPLICAS   AGE\nhorizontalpodautoscaler.autoscaling/sarseg-web   Deployment/sarseg-web   cpu: 764%/50%   2         5         5          7m21s\n\nNAME                              READY   STATUS    RESTARTS   AGE\npod/api-68ff9488c4-bpx8s          1/1     Running   0          7m37s\npod/postgres-588b6d799d-x644n     1/1     Running   0          13m\npod/sarseg-cpu-load-l4bkc         1/1     Running   0          62s\npod/sarseg-web-5d49f74cf4-4pl2p   1/1     Running   0          21s\npod/sarseg-web-5d49f74cf4-bdw65   1/1     Running   0          21s\npod/sarseg-web-5d49f74cf4-kcvbw   1/1     Running   0          92s\npod/sarseg-web-5d49f74cf4-p59lf   1/1     Running   0          21s\npod/sarseg-web-5d49f74cf4-rdjb6   1/1     Running   0          89s\n"
+      },
+      {
+        "command": "kubectl --context kind-sarseg-spinnaker -n sarseg-dev top pods",
+        "output": "NAME                          CPU(cores)   MEMORY(bytes)   \napi-68ff9488c4-bpx8s          13m          157Mi           \npostgres-588b6d799d-x644n     3m           38Mi            \nsarseg-cpu-load-l4bkc         1001m        50Mi            \nsarseg-web-5d49f74cf4-4pl2p   87m          13Mi            \nsarseg-web-5d49f74cf4-bdw65   87m          14Mi            \nsarseg-web-5d49f74cf4-kcvbw   138m         17Mi            \nsarseg-web-5d49f74cf4-p59lf   88m          15Mi            \nsarseg-web-5d49f74cf4-rdjb6   87m          15Mi            \n"
+      },
+      {
+        "command": "kubectl --context kind-sarseg-spinnaker -n sarseg-dev get hpa sarseg-web -o yaml",
+        "output": "apiVersion: autoscaling/v2\nkind: HorizontalPodAutoscaler\nmetadata:\n  annotations:\n    artifact.spinnaker.io/location: sarseg-dev\n    artifact.spinnaker.io/name: sarseg-web\n    artifact.spinnaker.io/type: kubernetes/horizontalpodautoscaler\n    artifact.spinnaker.io/version: \"\"\n    kubectl.kubernetes.io/last-applied-configuration: |\n      {\"apiVersion\":\"autoscaling/v2\",\"kind\":\"HorizontalPodAutoscaler\",\"metadata\":{\"annotations\":{\"artifact.spinnaker.io/location\":\"sarseg-dev\",\"artifact.spinnaker.io/name\":\"sarseg-web\",\"artifact.spinnaker.io/type\":\"kubernetes/horizontalpodautoscaler\",\"artifact.spinnaker.io/version\":\"\",\"moniker.spinnaker.io/application\":\"sarseg\",\"moniker.spinnaker.io/cluster\":\"horizontalpodautoscaler sarseg-web\"},\"labels\":{\"app.kubernetes.io/managed-by\":\"spinnaker\",\"app.kubernetes.io/name\":\"sarseg\"},\"name\":\"sarseg-web\",\"namespace\":\"sarseg-dev\"},\"spec\":{\"behavior\":{\"scaleDown\":{\"policies\":[{\"periodSeconds\":15,\"type\":\"Pods\",\"value\":3}],\"stabilizationWindowSeconds\":60},\"scaleUp\":{\"policies\":[{\"periodSeconds\":15,\"type\":\"Pods\",\"value\":3}],\"stabilizationWindowSeconds\":0}},\"maxReplicas\":5,\"metrics\":[{\"resource\":{\"name\":\"cpu\",\"target\":{\"averageUtilization\":50,\"type\":\"Utilization\"}},\"type\":\"Resource\"}],\"minReplicas\":2,\"scaleTargetRef\":{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"name\":\"sarseg-web\"}}}\n    moniker.spinnaker.io/application: sarseg\n    moniker.spinnaker.io/cluster: horizontalpodautoscaler sarseg-web\n  creationTimestamp: \"2026-11-20T04:45:07Z\"\n  labels:\n    app.kubernetes.io/managed-by: spinnaker\n    app.kubernetes.io/name: sarseg\n  name: sarseg-web\n  namespace: sarseg-dev\n  resourceVersion: \"2727\"\n  uid: 6214c1da-d158-4393-9ce6-0a7742da2100\nspec:\n  behavior:\n    scaleDown:\n      policies:\n      - periodSeconds: 15\n        type: Pods\n        value: 3\n      selectPolicy: Max\n      stabilizationWindowSeconds: 60\n    scaleUp:\n      policies:\n      - periodSeconds: 15\n        type: Pods\n        value: 3\n      selectPolicy: Max\n      stabilizationWindowSeconds: 0\n  maxReplicas: 5\n  metrics:\n  - resource:\n      name: cpu\n      target:\n        averageUtilization: 50\n        type: Utilization\n    type: Resource\n  minReplicas: 2\n  scaleTargetRef:\n    apiVersion: apps/v1\n    kind: Deployment\n    name: sarseg-web\nstatus:\n  conditions:\n  - lastTransitionTime: \"2026-11-20T04:45:22Z\"\n    message: recommended size matches current size\n    reason: ReadyForNewScale\n    status: \"True\"\n    type: AbleToScale\n  - lastTransitionTime: \"2026-11-20T04:51:37Z\"\n    message: the HPA was able to successfully calculate a replica count from cpu resource\n      utilization (percentage of request)\n    reason: ValidMetricFound\n    status: \"True\"\n    type: ScalingActive\n  - lastTransitionTime: \"2026-11-20T04:49:22Z\"\n    message: the desired replica count is more than the maximum replica count\n    reason: TooManyReplicas\n    status: \"True\"\n    type: ScalingLimited\n  currentMetrics:\n  - resource:\n      current:\n        averageUtilization: 764\n        averageValue: 191m\n      name: cpu\n    type: Resource\n  currentReplicas: 5\n  desiredReplicas: 5\n  lastScaleTime: \"2026-11-20T04:52:07Z\"\n"
+      }
+    ],
+    "facts": [
+      [
+        "Hora de la prueba",
+        "2026-11-20T04:52:28.891520+00:00"
+      ],
+      [
+        "HPA actual / deseado",
+        "5 / 5"
+      ],
+      [
+        "CPU objetivo",
+        "50%"
+      ]
+    ],
+    "note": "La figura reutiliza la captura verificada de la ejecución original y conserva su fecha. No se presenta como una nueva prueba de carga."
+  },
+  {
+    "id": "24",
+    "title": "HPA: retorno automático a dos réplicas",
+    "category": "Registro histórico",
+    "source": "docs/evidencias/06-reduccion-dos.json",
+    "capturedAt": "2026-11-20T05:12:54.453872+00:00",
+    "blocks": [
+      {
+        "command": "kubectl --context kind-sarseg-spinnaker -n sarseg-dev get deployment,service,hpa,pods",
+        "output": "NAME                         READY   UP-TO-DATE   AVAILABLE   AGE\ndeployment.apps/api          1/1     1            1           16m\ndeployment.apps/postgres     1/1     1            1           16m\ndeployment.apps/sarseg-web   2/2     2            2           10m\n\nNAME                 TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE\nservice/api          ClusterIP   10.96.142.87   <none>        8080/TCP       16m\nservice/postgres     ClusterIP   10.96.221.33   <none>        5432/TCP       16m\nservice/sarseg-web   NodePort    10.96.101.63   <none>        80:30380/TCP   10m\n\nNAME                                             REFERENCE               TARGETS       MINPODS   MAXPODS   REPLICAS   AGE\nhorizontalpodautoscaler.autoscaling/sarseg-web   Deployment/sarseg-web   cpu: 4%/50%   2         5         2          10m\n\nNAME                              READY   STATUS    RESTARTS   AGE\npod/api-68ff9488c4-bpx8s          1/1     Running   0          10m\npod/postgres-588b6d799d-x644n     1/1     Running   0          16m\npod/sarseg-web-5d49f74cf4-p59lf   1/1     Running   0          3m2s\npod/sarseg-web-5d49f74cf4-rdjb6   1/1     Running   0          4m10s\n"
+      },
+      {
+        "command": "kubectl --context kind-sarseg-spinnaker -n sarseg-dev top pods",
+        "output": "NAME                          CPU(cores)   MEMORY(bytes)   \napi-68ff9488c4-bpx8s          13m          157Mi           \npostgres-588b6d799d-x644n     5m           40Mi            \nsarseg-web-5d49f74cf4-p59lf   1m           15Mi            \nsarseg-web-5d49f74cf4-rdjb6   1m           15Mi            \n"
+      },
+      {
+        "command": "kubectl --context kind-sarseg-spinnaker -n sarseg-dev get hpa sarseg-web -o yaml",
+        "output": "apiVersion: autoscaling/v2\nkind: HorizontalPodAutoscaler\nmetadata:\n  annotations:\n    artifact.spinnaker.io/location: sarseg-dev\n    artifact.spinnaker.io/name: sarseg-web\n    artifact.spinnaker.io/type: kubernetes/horizontalpodautoscaler\n    artifact.spinnaker.io/version: \"\"\n    kubectl.kubernetes.io/last-applied-configuration: |\n      {\"apiVersion\":\"autoscaling/v2\",\"kind\":\"HorizontalPodAutoscaler\",\"metadata\":{\"annotations\":{\"artifact.spinnaker.io/location\":\"sarseg-dev\",\"artifact.spinnaker.io/name\":\"sarseg-web\",\"artifact.spinnaker.io/type\":\"kubernetes/horizontalpodautoscaler\",\"artifact.spinnaker.io/version\":\"\",\"moniker.spinnaker.io/application\":\"sarseg\",\"moniker.spinnaker.io/cluster\":\"horizontalpodautoscaler sarseg-web\"},\"labels\":{\"app.kubernetes.io/managed-by\":\"spinnaker\",\"app.kubernetes.io/name\":\"sarseg\"},\"name\":\"sarseg-web\",\"namespace\":\"sarseg-dev\"},\"spec\":{\"behavior\":{\"scaleDown\":{\"policies\":[{\"periodSeconds\":15,\"type\":\"Pods\",\"value\":3}],\"stabilizationWindowSeconds\":60},\"scaleUp\":{\"policies\":[{\"periodSeconds\":15,\"type\":\"Pods\",\"value\":3}],\"stabilizationWindowSeconds\":0}},\"maxReplicas\":5,\"metrics\":[{\"resource\":{\"name\":\"cpu\",\"target\":{\"averageUtilization\":50,\"type\":\"Utilization\"}},\"type\":\"Resource\"}],\"minReplicas\":2,\"scaleTargetRef\":{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"name\":\"sarseg-web\"}}}\n    moniker.spinnaker.io/application: sarseg\n    moniker.spinnaker.io/cluster: horizontalpodautoscaler sarseg-web\n  creationTimestamp: \"2026-11-20T04:45:07Z\"\n  labels:\n    app.kubernetes.io/managed-by: spinnaker\n    app.kubernetes.io/name: sarseg\n  name: sarseg-web\n  namespace: sarseg-dev\n  resourceVersion: \"2971\"\n  uid: 6214c1da-d158-4393-9ce6-0a7742da2100\nspec:\n  behavior:\n    scaleDown:\n      policies:\n      - periodSeconds: 15\n        type: Pods\n        value: 3\n      selectPolicy: Max\n      stabilizationWindowSeconds: 60\n    scaleUp:\n      policies:\n      - periodSeconds: 15\n        type: Pods\n        value: 3\n      selectPolicy: Max\n      stabilizationWindowSeconds: 0\n  maxReplicas: 5\n  metrics:\n  - resource:\n      name: cpu\n      target:\n        averageUtilization: 50\n        type: Utilization\n    type: Resource\n  minReplicas: 2\n  scaleTargetRef:\n    apiVersion: apps/v1\n    kind: Deployment\n    name: sarseg-web\nstatus:\n  conditions:\n  - lastTransitionTime: \"2026-11-20T04:45:22Z\"\n    message: recommended size matches current size\n    reason: ReadyForNewScale\n    status: \"True\"\n    type: AbleToScale\n  - lastTransitionTime: \"2026-11-20T04:51:37Z\"\n    message: the HPA was able to successfully calculate a replica count from cpu resource\n      utilization (percentage of request)\n    reason: ValidMetricFound\n    status: \"True\"\n    type: ScalingActive\n  - lastTransitionTime: \"2026-11-20T04:54:52Z\"\n    message: the desired replica count is less than the minimum replica count\n    reason: TooFewReplicas\n    status: \"True\"\n    type: ScalingLimited\n  currentMetrics:\n  - resource:\n      current:\n        averageUtilization: 4\n        averageValue: 1m\n      name: cpu\n    type: Resource\n  currentReplicas: 2\n  desiredReplicas: 2\n  lastScaleTime: \"2026-11-20T04:54:37Z\"\n"
+      }
+    ],
+    "facts": [
+      [
+        "Hora de la prueba",
+        "2026-11-20T04:55:10.085897+00:00"
+      ],
+      [
+        "HPA actual / deseado",
+        "2 / 2"
+      ],
+      [
+        "CPU objetivo",
+        "50%"
+      ]
+    ],
+    "note": "La figura reutiliza la captura verificada de la ejecución original y conserva su fecha. No se presenta como una nueva prueba de carga."
+  },
+  {
+    "id": "25",
+    "title": "Integración en main y validación final",
+    "category": "Lectura actual y ejecuciones anteriores",
+    "source": "GitHub PR 8, PR 9 y Gate",
+    "capturedAt": "2026-11-20T05:12:55.822096+00:00",
+    "blocks": [],
+    "facts": [
+      [
+        "PR #8",
+        "True · informe y evidencias"
+      ],
+      [
+        "PR #9",
+        "True · integración principal"
+      ],
+      [
+        "GitHub Actions",
+        "success"
+      ],
+      [
+        "Rama desplegada",
+        "main"
+      ],
+      [
+        "SHA desplegado",
+        "ce9d979df85e54c56a0c5856a92ee46f0de46300"
+      ],
+      [
+        "Spinnaker",
+        "SUCCEEDED"
+      ]
+    ],
+    "note": "Los PR 8 y 9 corresponden a la implementación funcional. La actualización APA se documenta en una rama posterior sin modificar el despliegue."
+  },
+  {
+    "id": "26",
+    "title": "Repositorio público y archivos de entrega",
+    "category": "Lectura actual",
+    "source": "GitHub público",
+    "capturedAt": "2026-11-20T05:12:56.246018+00:00",
+    "blocks": [],
+    "facts": [
+      [
+        "Visibilidad",
+        "public"
+      ],
+      [
+        "Ruta",
+        "spinnaker/k8s/"
+      ],
+      [
+        "Archivos",
+        "deployment.yml, service.yml, hpa.yml"
+      ],
+      [
+        "Informe",
+        "spinnaker/output/pdf/Informe-SARSEG-Spinnaker-P2.pdf"
+      ]
+    ],
+    "note": "La figura utiliza una captura directa de GitHub y el acceso público se verifica además con su API."
+  }
+]

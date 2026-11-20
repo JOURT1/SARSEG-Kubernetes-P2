@@ -1,0 +1,26 @@
+<!doctype html><html lang="es"><meta charset="utf-8"><title>Paso 21 · Spinnaker despliega automáticamente la revisión</title>
+<style>*{box-sizing:border-box}body{margin:0;background:white;color:#172a3b;font:19px Arial}main{width:820px;padding:20px}header{font-size:12px;letter-spacing:1px;color:#52677a}h1{font-size:25px;line-height:1.2;margin:9px 0 12px}.meta{font-size:12px;color:#52677a;margin:8px 0 12px}table{border-collapse:collapse;width:100%;font-size:18px;margin:10px 0}th,td{padding:7px;border-bottom:1px solid #ccd8e0;text-align:left;vertical-align:top;overflow-wrap:anywhere}th{width:220px;background:#f2f5f7}h2{font:13px Consolas;margin:11px 0 5px}pre{font:17px/1.25 Consolas;background:#f4f7f9;border:1px solid #d1dce3;padding:10px;white-space:pre-wrap;overflow-wrap:anywhere;margin:0}footer{border-top:1px solid #bdcbd5;margin-top:12px;padding-top:8px;font-size:12px;line-height:1.35}.note{font-size:13px;line-height:1.35}</style>
+<main id="evidence"><header>SARSEG · SPINNAKER · REGISTRO DOCUMENTAL</header><h1>Paso 21. Spinnaker despliega automáticamente la revisión</h1><div class="meta">Captura directa y registro histórico · Lectura documental: 2026-11-20T05:12:54.442196+00:00 UTC</div>
+<table><tr><th>Estado</th><td>SUCCEEDED</td></tr><tr><th>SHA</th><td>3a1c721e4f71729f628d267d52264f96a1944ab5</td></tr></table><section><h2>Ejecución comprobada</h2><pre>{
+  &quot;id&quot;: &quot;01M7VMP5J4C39HZM0Y8G8C4GX1&quot;,
+  &quot;status&quot;: &quot;SUCCEEDED&quot;,
+  &quot;startTime&quot;: 1795150255765,
+  &quot;endTime&quot;: 1795150277508,
+  &quot;parameters&quot;: {
+    &quot;gitBranch&quot;: &quot;codex/spinnaker-local&quot;,
+    &quot;gitSha&quot;: &quot;3a1c721e4f71729f628d267d52264f96a1944ab5&quot;
+  },
+  &quot;stages&quot;: [
+    {
+      &quot;name&quot;: &quot;Deploy deployment.yml&quot;,
+      &quot;status&quot;: &quot;SUCCEEDED&quot;,
+      &quot;source&quot;: &quot;https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/3a1c721e4f71729f628d267d52264f96a1944ab5/spinnaker/k8s/deployment.yml&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Deploy service.yml&quot;,
+      &quot;status&quot;: &quot;SUCCEEDED&quot;,
+      &quot;source&quot;: &quot;https://raw.githubusercontent.com/JOURT1/SARSEG-Kubernetes-P2/3a1c721e4f71729f628d267d52264f96a1944ab5/spinnaker/k8s/service.yml&quot;
+    },
+    {
+[Registro completo en pasos.json]</pre></section><p class="note">La figura muestra la interfaz nativa de Deck en la ejecución correspondiente al commit de la prueba.</p>
+<footer>Visor de registros reales o archivos versionados; no es una terminal ni una interfaz nativa.<br/>Fuente: Gate execution 01M7VMP5J4C39HZM0Y8G8C4GX1. Datos completos: pasos.json, paso 21.</footer></main></html>
