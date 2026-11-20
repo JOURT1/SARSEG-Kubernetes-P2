@@ -1,5 +1,10 @@
 # Evidencias originales de la ejecución
 
+La ampliación del informe con 26 pasos ilustrados está en
+[recorrido APA 7](recorrido-apa7/README.md). Conserva las pruebas originales y
+añade lecturas documentales del 20 de noviembre de 2026, sin reinstalar el
+clúster ni repetir o simular el escalamiento.
+
 Fecha local: **19 de noviembre de 2026, America/Guayaquil**. Los registros
 internos usan UTC, por eso sus marcas comienzan por 2026-11-20.
 
